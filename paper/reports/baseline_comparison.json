@@ -1,0 +1,29 @@
+{
+  "unchanged_files": [
+    "q1/Q1_batch_solution.csv",
+    "q1/Q1_leg_physics.csv",
+    "q1/Q1_max_safe_payload.csv",
+    "q1/Q1_metrics.json",
+    "q1/Q1_sensitivity_summary.csv",
+    "q1/input_manifest.json",
+    "q2/Q2_box_delivery_balanced.csv",
+    "q2/Q2_frontier_plans.json",
+    "q2/Q2_metrics.json",
+    "q2/Q2_resource_check.csv",
+    "q2/Q2_tradeoff_frontier.csv",
+    "q2/Q2_transport_trips_balanced.csv",
+    "q2/input_manifest.json",
+    "q3/Q3_box_delivery.csv",
+    "q3/Q3_communication.csv",
+    "q3/Q3_metrics.json",
+    "q3/Q3_relay_sorties.csv",
+    "q3/Q3_resource_check.csv",
+    "q3/Q3_transport_trips.csv",
+    "q3/input_manifest.json",
+    "q4/Q4_partition_config.csv",
+    "q4/Q4_resource_summary.csv",
+    "q4/input_manifest.json",
+    "validation.json"
+  ],
+  "changed_files": []
+}

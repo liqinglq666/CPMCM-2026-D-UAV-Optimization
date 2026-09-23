@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "source_result_files": 24,
+  "workbook_sheets": 8,
+  "workbook_cells_compared": 1723,
+  "preserved_official_sheets": 6,
+  "added_transport_detail_sheets": 2,
+  "independent_aggregates": {
+    "QOneTrips": "18",
+    "QTwoTrips": "22",
+    "QThreeTrips": "24",
+    "RelayTrips": "6",
+    "QOneEnergy": "59.130",
+    "QOneTime": "32776.016",
+    "QTwoEnergy": "79.761",
+    "QTwoTime": "11033.023",
+    "JointEnergy": "86.712",
+    "JointTime": "12789.446",
+    "MinSoc": "20.84"
+  },
+  "generated_number_macros": 36,
+  "used_macros_found_in_pdf": 34,
+  "figures": 9,
+  "figure_files": 27,
+  "pdf_pages": 19,
+  "reference_entries": 7,
+  "reproduced_png_sha256": {
+    "fig01_framework": "2a539958e0e730fb4f7888f35613dc66798620b5c04d723891417d90dc3cba6f",
+    "fig02_physics": "0dd2f72d23a599d56254d4a913f9cc575688d56e1180b2f5e8494922ab45dd36",
+    "fig03_payload_boundary": "774c4ef83fdfedbe61c05a1137bc654e633f6be9295d10990ab490da8a1c6672",
+    "fig04_batching": "48a66b238449e9d8b6608299694bb445f73d190f994207ec60ff298ff8be8c81",
+    "fig05_optimization": "6ea2f14495cf6cd265876ecef7badbd20bcfb3e7ef9b38488a6fe93adf8fe91e",
+    "fig06_communication": "5b2597186afbb3cbd6c83f8d2f4ac6ced9535084d0fbc69d680f286b5cfdcfc5",
+    "fig07_sensitivity": "d0d1fc15a16e333c2a72af958211ba6a02bda6bc5ecb77f4826b7a444120fa7c",
+    "fig08_validation": "fa9ecdd55d8d4f852987da3deab41130f2a5c7b7c585c3d70f6754371b8aae34",
+    "fig09_partition": "fd5c0b6447268bf408427ed1a9fbf6a8529df021a4ecf9a2b6b33915bb5fb297"
+  },
+  "pdf_sha256": "75574aeb80723a04db6f5de895f5844b477dae4bf8ecc3ea24febda50126ffbb",
+  "workbook_sha256": "27812796a9fdfd8d9ee01e218e33d2ce60e772380613990235fd5a4578e5303e",
+  "interpretation": "Deterministic official model; sampled communication is not a continuous certificate."
+}

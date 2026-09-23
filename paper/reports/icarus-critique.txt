@@ -1,0 +1,225 @@
+
+Figure critique — scripts/figures/fig01_framework.py
+  figures: fig01_framework
+================================================================
+
+Reproducibility (§F)
+  ok  all checks pass
+
+Axis 3 — Unimpeachable (uncertainty / N / units / B&W)
+  ok  all checks pass
+
+Axis 4 — Visible gap (journal-grade craft)
+  ok  all checks pass
+
+Rendered artifacts (vector three-format)
+  ok  all checks pass
+
+Judgment — the script cannot decide these; you must (see figure-critique.md):
+  ?  Axis 1 — Depth: Cover the caption: is the claim still readable from the figure alone? Is the *mechanism* drawn (threshold line, inflection, decision region, the actual distribution shape) — not just 'what' but 'why + so what'?
+  ?  Axis 2 — Elegance: Drop test: delete each panel — is the claim much weaker? If not, delete it. Does ONE hero panel carry the headline while the rest visibly shrink?
+  ?  Axis 3 — Grayscale: Print it in B&W: does every series stay distinguishable by marker/linestyle, not colour alone?
+  ?  Axis 4 — 0.5 s test: Glance for half a second: does it read 'this came from a paper', or 'homework'? Hero/method figure must NOT be a generic boxes-and-arrows flowchart (§I).
+================================================================
+Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
+Mechanical floor cleared — now answer the four judgment prompts before 'done'.
+
+Figure critique — scripts/figures/fig02_physics.py
+  figures: fig02_physics
+================================================================
+
+Reproducibility (§F)
+  ok  all checks pass
+
+Axis 3 — Unimpeachable (uncertainty / N / units / B&W)
+  ok  all checks pass
+
+Axis 4 — Visible gap (journal-grade craft)
+  ok  all checks pass
+
+Rendered artifacts (vector three-format)
+  ok  all checks pass
+
+Judgment — the script cannot decide these; you must (see figure-critique.md):
+  ?  Axis 1 — Depth: Cover the caption: is the claim still readable from the figure alone? Is the *mechanism* drawn (threshold line, inflection, decision region, the actual distribution shape) — not just 'what' but 'why + so what'?
+  ?  Axis 2 — Elegance: Drop test: delete each panel — is the claim much weaker? If not, delete it. Does ONE hero panel carry the headline while the rest visibly shrink?
+  ?  Axis 3 — Grayscale: Print it in B&W: does every series stay distinguishable by marker/linestyle, not colour alone?
+  ?  Axis 4 — 0.5 s test: Glance for half a second: does it read 'this came from a paper', or 'homework'? Hero/method figure must NOT be a generic boxes-and-arrows flowchart (§I).
+================================================================
+Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
+Mechanical floor cleared — now answer the four judgment prompts before 'done'.
+
+Figure critique — scripts/figures/fig03_payload_boundary.py
+  figures: fig03_payload_boundary
+================================================================
+
+Reproducibility (§F)
+  ok  all checks pass
+
+Axis 3 — Unimpeachable (uncertainty / N / units / B&W)
+  ok  all checks pass
+
+Axis 4 — Visible gap (journal-grade craft)
+  ok  all checks pass
+
+Rendered artifacts (vector three-format)
+  ok  all checks pass
+
+Judgment — the script cannot decide these; you must (see figure-critique.md):
+  ?  Axis 1 — Depth: Cover the caption: is the claim still readable from the figure alone? Is the *mechanism* drawn (threshold line, inflection, decision region, the actual distribution shape) — not just 'what' but 'why + so what'?
+  ?  Axis 2 — Elegance: Drop test: delete each panel — is the claim much weaker? If not, delete it. Does ONE hero panel carry the headline while the rest visibly shrink?
+  ?  Axis 3 — Grayscale: Print it in B&W: does every series stay distinguishable by marker/linestyle, not colour alone?
+  ?  Axis 4 — 0.5 s test: Glance for half a second: does it read 'this came from a paper', or 'homework'? Hero/method figure must NOT be a generic boxes-and-arrows flowchart (§I).
+================================================================
+Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
+Mechanical floor cleared — now answer the four judgment prompts before 'done'.
+
+Figure critique — scripts/figures/fig04_batching.py
+  figures: fig04_batching
+================================================================
+
+Reproducibility (§F)
+  ok  all checks pass
+
+Axis 3 — Unimpeachable (uncertainty / N / units / B&W)
+  ok  all checks pass
+
+Axis 4 — Visible gap (journal-grade craft)
+  ok  all checks pass
+
+Rendered artifacts (vector three-format)
+  ok  all checks pass
+
+Judgment — the script cannot decide these; you must (see figure-critique.md):
+  ?  Axis 1 — Depth: Cover the caption: is the claim still readable from the figure alone? Is the *mechanism* drawn (threshold line, inflection, decision region, the actual distribution shape) — not just 'what' but 'why + so what'?
+  ?  Axis 2 — Elegance: Drop test: delete each panel — is the claim much weaker? If not, delete it. Does ONE hero panel carry the headline while the rest visibly shrink?
+  ?  Axis 3 — Grayscale: Print it in B&W: does every series stay distinguishable by marker/linestyle, not colour alone?
+  ?  Axis 4 — 0.5 s test: Glance for half a second: does it read 'this came from a paper', or 'homework'? Hero/method figure must NOT be a generic boxes-and-arrows flowchart (§I).
+================================================================
+Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
+Mechanical floor cleared — now answer the four judgment prompts before 'done'.
+
+Figure critique — scripts/figures/fig05_optimization.py
+  figures: fig05_optimization
+================================================================
+
+Reproducibility (§F)
+  ok  all checks pass
+
+Axis 3 — Unimpeachable (uncertainty / N / units / B&W)
+  ok  all checks pass
+
+Axis 4 — Visible gap (journal-grade craft)
+  ok  all checks pass
+
+Rendered artifacts (vector three-format)
+  ok  all checks pass
+
+Judgment — the script cannot decide these; you must (see figure-critique.md):
+  ?  Axis 1 — Depth: Cover the caption: is the claim still readable from the figure alone? Is the *mechanism* drawn (threshold line, inflection, decision region, the actual distribution shape) — not just 'what' but 'why + so what'?
+  ?  Axis 2 — Elegance: Drop test: delete each panel — is the claim much weaker? If not, delete it. Does ONE hero panel carry the headline while the rest visibly shrink?
+  ?  Axis 3 — Grayscale: Print it in B&W: does every series stay distinguishable by marker/linestyle, not colour alone?
+  ?  Axis 4 — 0.5 s test: Glance for half a second: does it read 'this came from a paper', or 'homework'? Hero/method figure must NOT be a generic boxes-and-arrows flowchart (§I).
+================================================================
+Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
+Mechanical floor cleared — now answer the four judgment prompts before 'done'.
+
+Figure critique — scripts/figures/fig06_communication.py
+  figures: fig06_communication
+================================================================
+
+Reproducibility (§F)
+  ok  all checks pass
+
+Axis 3 — Unimpeachable (uncertainty / N / units / B&W)
+  ok  all checks pass
+
+Axis 4 — Visible gap (journal-grade craft)
+  ok  all checks pass
+
+Rendered artifacts (vector three-format)
+  ok  all checks pass
+
+Judgment — the script cannot decide these; you must (see figure-critique.md):
+  ?  Axis 1 — Depth: Cover the caption: is the claim still readable from the figure alone? Is the *mechanism* drawn (threshold line, inflection, decision region, the actual distribution shape) — not just 'what' but 'why + so what'?
+  ?  Axis 2 — Elegance: Drop test: delete each panel — is the claim much weaker? If not, delete it. Does ONE hero panel carry the headline while the rest visibly shrink?
+  ?  Axis 3 — Grayscale: Print it in B&W: does every series stay distinguishable by marker/linestyle, not colour alone?
+  ?  Axis 4 — 0.5 s test: Glance for half a second: does it read 'this came from a paper', or 'homework'? Hero/method figure must NOT be a generic boxes-and-arrows flowchart (§I).
+================================================================
+Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
+Mechanical floor cleared — now answer the four judgment prompts before 'done'.
+
+Figure critique — scripts/figures/fig07_sensitivity.py
+  figures: fig07_sensitivity
+================================================================
+
+Reproducibility (§F)
+  ok  all checks pass
+
+Axis 3 — Unimpeachable (uncertainty / N / units / B&W)
+  ok  all checks pass
+
+Axis 4 — Visible gap (journal-grade craft)
+  ok  all checks pass
+
+Rendered artifacts (vector three-format)
+  ok  all checks pass
+
+Judgment — the script cannot decide these; you must (see figure-critique.md):
+  ?  Axis 1 — Depth: Cover the caption: is the claim still readable from the figure alone? Is the *mechanism* drawn (threshold line, inflection, decision region, the actual distribution shape) — not just 'what' but 'why + so what'?
+  ?  Axis 2 — Elegance: Drop test: delete each panel — is the claim much weaker? If not, delete it. Does ONE hero panel carry the headline while the rest visibly shrink?
+  ?  Axis 3 — Grayscale: Print it in B&W: does every series stay distinguishable by marker/linestyle, not colour alone?
+  ?  Axis 4 — 0.5 s test: Glance for half a second: does it read 'this came from a paper', or 'homework'? Hero/method figure must NOT be a generic boxes-and-arrows flowchart (§I).
+================================================================
+Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
+Mechanical floor cleared — now answer the four judgment prompts before 'done'.
+
+Figure critique — scripts/figures/fig08_validation.py
+  figures: fig08_validation
+================================================================
+
+Reproducibility (§F)
+  ok  all checks pass
+
+Axis 3 — Unimpeachable (uncertainty / N / units / B&W)
+  ok  all checks pass
+
+Axis 4 — Visible gap (journal-grade craft)
+  ok  all checks pass
+
+Rendered artifacts (vector three-format)
+  ok  all checks pass
+
+Judgment — the script cannot decide these; you must (see figure-critique.md):
+  ?  Axis 1 — Depth: Cover the caption: is the claim still readable from the figure alone? Is the *mechanism* drawn (threshold line, inflection, decision region, the actual distribution shape) — not just 'what' but 'why + so what'?
+  ?  Axis 2 — Elegance: Drop test: delete each panel — is the claim much weaker? If not, delete it. Does ONE hero panel carry the headline while the rest visibly shrink?
+  ?  Axis 3 — Grayscale: Print it in B&W: does every series stay distinguishable by marker/linestyle, not colour alone?
+  ?  Axis 4 — 0.5 s test: Glance for half a second: does it read 'this came from a paper', or 'homework'? Hero/method figure must NOT be a generic boxes-and-arrows flowchart (§I).
+================================================================
+Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
+Mechanical floor cleared — now answer the four judgment prompts before 'done'.
+
+Figure critique — scripts/figures/fig09_partition.py
+  figures: fig09_partition
+================================================================
+
+Reproducibility (§F)
+  ok  all checks pass
+
+Axis 3 — Unimpeachable (uncertainty / N / units / B&W)
+  ok  all checks pass
+
+Axis 4 — Visible gap (journal-grade craft)
+  ok  all checks pass
+
+Rendered artifacts (vector three-format)
+  ok  all checks pass
+
+Judgment — the script cannot decide these; you must (see figure-critique.md):
+  ?  Axis 1 — Depth: Cover the caption: is the claim still readable from the figure alone? Is the *mechanism* drawn (threshold line, inflection, decision region, the actual distribution shape) — not just 'what' but 'why + so what'?
+  ?  Axis 2 — Elegance: Drop test: delete each panel — is the claim much weaker? If not, delete it. Does ONE hero panel carry the headline while the rest visibly shrink?
+  ?  Axis 3 — Grayscale: Print it in B&W: does every series stay distinguishable by marker/linestyle, not colour alone?
+  ?  Axis 4 — 0.5 s test: Glance for half a second: does it read 'this came from a paper', or 'homework'? Hero/method figure must NOT be a generic boxes-and-arrows flowchart (§I).
+================================================================
+Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
+Mechanical floor cleared — now answer the four judgment prompts before 'done'.
