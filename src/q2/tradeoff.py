@@ -216,6 +216,10 @@ def schedule_groups(
         options = []
 
         for p in profiles:
+            if not any(state[0] == p.type_code for state in drones.values()) or not any(
+                state[0] == p.type_code for state in batteries.values()
+            ):
+                continue
             drone_id, drone_state = min(
                 (item for item in drones.items() if item[1][0] == p.type_code),
                 key=lambda x: x[1][1],
@@ -259,6 +263,8 @@ def schedule_groups(
                 )
             )
 
+        if not options:
+            return None
         options.sort(key=lambda x: x[0])
         score, p, drone_id, battery_id, start, deliveries = options[0]
 

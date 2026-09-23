@@ -180,7 +180,7 @@ class CommunicationInputs:
 
 
 def load_relay_inputs(root):
-    from src.q3.communication import RelaySpec
+    from src.core.communication import RelaySpec
 
     df = pd.read_excel(
         find_file(root, "中继无人机数据"), sheet_name="数据", header=None
@@ -221,7 +221,7 @@ def load_relay_inputs(root):
 
 
 def load_communication_inputs(root):
-    from src.q3.communication import Radio, bidirectional_loss_threshold
+    from src.core.communication import Radio, bidirectional_loss_threshold
 
     df = pd.read_excel(find_file(root, "通信链路参数"), sheet_name="数据", header=None)
     params = {

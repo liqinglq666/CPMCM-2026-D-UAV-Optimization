@@ -92,3 +92,8 @@ loader and shared energy module. Empty/invalid partitions and negative resource
 intervals fail explicitly. Zero-length intervals occupy no resource. The current
 recomputed Q3 timing retains the same four service atoms and K=2/K=3 shortage
 totals, but resource occupancy and energy must be read from regenerated CSVs.
+
+The independent Q4 entry verifies the official-input fingerprint of its Q3
+source before calculation. Concurrent resource counting is shared with the
+core constraints module and uses the same 1e-5 s numerical time tolerance as
+schedule validation; smaller solver round-off must not invent another resource.
