@@ -92,11 +92,15 @@ python scripts/validate_results.py
 
 校验器重算 Q1 航段、载荷和敏感性，Q2 所有保存的前沿计划及所选方案一致性，Q3 运输/中继能耗、SOC、资源、交付、最小硬截止余量与通信状态，以及 Q4 分区和库存统计。资源表不会在校验过程中被静默修复。校验失败会撤销旧 `validation.json`，避免留下误导性的成功记录。Q4 独立入口先核对 Q3 的官方输入指纹；完整物理和通信复核仍需运行总校验器。
 
-可选绘图：
+论文、科研图与结果工作簿：
 
 ```bash
-python -m pip install -r requirements-figures.txt
-python scripts/make_figures.py
+python -m pip install -r requirements-paper.txt
+python scripts/analyze_paper.py
+python scripts/setup_paper_fonts.py
+python scripts/build_paper.py
 ```
 
-本轮不重写论文、不声称已生成官方结果工作簿。`docs/paper/` 中的旧稿保留为历史工作资料，引用数值前应依据当前 `results/` 更新。AI 辅助记录见 `docs/AI_USAGE.md`。
+新论文在 [paper/](paper/README.md)：19 页匿名正文、9 张主图、13 张表与完整附录。主图均输出 PDF/SVG/300 dpi PNG，数字由结果文件生成。构建另需 XeLaTeX、ctex、xeCJK、Fandol，完整命令和 Excel 导出见论文 README。
+
+原 `scripts/make_figures.py` 的六幅图已由统一图形流水线替代并删除。`docs/paper/` 中旧稿仅作历史资料。当前证据及适用边界见 [论文终审](paper/reports/FINAL_AUDIT.md)，AI 记录见 `docs/AI_USAGE.md`。

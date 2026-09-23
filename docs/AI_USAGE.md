@@ -1,58 +1,18 @@
-# AI-assisted development record
+# AI 辅助使用记录
 
-本仓库在比赛过程中使用人工智能作为辅助工具，最终模型假设、公式、程序、数值结果与论文文字均由参赛队独立核验并承担责任。
+## 本次工作（2026-09-23）
 
-## Tool record
+- 工具：ChatGPT/Codex；开发机构：OpenAI。
+- 精确模型版本及公开发布日期：当前执行上下文不可得，须由参赛队从实际使用界面补全。
+- 用途：代码审计、数据整理、敏感性诊断、绘图、论文草拟与一致性检查。
+- 后处理：官方数据全量重算、独立几何反例、97 项测试、0.5 s 通信细化、Excel 逐格核对、逐图和逐页检查。
 
-- Tool: ChatGPT
-- Model: GPT-5.6 Sol
-- Developer: OpenAI
-- General-availability release date: 2026-07-09
-- Official release source: https://openai.com/index/gpt-5-6/
+本轮确实生成了新论文。参赛队须独立理解并核验全部假设、公式、代码和结论，按官方 AI 使用规定补全声明。
 
-## Usage scope
+## 历史记录边界
 
-AI assistance is used for:
+早期仓库曾写入“GPT-5.6 Sol、2026-07-09”及发布链接，本次无法核验这些历史元数据，不能将其当作本次模型身份或已核验发布日期。历史提交仍可追溯。新增代码写明实际工具、机构、日期及不可得项。
 
-- checking modeling logic and dimensional consistency;
-- drafting and refactoring Python code;
-- suggesting optimization formulations and algorithms;
-- assisting data processing and visualization;
-- reviewing paper structure and wording.
+## 第三方材料
 
-## Required team verification
-
-Before submission, the participating team must independently verify:
-
-1. all modeling assumptions;
-2. all equations and units;
-3. all parameters transcribed from the problem statement;
-4. all code and numerical outputs;
-5. all conclusions used in the paper;
-6. all external-code, literature and AI-use citations/disclosures required by the official rules.
-
-## Program header text
-
-The executable program files in this repository should begin with a disclosure equivalent to:
-
-```text
-本程序及代码是在人工智能工具辅助下完成的。
-工具名称：ChatGPT
-模型：GPT-5.6 Sol
-开发机构：OpenAI
-版本公开发布日期：2026-07-09
-```
-
-External code or ideas actually adopted must be cited separately and must not be represented as original work.
-
-
-## 2026-09-23 code-audit continuation
-
-ChatGPT/Codex assisted with repository scanning, shared-physics refactoring,
-source-data validation, a fixed-discrete-plan scheduling LP, boundary tests,
-result replay and this audit report. This continuation does not infer a model
-release date or overwrite the historical tool record above. Exact model/version
-metadata should be taken from the corresponding conversation record.
-
-No paper content was newly generated in this round. Historical paper drafts were
-marked as historical to prevent reuse of stale results.
+Icarus-Figures 用于学习 Figure Contract、视觉层级与质量检查原则。全部无人机图由真实数据原创绘制，未复制示例图片。字体使用 Noto Sans SC（SIL OFL 1.1）和 TeX 发行版字体；文献来源见 `paper/reports/CITATIONS.md`。
