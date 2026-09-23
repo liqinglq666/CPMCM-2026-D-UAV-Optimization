@@ -34,7 +34,7 @@ At every checked transport state:
 2. otherwise use exactly one relay UAV;
 3. relay mode is feasible only when both transport→relay access and relay→G01 backhaul are simultaneously available.
 
-The result file reports a conservative relay service window from the first detected direct-loss state to the last detected direct-loss state for each affected trip.
+The final terminal audit discretizes every transport flight/operation phase with a maximum temporal interval of **1 s**. The relay service window is then expanded by **5 s before and after** the detected direct-loss interval as a guard margin.
 
 ## 4. Relay sortie model
 
@@ -71,16 +71,16 @@ This shortens the early western relay requirement and releases the relay UAV ear
 
 ## 6. Current feasible baseline
 
-Current v1 metrics:
+Current 1 s terminal-audit metrics:
 
 - transport trips: **24**;
 - relay sorties: **6**;
 - hard-deadline violations: **0**;
 - transport energy: **80.8447 kWh**;
-- relay energy: **5.9585 kWh**;
-- total energy: **86.8032 kWh**;
+- relay energy: **5.9666 kWh**;
+- total energy: **86.8113 kWh**;
 - transport makespan: **12774.32 s**;
-- joint makespan: **13223.66 s = 3.67 h**;
+- joint makespan: **13224.36 s = 3.67 h**;
 - minimum hard-deadline slack: about **178.65 s**.
 
 The solution is a constraint-complete feasible baseline, **not a proof of global optimality**. Its soft weighted tardiness can still be improved if time remains.
@@ -95,6 +95,6 @@ The current result set verifies:
 - no invalid reuse of shared transport batteries before recharge to 100%;
 - two relay UAV schedules do not overlap after including turnaround;
 - six relay energy components are used once each;
-- every sampled direct-failure point has feasible transport↔relay access and relay↔G01 backhaul.
+- every sampled direct-failure point under the ≤1 s terminal audit has feasible transport-relay access and relay-G01 backhaul.
 
-For the final paper, describe the discrete communication verification resolution explicitly rather than claiming an analytic continuous-time proof.
+The final paper explicitly reports the ≤1 s discrete terminal audit and the ±5 s relay guard window; this remains a high-resolution discrete verification rather than an analytic continuous-time root proof.
