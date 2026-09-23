@@ -13,49 +13,22 @@ from __future__ import annotations
 import csv
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, Iterable, List, Sequence, Set, Tuple
+from typing import Dict, Iterable, Sequence, Set, Tuple
 
-INVENTORY = {
-    "A_uav": 4,
-    "B_uav": 2,
-    "C_uav": 2,
-    "A_bat": 6,
-    "B_bat": 4,
-    "C_bat": 4,
-    "relay_uav": 2,
-    "relay_comp": 6,
-}
-
-CHARGE_TIME = {"A": 1800.0, "B": 2400.0, "C": 3000.0}
-RELAY_CHARGE_TIME = 1800.0
-RELAY_TURNAROUND = 300.0
-
-
-def _read_csv(path: Path):
-    with path.open("r", encoding="utf-8-sig", newline="") as f:
-        return list(csv.DictReader(f))
-
-
-def two_stage_charge_time(
-    full_charge_s: float,
-    soc_percent: float,
-) -> float:
-    s = max(0.0, min(1.0, soc_percent / 100.0))
-    if s < 0.90:
-        return full_charge_s * (
-            0.65 * (0.90 - s) / 0.90
-            + 0.35
-        )
-    return (
-        full_charge_s
-        * 0.35
-        * (1.0 - s) / 0.10
-    )
+from src.config import DEFAULT_DATA_ROOT
+from src.core.inputs import load_inputs, load_relay_inputs
+from src.core.energy import two_stage_charge_time
+from src.core.io import read_csv as _read_csv
+from src.core.numeric import finite
 
 
 def max_overlap(intervals: Iterable[Tuple[float, float]]) -> int:
     events = []
     for start, end in intervals:
+        finite(start, "interval start", 0)
+        finite(end, "interval end", start)
+        if start == end:
+            continue
         events.append((start, +1))
         events.append((end, -1))
 
@@ -107,6 +80,8 @@ def atomic_components(transport_rows):
 
 def canonical_partitions(n: int, k: int):
     """Yield unlabeled set partitions encoded by integer labels."""
+    if not isinstance(n, int) or not isinstance(k, int) or n < 1 or not 1 <= k <= n:
+        raise ValueError("Partition requires integers 1 <= k <= n")
     labels = [0] * n
 
     def rec(i: int, max_label: int):
@@ -130,7 +105,13 @@ def canonical_partitions(n: int, k: int):
 def solve_partitions(
     q3_dir: Path,
     out_dir: Path,
+    root: Path = DEFAULT_DATA_ROOT,
 ):
+    _nodes, types, drones, batteries, _boxes, _dem = load_inputs(root)
+    relay_inputs = load_relay_inputs(root)
+    inventory = {f"{code}_uav": sum(d.type == code for d in drones) for code in types}
+    inventory.update({f"{code}_bat": sum(b.type == code for b in batteries) for code in types})
+    inventory.update(relay_uav=len(relay_inputs.drone_ids), relay_comp=len(relay_inputs.component_ids))
     transport = _read_csv(
         q3_dir / "Q3_transport_trips.csv"
     )
@@ -226,8 +207,8 @@ def solve_partitions(
                     float(row["开始时刻_s"]),
                     float(row["返回O01时刻_s"])
                     + two_stage_charge_time(
-                        CHARGE_TIME[vehicle_type],
-                        float(row["返航SOC_pct"]),
+                        types[vehicle_type].full_charge,
+                        float(row["返航SOC_pct"])/100,
                     ),
                 )
                 for row in selected
@@ -237,7 +218,7 @@ def solve_partitions(
             (
                 float(row["开始时刻_s"]),
                 float(row["返回O01时刻_s"])
-                + RELAY_TURNAROUND,
+                + relay_inputs.spec.turnaround_s,
             )
             for row in rrows
         )
@@ -247,8 +228,8 @@ def solve_partitions(
                 float(row["开始时刻_s"]),
                 float(row["返回O01时刻_s"])
                 + two_stage_charge_time(
-                    RELAY_CHARGE_TIME,
-                    float(row["返航SOC_pct"]),
+                    relay_inputs.full_charge_s,
+                    float(row["返航SOC_pct"])/100,
                 ),
             )
             for row in rrows
@@ -317,21 +298,21 @@ def solve_partitions(
                 group["req"][key]
                 for group in groups
             )
-            for key in INVENTORY
+            for key in inventory
         }
         gaps = {
             key: max(
                 0,
-                totals[key] - INVENTORY[key],
+                totals[key] - inventory[key],
             )
-            for key in INVENTORY
+            for key in inventory
         }
         redundancy = {
             key: max(
                 0,
-                INVENTORY[key] - totals[key],
+                inventory[key] - totals[key],
             )
-            for key in INVENTORY
+            for key in inventory
         }
 
         gap_sum = sum(gaps.values())
@@ -376,6 +357,8 @@ def solve_partitions(
     best = {}
 
     for k in (2, 3):
+        if k > len(atoms):
+            raise ValueError(f"Cannot divide {len(atoms)} indivisible service atoms into {k} groups")
         candidates = []
         for labels in canonical_partitions(
             len(atoms), k
@@ -441,12 +424,12 @@ def solve_partitions(
                 }
             )
 
-        for key in INVENTORY:
+        for key in inventory:
             resource_rows.append(
                 {
                     "K": k,
                     "资源": key,
-                    "现有库存": INVENTORY[key],
+                    "现有库存": inventory[key],
                     "分组独立执行总需求": totals[key],
                     "冗余": redundancy[key],
                     "缺口": gaps[key],
@@ -477,3 +460,4 @@ def solve_partitions(
         "config_rows": config_rows,
         "resource_rows": resource_rows,
     }
+

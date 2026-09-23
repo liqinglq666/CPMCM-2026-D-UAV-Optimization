@@ -1,48 +1,8 @@
-# AI-assisted development disclosure
-# Tool: ChatGPT
-# Model: GPT-5.6 Sol
-# Developer: OpenAI
-# General-availability release date: 2026-07-09
-# The participating team must independently verify all modeling assumptions,
-# equations, code and numerical outputs before submission.
-
-from __future__ import annotations
-
-import argparse
+"""Compatibility entry for Q4."""
 from pathlib import Path
 import sys
-
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(PROJECT_ROOT))
-
-from src.q4.partition import solve_partitions
-
-
-def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Run CPMCM 2026 D Q4"
-    )
-    parser.add_argument(
-        "--q3-dir",
-        type=Path,
-        default=PROJECT_ROOT / "results" / "q3",
-    )
-    parser.add_argument(
-        "--out",
-        type=Path,
-        default=PROJECT_ROOT / "results" / "q4",
-    )
-    args = parser.parse_args()
-
-    result = solve_partitions(
-        args.q3_dir,
-        args.out,
-    )
-
-    print("Atomic service groups:")
-    for atom in result["atoms"]:
-        print("  ", atom)
-
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from src.cli import run_question
 
 if __name__ == "__main__":
-    main()
+    run_question("q4")
