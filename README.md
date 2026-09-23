@@ -160,6 +160,20 @@ Run Q4:
 python scripts/run_q4.py --q3-dir results/q3 --out results/q4
 ```
 
+Validate the complete result set:
+
+```bash
+python scripts/validate_results.py --results results
+```
+
+Regenerate paper figures after any result change:
+
+```bash
+python scripts/make_figures.py --results results --out figures
+```
+
+The figure generator currently creates Q1 reserve-sensitivity, Q2 timeliness/energy trade-off, Q3 relay-location and joint Gantt figures, and the Q4 resource-shortage comparison.
+
 ## Important modeling language
 
 Q1 contains an exact subset-partition step for each single service area.
