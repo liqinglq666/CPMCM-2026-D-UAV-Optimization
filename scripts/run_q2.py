@@ -1,3 +1,11 @@
+# AI-assisted development disclosure
+# Tool: ChatGPT
+# Model: GPT-5.6 Sol
+# Developer: OpenAI
+# General-availability release date: 2026-07-09
+# The participating team must independently verify all modeling assumptions,
+# equations, code and numerical outputs before submission.
+
 from __future__ import annotations
 
 import argparse
