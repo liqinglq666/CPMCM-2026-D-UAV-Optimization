@@ -1,0 +1,19 @@
+# Submission status
+
+- Problem: D
+- Team number: **26105580028**
+- Final paper filename required by the competition: **D26105580028.pdf**
+- Attachment basename: **D26105580028**
+- Q3 communication audit: **max sampling interval <= 1 s**, with 5 s relay-protection margin on both sides of detected outage windows.
+- Latest official result workbook: `D题_结果提交模板_Q1_Q2_Q3_Q4_1秒终检版.xlsx`
+
+## Remaining hard blockers before MD5 freeze
+
+1. Replace the working cover with the **official Attachment 3 cover**, preserving all 4 official logos.
+2. Fill the official cover with school, team number and all three member names.
+3. Verify that school/member names/team number occur **only on page 1**.
+4. Render the complete paper and visually inspect every page.
+5. Freeze the exact final PDF as `D26105580028.pdf`.
+6. Generate/submit MD5 only from that frozen PDF; do not modify the PDF afterward.
+
+Current repository remains private during the competition.
