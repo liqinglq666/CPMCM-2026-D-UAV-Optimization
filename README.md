@@ -128,6 +128,13 @@ submission/
 tests/
 ```
 
+## Current paper draft
+
+- Current writing version: `docs/paper/D题论文正文初稿_v2.md`
+- v2 adds verified literature references for UAV routing, UAV communications and ITU-R P.525-5.
+- The editable DOCX working draft is maintained outside Git until the official cover/template is finalized.
+- **Do not freeze or generate the final MD5 yet.** The official cover, final AI disclosure format and 1 s Q3 boundary recheck still need completion.
+
 ## Reproducibility
 
 Python 3.10+ recommended.
