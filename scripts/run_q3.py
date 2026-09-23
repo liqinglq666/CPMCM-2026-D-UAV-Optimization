@@ -9,7 +9,7 @@
 from __future__ import annotations
 
 """
-Q3 feasible joint transport-relay baseline for CPMCM 2026 Problem D.
+Q3 feasible joint transport-relay baseline for CPMCM 2026 Problem D.\n\nFinal version uses a maximum communication-state sampling interval of 1 s and\nretains a 5 s guard interval before/after each detected relay-demand window.
 
 This script keeps the Q2 physical model, checks DEM line-of-sight and FSPL link
 budgets, performs a small transport regrouping to remove early relay conflicts,
@@ -90,7 +90,7 @@ def transport_profile(job):
  if energy>(1-cfg['rho'])*cfg['E']+1e-8:raise ValueError(('energy',job['id'],energy,(1-cfg['rho'])*cfg['E']))
  fail=[]
  for ph,t0,t1,a,b,z0,z1,d in phases:
-  n=max(1,int((t1-t0)/5))
+  # Final communication audit: discretize every flight/operation phase so the maximum\n  # temporal gap between adjacent checked states is <= 1 s.\n  n=max(1,math.ceil((t1-t0)/1.0))
   for k in range(n+1):
    f=k/n;tt=t0+(t1-t0)*f;na=NODES[a];nb=NODES[b]
    if ph=='巡航':az,_,_=GEOD.inv(na[0],na[1],nb[0],nb[1]);lon,lat,_=GEOD.fwd(na[0],na[1],az,d*f);z=z0
