@@ -34,43 +34,100 @@ Q4 partition + resource allocation
 Official submission workbook + paper
 ```
 
-## Current Q1 baseline
+## Current status
+
+### Q1 — completed working baseline
 
 At a 20% return-energy reserve:
 
-- Minimum round trips: **18**
+- Minimum single-service round trips: **18**
 - Total transport energy: **59.1304 kWh**
 - Cumulative operation time: **32776.02 s**
 - Split-demand service areas: **S001, S002, S003**
 
-These values are working results and must be independently checked by the team before final submission.
+### Q2 — completed working balanced solution
+
+The current Q2 route/resource search produces a hard-deadline-feasible trade-off frontier.
+
+Working 22-trip balance point:
+
+- Transport trips: **22**
+- Hard deadline violations: **0**
+- Makespan: **11033.023 s**
+- Total transport energy: **79.801846 kWh**
+- Weighted tardiness: **327498.249 priority·s**
+- Minimum hard-deadline slack: about **1768.65 s**
+
+The Q2 result is a heuristic / trade-off solution, not a claimed proof of global optimality. The full 17–24 trip frontier is stored in `results/q2/Q2_tradeoff_frontier.csv`.
 
 ## Repository structure
 
 ```text
-docs/          modeling notes, assumptions, AI-use record
-data/          data-placement instructions; raw competition data should stay controlled
-src/           reusable model and optimization code
-scripts/       executable entry points
-results/       intermediate/final numerical results
-submission/    official output files prepared for submission
-tests/         numerical and physics consistency tests
+docs/
+  modeling/
+    Q1_model.md
+    Q2_model.md
+  AI_USAGE.md
+
+data/
+  raw/
+  dem/
+
+src/
+  q1/
+  q2/
+
+scripts/
+  run_q1.py
+  run_q2.py
+
+results/
+  q1/
+  q2/
+
+submission/
+tests/
 ```
 
 ## Reproducibility
 
-Python 3.10+ is recommended. Install dependencies with:
+Python 3.10+ is recommended.
+
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run Q1 with:
+Run Q1:
 
 ```bash
 python scripts/run_q1.py /path/to/D_problem_unpacked --out results/q1
 ```
 
+Run Q2:
+
+```bash
+python scripts/run_q2.py /path/to/D_problem_unpacked --target-trips 22 --out results/q2
+```
+
+Q2 output files include:
+
+- `Q2_transport_trips_balanced.csv`
+- `Q2_box_delivery_balanced.csv`
+- `Q2_tradeoff_frontier.csv`
+- `Q2_resource_check.csv`
+
+## Next step
+
+Q3 will inherit the Q2 box groups, route orders, physical UAV/battery schedules and segment timing, then add:
+
+- terrain line-of-sight checking;
+- bidirectional link-budget checking;
+- direct-link outage intervals;
+- relay candidate positions/heights;
+- relay UAV / energy-component scheduling.
+
 ## Competition compliance
 
-AI is used only as an auxiliary tool. Modeling assumptions, equations, code, numerical outputs and written conclusions must be independently verified by the participating team. Any external code, literature or AI-assisted program must be cited/declared according to the competition rules.
+AI is used only as an auxiliary tool. Modeling assumptions, equations, code, numerical outputs and written conclusions must be independently verified by the participating team. Any external code, literature or AI-assisted program actually used must be cited/declared according to the competition rules.
