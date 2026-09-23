@@ -45,20 +45,20 @@ Verified feasible baseline:
 - all 80 boxes delivered exactly once;
 - hard-deadline violations: **0**;
 - transport energy: **80.844703 kWh**;
-- relay energy: **5.958528 kWh**;
-- joint energy: **86.803232 kWh**;
+- relay energy: **5.966558 kWh**;
+- joint energy: **86.811261 kWh**;
 - transport makespan: **12774.325 s**;
-- joint makespan: **13223.665 s = 3.67324 h**;
+- joint makespan: **13224.359 s ≈ 3.67343 h**;
 - weighted tardiness: **756674.615 priority·s**;
 - minimum hard-deadline slack: **178.649 s**.
 
 Relative to the selected Q2 point:
 
 - transport trips: +2;
-- joint energy: about **+8.77%**;
+- joint energy: about **+8.78%**;
 - joint makespan: about **+19.86%**.
 
-Interpretation: these are the current costs of adding continuous communication feasibility under the two-relay resource restriction.
+Interpretation: these are the current costs of adding high-resolution discrete communication feasibility under the two-relay resource restriction.
 
 ### Q3 validation completed
 
@@ -73,7 +73,7 @@ The current result set has been rechecked for:
 - relay communication windows lying inside the corresponding established-link / service windows;
 - sampled direct-failure states having feasible transport↔relay and relay↔G01 links in the Q3 solver.
 
-Important limitation: communication continuity is verified on the solver's finite temporal / DEM sampling resolution; do not call it an analytic continuous-time proof.
+Final terminal audit: every flight/operation phase is discretized with maximum adjacent communication-check interval **≤ 1 s**, and each detected direct-loss window is padded by **5 s before and after** for relay service. Compared with the previous coarser audit, some loss boundaries moved by about 1–9 s while the transport plan, six relay hover states, wave assignments and Q4 atoms remained feasible and unchanged. This is still a high-resolution discrete verification, not an analytic continuous-time proof.
 
 ## Q4 — fixed-Q3 partition enumeration
 
