@@ -65,13 +65,13 @@ Communication-aware feasible joint baseline:
 - Relay sorties: **6**
 - Hard-deadline violations: **0**
 - Transport energy: **80.844703 kWh**
-- Relay energy: **5.958528 kWh**
-- Joint energy: **86.803232 kWh**
+- Relay energy: **5.966558 kWh**
+- Joint energy: **86.811261 kWh**
 - Transport makespan: **12774.325 s**
-- Joint makespan: **13223.665 s ≈ 3.67 h**
+- Joint makespan: **13224.359 s ≈ 3.67 h**
 - Minimum hard-deadline slack: **≈178.65 s**
 
-The communication model uses 2.4 GHz FSPL, DEM obstruction checking and bidirectional link-budget thresholds. The current Q3 is a verified feasible collaborative baseline, not a proof of global optimality.
+The communication model uses 2.4 GHz FSPL, DEM obstruction checking and bidirectional link-budget thresholds. The final communication terminal audit uses a maximum sampling interval of **1 s**, with a **±5 s relay guard window**. The current Q3 is a verified feasible collaborative baseline, not a proof of global optimality.
 
 ### Q4
 
