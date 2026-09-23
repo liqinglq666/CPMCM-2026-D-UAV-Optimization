@@ -61,6 +61,11 @@ E_trip <= (1 - rho) * E_use
 
 where rho is the required return-energy reserve.
 
+By default each type uses its own official reserve. A Q1 `--rho` option is an
+explicit all-type override for experiments; it is not the default source of
+physical parameters. DEM extraction includes both sides of exact raster edges
+and cells meeting at a corner, using a conservative closed-pixel convention.
+
 ## 3. Batch feasibility
 
 Each batch must satisfy simultaneously:

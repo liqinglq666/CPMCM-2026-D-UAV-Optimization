@@ -1,0 +1,132 @@
+{
+  "baseline_commit": "4a00465e7aa7207fa9e927e78fecbf98c923f83b",
+  "result_files": 24,
+  "csv_files": 15,
+  "changed_from_baseline": [
+    "q1/Q1_metrics.json",
+    "validation.json"
+  ],
+  "repeat_run_differences": [],
+  "new_summary": {
+    "q1": {
+      "reserve_fraction": null,
+      "reserve_by_type": {
+        "A": 0.2,
+        "B": 0.2,
+        "C": 0.2
+      },
+      "trips": 18,
+      "energy_kwh": 59.13042326715278,
+      "operation_time_s": 32776.015748915874
+    },
+    "q2": {
+      "trips": 22,
+      "boxes": 80,
+      "energy_kwh": 79.76059654204991,
+      "makespan_s": 11033.023069572368
+    },
+    "q3": {
+      "trips": 24,
+      "boxes": 80,
+      "energy_kwh": 80.84470332812647,
+      "makespan_s": 12339.411873284695,
+      "checked_states": 41572,
+      "relay_energy_kwh": 5.867028837665667,
+      "joint_makespan_s": 12789.446029897668
+    },
+    "q4": {
+      "atomic_groups": 4,
+      "shortages": {
+        "2": 4,
+        "3": 7
+      }
+    },
+    "input_sha256": {
+      "调度中心与服务区.xlsx": "541a7af1ded08c9a3ff448480332cb5f6a54902f0afa6e9bcd50c1d2b2b34e38",
+      "运输无人机数据.xlsx": "9296a657c07e042afba6aeea7999665d9cd24e00b592fd6c269de6e338480dcb",
+      "物资需求与配送时限.xlsx": "5a3346159ceddcf585859d270b8f62114b388a1f737fbe64ffde0ee1fdc8170a",
+      "中继无人机数据.xlsx": "be52643ff29419233e6a141dca03a04160a8af551cab36d8c49b51bb836bea04",
+      "通信链路参数.xlsx": "1860d153199e7ae460ba36e83b673374e640e19de91ea167f2877271001f5f81",
+      "30米DEM.tif": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03"
+    },
+    "communication_step_s": 1.0,
+    "continuous_time_proof": false
+  },
+  "output_sha256": {
+    "q1/Q1_batch_solution.csv": "a28c5e3eb7660ec0789969d122025445c61b67140d6bbb91f3a740423dece05c",
+    "q1/Q1_leg_physics.csv": "1957936788eca03a6dd4d168053f023a7a212bf124b22bfe8f967a799e99f314",
+    "q1/Q1_max_safe_payload.csv": "2c3decbfea44e95c1e77d84ce9db8c4f13581189774f930fd4e66ed7a8c1e023",
+    "q1/Q1_metrics.json": "3df457b62741f0236f9cf2fd1d20918d9383fa2b645bf3a0c42fbe807145b7eb",
+    "q1/Q1_sensitivity_summary.csv": "608793bfdea2401f95a0f0d1dca3fb62142e6324be0307f3b923a400f40e3d77",
+    "q1/input_manifest.json": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+    "q2/Q2_box_delivery_balanced.csv": "b8493cdae41c74cc0e00bd96ba0334e23824c608098c1e29fe6541dd0ed821c4",
+    "q2/Q2_frontier_plans.json": "a2496996aa1933c5c098e133db2b48b8632abf0e2e82869155c58725ad1b043f",
+    "q2/Q2_metrics.json": "3c3231f6784f34e1e808343cdb04bd5e58ef9e86e61f4e770bd1172e3ca93132",
+    "q2/Q2_resource_check.csv": "19e50d273bfebda65195f555be17e5553e482cdc05cea6b796d33bb0c1506dc6",
+    "q2/Q2_tradeoff_frontier.csv": "036a984db110d6622be9ef3a0f71907b39cc240724cbe76d63a6ffd7a81c37e7",
+    "q2/Q2_transport_trips_balanced.csv": "b38fea8d79eb5e6335d21d1609b3dffb78b75b517a45897c7371f3e1c037eb11",
+    "q2/input_manifest.json": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+    "q3/Q3_box_delivery.csv": "fe276dcfaeaac8fcef7869ea0a145bbc6e1debdb5ac25fb3d44cd16a23612c77",
+    "q3/Q3_communication.csv": "d9dacd7a0403510e53062df7063fec1132b9a081e8236e0dbc2f30ed6363e7ee",
+    "q3/Q3_metrics.json": "59ed2f2f824c03013dd6aaabbc2a7acd7b20ab030bea5c895663f142677ef032",
+    "q3/Q3_relay_sorties.csv": "0fe08d2648ce0069567c62bfa16f99c533da2a5acac630cbd3a47287cee61fa7",
+    "q3/Q3_resource_check.csv": "c24026abd5f90199140caeda66b976a9fdadcf2b55e80e3b094862f04d39e02c",
+    "q3/Q3_transport_trips.csv": "76a8a45d39da0c7a3aeac45a7e00fd2e3fd260b69752e9df824e6e1765132e41",
+    "q3/input_manifest.json": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+    "q4/Q4_partition_config.csv": "8dec4be509bea35dbb265ad5c985635f6e9c7ae50aa14abc62a1baf5d404c5d3",
+    "q4/Q4_resource_summary.csv": "61b9bbfc2d4b6f71abc72f665b12ec5a509ba7ffcc0f2258642c8195bb28155e",
+    "q4/input_manifest.json": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+    "validation.json": "26b8ab283062b1507c0bf43cc858ebbfe417a1b78dbf67ea6deb5ec84ad629cb"
+  },
+  "tested_source_sha256": {
+    "config/q3_plan.json": "90b59f662651ecc73507077e76aa3041ba43a1338a727d0c1eed9b31095a3773",
+    "requirements-dev.txt": "1ce927cfea67d993475bd70accac498962f6c0038a6cc6546746388b03c9d5fa",
+    "requirements-figures.txt": "4cb0b0f9d613ccbe033eac4bbd8d4e004e2f73834155b307b11333607003237b",
+    "requirements.txt": "3e0cece1d8c4dca4288d21bf053ea55e354a42eb6b453ba480aa3783f5681e70",
+    "run_all.py": "a747dc3d0ee31fa807fee37ddebb760c4c18a162eaf0f358969c989011e5be09",
+    "run_q1.py": "84ddc68aa5125a7490125847337e56742b47f3e37a6bce1135e3727fed463472",
+    "run_q2.py": "e6f56506b00b51051558c9ddd886e6ba95bcb8bfeba95f83587003b4c362b4ba",
+    "run_q3.py": "2a528d771d34683ef4ad7c0ef725d7518632e7bcd075457598fea5c19a0f0bf6",
+    "run_q4.py": "47e519d0f116e945639257832904c503ec24b158553ee405f289212c6c5abb18",
+    "scripts/make_figures.py": "5678ccf8687f6ed56a4323cb429992a08a41cd598ac77c72f59def2b0f149aff",
+    "scripts/run_q1.py": "6ec4fc29dc99ed15a92006a51414b548b8ff1460839a013e4fb89335c07886e6",
+    "scripts/run_q2.py": "1c303eff1f8fa5c4f3175d489cf6575e6439796b9ddf56b9325fe5652210b7b6",
+    "scripts/run_q3.py": "794079c4913f8997034383ae69954352347d8936af91811dbacfc7dffe0a2820",
+    "scripts/run_q4.py": "89b13b702dc51ac320a59a4798d1458939deb03ae4a12d7fae009d0b9b3a1d0e",
+    "scripts/validate_results.py": "91506d13a48015957040abef33d6a7301cfc43068f028277f2963b682e9d618e",
+    "src/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "src/cli.py": "ee0859c73659bdc66bca150194d9bdae55a5d91e11e2705a5edd69575887f4ac",
+    "src/config.py": "fa072d56922c42ecc54d3678b7c6d25143f4958f75bb1299b1846ef08bb797a4",
+    "src/core/__init__.py": "08c1ee08cebfd23595ae24bfd8482157dc071e9e9e1f01e90a72f1057daf4abb",
+    "src/core/communication.py": "7b2cdaa54eead3c8d8d0a300b09e71d298c5c8ee17c9047312932c6f55bb3a65",
+    "src/core/constraints.py": "16a5d95bcaa05b7abf2e995f2a38dbac69e4b328124faa2fa25ef805565a9b27",
+    "src/core/energy.py": "3e4ca3ae2b137917c10d9a7c7ba72b12b4aa876899255799b7d8a9cffe1ad4e1",
+    "src/core/inputs.py": "124ba94199a2aa8b54abc5a806ec523d53eeaa049dd89d00420e0125dede908c",
+    "src/core/io.py": "a6a2f9f16f8b3c8621b88cbb27f73d64741ae5ee6ce27a920285c5c1eabd07d7",
+    "src/core/models.py": "2f4516fcd377cb0473d8578545281f90075b046a049be6d10cb9b23f8e50d546",
+    "src/core/numeric.py": "ab3e3ecfb0fda67da0fd1fc363a8a8ad328ed61a610944016401b25a5e7cd4dc",
+    "src/core/physics.py": "36b58299dbdf77d62b1408a6fb26366860fdee938e8d650bed28f877712d362d",
+    "src/core/provenance.py": "5b226b6cbe9f1d3744cab59a53e80fa2ba1bf2dea8c557095e37e4603392db4a",
+    "src/core/routes.py": "716aedafd42b4769390c292bececb09a00674d9aa716786b09e85aa52b2dded7",
+    "src/core/terrain.py": "e6c89a7c35ef3600284bed34bcbbf30267d0ad285a298433b34ddd593f2ad164",
+    "src/q1/__init__.py": "2c036d2aff49c24e049486d8b8d4885eb40f97bc0e827086f649ffcd561993ca",
+    "src/q1/physics_engine.py": "997747a02f4fac4440d5c7139ebb0e7d48ac5bca72edafea4429171975b7748b",
+    "src/q2/__init__.py": "63a65b7c6bf8342a392b24dd73c2fbf211d9bfbcf0b757821a70d3219cf1927e",
+    "src/q2/heuristic.py": "77c8c4169c18a26c69235fb20c8186e422da229e49aaf09397c8d92b91e35e39",
+    "src/q2/tradeoff.py": "0dc38e0b2d0f28176ce867a9b1adf8b3b111f00c3178a1ae231b1303b3fde03a",
+    "src/q3/__init__.py": "a152947de949d73a6b3400facbe1f65a571a569fd60d02d46b7849c01c2686d9",
+    "src/q3/communication.py": "9b4d1fcef45a71edfbb738d5245ed2aba86f4f3d83be4625085243b0967c74e5",
+    "src/q3/solver.py": "9f2af3bff20a98b9e5c4025e5e41cd32cea40c472a567e6a5dee0fba1687c445",
+    "src/q4/__init__.py": "e515ef2dfc007025eecc3f5ba308e6b43f0343fc64b0d1808ff493cda3f29f9d",
+    "src/q4/partition.py": "5fd81e320ac34d7d22effa39e91ceaa7758e867b663f07f133b752b6e9978132",
+    "src/validation.py": "bf5f28aacf8d0ba5bb7324f65df0907820112228cfb975940041462c74baf005",
+    "tests/conftest.py": "29cb82ad44a4e7cb221495e15d046dab7535e1721ee3193b87e68272277b4a9d",
+    "tests/test_core_boundaries.py": "d24708f1dc6de65a68072950c41240969721b04e9ce4fe077526c4793dd9eb08",
+    "tests/test_independent_audit.py": "eb1df031738c11f775da62edf8d99b3e2efc43501b7ca9a1e16d9f67d4fa3cf9",
+    "tests/test_official_integration.py": "5dd89bf2ed6a3fbf7d5fa56c1e1b3cbfe0715f216a9ef72e97bef4998b4b750b",
+    "tests/test_q1_physics.py": "2b71892de3e23dec2c0c341bf044e688bb4f8daf22e672388bb306c3c7112584",
+    "tests/test_q3_communication.py": "6a9f47d5ee8d692a52aa72ba258b1d89cdc843cb95c45b51ef4e63f27f3c3f2d",
+    "tests/test_q4_partition.py": "5ee5dcd96f72c3b7fc70bb3b6f08a929482d23a95058f9121548d1c513dc8178",
+    "tests/test_validation.py": "1f802f09503ec8340170c1d1608cd25444b0cce9e4ca612497900ad5c28f5341"
+  }
+}
