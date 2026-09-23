@@ -2,6 +2,7 @@
 
 from collections import Counter, defaultdict
 import math
+import heapq
 from .energy import charge_time, energy_feasible, two_stage_charge_time
 from .numeric import finite
 from .routes import evaluate_route
@@ -9,6 +10,25 @@ from .io import write_csv
 from src.config import SECONDS_PER_HOUR
 
 RESULT_TOLERANCE = 1e-5  # seconds/kWh serialization and LP feasibility tolerance
+
+
+def max_overlap(intervals):
+    """Resource demand with the same time tolerance as schedule validation."""
+    checked = []
+    for start, end in intervals:
+        start, end = finite(start, "interval start", 0), finite(end, "interval end", 0)
+        if end < start:
+            raise ValueError("Negative resource interval")
+        if start < end:
+            checked.append((start, end))
+    active = []
+    maximum = 0
+    for start, end in sorted(checked):
+        while active and start >= active[0] - RESULT_TOLERANCE:
+            heapq.heappop(active)
+        heapq.heappush(active, end)
+        maximum = max(maximum, len(active))
+    return maximum
 
 
 def close(actual, expected, label):

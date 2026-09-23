@@ -12,35 +12,14 @@ from __future__ import annotations
 
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, Iterable, Sequence, Set, Tuple
+from typing import Dict, Sequence, Set
 
 from src.config import DEFAULT_DATA_ROOT
 from src.core.inputs import load_inputs, load_relay_inputs
 from src.core.energy import two_stage_charge_time
 from src.core.io import read_csv as _read_csv, write_csv
-from src.core.numeric import finite
+from src.core.constraints import max_overlap as max_overlap
 from src.core.provenance import save_provenance, check_question_provenance
-
-
-def max_overlap(intervals: Iterable[Tuple[float, float]]) -> int:
-    events = []
-    for start, end in intervals:
-        finite(start, "interval start", 0)
-        finite(end, "interval end", start)
-        if start == end:
-            continue
-        events.append((start, +1))
-        events.append((end, -1))
-
-    # End before start at the same instant allows immediate reuse.
-    events.sort(key=lambda x: (x[0], x[1]))
-
-    current = 0
-    maximum = 0
-    for _time, delta in events:
-        current += delta
-        maximum = max(maximum, current)
-    return maximum
 
 
 def atomic_components(transport_rows):

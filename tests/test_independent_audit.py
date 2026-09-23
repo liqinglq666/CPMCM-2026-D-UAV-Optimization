@@ -171,6 +171,19 @@ def test_grid_boundary_nodata_is_not_ignored(terrain):
             method((0.5, 11, 50), (2.5, 11, 50))
 
 
+def test_q4_resource_counts_use_the_same_time_tolerance_as_validation():
+    from src.core.constraints import check_intervals, RESULT_TOLERANCE
+    from src.q4.partition import max_overlap
+
+    touching = [(0.0, 10.0), (10.0 - RESULT_TOLERANCE / 2, 20.0)]
+    check_intervals(
+        [("one-UAV", start, end, str(i)) for i, (start, end) in enumerate(touching)],
+        "UAV",
+    )
+    assert max_overlap(touching) == 1
+    assert max_overlap([(0, 10), (10 - 2 * RESULT_TOLERANCE, 20)]) == 2
+
+
 def test_terrain_traversal_against_independent_rectangle_intersections(terrain):
     """Brute-force every cell using line/rectangle clipping, not raster traversal."""
     import numpy as np
