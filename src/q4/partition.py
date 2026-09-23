@@ -10,7 +10,6 @@ components are exhaustively enumerated.
 
 from __future__ import annotations
 
-import csv
 from collections import defaultdict
 from pathlib import Path
 from typing import Dict, Iterable, Sequence, Set, Tuple
@@ -18,9 +17,9 @@ from typing import Dict, Iterable, Sequence, Set, Tuple
 from src.config import DEFAULT_DATA_ROOT
 from src.core.inputs import load_inputs, load_relay_inputs
 from src.core.energy import two_stage_charge_time
-from src.core.io import read_csv as _read_csv
+from src.core.io import read_csv as _read_csv, write_csv
 from src.core.numeric import finite
-from src.core.provenance import save_provenance
+from src.core.provenance import save_provenance, check_question_provenance
 
 
 def max_overlap(intervals: Iterable[Tuple[float, float]]) -> int:
@@ -104,6 +103,7 @@ def solve_partitions(
     out_dir: Path,
     root: Path = DEFAULT_DATA_ROOT,
 ):
+    check_question_provenance(root, q3_dir)
     _nodes, types, drones, batteries, _boxes, _dem = load_inputs(root)
     relay_inputs = load_relay_inputs(root)
     inventory = {f"{code}_uav": sum(d.type == code for d in drones) for code in types}
@@ -161,7 +161,7 @@ def solve_partitions(
 
         req: Dict[str, int] = {}
 
-        for vehicle_type in ("A", "B", "C"):
+        for vehicle_type in types:
             selected = [row for row in trows if row["机型编号"] == vehicle_type]
 
             req[f"{vehicle_type}_uav"] = max_overlap(
@@ -333,12 +333,8 @@ def solve_partitions(
                     "K": k,
                     "任务组编号": f"G{index}",
                     "服务区列表": ",".join(group["services"]),
-                    "A型运输无人机数": req["A_uav"],
-                    "B型运输无人机数": req["B_uav"],
-                    "C型运输无人机数": req["C_uav"],
-                    "A型电池组数": req["A_bat"],
-                    "B型电池组数": req["B_bat"],
-                    "C型电池组数": req["C_bat"],
+                    **{f"{code}型运输无人机数": req[f"{code}_uav"] for code in types},
+                    **{f"{code}型电池组数": req[f"{code}_bat"] for code in types},
                     "中继无人机数": req["relay_uav"],
                     "中继能源组件数": req["relay_comp"],
                     "运输架次": group["transport_trips"],
@@ -365,17 +361,7 @@ def solve_partitions(
         ("Q4_partition_config.csv", config_rows),
         ("Q4_resource_summary.csv", resource_rows),
     ):
-        with (out_dir / filename).open(
-            "w",
-            encoding="utf-8-sig",
-            newline="",
-        ) as f:
-            writer = csv.DictWriter(
-                f,
-                fieldnames=rows[0].keys(),
-            )
-            writer.writeheader()
-            writer.writerows(rows)
+        write_csv(out_dir / filename, rows)
 
     save_provenance(root, out_dir)
     return {

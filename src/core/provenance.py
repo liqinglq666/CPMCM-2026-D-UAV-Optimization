@@ -31,11 +31,15 @@ def save_provenance(root, out):
 def check_provenance(root, results):
     expected = input_fingerprints(root)
     for question in ("q1", "q2", "q3", "q4"):
-        actual = json.loads(
-            (results / question / "input_manifest.json").read_text(encoding="utf-8")
+        check_question_provenance(root, results / question, expected)
+    return expected
+
+
+def check_question_provenance(root, directory, expected=None):
+    expected = input_fingerprints(root) if expected is None else expected
+    actual = json.loads((directory / "input_manifest.json").read_text(encoding="utf-8"))
+    if actual != expected:
+        raise ValueError(
+            f"Stale results in {directory.name}: official input hashes differ"
         )
-        if actual != expected:
-            raise ValueError(
-                f"Stale {question.upper()} results: official input hashes differ"
-            )
     return expected

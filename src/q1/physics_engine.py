@@ -187,7 +187,9 @@ def _optimize_service(service, boxes, drone_types, seg, rho):
             if mass > drone.max_payload + 1e-10 or volume > drone.max_volume + 1e-12:
                 continue
             e = roundtrip_energy(drone, seg, mass)
-            if not energy_feasible(e, drone.energy_use, drone.rho if rho is None else rho):
+            if not energy_feasible(
+                e, drone.energy_use, drone.rho if rho is None else rho
+            ):
                 continue
             t = roundtrip_time(drone, seg, len(batch))
             soc = 100.0 * (1.0 - e / drone.energy_use)
@@ -367,7 +369,10 @@ def solve_q1(
         out_dir / "Q1_metrics.json",
         {
             "reserve_fraction": rho,
-            "reserve_by_type": {code: drone.rho if rho is None else rho for code, drone in drones.items()},
+            "reserve_by_type": {
+                code: drone.rho if rho is None else rho
+                for code, drone in drones.items()
+            },
             "trips": len(result_df),
             "energy_kwh": float(result_df["架次能耗（kWh）"].sum()),
             "operation_time_s": float(result_df["往返时间（s）"].sum()),

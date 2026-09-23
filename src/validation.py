@@ -28,7 +28,7 @@ from src.q1.physics_engine import (
     roundtrip_time,
     optimize_service_q1,
 )
-from src.q3.solver import Communication, sample_states
+from src.core.communication import Communication, sample_states
 from src.q4.partition import solve_partitions
 
 
@@ -41,7 +41,7 @@ def compare_records(actual, expected, label):
         for key, value in right.items():
             if isinstance(value, (int, float)):
                 close(left[key], value, label + " " + key)
-            elif str(left[key]) != str(value):
+            elif str(left[key]) != ("" if value is None else str(value)):
                 raise ValueError(label + ": field mismatch: " + key)
 
 
@@ -50,6 +50,11 @@ def validate_q1(directory, nodes, types, boxes, dem):
     box_map = {b.id: b for b in boxes}
     metrics = json.loads((directory / "Q1_metrics.json").read_text(encoding="utf-8"))
     rho = metrics["reserve_fraction"]
+    expected_reserves = {
+        code: drone.rho if rho is None else rho for code, drone in types.items()
+    }
+    if metrics["reserve_by_type"] != expected_reserves:
+        raise ValueError("Q1 per-type reserve metadata mismatch")
     segs = compute_segments(nodes, dem)
     covered, trip_ids = [], []
     for row in rows:
@@ -87,6 +92,8 @@ def validate_q1(directory, nodes, types, boxes, dem):
                     raise ValueError("Q1 unreachable service must be explicit")
             else:
                 close(value, expected, "Q1 safe payload")
+                if row[f"{typ}型空载可达"] != "True":
+                    raise ValueError("Q1 reachable service marked unreachable")
     for key, actual in (
         ("trips", len(rows)),
         ("energy_kwh", sum(float(r["架次能耗（kWh）"]) for r in rows)),
@@ -108,6 +115,7 @@ def validate_q1(directory, nodes, types, boxes, dem):
                 service, [b for b in boxes if b.service == service], types, seg, reserve
             )
             for service, seg in segs.items()
+            if any(b.service == service for b in boxes)
         }
         close(
             row["最少往返架次数"],
@@ -139,6 +147,8 @@ def validate_communication(profiles, comm_rows, relays, physics, communication, 
         mode, rid = row["保障方式"], row["中继架次编号"]
         if mode not in ("直连", "中继"):
             raise ValueError("Unknown communication mode")
+        if row["通信阶段"] != ("需中继区间" if mode == "中继" else "全程"):
+            raise ValueError("Communication phase disagrees with coverage mode")
         if mode == "中继" and rid not in relays:
             raise ValueError("Unknown relay in communication table")
         if mode == "直连" and rid:
@@ -177,7 +187,15 @@ def validate_communication(profiles, comm_rows, relays, physics, communication, 
     return checked
 
 
-def validate_frontier(directory, physics, boxes, drones, batteries):
+def validate_frontier(
+    directory,
+    physics,
+    boxes,
+    drones,
+    batteries,
+    selected_trips=None,
+    selected_deliveries=None,
+):
     rows = read_csv(directory / "Q2_tradeoff_frontier.csv")
     plans = json.loads(
         (directory / "Q2_frontier_plans.json").read_text(encoding="utf-8")
@@ -206,9 +224,51 @@ def validate_frontier(directory, physics, boxes, drones, batteries):
             "frontier tardiness",
         )
         close(row["hard_violations"], 0, "frontier hard violations")
+    if selected_trips is not None:
+        selected = plans.get(str(len(selected_trips)))
+        if selected is None:
+            raise ValueError("Selected Q2 plan is missing from the frontier")
+        compare_records(selected_trips, selected["trips"], "Q2 selected frontier trips")
+        compare_records(
+            selected_deliveries,
+            selected["deliveries"],
+            "Q2 selected frontier deliveries",
+        )
+
+
+def validate_q3_metrics(metrics, summary, trips, relay_rows, deliveries, boxes, step_s):
+    for key, expected in (
+        ("transport_trips", len(trips)),
+        ("relay_sorties", len(relay_rows)),
+        ("transport_energy_kwh", summary["energy_kwh"]),
+        ("relay_energy_kwh", summary["relay_energy_kwh"]),
+        ("transport_makespan_s", summary["makespan_s"]),
+        ("joint_makespan_s", summary["joint_makespan_s"]),
+        (
+            "weighted_tardiness",
+            sum(float(row["加权延误"]) for row in deliveries),
+        ),
+        ("checked_states", summary["checked_states"]),
+        ("communication_step_s", step_s),
+        (
+            "minimum_hard_slack_s",
+            min(
+                box.hard_deadline - float(row["交付完成时刻_s"])
+                for box in boxes
+                if box.hard_deadline is not None
+                for row in deliveries
+                if row["货箱编号"] == box.id
+            ),
+        ),
+    ):
+        close(metrics[key], expected, "Q3 metric " + key)
+    if metrics["continuous_time_proof"] is not False:
+        raise ValueError("Sampled communication cannot certify continuous time")
 
 
 def validate_results(root: Path, results: Path, step_s=COMMUNICATION_STEP_S):
+    # A failed revalidation must never leave an earlier success certificate.
+    (results / "validation.json").unlink(missing_ok=True)
     fingerprints = check_provenance(root, results)
     nodes, types, drones, batteries, boxes, dem = load_inputs(root)
     physics = Physics(nodes, types, dem)
@@ -246,7 +306,9 @@ def validate_results(root: Path, results: Path, step_s=COMMUNICATION_STEP_S):
             )
         )
         if question == "q2":
-            validate_frontier(results / question, physics, boxes, drones, batteries)
+            validate_frontier(
+                results / question, physics, boxes, drones, batteries, trips, deliveries
+            )
             for key, expected in (
                 ("trips", len(trips)),
                 ("energy", summary[question]["energy_kwh"]),
@@ -278,23 +340,9 @@ def validate_results(root: Path, results: Path, step_s=COMMUNICATION_STEP_S):
                 summary[question]["makespan_s"],
                 max(float(r["返回O01时刻_s"]) for r in relay_rows),
             )
-            for key, expected in (
-                ("transport_trips", len(trips)),
-                ("relay_sorties", len(relay_rows)),
-                ("transport_energy_kwh", summary[question]["energy_kwh"]),
-                ("relay_energy_kwh", summary[question]["relay_energy_kwh"]),
-                ("transport_makespan_s", summary[question]["makespan_s"]),
-                ("joint_makespan_s", summary[question]["joint_makespan_s"]),
-                (
-                    "weighted_tardiness",
-                    sum(float(row["加权延误"]) for row in deliveries),
-                ),
-                ("checked_states", summary[question]["checked_states"]),
-                ("communication_step_s", step_s),
-            ):
-                close(metrics[key], expected, "Q3 metric " + key)
-            if metrics["continuous_time_proof"] is not False:
-                raise ValueError("Sampled communication cannot certify continuous time")
+            validate_q3_metrics(
+                metrics, summary[question], trips, relay_rows, deliveries, boxes, step_s
+            )
     with tempfile.TemporaryDirectory(prefix="uav-q4-validation-") as directory:
         expected = solve_partitions(results / "q3", Path(directory), root)
         for filename in ("Q4_partition_config.csv", "Q4_resource_summary.csv"):
