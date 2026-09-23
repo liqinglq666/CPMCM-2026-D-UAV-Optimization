@@ -138,9 +138,6 @@ def build_candidate(
         b.priority * max(0.0, delivery[b.id] - b.expected) for b in trip_boxes
     )
     hard_count = sum(b.hard_deadline is not None for b in trip_boxes)
-    reward = sum(
-        b.priority * (2.0 if b.hard_deadline is not None else 1.0) for b in trip_boxes
-    )
     mass = sum(b.mass for b in trip_boxes)
 
     metrics = (
@@ -148,12 +145,8 @@ def build_candidate(
         hard_lateness,
         weighted_tardiness,
         hard_count,
-        reward,
         mass,
         len(trip_boxes),
-        delivery[anchor_id],
-        end,
-        energy,
     )
     return (
         metrics,
@@ -263,12 +256,8 @@ def solve(
                     hard_lateness,
                     weighted_tardiness,
                     hard_count,
-                    reward,
                     mass,
                     box_count,
-                    _anchor_delivery,
-                    _end,
-                    _energy,
                 ) = metrics
 
                 if phase == "hard":

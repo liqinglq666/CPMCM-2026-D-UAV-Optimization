@@ -1,7 +1,7 @@
 """Single flight engine shared by Q1, Q2, Q3 and validation."""
 
 from src.config import TERRAIN_CLEARANCE_M, SERVICE_ALTITUDE_M
-from .energy import equivalent_range, leg_energy, flight_time
+from .energy import leg_energy, flight_time
 from .models import Segment
 from .terrain import Terrain, horizontal_distance
 
@@ -34,9 +34,6 @@ class Physics:
                     a, b, horizontal_distance(pa, pb), cruise, cruise - za, cruise - zb
                 )
         return self._cache[key]
-
-    def equivalent_range(self, type_code, payload):
-        return equivalent_range(self.types[type_code], payload)
 
     def energy(self, type_code, a, b, payload):
         seg = self.segment(a, b)

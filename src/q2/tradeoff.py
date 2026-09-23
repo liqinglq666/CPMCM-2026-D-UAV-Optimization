@@ -181,7 +181,9 @@ def schedule_groups(
         if not profiles:
             return None
 
-        hard_boxes = [box_map[x] for x in group if box_map[x].hard_deadline is not None]
+        hard_boxes = [
+            box_map[x] for x in sorted(group) if box_map[x].hard_deadline is not None
+        ]
         hard_key = min(
             (b.hard_deadline for b in hard_boxes),
             default=1e18,
@@ -201,7 +203,7 @@ def schedule_groups(
         key=lambda z: (
             z[3],
             z[4],
-            -sum(box_map[x].mass for x in z[1]),
+            -sum(box_map[x].mass for x in sorted(z[1])),
         )
     )
 
@@ -231,14 +233,14 @@ def schedule_groups(
                 0.0,
                 start - p.latest_start,
             )
-            deliveries = {box_id: start + p.offsets[box_id] for box_id in ids}
+            deliveries = {box_id: start + p.offsets[box_id] for box_id in sorted(ids)}
             weighted_tardiness = sum(
                 box_map[x].priority
                 * max(
                     0.0,
                     deliveries[x] - box_map[x].expected,
                 )
-                for x in ids
+                for x in sorted(ids)
             )
 
             options.append(
@@ -357,13 +359,13 @@ def merge_tradeoff_search(
                 union = groups[i] | groups[j]
 
                 if (
-                    sum(box_map[x].mass for x in union)
+                    sum(box_map[x].mass for x in sorted(union))
                     > max(t.max_payload for t in types.values()) + 1e-9
                 ):
                     continue
 
                 if (
-                    sum(box_map[x].volume for x in union)
+                    sum(box_map[x].volume for x in sorted(union))
                     > max(t.max_volume for t in types.values()) + 1e-12
                 ):
                     continue
@@ -532,7 +534,7 @@ def solve_q2(
     box_map = {box.id: box for box in boxes}
 
     groups = [
-        {box_id for ids in trip.boxes_by_stop.values() for box_id in ids}
+        {box_id for ids in trip.boxes_by_stop.values() for box_id in sorted(ids)}
         for trip in initial["trips"]
     ]
 
