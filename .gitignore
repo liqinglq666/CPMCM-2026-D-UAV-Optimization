@@ -32,4 +32,9 @@ data/dem/*
 # Test/tool caches and optional rendered figures
 .pytest_cache/
 .ruff_cache/
-figures/
+/figures/
+/outputs/
+paper/reports/pytest.xml
+paper/fonts/*.ttf
+paper/data/communication_states.csv
+paper/data/terrain_map.json
