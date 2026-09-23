@@ -130,10 +130,10 @@ tests/
 
 ## Current paper draft
 
-- Current writing version: `docs/paper/D题论文正文初稿_v2.md`
-- v2 adds verified literature references for UAV routing, UAV communications and ITU-R P.525-5.
-- The editable DOCX working draft is maintained outside Git until the official cover/template is finalized.
-- **Do not freeze or generate the final MD5 yet.** The official cover, final AI disclosure format and 1 s Q3 boundary recheck still need completion.
+- The current editable DOCX has been upgraded to an evidence-chain-enhanced v4.2 working version outside Git.
+- The upgrade adds: a four-question framework figure, explicit Q2 decision/resource variables, quantitative justification of the 22-trip balance point, Q3 relay-conflict evidence, exact Q4 enumeration size, a consolidated validation table, and evidence-backed innovation statements.
+- The **≤1 s Q3 terminal communication audit is complete** and synchronized with the result CSVs and audit record.
+- **Do not freeze or generate the final MD5 yet.** The remaining hard blocker is replacing the placeholder cover with the official Attachment 3 cover and completing the final team-information / anonymity check.
 
 ## Reproducibility
 
