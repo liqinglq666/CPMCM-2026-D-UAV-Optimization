@@ -8,7 +8,6 @@ from pathlib import Path
 from src.config import (
     DEFAULT_DATA_ROOT,
     PROJECT_ROOT,
-    DEFAULT_RESERVE,
     BALANCED_TRIPS,
     FRONTIER_MIN_TRIPS,
     Q3_PLAN,
@@ -28,7 +27,8 @@ def run_question(question, argv=None):
     )
     parser.add_argument("--out", type=Path, default=PROJECT_ROOT / "results" / question)
     if question == "q1":
-        parser.add_argument("--rho", type=float, default=DEFAULT_RESERVE)
+        parser.add_argument("--rho", type=float, default=None,
+                            help="Override all type reserves; default: official per-type values")
     elif question == "q2":
         parser.add_argument("--target-trips", type=int, default=BALANCED_TRIPS)
         parser.add_argument("--frontier-min", type=int, default=FRONTIER_MIN_TRIPS)

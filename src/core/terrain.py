@@ -4,10 +4,8 @@ from dataclasses import dataclass
 import math
 import numpy as np
 import rasterio
-from rasterio.features import geometry_mask
-from rasterio.windows import Window, transform as window_transform
 from pyproj import Geod
-from shapely.geometry import LineString, Point
+from src.config import DEM_GRID_TOLERANCE_PIXELS
 from .numeric import finite
 
 GEOD = Geod(ellps="WGS84")
@@ -67,41 +65,18 @@ class Terrain:
         return float(self.values(int(r), int(c)))
 
     def maximum(self, a, b):
-        ca, ra = self.pixel(*a[:2])
-        cb, rb = self.pixel(*b[:2])
-        c0, r0 = max(0, int(min(ca, cb)) - 1), max(0, int(min(ra, rb)) - 1)
-        c1, r1 = (
-            min(self.width, int(max(ca, cb)) + 2),
-            min(self.height, int(max(ra, rb)) + 2),
-        )
-        shape = (
-            Point(a[:2]) if tuple(a[:2]) == tuple(b[:2]) else LineString([a[:2], b[:2]])
-        )
-        mask = geometry_mask(
-            [shape.__geo_interface__],
-            out_shape=(r1 - r0, c1 - c0),
-            transform=window_transform(
-                Window(c0, r0, c1 - c0, r1 - r0), self.transform
-            ),
-            invert=True,
-            all_touched=True,
-        )
-        rr, cc = np.nonzero(mask)
-        if not len(rr):
-            raise ValueError("No DEM cells intersect route")
-        return float(np.max(self.values(rr + r0, cc + c0)))
+        rows, cols, _begin, _end = self.cell_intervals(a, b)
+        return float(np.max(self.values(rows, cols)))
 
-    def obstructed(self, a, b):
-        """Visit every raster-cell interval crossed by the straight radio ray.
+    def cell_intervals(self, a, b):
+        """Closed pixel intersections, including both sides of edges and corners.
 
-        Evaluate the lowest ray altitude in each interval. Sub-cell sampling
-        may miss a narrow ridge near a pixel corner; boundary traversal does not.
-        Endpoints have zero extent and do not create an obstruction by themselves.
+        The DEM is piecewise constant on pixel footprints. At a boundary the
+        larger adjacent height is conservative; traversal direction must not
+        change the result. Zero-duration intervals retain corner contacts.
         """
         ca, ra = self.pixel(*a[:2])
         cb, rb = self.pixel(*b[:2])
-        finite(a[2], "ray elevation")
-        finite(b[2], "ray elevation")
         cuts = [np.array([0.0, 1.0])]
         for start, end in ((ca, cb), (ra, rb)):
             if start != end:
@@ -110,9 +85,37 @@ class Terrain:
                 )
                 cuts.append((grid - start) / (end - start))
         fractions = np.unique(np.concatenate(cuts))
-        mid = (fractions[:-1] + fractions[1:]) / 2
-        rr = np.floor(ra + (rb - ra) * mid).astype(int)
-        cc = np.floor(ca + (cb - ca) * mid).astype(int)
-        terrain = self.values(rr, cc)
-        z = a[2] + (b[2] - a[2]) * fractions
-        return bool(np.any(terrain >= np.minimum(z[:-1], z[1:])))
+        begin = np.concatenate((fractions[:-1], fractions))
+        end = np.concatenate((fractions[1:], fractions))
+        mid = (begin + end) / 2
+        columns = ca + (cb - ca) * mid
+        rows = ra + (rb - ra) * mid
+
+        def adjacent(values):
+            nearest = np.rint(values)
+            on_edge = np.abs(values - nearest) <= DEM_GRID_TOLERANCE_PIXELS
+            values = np.where(on_edge, nearest, values)
+            return np.floor(values).astype(int), on_edge
+
+        cc, column_edge = adjacent(columns)
+        rr, row_edge = adjacent(rows)
+        pieces = []
+        for dr, dc in ((0, 0), (-1, 0), (0, -1), (-1, -1)):
+            r, c = rr + dr, cc + dc
+            valid = (r >= 0) & (r < self.height) & (c >= 0) & (c < self.width)
+            if dr:
+                valid &= row_edge
+            if dc:
+                valid &= column_edge
+            pieces.append((r[valid], c[valid], begin[valid], end[valid]))
+        return tuple(np.concatenate(parts) for parts in zip(*pieces))
+
+    def obstructed(self, a, b):
+        """Test the lowest ray altitude on each closed pixel intersection."""
+        finite(a[2], "ray elevation")
+        finite(b[2], "ray elevation")
+        rows, cols, begin, end = self.cell_intervals(a, b)
+        terrain = self.values(rows, cols)
+        z_begin = a[2] + (b[2] - a[2]) * begin
+        z_end = a[2] + (b[2] - a[2]) * end
+        return bool(np.any(terrain >= np.minimum(z_begin, z_end)))

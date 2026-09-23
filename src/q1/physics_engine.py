@@ -11,7 +11,7 @@ AI 辅助说明（提交前请按赛事附件4最终核对格式）：
 核心口径：
 1) 航段为两节点水平直线；WGS84 椭球计算水平距离。
 2) 计划巡航海拔 = 航段经过的 30 m DEM 像元最高地面高程 + 50 m。
-   采用 all_touched=True 栅格化直线，符合“航段所经过 DEM 像元”的字面口径。
+   沿像元闭边界遍历，边界两侧和角点相接像元均纳入净空检查。
 3) 等效航程：L(q)=L0-(L0-LF)*(q/Q)^(3/2)。
 4) 水平能耗：E_hor=E_use*d/L(q)。
 5) 爬升附加能耗：E_up=(m_empty+q)*g*h_up/(eta_up*3.6e6) kWh。
@@ -36,12 +36,12 @@ from src.core.energy import (
     equivalent_range as equivalent_range,
     leg_energy,
     flight_time,
+    energy_feasible,
 )
 from src.core.numeric import finite
 from src.core.io import write_json
 from src.core.provenance import save_provenance
 from src.config import (
-    DEFAULT_RESERVE,
     RESERVE_SCENARIOS,
     TERRAIN_CLEARANCE_M,
     SECONDS_PER_HOUR,
@@ -136,18 +136,18 @@ def feasible_batch(
     drone: DroneType,
     seg: SegmentPhysics,
     batch: List[Box],
-    rho: float,
+    rho: float | None = None,
 ) -> bool:
     if not batch or len({b.id for b in batch}) != len(batch):
         return False
-    finite(rho, "reserve", 0, 1)
+    rho = finite(drone.rho if rho is None else rho, "reserve", 0, 1)
     mass = sum(b.mass for b in batch)
     volume = sum(b.volume for b in batch)
     if mass > drone.max_payload + 1e-10:
         return False
     if volume > drone.max_volume + 1e-12:
         return False
-    return roundtrip_energy(drone, seg, mass) <= (1.0 - rho) * drone.energy_use + 1e-10
+    return energy_feasible(roundtrip_energy(drone, seg, mass), drone.energy_use, rho)
 
 
 def optimize_service_q1(
@@ -155,9 +155,10 @@ def optimize_service_q1(
     boxes: List[Box],
     drones: Dict[str, DroneType],
     seg: SegmentPhysics,
-    rho: float,
+    rho: float | None = None,
 ):
-    finite(rho, "reserve", 0, 1)
+    if rho is not None:
+        finite(rho, "reserve", 0, 1)
     if (
         not boxes
         or len({b.id for b in boxes}) != len(boxes)
@@ -186,7 +187,7 @@ def _optimize_service(service, boxes, drone_types, seg, rho):
             if mass > drone.max_payload + 1e-10 or volume > drone.max_volume + 1e-12:
                 continue
             e = roundtrip_energy(drone, seg, mass)
-            if e > (1 - rho) * drone.energy_use + 1e-10:
+            if not energy_feasible(e, drone.energy_use, drone.rho if rho is None else rho):
                 continue
             t = roundtrip_time(drone, seg, len(batch))
             soc = 100.0 * (1.0 - e / drone.energy_use)
@@ -233,17 +234,18 @@ def _optimize_service(service, boxes, drone_types, seg, rho):
                 dp[nm] = cand
 
     if dp[full] is None:
-        raise RuntimeError(f"服务区 {service} 在 rho={rho:.2%} 下不存在可行组批")
+        raise RuntimeError(f"服务区 {service} 在 rho={rho} 下不存在可行组批")
     return dp[full]
 
 
 def solve_q1(
     root: Path,
-    rho: float = DEFAULT_RESERVE,
+    rho: float | None = None,
     out_dir: Path | None = None,
 ):
     nodes, drones, _uavs, _batteries, boxes, dem_file = load_inputs(root)
-    finite(rho, "reserve", 0, 1)
+    if rho is not None:
+        finite(rho, "reserve", 0, 1)
     segs = compute_segments(nodes, dem_file)
     out_dir = out_dir or root
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -365,6 +367,7 @@ def solve_q1(
         out_dir / "Q1_metrics.json",
         {
             "reserve_fraction": rho,
+            "reserve_by_type": {code: drone.rho if rho is None else rho for code, drone in drones.items()},
             "trips": len(result_df),
             "energy_kwh": float(result_df["架次能耗（kWh）"].sum()),
             "operation_time_s": float(result_df["往返时间（s）"].sum()),
