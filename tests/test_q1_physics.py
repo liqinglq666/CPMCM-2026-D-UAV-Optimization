@@ -1,4 +1,4 @@
-from src.q1.physics_engine import DroneType, SegmentPhysics, equivalent_range, leg_energy
+from src.q1.physics_engine import DroneType, equivalent_range, leg_energy
 
 
 def _drone() -> DroneType:

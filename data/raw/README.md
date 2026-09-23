@@ -1,13 +1,10 @@
-# Raw competition data
+# Official inputs
 
-Place the unpacked D-problem source files here locally when running the models.
+Extract the complete official D-problem ZIP into this directory, keeping its
+subdirectories, original filenames, problem statement, Excel files, DEM and
+submission template. Source files are ignored by Git and never modified by the
+pipeline. Alternatively, supply the unpacked root as a positional CLI argument.
 
-Recommended contents include:
-
-- 调度中心与服务区参数 Excel
-- 运输无人机数据 Excel
-- 物资需求与配送时限 Excel
-- communication / relay parameters required by Q3
-- any other official attachments
-
-Raw competition data are intentionally ignored by Git by default to reduce accidental exposure during the competition.
+The six calculation inputs are the node, transport, demand, relay and radio
+workbooks plus the 30 m GeoTIFF. The per-question SHA-256 manifest binds outputs
+to their exact contents. Multiple matches for an input are rejected explicitly.

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/1fcf198df734/repo/scripts/run_q3.py", line 121, in <module>
+    for j in jobs:j['profile']=transport_profile(j)
+                               ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/1fcf198df734/repo/scripts/run_q3.py", line 94, in transport_profile
+    for k in range(n+1):
+                   ^
+NameError: name 'n' is not defined. Did you mean: 'na'?

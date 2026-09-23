@@ -18,11 +18,10 @@ import math
 from typing import Tuple
 
 import numpy as np
-import rasterio
-from pyproj import Geod
-
-GEOD = Geod(ellps="WGS84")
-G = 9.80665
+from src.core.terrain import Terrain, horizontal_distance
+from src.core.numeric import finite, positive
+from src.core.energy import climb_energy, two_stage_charge_time as two_stage_charge_time
+from src.config import SECONDS_PER_HOUR
 
 
 @dataclass(frozen=True)
@@ -30,6 +29,10 @@ class Radio:
     tx_power_dbm: float
     antenna_gain_dbi: float
     sensitivity_dbm: float
+
+    def __post_init__(self):
+        for name, value in vars(self).items():
+            finite(value, name)
 
 
 @dataclass(frozen=True)
@@ -48,6 +51,21 @@ class RelaySpec:
     hover_power_kw: float
     communication_power_kw: float
     max_hover_agl_m: float
+
+    def __post_init__(self):
+        for name, value in vars(self).items():
+            finite(value, name, 0)
+        for name in (
+            "takeoff_mass_kg",
+            "cruise_speed_mps",
+            "usable_energy_kwh",
+            "climb_speed_mps",
+            "descent_speed_mps",
+            "climb_efficiency",
+        ):
+            positive(getattr(self, name), name)
+        finite(self.reserve_fraction, "reserve", 0, 1)
+        finite(self.climb_efficiency, "climb efficiency", 0, 1)
 
 
 def bidirectional_loss_threshold(
@@ -80,12 +98,12 @@ def free_space_path_loss(
     frequency_mhz: float,
     distance_km: float,
 ) -> float:
-    d = max(distance_km, 1e-9)
-    return (
-        32.45
-        + 20.0 * math.log10(frequency_mhz)
-        + 20.0 * math.log10(d)
-    )
+    positive(frequency_mhz, "frequency_mhz")
+    finite(distance_km, "distance_km", 0)
+    if distance_km == 0:
+        return -math.inf  # coincident endpoints: zero-distance FSPL limit
+    d = distance_km
+    return 32.45 + 20.0 * math.log10(frequency_mhz) + 20.0 * math.log10(d)
 
 
 def _terrain_obstructed_vectorized(
@@ -94,34 +112,12 @@ def _terrain_obstructed_vectorized(
     dem_dataset,
     dem: np.ndarray,
 ) -> bool:
-    """
-    DEM line-of-sight check.
-
-    The segment is sampled at approximately half a raster cell in row/column
-    coordinates. A terrain cell is treated as blocking when its DEM elevation
-    reaches the straight 3-D radio ray.
-    """
-    inv = ~dem_dataset.transform
-    c1, r1 = inv * (p1[0], p1[1])
-    c2, r2 = inv * (p2[0], p2[1])
-    n = max(2, int(max(abs(r2-r1), abs(c2-c1)) * 2) + 1)
-
-    frac = np.linspace(0.0, 1.0, n)
-    rr = np.floor(r1 + (r2-r1) * frac).astype(int)
-    cc = np.floor(c1 + (c2-c1) * frac).astype(int)
-
-    valid = (
-        (rr >= 0) & (cc >= 0)
-        & (rr < dem_dataset.height)
-        & (cc < dem_dataset.width)
+    terrain = (
+        dem_dataset
+        if isinstance(dem_dataset, Terrain)
+        else Terrain(dem, dem_dataset.transform, dem_dataset.nodata)
     )
-    rr, cc, frac = rr[valid], cc[valid], frac[valid]
-    if len(rr) <= 2:
-        return False
-
-    ray_z = p1[2] + (p2[2] - p1[2]) * frac[1:-1]
-    terrain_z = dem[rr[1:-1], cc[1:-1]]
-    return bool(np.any(terrain_z >= ray_z - 0.1))
+    return terrain.obstructed(p1, p2)
 
 
 def link_available(
@@ -134,29 +130,20 @@ def link_available(
     dem: np.ndarray,
 ):
     """Return (available, total_path_loss_db, obstructed)."""
-    _, _, horizontal_m = GEOD.inv(
-        p1[0], p1[1], p2[0], p2[1]
-    )
-    distance_km = (
-        horizontal_m**2 + (p2[2]-p1[2])**2
-    ) ** 0.5 / 1000.0
+    horizontal_m = horizontal_distance(p1, p2)
+    distance_km = (horizontal_m**2 + (p2[2] - p1[2]) ** 2) ** 0.5 / 1000.0
 
     fspl = free_space_path_loss(
         frequency_mhz,
         distance_km,
     )
 
-    # If even free-space loss already exceeds the budget, DEM evaluation
-    # cannot restore feasibility.
-    obstructed = False
-    if fspl <= max_path_loss_db:
-        obstructed = _terrain_obstructed_vectorized(
-            p1, p2, dem_dataset, dem
-        )
+    finite(max_path_loss_db, "link budget")
+    finite(obstruction_loss_db, "obstruction loss", 0)
+    # Diagnostic loss and obstruction must stay truthful even for unavailable links.
+    obstructed = _terrain_obstructed_vectorized(p1, p2, dem_dataset, dem)
 
-    path_loss = fspl + (
-        obstruction_loss_db if obstructed else 0.0
-    )
+    path_loss = fspl + (obstruction_loss_db if obstructed else 0.0)
     return (
         path_loss <= max_path_loss_db,
         path_loss,
@@ -176,44 +163,22 @@ def relay_sortie_energy(
     two-way horizontal cruise + positive climb work + hover/communication.
     Descent has no extra energy term under the current problem interpretation.
     """
-    cruise_time_s = (
-        2.0 * horizontal_distance_m
-        / spec.cruise_speed_mps
+    for name, value in (
+        ("horizontal_distance_m", horizontal_distance_m),
+        ("outbound_climb_m", outbound_climb_m),
+        ("return_climb_m", return_climb_m),
+        ("service_duration_s", service_duration_s),
+    ):
+        finite(value, name, 0)
+    cruise_time_s = 2.0 * horizontal_distance_m / spec.cruise_speed_mps
+    cruise_energy = spec.cruise_power_kw * cruise_time_s / SECONDS_PER_HOUR
+    ascent_energy = climb_energy(
+        spec.takeoff_mass_kg, outbound_climb_m + return_climb_m, spec.climb_efficiency
     )
-    cruise_energy = (
-        spec.cruise_power_kw
-        * cruise_time_s / 3600.0
-    )
-    climb_energy = (
-        spec.takeoff_mass_kg
-        * G
-        * (outbound_climb_m + return_climb_m)
-        / (spec.climb_efficiency * 3.6e6)
-    )
+    finite(service_duration_s, "service_duration_s", 0)
     service_energy = (
         (spec.hover_power_kw + spec.communication_power_kw)
-        * service_duration_s / 3600.0
+        * service_duration_s
+        / SECONDS_PER_HOUR
     )
-    return (
-        cruise_energy
-        + climb_energy
-        + service_energy
-    )
-
-
-def two_stage_charge_time(
-    full_charge_time_s: float,
-    soc_fraction: float,
-) -> float:
-    """Appendix-2 two-stage charging time back to 100% SOC."""
-    s = max(0.0, min(1.0, soc_fraction))
-    if s < 0.90:
-        return full_charge_time_s * (
-            0.65 * (0.90 - s) / 0.90
-            + 0.35
-        )
-    return (
-        full_charge_time_s
-        * 0.35
-        * (1.0 - s) / 0.10
-    )
+    return cruise_energy + ascent_energy + service_energy

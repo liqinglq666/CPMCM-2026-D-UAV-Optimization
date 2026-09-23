@@ -44,3 +44,15 @@ The executable program files in this repository should begin with a disclosure e
 ```
 
 External code or ideas actually adopted must be cited separately and must not be represented as original work.
+
+
+## 2026-09-23 code-audit continuation
+
+ChatGPT/Codex assisted with repository scanning, shared-physics refactoring,
+source-data validation, a fixed-discrete-plan scheduling LP, boundary tests,
+result replay and this audit report. This continuation does not infer a model
+release date or overwrite the historical tool record above. Exact model/version
+metadata should be taken from the corresponding conversation record.
+
+No paper content was newly generated in this round. Historical paper drafts were
+marked as historical to prevent reuse of stale results.

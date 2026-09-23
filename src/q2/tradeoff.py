@@ -14,6 +14,7 @@ in the paper instead of claiming a single universal optimum.
 from __future__ import annotations
 
 import itertools
+import logging
 from pathlib import Path
 from typing import Dict, Iterable, List, Set
 
@@ -22,10 +23,22 @@ import pandas as pd
 from .heuristic import (
     Box,
     Physics,
-    Resource,
-    charge_time,
-    load_inputs,
     solve as build_initial_solution,
+)
+
+
+from src.core.models import Resource
+from src.core.numeric import lexicographic_less
+from src.core.provenance import save_provenance
+from src.core.energy import charge_time
+from src.core.routes import evaluate_route, route_is_energy_feasible
+from src.config import (
+    MAX_ROUTE_SERVICES,
+    TARDINESS_SCALE,
+    MAKESPAN_SCALE,
+    ENERGY_SCALE,
+    BALANCED_TRIPS,
+    FRONTIER_MIN_TRIPS,
 )
 
 
@@ -53,10 +66,10 @@ def route_profile(
     box_map: Dict[str, Box],
     physics: Physics,
     types,
-    max_services: int = 6,
+    max_services: int = MAX_ROUTE_SERVICES,
 ):
     t = types[type_code]
-    boxes = [box_map[x] for x in box_ids]
+    boxes = [box_map[x] for x in sorted(box_ids)]
 
     if sum(b.mass for b in boxes) > t.max_payload + 1e-9:
         return None
@@ -70,55 +83,9 @@ def route_profile(
     best = None
 
     for order in itertools.permutations(services):
-        by_service = {
-            s: [b for b in boxes if b.service == s]
-            for s in order
-        }
-
-        now = t.prep + t.load_per_box * len(boxes)
-        payload = sum(b.mass for b in boxes)
-        prev = "O01"
-        energy = 0.0
-        offsets: Dict[str, float] = {}
-
-        for service in order:
-            energy += physics.energy(
-                type_code,
-                prev,
-                service,
-                payload,
-            )
-            now += physics.flight_time(
-                type_code,
-                prev,
-                service,
-            )
-            now += (
-                t.hand_base
-                + t.hand_per_box * len(by_service[service])
-            )
-
-            for box in by_service[service]:
-                offsets[box.id] = now
-
-            payload -= sum(
-                b.mass for b in by_service[service]
-            )
-            prev = service
-
-        energy += physics.energy(
-            type_code,
-            prev,
-            "O01",
-            0.0,
-        )
-        now += physics.flight_time(
-            type_code,
-            prev,
-            "O01",
-        )
-
-        if energy > (1.0 - t.rho) * t.energy_use + 1e-9:
+        route = evaluate_route(physics, type_code, boxes, order)
+        now, energy, offsets = route.duration, route.energy, route.delivery
+        if not route_is_energy_feasible(route, t):
             continue
 
         latest_start = min(
@@ -134,9 +101,7 @@ def route_profile(
             continue
 
         intrinsic_tardiness = sum(
-            b.priority
-            * max(0.0, offsets[b.id] - b.expected)
-            for b in boxes
+            b.priority * max(0.0, offsets[b.id] - b.expected) for b in boxes
         )
 
         score = (
@@ -155,7 +120,9 @@ def route_profile(
             latest_start=latest_start,
         )
 
-        if best is None or score < best[0]:
+        if best is None or lexicographic_less(
+            score, best[0], (1e-8, 1e-6, 1e-8, 1e-10)
+        ):
             best = (score, profile)
 
     return None if best is None else best[1]
@@ -167,9 +134,13 @@ def all_profiles(
     physics: Physics,
     types,
 ):
-    return [
+    key = (tuple(box_map[x] for x in sorted(group)), tuple(types.values()))
+    cache = physics.__dict__.setdefault("_profile_cache", {})
+    if key in cache:
+        return cache[key]
+    profiles = [
         p
-        for type_code in ("A", "B", "C")
+        for type_code in sorted(types)
         if (
             p := route_profile(
                 type_code,
@@ -181,6 +152,8 @@ def all_profiles(
         )
         is not None
     ]
+    cache[key] = profiles
+    return profiles
 
 
 def schedule_groups(
@@ -191,6 +164,11 @@ def schedule_groups(
     drone_specs: Iterable[Resource],
     battery_specs: Iterable[Resource],
 ):
+    if not groups or any(not group for group in groups):
+        raise ValueError("Empty cargo groups")
+    flattened = [bid for group in groups for bid in group]
+    if len(set(flattened)) != len(flattened) or set(flattened) != set(box_map):
+        raise ValueError("Cargo groups must form an exact partition")
     jobs = []
 
     for index, group in enumerate(groups):
@@ -204,17 +182,13 @@ def schedule_groups(
             return None
 
         hard_boxes = [
-            box_map[x]
-            for x in group
-            if box_map[x].hard_deadline is not None
+            box_map[x] for x in sorted(group) if box_map[x].hard_deadline is not None
         ]
         hard_key = min(
             (b.hard_deadline for b in hard_boxes),
             default=1e18,
         )
-        expected_key = min(
-            box_map[x].expected for x in group
-        )
+        expected_key = min(box_map[x].expected for x in group)
         jobs.append(
             (
                 index,
@@ -229,18 +203,12 @@ def schedule_groups(
         key=lambda z: (
             z[3],
             z[4],
-            -sum(box_map[x].mass for x in z[1]),
+            -sum(box_map[x].mass for x in sorted(z[1])),
         )
     )
 
-    drones = {
-        d.id: [d.type, 0.0]
-        for d in drone_specs
-    }
-    batteries = {
-        b.id: [b.type, 0.0]
-        for b in battery_specs
-    }
+    drones = {d.id: [d.type, 0.0] for d in drone_specs}
+    batteries = {b.id: [b.type, 0.0] for b in battery_specs}
 
     schedule = []
 
@@ -249,19 +217,11 @@ def schedule_groups(
 
         for p in profiles:
             drone_id, drone_state = min(
-                (
-                    item
-                    for item in drones.items()
-                    if item[1][0] == p.type_code
-                ),
+                (item for item in drones.items() if item[1][0] == p.type_code),
                 key=lambda x: x[1][1],
             )
             battery_id, battery_state = min(
-                (
-                    item
-                    for item in batteries.items()
-                    if item[1][0] == p.type_code
-                ),
+                (item for item in batteries.items() if item[1][0] == p.type_code),
                 key=lambda x: x[1][1],
             )
 
@@ -273,17 +233,14 @@ def schedule_groups(
                 0.0,
                 start - p.latest_start,
             )
-            deliveries = {
-                box_id: start + p.offsets[box_id]
-                for box_id in ids
-            }
+            deliveries = {box_id: start + p.offsets[box_id] for box_id in sorted(ids)}
             weighted_tardiness = sum(
                 box_map[x].priority
                 * max(
                     0.0,
                     deliveries[x] - box_map[x].expected,
                 )
-                for x in ids
+                for x in sorted(ids)
             )
 
             options.append(
@@ -312,12 +269,9 @@ def schedule_groups(
         soc = 1.0 - p.energy / types[p.type_code].energy_use
 
         drones[drone_id][1] = end
-        batteries[battery_id][1] = (
-            end
-            + charge_time(
-                types[p.type_code],
-                soc,
-            )
+        batteries[battery_id][1] = end + charge_time(
+            types[p.type_code],
+            soc,
         )
 
         schedule.append(
@@ -343,30 +297,21 @@ def schedule_groups(
 
             if (
                 box.hard_deadline is not None
-                and delivery_time
-                > box.hard_deadline + 1e-7
+                and delivery_time > box.hard_deadline + 1e-7
             ):
                 hard_violations += 1
 
-            weighted_tardiness += (
-                box.priority
-                * max(
-                    0.0,
-                    delivery_time - box.expected,
-                )
+            weighted_tardiness += box.priority * max(
+                0.0,
+                delivery_time - box.expected,
             )
 
     return {
         "jobs": schedule,
         "hard_violations": hard_violations,
         "weighted_tardiness": weighted_tardiness,
-        "makespan": max(
-            job["end"] for job in schedule
-        ),
-        "energy": sum(
-            job["profile"].energy
-            for job in schedule
-        ),
+        "makespan": max(job["end"] for job in schedule),
+        "energy": sum(job["profile"].energy for job in schedule),
         "trips": len(schedule),
     }
 
@@ -378,8 +323,12 @@ def merge_tradeoff_search(
     types,
     drones,
     batteries,
-    target_trips: int = 22,
+    target_trips: int = BALANCED_TRIPS,
+    min_trips: int | None = None,
 ):
+    min_trips = target_trips if min_trips is None else min_trips
+    if not 1 <= min_trips <= target_trips <= len(groups):
+        raise ValueError("Require 1 <= min_trips <= target_trips <= initial trip count")
     current = schedule_groups(
         groups,
         box_map,
@@ -389,25 +338,20 @@ def merge_tradeoff_search(
         batteries,
     )
     if current is None:
-        raise RuntimeError(
-            "Initial Q2 partition cannot be scheduled."
-        )
+        raise RuntimeError("Initial Q2 partition cannot be scheduled.")
 
     frontier = [
         {
             "trips": current["trips"],
             "makespan": current["makespan"],
             "energy": current["energy"],
-            "weighted_tardiness": current[
-                "weighted_tardiness"
-            ],
-            "hard_violations": current[
-                "hard_violations"
-            ],
+            "weighted_tardiness": current["weighted_tardiness"],
+            "hard_violations": current["hard_violations"],
         }
     ]
 
-    while len(groups) > target_trips:
+    solutions = {len(groups): (groups, current)}
+    while len(groups) > min_trips:
         best = None
 
         for i in range(len(groups)):
@@ -415,32 +359,22 @@ def merge_tradeoff_search(
                 union = groups[i] | groups[j]
 
                 if (
-                    sum(box_map[x].mass for x in union)
-                    > 80.0 + 1e-9
+                    sum(box_map[x].mass for x in sorted(union))
+                    > max(t.max_payload for t in types.values()) + 1e-9
                 ):
                     continue
 
                 if (
-                    sum(box_map[x].volume for x in union)
-                    > 0.25 + 1e-12
+                    sum(box_map[x].volume for x in sorted(union))
+                    > max(t.max_volume for t in types.values()) + 1e-12
                 ):
                     continue
 
-                if (
-                    len(
-                        {
-                            box_map[x].service
-                            for x in union
-                        }
-                    )
-                    > 5
-                ):
+                if len({box_map[x].service for x in union}) > MAX_ROUTE_SERVICES:
                     continue
 
                 new_groups = [
-                    group
-                    for k, group in enumerate(groups)
-                    if k not in (i, j)
+                    group for k, group in enumerate(groups) if k not in (i, j)
                 ] + [union]
 
                 result = schedule_groups(
@@ -455,9 +389,9 @@ def merge_tradeoff_search(
                     continue
 
                 balance_score = (
-                    result["weighted_tardiness"] / 2e5
-                    + result["makespan"] / 1e4
-                    + result["energy"] / 100.0
+                    result["weighted_tardiness"] / TARDINESS_SCALE
+                    + result["makespan"] / MAKESPAN_SCALE
+                    + result["energy"] / ENERGY_SCALE
                 )
 
                 candidate = (
@@ -468,41 +402,33 @@ def merge_tradeoff_search(
                     result,
                 )
 
-                if (
-                    best is None
-                    or balance_score < best[0]
-                ):
+                if best is None or balance_score < best[0]:
                     best = candidate
 
         if best is None:
             break
 
         _, _i, _j, groups, current = best
+        solutions[len(groups)] = (groups, current)
         frontier.append(
             {
                 "trips": current["trips"],
                 "makespan": current["makespan"],
                 "energy": current["energy"],
-                "weighted_tardiness": current[
-                    "weighted_tardiness"
-                ],
-                "hard_violations": current[
-                    "hard_violations"
-                ],
+                "weighted_tardiness": current["weighted_tardiness"],
+                "hard_violations": current["hard_violations"],
             }
         )
 
-    return groups, current, frontier
+    if target_trips not in solutions:
+        raise RuntimeError(
+            f"Cannot reach requested {target_trips} trips with feasible merges"
+        )
+    selected_groups, selected = solutions[target_trips]
+    return selected_groups, selected, frontier, solutions
 
 
-def export_solution(
-    result,
-    box_map: Dict[str, Box],
-    out_dir: Path,
-    frontier,
-):
-    out_dir.mkdir(parents=True, exist_ok=True)
-
+def solution_rows(result, box_map):
     trip_rows = []
     box_rows = []
 
@@ -528,22 +454,16 @@ def export_solution(
                 "机型编号": profile.type_code,
                 "电池编号": job["battery"],
                 "开始时刻（s）": job["start"],
-                "访问服务区顺序": "->".join(
-                    profile.order
-                ),
+                "访问服务区顺序": "->".join(profile.order),
                 "返回O01时刻（s）": job["end"],
                 "架次能耗（kWh）": profile.energy,
                 "返航SOC（%）": job["soc"],
                 "货箱数": len(job["ids"]),
-                "货箱编号列表": ",".join(
-                    sorted(job["ids"])
-                ),
+                "货箱编号列表": ",".join(sorted(job["ids"])),
             }
         )
 
-        for box_id, delivery_time in job[
-            "delivery"
-        ].items():
+        for box_id, delivery_time in job["delivery"].items():
             box = box_map[box_id]
             box_rows.append(
                 {
@@ -564,14 +484,29 @@ def export_solution(
                 }
             )
 
+    return trip_rows, sorted(box_rows, key=lambda row: row["货箱编号"])
+
+
+def export_solution(result, box_map, out_dir, frontier, solutions):
+    from src.core.io import write_json
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    trip_rows, box_rows = solution_rows(result, box_map)
+    write_json(
+        out_dir / "Q2_frontier_plans.json",
+        {
+            str(count): dict(
+                zip(("trips", "deliveries"), solution_rows(solution, box_map))
+            )
+            for count, (_groups, solution) in sorted(solutions.items())
+        },
+    )
     pd.DataFrame(trip_rows).to_csv(
         out_dir / "Q2_transport_trips_balanced.csv",
         index=False,
         encoding="utf-8-sig",
     )
-    pd.DataFrame(box_rows).sort_values(
-        "货箱编号"
-    ).to_csv(
+    pd.DataFrame(box_rows).sort_values("货箱编号").to_csv(
         out_dir / "Q2_box_delivery_balanced.csv",
         index=False,
         encoding="utf-8-sig",
@@ -586,7 +521,8 @@ def export_solution(
 def solve_q2(
     root: Path,
     out_dir: Path,
-    target_trips: int = 22,
+    target_trips: int = BALANCED_TRIPS,
+    frontier_min: int = FRONTIER_MIN_TRIPS,
 ):
     initial = build_initial_solution(
         root,
@@ -595,24 +531,17 @@ def solve_q2(
     )
 
     boxes = initial["boxes"]
-    box_map = {
-        box.id: box
-        for box in boxes
-    }
+    box_map = {box.id: box for box in boxes}
 
     groups = [
-        {
-            box_id
-            for ids in trip.boxes_by_stop.values()
-            for box_id in ids
-        }
+        {box_id for ids in trip.boxes_by_stop.values() for box_id in sorted(ids)}
         for trip in initial["trips"]
     ]
 
-    _nodes, types, drones, batteries, _boxes, _dem = load_inputs(root)
+    types, drones, batteries = initial["types"], initial["drones"], initial["batteries"]
     physics = initial["physics"]
 
-    groups, result, frontier = merge_tradeoff_search(
+    groups, result, frontier, solutions = merge_tradeoff_search(
         groups,
         box_map,
         physics,
@@ -620,6 +549,7 @@ def solve_q2(
         drones,
         batteries,
         target_trips=target_trips,
+        min_trips=min(frontier_min, target_trips),
     )
 
     export_solution(
@@ -627,8 +557,43 @@ def solve_q2(
         box_map,
         out_dir,
         frontier,
+        solutions,
     )
 
+    from src.core.io import read_csv, write_json
+    from src.core.constraints import validate_transport, export_resource_check
+
+    _, resources = validate_transport(
+        read_csv(out_dir / "Q2_transport_trips_balanced.csv"),
+        read_csv(out_dir / "Q2_box_delivery_balanced.csv"),
+        "q2",
+        physics,
+        boxes,
+        drones,
+        batteries,
+    )
+    export_resource_check(out_dir / "Q2_resource_check.csv", resources)
+    write_json(
+        out_dir / "Q2_metrics.json",
+        {
+            key: result[key]
+            for key in (
+                "trips",
+                "makespan",
+                "energy",
+                "weighted_tardiness",
+                "hard_violations",
+            )
+        },
+    )
+    save_provenance(root, out_dir)
+    logging.getLogger(__name__).info(
+        "Q2: %d trips, %.6f kWh, %.3f s; %d frontier points",
+        result["trips"],
+        result["energy"],
+        result["makespan"],
+        len(frontier),
+    )
     return {
         "groups": groups,
         "result": result,
