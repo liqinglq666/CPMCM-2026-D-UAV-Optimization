@@ -97,7 +97,7 @@ Metrics:
 
 - hard deadline violations: **0**;
 - makespan: **11033.023 s**;
-- total transport energy: **79.801846 kWh**;
+- total transport energy: **79.760597 kWh**;
 - weighted tardiness: **327498.249 priority·s**;
 - minimum hard-deadline slack: about **1768.65 s**.
 
@@ -106,3 +106,12 @@ The 22-trip point is not claimed to be a mathematically proven global optimum. I
 ## 6. Paper-writing note
 
 The paper should report the full frontier and explain the selected balance point. Avoid presenting the heuristic output as an exact global optimum unless an exact optimization proof is added later.
+
+
+## Audit implementation update
+
+The canonical physics is now in `src/core/`. Default execution computes all
+17–24 frontier points and stores every plan in `Q2_frontier_plans.json`; the
+validator replays every saved plan from official data. Numerically tied route
+time objectives use explicit comparison tolerances before comparing energy.
+All set-based summations are ordered for hash-seed-independent reproduction.

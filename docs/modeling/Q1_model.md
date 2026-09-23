@@ -91,3 +91,12 @@ At rho = 20%:
 - S001, S002, S003 require multiple batches.
 
 These are working results and should be cross-checked before final submission.
+
+
+## Audit implementation update
+
+Q1 uses the shared input, DEM, energy and flight-time implementations in
+`src/core/`. A type unable to make an empty round trip is represented explicitly
+as unreachable rather than an unexplained NaN. NoData and outside-DEM paths fail
+explicitly. The standalone validator recomputes leg physics, safe payloads, cargo
+coverage and every reported reserve-sensitivity point.

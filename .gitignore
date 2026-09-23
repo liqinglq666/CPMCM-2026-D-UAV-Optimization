@@ -27,3 +27,9 @@ data/raw/*
 # DEM can be large; keep local unless intentionally versioned
 data/dem/*
 !data/dem/README.md
+
+
+# Test/tool caches and optional rendered figures
+.pytest_cache/
+.ruff_cache/
+figures/

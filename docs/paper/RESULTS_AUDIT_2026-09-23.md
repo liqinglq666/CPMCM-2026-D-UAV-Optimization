@@ -1,4 +1,5 @@
 # Q1–Q4 Results Audit — 2026-09-23
+> 历史工作资料：本文件未随本轮代码审计重写。当前数值和验证边界请以 `results/`、`docs/modeling/` 与 `docs/audit/REFACTOR_REPORT.md` 为准；不得直接把本文旧数值当作本轮输出。
 
 This file freezes the currently verified numerical baseline used for paper drafting.
 If any model or result CSV changes, rerun `scripts/validate_results.py` and regenerate this audit.
@@ -127,3 +128,4 @@ Avoid:
 - “Q3 global optimum”;
 - “continuous communication proven for all real-valued time”;
 - “K=2 is universally optimal” without the stated Q4 objective and fixed-Q3 condition.
+

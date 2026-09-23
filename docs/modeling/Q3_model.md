@@ -1,100 +1,32 @@
-# Q3 — 运输与通信中继协同优化
+# Q3 固定离散方案的运输与中继联合调度
 
-## 1. Why Q2 cannot simply be reused
+当前实现用 `config/q3_plan.json` 保存历史方案的货箱分组、访问顺序、中继点经纬度、资源分配及同资源任务顺序。它是可追溯的离散决策输入；不含最终开始时间、悬停海拔、能耗、SOC、传播损耗或可用性结果。该问题没有被描述为全局路线优化。
 
-对 Q2 的运输轨迹进行 30 m DEM 视距与链路预算检查后，绝大多数架次存在 G01 直连中断区间。因此 Q3 必须将运输调度和中继资源周转联合考虑，而不能只对 Q2 路线做事后补丁。
+## 物理和通信
 
-## 2. Communication model
+节点、货箱、运输参数、中继参数和无线设备参数均来自官方工作簿。运输航段复用 `src/core/physics.py`；正载荷逐站卸除，返程空载。中继悬停海拔由 DEM 地面高程加官方最大允许 AGL 计算；出入航段满足地形净空并能到达悬停海拔。
 
-For every communication segment:
+双向链路预算采用两方向允许传播损耗的较小者；当前附件导出 122 / 116 / 126 dB 的直连、接入和回传门限。传播损耗采用 MHz 与 km；距离包括水平距离和两端高度差。遮挡检查遍历视线经过的像元区间，不采用坐标取整缓存。NoData、越界和非法参数直接失败。
 
-```text
-P_th = P_sens + M
-L_max(a->b) = P_t,a + G_t,a + G_r,b - L_sys - P_th,b
-L_max,bidir = min(L_max(a->b), L_max(b->a))
-FSPL = 32.45 + 20 log10(f_MHz) + 20 log10(D_km)
-L_path = FSPL + L_obs * obstruction
-```
+每个爬升、巡航、下降和交接阶段包含端点且采样间隔不大于 1 s。失去直连的每个状态都检查接入和回传链路，首末失联状态之外各设置 5 s 中继保护时段。此处是离散数值验证，未给出所有实数时刻通信连续的证明。
 
-A link is usable when `L_path <= L_max,bidir`.
+## 时间求解
 
-Current parameter reduction:
+线性规划变量包括运输开始时刻、中继服务开始/结束时刻、逐箱延误以及联合完成时刻。约束包括：
 
-- transport UAV ↔ G01: about **122 dB**;
-- transport UAV ↔ relay access: about **116 dB**;
-- relay ↔ G01 backhaul: about **126 dB**.
+- 医疗和首批货箱硬截止；
+- 同一运输无人机不重叠，电池充满后才复用；
+- 中继准备、出航、建链、服务、返航和周转；
+- 中继服务窗口覆盖所有分配任务的失联状态与保护时段；
+- 中继服务时长受返航能量余量限制；
+- 所有资源编号属于官方库存。
 
-Terrain obstruction is evaluated against the official 30 m DEM. No relay-to-relay multihop is allowed.
+依次最小化加权延误、联合完成时间和中继总服务时长。每一级保留前一级目标，容许 1e-7 的求解数值误差。当前固定方案六个能源组件各使用一次；求解器明确拒绝要求组件重复使用的自定义方案，结果校验器则具有充电复用检查能力。
 
-## 3. Transport communication state
+建链发生在到达悬停点后，建链期间计入悬停加通信功率。地面准备和题目规定为零的下降附加能耗不额外计入。
 
-At every checked transport state:
+## 当前结果与边界
 
-1. use G01 direct communication when it is available;
-2. otherwise use exactly one relay UAV;
-3. relay mode is feasible only when both transport→relay access and relay→G01 backhaul are simultaneously available.
+数值以 `results/q3/Q3_metrics.json` 和 `results/validation.json` 为准。对当前官方数据，24 个运输架次、6 个中继架次，运输能耗约 80.844703 kWh，中继能耗约 5.867029 kWh，联合完成时间约 12789.446 s。
 
-The final terminal audit discretizes every transport flight/operation phase with a maximum temporal interval of **1 s**. The relay service window is then expanded by **5 s before and after** the detected direct-loss interval as a guard margin.
-
-## 4. Relay sortie model
-
-Each relay sortie contains:
-
-```text
-O01 preparation
-→ outbound climb/cruise/descent
-→ link setup
-→ hover + communication service
-→ return
-→ turnaround / component recharge
-```
-
-Energy contains:
-
-- two-way cruise power;
-- positive climb gravitational work / efficiency;
-- hover + communication power during the service window.
-
-The selected hover states use the 300 m AGL upper bound and are retained only when their G01 backhaul is feasible.
-
-## 5. Communication-aware transport redesign
-
-The main cooperation change relative to Q2 is the early western wave.
-
-Instead of preserving the original early `S006→S007→S015` structure, Q3 uses:
-
-- a light `S007` trip;
-- a `S007→S006` hard-deadline trip;
-- a later dedicated `S015` trip.
-
-This shortens the early western relay requirement and releases the relay UAV early enough to serve the next communication region.
-
-## 6. Current feasible baseline
-
-Current 1 s terminal-audit metrics:
-
-- transport trips: **24**;
-- relay sorties: **6**;
-- hard-deadline violations: **0**;
-- transport energy: **80.8447 kWh**;
-- relay energy: **5.9666 kWh**;
-- total energy: **86.8113 kWh**;
-- transport makespan: **12774.32 s**;
-- joint makespan: **13224.36 s = 3.67 h**;
-- minimum hard-deadline slack: about **178.65 s**.
-
-The solution is a constraint-complete feasible baseline, **not a proof of global optimality**. Its soft weighted tardiness can still be improved if time remains.
-
-## 7. Verification
-
-The current result set verifies:
-
-- all 80 boxes delivered exactly once;
-- all medical / first-batch hard deadlines satisfied;
-- no overlap of physical transport UAVs;
-- no invalid reuse of shared transport batteries before recharge to 100%;
-- two relay UAV schedules do not overlap after including turnaround;
-- six relay energy components are used once each;
-- every sampled direct-failure point under the ≤1 s terminal audit has feasible transport-relay access and relay-G01 backhaul.
-
-The final paper explicitly reports the ≤1 s discrete terminal audit and the ±5 s relay guard window; this remains a high-resolution discrete verification rather than an analytic continuous-time root proof.
+Q3 不按 Q2 易变的架次行号继承货箱；当前 JSON 是继承旧 Q2/Q3 研究过程的独立可追溯离散方案。Q2 新结果不会自动重组 Q3。自定义方案改变后必须重新计算、验证和运行 Q4。

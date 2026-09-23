@@ -1,196 +1,99 @@
-# CPMCM 2026 Problem D — UAV Transportation & Communication Collaborative Optimization
+# CPMCM 2026 D 无人机运输与通信协同优化
 
-> 2026 “华为杯”中国研究生数学建模竞赛 D 题工作仓库  
-> **Competition status: PRIVATE. Do not make public during the competition.**
+赛题、原始 Excel、DEM 是输入事实来源；`src/core/` 统一距离、地形、时间、载荷、能耗、充电和资源检查。仓库保持私有。
 
-## Scope
+本轮代码审计的起点是 `e668347`。旧版 Q3 命令因采样变量未定义而无法运行；历史 CSV 不等于已复现结果。修改、测试、数值变化及剩余边界见 [审计报告](docs/audit/REFACTOR_REPORT.md)，历史证据保留在 `archive/baseline-e668347/`。
 
-本仓库统一管理 D 题：
+## 安装与数据
 
-- Q1 单服务区运输能力、最大安全载荷与精确组批
-- Q2 异构运输无人机、多架次、多点配送与共享电池调度
-- Q3 30 m DEM 通信视距、链路预算与运输—中继协同调度
-- Q4 固定 Q3 任务关系下的 K=2 / K=3 分区资源配置
-- 结果 CSV、模型说明、AI 使用记录与最终提交工作区
+支持 Python 3.11 / 3.12，建议建立虚拟环境：
 
-## Modeling pipeline
+```bash
+python -m venv .venv
+# Linux / Codespaces: source .venv/bin/activate
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+python -m pip install -r requirements-dev.txt
+```
+
+将官方 D 题 ZIP **完整解压到 `data/raw/`**，保留其子目录和原文件名。程序递归定位文件，也兼容 `#Uxxxx` 中文文件名；遇到重名输入会报错，避免随机选择不同版本。
+
+必需输入为五个官方参数工作簿及 `30米DEM.tif`；赛题、DEM MAT、地理文件与官方模板请保留。原始文件默认不提交 Git。每个问题生成的 `input_manifest.json` 记录六个计算输入的 SHA-256，校验时检查输入版本。
+
+```bash
+python run_q1.py
+python run_q2.py
+python run_q3.py
+python run_q4.py
+python run_all.py
+python -m pytest -q
+```
+
+也可以显式指定原始附件解压目录：
+
+```bash
+python run_all.py /path/to/D_problem_unpacked --out /path/to/output
+python scripts/validate_results.py /path/to/D_problem_unpacked --results /path/to/output
+```
+
+`scripts/run_q1.py` 等旧入口仍保留，调用相同 CLI。`run_all` 在临时目录完成 Q1–Q4 和全量校验，全部成功后发布本次输出，失败时保留上一次完整结果。单独运行某一问题后，应重新运行受其影响的下游问题和总校验。
+
+## 计算流程
+
+| 问题 | 模型与输入 | 主要输出 |
+|---|---|---|
+| Q1 | 官方参数、DEM；单点往返能力与词典序集合划分 DP | 最大安全载荷、18 个批次、余量敏感性 |
+| Q2 | 共享物理引擎；时限优先构造、可行合并、无人机和电池调度 | 选定方案、前沿 CSV、每个前沿方案的可重放 JSON、资源表 |
+| Q3 | 官方通信与中继参数、共享物理引擎、显式离散方案 | 联合时刻、逐箱交付、通信窗口、中继能耗与资源表 |
+| Q4 | 固定 Q3 任务和通信关系、官方库存 | K=2 / K=3 分区与独立资源缺口 |
+
+Q1 使用题目给定的计划速度，未引入风场。风速、顺逆风、侧风不是官方输入，也未用于调整正式结果。内部单位为 m、s、kg、m³、kWh、kW；只有输出小时、SOC 百分数及无线链路距离 km 时进行单位转换。
+
+Q2 默认导出从初始 24 架次到 17 架次的可行合并前沿，选择 22 架次。`--target-trips` 改变选择，`--frontier-min` 改变搜索下界；无法达到指定架次数会明确报错。
+
+Q3 的 `config/q3_plan.json` 保存继承自历史可行方案的**货箱分组、路线、中继点、资源分配及顺序**，不保存最终时刻、能耗、SOC 或链路计算结果。程序根据 DEM 重新确定悬停海拔，通过线性规划依次优化加权延误、联合完成时间和中继服务时长。它是固定离散方案条件下的调度求解器，**不能声称自动搜索了全部路线/中继点或得到全局最优**。Q3 不再按易变的 Q2 行号继承任务，修改 Q2 参数不会自动改变这份离散方案；如需改变任务分组，编辑 JSON 后重新校验。
+
+通信逐阶段采样间隔不超过 1 s，中继窗口前后各留 5 s。DEM 视线按穿越像元区间检测，不再对坐标取整缓存。**离散采样仍不构成连续时间通信的解析证明。** 建链时无人机已在空中，因此其悬停及通信能耗计入中继能耗。
+
+## 项目结构
 
 ```text
-Official data / 30 m DEM
-        ↓
-Unified flight physics
-(distance / terrain / altitude / energy / time)
-        ↓
-Q1 exact batching
-        ↓
-Q2 transport scheduling + battery resources
-        ↓
-Q3 direct-link check + relay collaborative scheduling
-        ↓
-Q4 indivisible service atoms + exact K=2/K=3 enumeration
-        ↓
-Official workbook / paper / attachment package
+config/q3_plan.json              已选离散方案，不含硬编码结果
+src/config.py                   赛题规则、单位常数、算法参数
+src/core/                       官方输入、模型、地形、物理、路线、约束、I/O、溯源
+src/q1/physics_engine.py         单点能力与精确组批
+src/q2/heuristic.py              初始可行构造
+src/q2/tradeoff.py               缓存路线评价、合并前沿与资源调度
+src/q3/communication.py          双向链路预算与中继能耗
+src/q3/solver.py                 通信采样与固定离散方案的联合时刻求解
+src/q4/partition.py              固定任务的分区枚举
+src/validation.py               从官方数据重算结果
+src/cli.py                      统一入口
+run_q1.py … run_q4.py            单题入口
+run_all.py                      全流程入口
+scripts/                        兼容入口、校验、可选绘图
+results/q1 … results/q4         当前生成结果
+results/validation.json         最近一次成功的全量校验
+archive/baseline-e668347/        原始 baseline 证据
+config/ docs/ tests/            离散方案、说明、测试
 ```
 
-## Current working results
-
-### Q1
-
-20% return-energy reserve:
-
-- Minimum single-service round trips: **18**
-- Total transport energy: **59.1304 kWh**
-- Cumulative operation time: **32776.02 s**
-- Split service areas: **S001, S002, S003**
-
-Sensitivity shows the trip count remains 18 from 10% to 20% reserve, rises to 19 at 25%, and 20 at 30%.
-
-### Q2
-
-Current balanced hard-deadline-feasible point:
-
-- Transport trips: **22**
-- Hard-deadline violations: **0**
-- Makespan: **11033.023 s**
-- Total transport energy: **79.801846 kWh**
-- Weighted tardiness: **327498.249 priority·s**
-
-The full 17–24 trip trade-off frontier is stored under `results/q2/`.
-
-### Q3
-
-Communication-aware feasible joint baseline:
-
-- Transport trips: **24**
-- Relay sorties: **6**
-- Hard-deadline violations: **0**
-- Transport energy: **80.844703 kWh**
-- Relay energy: **5.966558 kWh**
-- Joint energy: **86.811261 kWh**
-- Transport makespan: **12774.325 s**
-- Joint makespan: **13224.359 s ≈ 3.67 h**
-- Minimum hard-deadline slack: **≈178.65 s**
-
-The communication model uses 2.4 GHz FSPL, DEM obstruction checking and bidirectional link-budget thresholds. The final communication terminal audit uses a maximum sampling interval of **1 s**, with a **±5 s relay guard window**. The current Q3 is a verified feasible collaborative baseline, not a proof of global optimality.
-
-### Q4
-
-Q3 multi-service routes induce four indivisible service atoms. K=2 and K=3 partitions are exhaustively enumerated.
-
-Current lexicographic objective:
-
-1. minimum total inventory shortage;
-2. minimum independently provisioned resource scale;
-3. minimum workload coefficient of variation;
-4. minimum transport-trip imbalance.
-
-Selected resource-shortage totals:
-
-- **K=2: 4 shortage units**
-- **K=3: 7 shortage units**
-
-Under this stated resource-first objective, K=2 places less pressure on existing inventory.
-
-## Repository structure
-
-```text
-docs/
-  AI_USAGE.md
-  modeling/
-    Q1_model.md
-    Q2_model.md
-    Q3_model.md
-    Q4_model.md
-
-data/
-  raw/            # official raw data kept local by default
-  dem/            # official DEM kept local by default
-
-src/
-  q1/
-  q2/
-  q3/
-  q4/
-
-scripts/
-  run_q1.py
-  run_q2.py
-  run_q3.py
-  run_q4.py
-
-results/
-  q1/
-  q2/
-  q3/
-  q4/
-
-submission/
-tests/
-```
-
-## Current paper draft
-
-- The current editable DOCX has been upgraded to an evidence-chain-enhanced v4.2 working version outside Git.
-- The upgrade adds: a four-question framework figure, explicit Q2 decision/resource variables, quantitative justification of the 22-trip balance point, Q3 relay-conflict evidence, exact Q4 enumeration size, a consolidated validation table, and evidence-backed innovation statements.
-- The **≤1 s Q3 terminal communication audit is complete** and synchronized with the result CSVs and audit record.
-- **Do not freeze or generate the final MD5 yet.** The remaining hard blocker is replacing the placeholder cover with the official Attachment 3 cover and completing the final team-information / anonymity check.
-
-## Reproducibility
-
-Python 3.10+ recommended.
+## 测试与输出校验
 
 ```bash
-pip install -r requirements.txt
+python -m pytest -q
+python -m ruff check --select F,E9 src scripts tests run_all.py run_q1.py run_q2.py run_q3.py run_q4.py
+python scripts/validate_results.py
 ```
 
-Run Q1:
+单元测试使用小型合成 DEM，覆盖物理边界、NoData、非法输入、路线卸货、资源占用、通信门限、CSV 篡改、CLI 导入和失败恢复。有官方数据时还执行跨问题物理一致性和参数读取测试；也可通过 `UAV_DATA_ROOT` 指定数据。CI 不含私人赛题附件，官方数据集成测试会明确 skip；全量真实数据运行已在本轮审计环境中完成。
+
+校验器重算 Q1 航段、载荷和敏感性，Q2 所有保存的前沿计划，Q3 运输/中继能耗、SOC、资源、交付与通信状态，以及 Q4 分区和库存统计。资源表不会在校验过程中被静默修复。
+
+可选绘图：
 
 ```bash
-python scripts/run_q1.py /path/to/D_problem_unpacked --out results/q1
+python -m pip install -r requirements-figures.txt
+python scripts/make_figures.py
 ```
 
-Run Q2:
-
-```bash
-python scripts/run_q2.py /path/to/D_problem_unpacked --target-trips 22 --out results/q2
-```
-
-Run Q3:
-
-```bash
-python scripts/run_q3.py /path/to/D_problem_unpacked --q2-dir results/q2 --out results/q3
-```
-
-Run Q4:
-
-```bash
-python scripts/run_q4.py --q3-dir results/q3 --out results/q4
-```
-
-Validate the complete result set:
-
-```bash
-python scripts/validate_results.py --results results
-```
-
-Regenerate paper figures after any result change:
-
-```bash
-python scripts/make_figures.py --results results --out figures
-```
-
-The figure generator currently creates Q1 reserve-sensitivity, Q2 timeliness/energy trade-off, Q3 relay-location and joint Gantt figures, and the Q4 resource-shortage comparison.
-
-## Important modeling language
-
-Q1 contains an exact subset-partition step for each single service area.
-
-Q2 and Q3 are heuristic / trade-off / collaborative feasible solutions. Do **not** describe them as globally optimal unless an exact optimality proof is added later.
-
-Q4 is exact enumeration **conditional on the fixed Q3 decisions and the stated lexicographic resource objective**.
-
-## Competition compliance
-
-AI is used only as an auxiliary tool. Modeling assumptions, equations, code, numerical outputs and written conclusions must be independently verified by the participating team. External code, literature and AI-assisted code actually used must be cited or declared according to the official competition rules.
-
-Do not make this repository public during the competition.
+本轮不重写论文、不声称已生成官方结果工作簿。`docs/paper/` 中的旧稿保留为历史工作资料，引用数值前应依据当前 `results/` 更新。AI 辅助记录见 `docs/AI_USAGE.md`。

@@ -83,3 +83,12 @@ Total shortages:
 Total shortage units = **7**.
 
 Under the stated lexicographic objective, K=2 requires fewer additional resources and has lower workload imbalance than the selected K=3 allocation.
+
+
+## Audit implementation update
+
+Inventory, recharge and turnaround values now come from the official input
+loader and shared energy module. Empty/invalid partitions and negative resource
+intervals fail explicitly. Zero-length intervals occupy no resource. The current
+recomputed Q3 timing retains the same four service atoms and K=2/K=3 shortage
+totals, but resource occupancy and energy must be read from regenerated CSVs.
