@@ -3,87 +3,126 @@
 > 2026 “华为杯”中国研究生数学建模竞赛 D 题工作仓库  
 > **Competition status: PRIVATE. Do not make public during the competition.**
 
-## Project scope
+## Scope
 
-本仓库用于统一管理 D 题的：
+本仓库统一管理 D 题：
 
-- 题目与数据说明
-- 统一物理计算引擎
-- Q1 单服务区运输能力与精确组批
-- Q2 异构多无人机运输调度
-- Q3 运输—通信中继协同优化
-- Q4 任务分区与资源配置
-- 结果表、敏感性分析与最终提交文件
+- Q1 单服务区运输能力、最大安全载荷与精确组批
+- Q2 异构运输无人机、多架次、多点配送与共享电池调度
+- Q3 30 m DEM 通信视距、链路预算与运输—中继协同调度
+- Q4 固定 Q3 任务关系下的 K=2 / K=3 分区资源配置
+- 结果 CSV、模型说明、AI 使用记录与最终提交工作区
 
 ## Modeling pipeline
 
 ```text
-Raw data / DEM
-      ↓
-Unified physics engine
-(distance / terrain / altitude / energy / flight time)
-      ↓
-Q1 payload capacity + exact batching
-      ↓
-Q2 multi-UAV routing + battery scheduling
-      ↓
-Q3 relay placement + communication scheduling
-      ↓
-Q4 partition + resource allocation
-      ↓
-Official submission workbook + paper
+Official data / 30 m DEM
+        ↓
+Unified flight physics
+(distance / terrain / altitude / energy / time)
+        ↓
+Q1 exact batching
+        ↓
+Q2 transport scheduling + battery resources
+        ↓
+Q3 direct-link check + relay collaborative scheduling
+        ↓
+Q4 indivisible service atoms + exact K=2/K=3 enumeration
+        ↓
+Official workbook / paper / attachment package
 ```
 
-## Current status
+## Current working results
 
-### Q1 — completed working baseline
+### Q1
 
-At a 20% return-energy reserve:
+20% return-energy reserve:
 
 - Minimum single-service round trips: **18**
 - Total transport energy: **59.1304 kWh**
 - Cumulative operation time: **32776.02 s**
-- Split-demand service areas: **S001, S002, S003**
+- Split service areas: **S001, S002, S003**
 
-### Q2 — completed working balanced solution
+Sensitivity shows the trip count remains 18 from 10% to 20% reserve, rises to 19 at 25%, and 20 at 30%.
 
-The current Q2 route/resource search produces a hard-deadline-feasible trade-off frontier.
+### Q2
 
-Working 22-trip balance point:
+Current balanced hard-deadline-feasible point:
 
 - Transport trips: **22**
-- Hard deadline violations: **0**
+- Hard-deadline violations: **0**
 - Makespan: **11033.023 s**
 - Total transport energy: **79.801846 kWh**
 - Weighted tardiness: **327498.249 priority·s**
-- Minimum hard-deadline slack: about **1768.65 s**
 
-The Q2 result is a heuristic / trade-off solution, not a claimed proof of global optimality. The full 17–24 trip frontier is stored in `results/q2/Q2_tradeoff_frontier.csv`.
+The full 17–24 trip trade-off frontier is stored under `results/q2/`.
+
+### Q3
+
+Communication-aware feasible joint baseline:
+
+- Transport trips: **24**
+- Relay sorties: **6**
+- Hard-deadline violations: **0**
+- Transport energy: **80.844703 kWh**
+- Relay energy: **5.958528 kWh**
+- Joint energy: **86.803232 kWh**
+- Transport makespan: **12774.325 s**
+- Joint makespan: **13223.665 s ≈ 3.67 h**
+- Minimum hard-deadline slack: **≈178.65 s**
+
+The communication model uses 2.4 GHz FSPL, DEM obstruction checking and bidirectional link-budget thresholds. The current Q3 is a verified feasible collaborative baseline, not a proof of global optimality.
+
+### Q4
+
+Q3 multi-service routes induce four indivisible service atoms. K=2 and K=3 partitions are exhaustively enumerated.
+
+Current lexicographic objective:
+
+1. minimum total inventory shortage;
+2. minimum independently provisioned resource scale;
+3. minimum workload coefficient of variation;
+4. minimum transport-trip imbalance.
+
+Selected resource-shortage totals:
+
+- **K=2: 4 shortage units**
+- **K=3: 7 shortage units**
+
+Under this stated resource-first objective, K=2 places less pressure on existing inventory.
 
 ## Repository structure
 
 ```text
 docs/
+  AI_USAGE.md
   modeling/
     Q1_model.md
     Q2_model.md
-  AI_USAGE.md
+    Q3_model.md
+    Q4_model.md
 
 data/
-  raw/
-  dem/
+  raw/            # official raw data kept local by default
+  dem/            # official DEM kept local by default
 
 src/
   q1/
   q2/
+  q3/
+  q4/
 
 scripts/
   run_q1.py
   run_q2.py
+  run_q3.py
+  run_q4.py
 
 results/
   q1/
   q2/
+  q3/
+  q4/
 
 submission/
 tests/
@@ -91,9 +130,7 @@ tests/
 
 ## Reproducibility
 
-Python 3.10+ is recommended.
-
-Install dependencies:
+Python 3.10+ recommended.
 
 ```bash
 pip install -r requirements.txt
@@ -111,23 +148,28 @@ Run Q2:
 python scripts/run_q2.py /path/to/D_problem_unpacked --target-trips 22 --out results/q2
 ```
 
-Q2 output files include:
+Run Q3:
 
-- `Q2_transport_trips_balanced.csv`
-- `Q2_box_delivery_balanced.csv`
-- `Q2_tradeoff_frontier.csv`
-- `Q2_resource_check.csv`
+```bash
+python scripts/run_q3.py /path/to/D_problem_unpacked --q2-dir results/q2 --out results/q3
+```
 
-## Next step
+Run Q4:
 
-Q3 will inherit the Q2 box groups, route orders, physical UAV/battery schedules and segment timing, then add:
+```bash
+python scripts/run_q4.py --q3-dir results/q3 --out results/q4
+```
 
-- terrain line-of-sight checking;
-- bidirectional link-budget checking;
-- direct-link outage intervals;
-- relay candidate positions/heights;
-- relay UAV / energy-component scheduling.
+## Important modeling language
+
+Q1 contains an exact subset-partition step for each single service area.
+
+Q2 and Q3 are heuristic / trade-off / collaborative feasible solutions. Do **not** describe them as globally optimal unless an exact optimality proof is added later.
+
+Q4 is exact enumeration **conditional on the fixed Q3 decisions and the stated lexicographic resource objective**.
 
 ## Competition compliance
 
-AI is used only as an auxiliary tool. Modeling assumptions, equations, code, numerical outputs and written conclusions must be independently verified by the participating team. Any external code, literature or AI-assisted program actually used must be cited/declared according to the competition rules.
+AI is used only as an auxiliary tool. Modeling assumptions, equations, code, numerical outputs and written conclusions must be independently verified by the participating team. External code, literature and AI-assisted code actually used must be cited or declared according to the official competition rules.
+
+Do not make this repository public during the competition.
