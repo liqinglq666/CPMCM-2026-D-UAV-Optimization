@@ -1,4 +1,5 @@
 """Rules from Appendix 2 and explicit numerical/search choices (SI, kWh)."""
+
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]

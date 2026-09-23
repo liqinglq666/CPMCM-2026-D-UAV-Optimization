@@ -1,7 +1,9 @@
 """Data types: distances in m, time in s, payload in kg, energy in kWh."""
+
 from dataclasses import dataclass
 from typing import Dict, List, Optional
 from .numeric import finite, positive
+
 
 @dataclass(frozen=True)
 class Node:
@@ -37,14 +39,30 @@ class DroneType:
     full_charge: float = 0.0
 
     def __post_init__(self):
-        for name in ("empty_mass", "max_payload", "max_volume", "cruise_speed",
-                     "range_empty", "range_full", "energy_use", "climb_speed", "descent_speed", "eta_up"):
+        for name in (
+            "empty_mass",
+            "max_payload",
+            "max_volume",
+            "cruise_speed",
+            "range_empty",
+            "range_full",
+            "energy_use",
+            "climb_speed",
+            "descent_speed",
+            "eta_up",
+        ):
             positive(getattr(self, name), name)
         if self.range_full > self.range_empty:
             raise ValueError("Full-load range exceeds empty range")
         finite(self.rho, "reserve", 0, 1)
         finite(self.eta_up, "climb efficiency", 0, 1)
-        for name in ("prep_time", "load_time_per_box", "handover_base", "handover_per_box", "full_charge"):
+        for name in (
+            "prep_time",
+            "load_time_per_box",
+            "handover_base",
+            "handover_per_box",
+            "full_charge",
+        ):
             finite(getattr(self, name), name, 0)
 
 
@@ -67,6 +85,8 @@ class Box:
         finite(self.expected, "expected_s", 0)
         if self.hard_deadline is not None:
             finite(self.hard_deadline, "hard_deadline_s", 0)
+        if self.first_deadline is not None:
+            finite(self.first_deadline, "first_deadline_s", 0)
         if self.first and self.first_deadline is None:
             raise ValueError(f"Missing first-batch deadline: {self.id}")
 
@@ -101,4 +121,3 @@ class Trip:
     end: float
     energy: float
     soc: float
-

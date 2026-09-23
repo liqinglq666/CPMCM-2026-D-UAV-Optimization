@@ -1,4 +1,5 @@
 """Run Q2; see README for official data setup."""
+
 from src.cli import run_question
 
 if __name__ == "__main__":

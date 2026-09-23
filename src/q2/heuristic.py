@@ -24,6 +24,7 @@ Rules implemented:
 from __future__ import annotations
 
 import itertools
+import logging
 from pathlib import Path
 from typing import Dict, List, Tuple
 from src.core.models import Box, DroneType, Trip
@@ -57,25 +58,20 @@ def build_candidate(
     volume_left -= anchor.volume
 
     candidates = [
-        b
-        for b in remaining.values()
-        if b.id != anchor_id and b.service in order
+        b for b in remaining.values() if b.id != anchor_id and b.service in order
     ]
 
     def box_rank(b: Box):
         return (
             0 if b.hard_deadline is not None else 1,
-            b.hard_deadline or 1e18,
+            b.hard_deadline if b.hard_deadline is not None else float("inf"),
             b.expected,
             -b.priority,
             -b.mass,
         )
 
     for box in sorted(candidates, key=box_rank):
-        if (
-            box.mass <= mass_left + 1e-9
-            and box.volume <= volume_left + 1e-12
-        ):
+        if box.mass <= mass_left + 1e-9 and box.volume <= volume_left + 1e-12:
             selected[box.service].append(box)
             mass_left -= box.mass
             volume_left -= box.volume
@@ -87,22 +83,22 @@ def build_candidate(
     def evaluate(sel, visit_order):
         trip_boxes = [b for s in visit_order for b in sel[s]]
         profile = evaluate_route(physics, drone_type.code, trip_boxes, visit_order)
-        return (trip_boxes, {key: start + value for key, value in profile.delivery.items()},
-                start + profile.duration, profile.energy)
+        return (
+            trip_boxes,
+            {key: start + value for key, value in profile.delivery.items()},
+            start + profile.duration,
+            profile.energy,
+        )
 
     trip_boxes, delivery, end, energy = evaluate(
         selected,
         actual_order,
     )
 
-    energy_limit = (
-        1.0 - drone_type.rho
-    ) * drone_type.energy_use
+    energy_limit = (1.0 - drone_type.rho) * drone_type.energy_use
 
     while energy > energy_limit + 1e-10:
-        droppable = [
-            b for b in trip_boxes if b.id != anchor_id
-        ]
+        droppable = [b for b in trip_boxes if b.id != anchor_id]
         if not droppable:
             return None
 
@@ -117,13 +113,9 @@ def build_candidate(
         )
         remove = droppable[0]
         selected[remove.service] = [
-            x
-            for x in selected[remove.service]
-            if x.id != remove.id
+            x for x in selected[remove.service] if x.id != remove.id
         ]
-        actual_order = tuple(
-            s for s in actual_order if selected[s]
-        )
+        actual_order = tuple(s for s in actual_order if selected[s])
         trip_boxes, delivery, end, energy = evaluate(
             selected,
             actual_order,
@@ -143,19 +135,11 @@ def build_candidate(
         if b.hard_deadline is not None
     )
     weighted_tardiness = sum(
-        b.priority
-        * max(0.0, delivery[b.id] - b.expected)
-        for b in trip_boxes
+        b.priority * max(0.0, delivery[b.id] - b.expected) for b in trip_boxes
     )
-    hard_count = sum(
-        b.hard_deadline is not None
-        for b in trip_boxes
-    )
+    hard_count = sum(b.hard_deadline is not None for b in trip_boxes)
     reward = sum(
-        b.priority * (
-            2.0 if b.hard_deadline is not None else 1.0
-        )
-        for b in trip_boxes
+        b.priority * (2.0 if b.hard_deadline is not None else 1.0) for b in trip_boxes
     )
     mass = sum(b.mass for b in trip_boxes)
 
@@ -201,11 +185,7 @@ def solve(
     }
 
     while remaining:
-        hard_remaining = [
-            b
-            for b in remaining.values()
-            if b.hard_deadline is not None
-        ]
+        hard_remaining = [b for b in remaining.values() if b.hard_deadline is not None]
 
         if hard_remaining:
             anchor = min(
@@ -234,11 +214,7 @@ def solve(
         for drone in drones:
             t = types[drone.type]
             battery = min(
-                (
-                    b
-                    for b in batteries
-                    if b.type == drone.type
-                ),
+                (b for b in batteries if b.type == drone.type),
                 key=lambda b: b.available,
             )
             start = max(
@@ -246,14 +222,10 @@ def solve(
                 battery.available,
             )
 
-            remaining_services = sorted(
-                {b.service for b in remaining.values()}
-            )
-            nearby = [
-                x
-                for x in neighbors[anchor.service]
-                if x in remaining_services
-            ][:6]
+            remaining_services = sorted({b.service for b in remaining.values()})
+            nearby = [x for x in neighbors[anchor.service] if x in remaining_services][
+                :6
+            ]
 
             sequences = {(anchor.service,)}
             for extra_count in range(1, max_stops):
@@ -261,9 +233,7 @@ def solve(
                     nearby,
                     extra_count,
                 ):
-                    for perm in itertools.permutations(
-                        (anchor.service,) + comb
-                    ):
+                    for perm in itertools.permutations((anchor.service,) + comb):
                         sequences.add(perm)
 
             local_best = None
@@ -332,25 +302,14 @@ def solve(
                     battery,
                     start,
                 )
-                if (
-                    local_best is None
-                    or score < local_best[0]
-                ):
+                if local_best is None or score < local_best[0]:
                     local_best = item
 
-            if (
-                local_best is not None
-                and (
-                    best is None
-                    or local_best[0] < best[0]
-                )
-            ):
+            if local_best is not None and (best is None or local_best[0] < best[0]):
                 best = local_best
 
         if best is None:
-            raise RuntimeError(
-                f"No feasible candidate for {anchor.id}"
-            )
+            raise RuntimeError(f"No feasible candidate for {anchor.id}")
 
         _, candidate, drone, battery, start = best
         (
@@ -378,10 +337,7 @@ def solve(
             battery_id=battery.id,
             start=start,
             stops=list(order),
-            boxes_by_stop={
-                s: [b.id for b in selected[s]]
-                for s in order
-            },
+            boxes_by_stop={s: [b.id for b in selected[s]] for s in order},
             delivery=delivery,
             end=end,
             energy=energy,
@@ -390,26 +346,19 @@ def solve(
         trips.append(trip)
 
         drone.available = end
-        battery.available = (
-            end
-            + charge_time(
-                types[drone.type],
-                soc,
-            )
+        battery.available = end + charge_time(
+            types[drone.type],
+            soc,
         )
 
         if verbose:
-            print(
+            logging.getLogger(__name__).info(
+                "%s drone=%s boxes=%d end_s=%.3f energy_kwh=%.6f remaining=%d",
                 trip_id,
                 drone.id,
-                drone.type,
-                battery.id,
-                round(start, 1),
-                order,
                 len(box_ids),
-                round(end, 1),
-                round(energy, 3),
-                "remaining=",
+                end,
+                energy,
                 len(remaining),
             )
 
@@ -431,15 +380,9 @@ def solve(
             )
 
     hard_violations = [
-        row
-        for row in deliveries
-        if row[5] is not None
-        and row[3] > row[5] + 1e-9
+        row for row in deliveries if row[5] is not None and row[3] > row[5] + 1e-9
     ]
-    weighted_tardiness = sum(
-        row[6] * max(0.0, row[3] - row[4])
-        for row in deliveries
-    )
+    weighted_tardiness = sum(row[6] * max(0.0, row[3] - row[4]) for row in deliveries)
 
     metrics = {
         "trips": len(trips),
@@ -459,4 +402,3 @@ def solve(
         "physics": physics,
         "metrics": metrics,
     }
-

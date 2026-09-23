@@ -1,4 +1,5 @@
 """One remaining-payload and handover calculation for every multi-stop route."""
+
 from dataclasses import dataclass
 from collections import defaultdict
 from .energy import energy_feasible
@@ -31,7 +32,7 @@ def evaluate_route(physics, type_code, boxes, order):
     for box in boxes:
         by_service[box.service].append(box)
     time_s = drone.prep_time + drone.load_time_per_box * len(boxes)
-    energy, delivery, phases = 0., {}, []
+    energy, delivery, phases = 0.0, {}, []
     previous = "O01"
     remaining = {b.id: b for b in boxes}
     for dest in (*order, "O01"):
@@ -40,14 +41,26 @@ def evaluate_route(physics, type_code, boxes, order):
         energy += physics.energy(type_code, previous, dest, payload)
         za, zb = physics.operation_altitude(previous), physics.operation_altitude(dest)
         for name, duration, z0, z1 in (
-            ("climb", seg.climb/drone.climb_speed, za, seg.cruise_alt),
-            ("cruise", seg.distance/drone.cruise_speed, seg.cruise_alt, seg.cruise_alt),
-            ("descent", seg.descent/drone.descent_speed, seg.cruise_alt, zb)):
-            phases.append((name, time_s, time_s+duration, previous, dest, z0, z1, seg.distance))
+            ("climb", seg.climb / drone.climb_speed, za, seg.cruise_alt),
+            (
+                "cruise",
+                seg.distance / drone.cruise_speed,
+                seg.cruise_alt,
+                seg.cruise_alt,
+            ),
+            ("descent", seg.descent / drone.descent_speed, seg.cruise_alt, zb),
+        ):
+            phases.append(
+                (name, time_s, time_s + duration, previous, dest, z0, z1, seg.distance)
+            )
             time_s += duration
         if dest != "O01":
-            duration = drone.handover_base + drone.handover_per_box * len(by_service[dest])
-            phases.append(("handover", time_s, time_s+duration, dest, dest, zb, zb, 0.))
+            duration = drone.handover_base + drone.handover_per_box * len(
+                by_service[dest]
+            )
+            phases.append(
+                ("handover", time_s, time_s + duration, dest, dest, zb, zb, 0.0)
+            )
             time_s += duration
             for box in by_service[dest]:
                 delivery[box.id] = time_s

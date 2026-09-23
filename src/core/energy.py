@@ -1,6 +1,12 @@
 """Appendix-2 authoritative energy (kWh), flight (s) and charging rules."""
-from src.config import (GRAVITY_MPS2, JOULES_PER_KWH, CHARGE_KNEE_SOC,
-                        CHARGE_FAST_FRACTION, FEASIBILITY_TOL)
+
+from src.config import (
+    GRAVITY_MPS2,
+    JOULES_PER_KWH,
+    CHARGE_KNEE_SOC,
+    CHARGE_FAST_FRACTION,
+    FEASIBILITY_TOL,
+)
 from .numeric import finite, positive
 
 
@@ -8,9 +14,11 @@ def equivalent_range(drone, payload_kg: float) -> float:
     payload_kg = finite(payload_kg, "payload_kg", 0)
     if payload_kg > drone.max_payload + 1e-10:
         raise ValueError(f"Payload {payload_kg} exceeds {drone.code} capacity")
-    return drone.range_empty - (drone.range_empty - drone.range_full) * (
-        payload_kg / drone.max_payload
-    ) ** 1.5
+    return (
+        drone.range_empty
+        - (drone.range_empty - drone.range_full)
+        * (payload_kg / drone.max_payload) ** 1.5
+    )
 
 
 def climb_energy(mass_kg, climb_m, efficiency):
@@ -29,7 +37,11 @@ def leg_energy(drone, distance: float, h_up: float, q: float):
 
 
 def flight_time(distance_m, climb_m, descent_m, cruise_mps, climb_mps, descent_mps):
-    for name, value in (("distance", distance_m), ("climb", climb_m), ("descent", descent_m)):
+    for name, value in (
+        ("distance", distance_m),
+        ("climb", climb_m),
+        ("descent", descent_m),
+    ):
         finite(value, name, 0)
     for value in (cruise_mps, climb_mps, descent_mps):
         positive(value, "speed_mps")
@@ -48,8 +60,9 @@ def two_stage_charge_time(full_charge_time_s: float, soc_fraction: float) -> flo
     s = finite(soc_fraction, "soc_fraction", 0, 1)
     slow = 1 - CHARGE_FAST_FRACTION
     if s < CHARGE_KNEE_SOC:
-        return full_charge_time_s * (CHARGE_FAST_FRACTION * (CHARGE_KNEE_SOC - s)
-                                     / CHARGE_KNEE_SOC + slow)
+        return full_charge_time_s * (
+            CHARGE_FAST_FRACTION * (CHARGE_KNEE_SOC - s) / CHARGE_KNEE_SOC + slow
+        )
     return full_charge_time_s * slow * (1 - s) / (1 - CHARGE_KNEE_SOC)
 
 

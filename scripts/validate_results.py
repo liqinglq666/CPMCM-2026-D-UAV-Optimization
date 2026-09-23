@@ -1,4 +1,5 @@
 """Recompute constraints from official inputs, including Q3 communication."""
+
 from pathlib import Path
 import argparse
 import sys
@@ -11,7 +12,7 @@ from src.validation import validate_results
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("root", nargs="?", type=Path, default=DEFAULT_DATA_ROOT)
-    parser.add_argument("--results", type=Path, default=PROJECT_ROOT/"results")
+    parser.add_argument("--results", type=Path, default=PROJECT_ROOT / "results")
     args = parser.parse_args()
     print(validate_results(args.root, args.results))
 

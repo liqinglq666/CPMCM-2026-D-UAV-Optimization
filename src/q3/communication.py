@@ -30,6 +30,10 @@ class Radio:
     antenna_gain_dbi: float
     sensitivity_dbm: float
 
+    def __post_init__(self):
+        for name, value in vars(self).items():
+            finite(value, name)
+
 
 @dataclass(frozen=True)
 class RelaySpec:
@@ -47,6 +51,21 @@ class RelaySpec:
     hover_power_kw: float
     communication_power_kw: float
     max_hover_agl_m: float
+
+    def __post_init__(self):
+        for name, value in vars(self).items():
+            finite(value, name, 0)
+        for name in (
+            "takeoff_mass_kg",
+            "cruise_speed_mps",
+            "usable_energy_kwh",
+            "climb_speed_mps",
+            "descent_speed_mps",
+            "climb_efficiency",
+        ):
+            positive(getattr(self, name), name)
+        finite(self.reserve_fraction, "reserve", 0, 1)
+        finite(self.climb_efficiency, "climb efficiency", 0, 1)
 
 
 def bidirectional_loss_threshold(
@@ -84,11 +103,7 @@ def free_space_path_loss(
     if distance_km == 0:
         return -math.inf  # coincident endpoints: zero-distance FSPL limit
     d = distance_km
-    return (
-        32.45
-        + 20.0 * math.log10(frequency_mhz)
-        + 20.0 * math.log10(d)
-    )
+    return 32.45 + 20.0 * math.log10(frequency_mhz) + 20.0 * math.log10(d)
 
 
 def _terrain_obstructed_vectorized(
@@ -97,8 +112,11 @@ def _terrain_obstructed_vectorized(
     dem_dataset,
     dem: np.ndarray,
 ) -> bool:
-    terrain = dem_dataset if isinstance(dem_dataset, Terrain) else Terrain(
-        dem, dem_dataset.transform, dem_dataset.nodata)
+    terrain = (
+        dem_dataset
+        if isinstance(dem_dataset, Terrain)
+        else Terrain(dem, dem_dataset.transform, dem_dataset.nodata)
+    )
     return terrain.obstructed(p1, p2)
 
 
@@ -113,9 +131,7 @@ def link_available(
 ):
     """Return (available, total_path_loss_db, obstructed)."""
     horizontal_m = horizontal_distance(p1, p2)
-    distance_km = (
-        horizontal_m**2 + (p2[2]-p1[2])**2
-    ) ** 0.5 / 1000.0
+    distance_km = (horizontal_m**2 + (p2[2] - p1[2]) ** 2) ** 0.5 / 1000.0
 
     fspl = free_space_path_loss(
         frequency_mhz,
@@ -127,9 +143,7 @@ def link_available(
     # Diagnostic loss and obstruction must stay truthful even for unavailable links.
     obstructed = _terrain_obstructed_vectorized(p1, p2, dem_dataset, dem)
 
-    path_loss = fspl + (
-        obstruction_loss_db if obstructed else 0.0
-    )
+    path_loss = fspl + (obstruction_loss_db if obstructed else 0.0)
     return (
         path_loss <= max_path_loss_db,
         path_loss,
@@ -149,24 +163,22 @@ def relay_sortie_energy(
     two-way horizontal cruise + positive climb work + hover/communication.
     Descent has no extra energy term under the current problem interpretation.
     """
-    cruise_time_s = (
-        2.0 * horizontal_distance_m
-        / spec.cruise_speed_mps
+    for name, value in (
+        ("horizontal_distance_m", horizontal_distance_m),
+        ("outbound_climb_m", outbound_climb_m),
+        ("return_climb_m", return_climb_m),
+        ("service_duration_s", service_duration_s),
+    ):
+        finite(value, name, 0)
+    cruise_time_s = 2.0 * horizontal_distance_m / spec.cruise_speed_mps
+    cruise_energy = spec.cruise_power_kw * cruise_time_s / SECONDS_PER_HOUR
+    ascent_energy = climb_energy(
+        spec.takeoff_mass_kg, outbound_climb_m + return_climb_m, spec.climb_efficiency
     )
-    cruise_energy = (
-        spec.cruise_power_kw
-        * cruise_time_s / SECONDS_PER_HOUR
-    )
-    ascent_energy = climb_energy(spec.takeoff_mass_kg, outbound_climb_m + return_climb_m,
-                                  spec.climb_efficiency)
     finite(service_duration_s, "service_duration_s", 0)
     service_energy = (
         (spec.hover_power_kw + spec.communication_power_kw)
-        * service_duration_s / SECONDS_PER_HOUR
+        * service_duration_s
+        / SECONDS_PER_HOUR
     )
-    return (
-        cruise_energy
-        + ascent_energy
-        + service_energy
-    )
-
+    return cruise_energy + ascent_energy + service_energy

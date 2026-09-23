@@ -1,4 +1,5 @@
 """Validated WGS84 DEM snapshot; files are closed immediately after loading."""
+
 from dataclasses import dataclass
 import math
 import numpy as np
@@ -55,7 +56,9 @@ class Terrain:
 
     def values(self, rows, cols):
         values = self.dem[rows, cols]
-        if np.any(~np.isfinite(values)) or (self.nodata is not None and np.any(values == self.nodata)):
+        if np.any(~np.isfinite(values)) or (
+            self.nodata is not None and np.any(values == self.nodata)
+        ):
             raise ValueError("DEM NoData on required route or radio ray")
         return values
 
@@ -67,15 +70,26 @@ class Terrain:
         ca, ra = self.pixel(*a[:2])
         cb, rb = self.pixel(*b[:2])
         c0, r0 = max(0, int(min(ca, cb)) - 1), max(0, int(min(ra, rb)) - 1)
-        c1, r1 = min(self.width, int(max(ca, cb)) + 2), min(self.height, int(max(ra, rb)) + 2)
-        shape = Point(a[:2]) if tuple(a[:2]) == tuple(b[:2]) else LineString([a[:2], b[:2]])
-        mask = geometry_mask([shape.__geo_interface__], out_shape=(r1-r0, c1-c0),
-                             transform=window_transform(Window(c0, r0, c1-c0, r1-r0), self.transform),
-                             invert=True, all_touched=True)
+        c1, r1 = (
+            min(self.width, int(max(ca, cb)) + 2),
+            min(self.height, int(max(ra, rb)) + 2),
+        )
+        shape = (
+            Point(a[:2]) if tuple(a[:2]) == tuple(b[:2]) else LineString([a[:2], b[:2]])
+        )
+        mask = geometry_mask(
+            [shape.__geo_interface__],
+            out_shape=(r1 - r0, c1 - c0),
+            transform=window_transform(
+                Window(c0, r0, c1 - c0, r1 - r0), self.transform
+            ),
+            invert=True,
+            all_touched=True,
+        )
         rr, cc = np.nonzero(mask)
         if not len(rr):
             raise ValueError("No DEM cells intersect route")
-        return float(np.max(self.values(rr+r0, cc+c0)))
+        return float(np.max(self.values(rr + r0, cc + c0)))
 
     def obstructed(self, a, b):
         """Visit every raster-cell interval crossed by the straight radio ray.
@@ -88,15 +102,17 @@ class Terrain:
         cb, rb = self.pixel(*b[:2])
         finite(a[2], "ray elevation")
         finite(b[2], "ray elevation")
-        cuts = [np.array([0., 1.])]
+        cuts = [np.array([0.0, 1.0])]
         for start, end in ((ca, cb), (ra, rb)):
             if start != end:
-                grid = np.arange(math.floor(min(start, end)) + 1, math.ceil(max(start, end)))
+                grid = np.arange(
+                    math.floor(min(start, end)) + 1, math.ceil(max(start, end))
+                )
                 cuts.append((grid - start) / (end - start))
         fractions = np.unique(np.concatenate(cuts))
         mid = (fractions[:-1] + fractions[1:]) / 2
-        rr = np.floor(ra + (rb-ra)*mid).astype(int)
-        cc = np.floor(ca + (cb-ca)*mid).astype(int)
+        rr = np.floor(ra + (rb - ra) * mid).astype(int)
+        cc = np.floor(ca + (cb - ca) * mid).astype(int)
         terrain = self.values(rr, cc)
-        z = a[2] + (b[2]-a[2])*fractions
+        z = a[2] + (b[2] - a[2]) * fractions
         return bool(np.any(terrain >= np.minimum(z[:-1], z[1:])))

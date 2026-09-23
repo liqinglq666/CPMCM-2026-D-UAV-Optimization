@@ -1,4 +1,5 @@
 """Single flight engine shared by Q1, Q2, Q3 and validation."""
+
 from src.config import TERRAIN_CLEARANCE_M, SERVICE_ALTITUDE_M
 from .energy import equivalent_range, leg_energy, flight_time
 from .models import Segment
@@ -22,12 +23,16 @@ class Physics:
             pa, pb = (na.lon, na.lat), (nb.lon, nb.lat)
             za, zb = self.operation_altitude(a), self.operation_altitude(b)
             if a == b:
-                self._cache[key] = Segment(a, b, 0., za, 0., 0.)
+                self._cache[key] = Segment(a, b, 0.0, za, 0.0, 0.0)
             else:
                 cruise = self.terrain.maximum(pa, pb) + TERRAIN_CLEARANCE_M
                 if cruise < max(za, zb):
-                    raise ValueError(f"Official cruise altitude below operation endpoint: {a}->{b}")
-                self._cache[key] = Segment(a, b, horizontal_distance(pa, pb), cruise, cruise-za, cruise-zb)
+                    raise ValueError(
+                        f"Official cruise altitude below operation endpoint: {a}->{b}"
+                    )
+                self._cache[key] = Segment(
+                    a, b, horizontal_distance(pa, pb), cruise, cruise - za, cruise - zb
+                )
         return self._cache[key]
 
     def equivalent_range(self, type_code, payload):
@@ -39,5 +44,11 @@ class Physics:
 
     def flight_time(self, type_code, a, b):
         t, seg = self.types[type_code], self.segment(a, b)
-        return flight_time(seg.distance, seg.climb, seg.descent,
-                           t.cruise_speed, t.climb_speed, t.descent_speed)
+        return flight_time(
+            seg.distance,
+            seg.climb,
+            seg.descent,
+            t.cruise_speed,
+            t.climb_speed,
+            t.descent_speed,
+        )

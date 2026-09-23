@@ -32,10 +32,21 @@ import pandas as pd
 from src.core.models import DroneType, Node, Box
 from src.core.inputs import load_inputs
 from src.core.physics import Physics
-from src.core.energy import equivalent_range as equivalent_range, leg_energy, flight_time
+from src.core.energy import (
+    equivalent_range as equivalent_range,
+    leg_energy,
+    flight_time,
+)
 from src.core.numeric import finite
 from src.core.io import write_json
-from src.config import DEFAULT_RESERVE, RESERVE_SCENARIOS, TERRAIN_CLEARANCE_M
+from src.core.provenance import save_provenance
+from src.config import (
+    DEFAULT_RESERVE,
+    RESERVE_SCENARIOS,
+    TERRAIN_CLEARANCE_M,
+    SECONDS_PER_HOUR,
+)
+
 
 @dataclass(frozen=True)
 class SegmentPhysics:
@@ -49,31 +60,48 @@ class SegmentPhysics:
     ret_down: float
 
 
-
 def compute_segments(nodes: Dict[str, Node], dem_file: Path):
     physics = Physics(nodes, {}, dem_file)
     segments = {}
     for service in sorted(k for k in nodes if k != "O01"):
         out = physics.segment("O01", service)
         back = physics.segment(service, "O01")
-        segments[service] = SegmentPhysics(service, out.distance, out.cruise_alt - TERRAIN_CLEARANCE_M,
-            out.cruise_alt, out.climb, out.descent, back.climb, back.descent)
+        segments[service] = SegmentPhysics(
+            service,
+            out.distance,
+            out.cruise_alt - TERRAIN_CLEARANCE_M,
+            out.cruise_alt,
+            out.climb,
+            out.descent,
+            back.climb,
+            back.descent,
+        )
     return segments
 
 
-def roundtrip_energy(
-    drone: DroneType, seg: SegmentPhysics, q: float
-) -> float:
+def roundtrip_energy(drone: DroneType, seg: SegmentPhysics, q: float) -> float:
     e_out = leg_energy(drone, seg.distance, seg.out_up, q)[0]
     e_back = leg_energy(drone, seg.distance, seg.ret_up, 0.0)[0]
     return e_out + e_back
 
 
-def roundtrip_time(
-    drone: DroneType, seg: SegmentPhysics, n_boxes: int
-) -> float:
-    t_out = flight_time(seg.distance, seg.out_up, seg.out_down, drone.cruise_speed, drone.climb_speed, drone.descent_speed)
-    t_back = flight_time(seg.distance, seg.ret_up, seg.ret_down, drone.cruise_speed, drone.climb_speed, drone.descent_speed)
+def roundtrip_time(drone: DroneType, seg: SegmentPhysics, n_boxes: int) -> float:
+    t_out = flight_time(
+        seg.distance,
+        seg.out_up,
+        seg.out_down,
+        drone.cruise_speed,
+        drone.climb_speed,
+        drone.descent_speed,
+    )
+    t_back = flight_time(
+        seg.distance,
+        seg.ret_up,
+        seg.ret_down,
+        drone.cruise_speed,
+        drone.climb_speed,
+        drone.descent_speed,
+    )
     t_ops = (
         drone.prep_time
         + n_boxes * drone.load_time_per_box
@@ -85,13 +113,15 @@ def roundtrip_time(
 
 def max_safe_payload(
     drone: DroneType, seg: SegmentPhysics, rho: float | None = None
-) -> float:
+) -> float | None:
     rho = finite(drone.rho if rho is None else rho, "reserve", 0, 1)
     cap = (1.0 - rho) * drone.energy_use
     if roundtrip_energy(drone, seg, drone.max_payload) <= cap:
         return drone.max_payload
     if roundtrip_energy(drone, seg, 0.0) > cap:
-        return None  # explicit unreachable service/type, exported with feasibility status
+        return (
+            None  # explicit unreachable service/type, exported with feasibility status
+        )
     lo, hi = 0.0, drone.max_payload
     for _ in range(100):
         mid = (lo + hi) / 2.0
@@ -117,10 +147,7 @@ def feasible_batch(
         return False
     if volume > drone.max_volume + 1e-12:
         return False
-    return (
-        roundtrip_energy(drone, seg, mass)
-        <= (1.0 - rho) * drone.energy_use + 1e-10
-    )
+    return roundtrip_energy(drone, seg, mass) <= (1.0 - rho) * drone.energy_use + 1e-10
 
 
 def optimize_service_q1(
@@ -130,7 +157,16 @@ def optimize_service_q1(
     seg: SegmentPhysics,
     rho: float,
 ):
-    return _optimize_service(service, tuple(boxes), tuple(drones.values()), seg, rho)
+    finite(rho, "reserve", 0, 1)
+    if (
+        not boxes
+        or len({b.id for b in boxes}) != len(boxes)
+        or any(b.service != service for b in boxes)
+    ):
+        raise ValueError("Q1 requires nonempty unique boxes from one service")
+    return _optimize_service(
+        service, tuple(boxes), tuple(drones[g] for g in sorted(drones)), seg, rho
+    )
 
 
 @lru_cache(maxsize=128)
@@ -145,12 +181,12 @@ def _optimize_service(service, boxes, drone_types, seg, rho):
         batch = [boxes[i] for i in range(n) if (mask >> i) & 1]
         mass = sum(b.mass for b in batch)
         volume = sum(b.volume for b in batch)
-        for g in ("A", "B", "C"):
+        for g in sorted(drones):
             drone = drones[g]
             if mass > drone.max_payload + 1e-10 or volume > drone.max_volume + 1e-12:
                 continue
             e = roundtrip_energy(drone, seg, mass)
-            if e > (1-rho)*drone.energy_use + 1e-10:
+            if e > (1 - rho) * drone.energy_use + 1e-10:
                 continue
             t = roundtrip_time(drone, seg, len(batch))
             soc = 100.0 * (1.0 - e / drone.energy_use)
@@ -197,9 +233,7 @@ def _optimize_service(service, boxes, drone_types, seg, rho):
                 dp[nm] = cand
 
     if dp[full] is None:
-        raise RuntimeError(
-            f"服务区 {service} 在 rho={rho:.2%} 下不存在可行组批"
-        )
+        raise RuntimeError(f"服务区 {service} 在 rho={rho:.2%} 下不存在可行组批")
     return dp[full]
 
 
@@ -224,10 +258,8 @@ def solve_q1(
     load_rows = []
     for sid, seg in segs.items():
         row = {"服务区编号": sid}
-        for g in ("A", "B", "C"):
-            row[f"{g}型最大安全载荷（kg）"] = max_safe_payload(
-                drones[g], seg, rho
-            )
+        for g in sorted(drones):
+            row[f"{g}型最大安全载荷（kg）"] = max_safe_payload(drones[g], seg, rho)
             row[f"{g}型空载可达"] = row[f"{g}型最大安全载荷（kg）"] is not None
         load_rows.append(row)
 
@@ -255,20 +287,12 @@ def solve_q1(
         parts = []
         for c in sol[3]:
             mask, _, _, _, _, _, _ = c
-            batch = [
-                bs[i]
-                for i in range(len(bs))
-                if (mask >> i) & 1
-            ]
+            batch = [bs[i] for i in range(len(bs)) if (mask >> i) & 1]
             first_n = sum(b.first for b in batch)
             priority_sum = sum(b.priority for b in batch)
-            parts.append(
-                (first_n, priority_sum, c, batch)
-            )
+            parts.append((first_n, priority_sum, c, batch))
 
-        parts.sort(
-            key=lambda x: (-x[0], -x[1], -x[2][4])
-        )
+        parts.sort(key=lambda x: (-x[0], -x[1], -x[2][4]))
 
         for k, (_, _, c, batch) in enumerate(parts, 1):
             _, g, e, t, mass, volume, soc = c
@@ -277,9 +301,7 @@ def solve_q1(
                     "架次编号": f"Q1-{sid}-{k:02d}",
                     "服务区编号": sid,
                     "机型编号": g,
-                    "货箱编号列表": ",".join(
-                        b.id for b in batch
-                    ),
+                    "货箱编号列表": ",".join(b.id for b in batch),
                     "总质量（kg）": mass,
                     "总体积（m³）": volume,
                     "往返时间（s）": t,
@@ -322,7 +344,7 @@ def solve_q1(
                 "最少往返架次数": trips,
                 "总运输能耗（kWh）": energy,
                 "累计作业时间（s）": op_time,
-                "累计作业时间（h）": op_time / 3600.0,
+                "累计作业时间（h）": op_time / SECONDS_PER_HOUR,
                 "需分批服务区": ",".join(split),
             }
         )
@@ -333,9 +355,20 @@ def solve_q1(
         encoding="utf-8-sig",
     )
 
-    logging.getLogger(__name__).info("Q1: %s trips, %.6f kWh, %.3f s", len(result_df),
-        result_df["架次能耗（kWh）"].sum(), result_df["往返时间（s）"].sum())
-    write_json(out_dir / "Q1_metrics.json", {"reserve_fraction": rho, "trips": len(result_df),
-        "energy_kwh": float(result_df["架次能耗（kWh）"].sum()),
-        "operation_time_s": float(result_df["往返时间（s）"].sum())})
+    logging.getLogger(__name__).info(
+        "Q1: %s trips, %.6f kWh, %.3f s",
+        len(result_df),
+        result_df["架次能耗（kWh）"].sum(),
+        result_df["往返时间（s）"].sum(),
+    )
+    write_json(
+        out_dir / "Q1_metrics.json",
+        {
+            "reserve_fraction": rho,
+            "trips": len(result_df),
+            "energy_kwh": float(result_df["架次能耗（kWh）"].sum()),
+            "operation_time_s": float(result_df["往返时间（s）"].sum()),
+        },
+    )
+    save_provenance(root, out_dir)
     return result_df
