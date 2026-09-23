@@ -164,7 +164,7 @@ def validate_transport(trips, deliveries, question, physics, boxes, drones, batt
 
 
 def validate_relays(rows, physics, relay_inputs, communication):
-    from src.q3.solver import relay_travel
+    from src.core.communication import relay_travel
 
     spec = relay_inputs.spec
     by_id = {}

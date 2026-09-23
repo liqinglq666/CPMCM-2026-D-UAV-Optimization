@@ -8,7 +8,6 @@ from historical outputs. Exactness is conditional on those discrete decisions.
 from collections import Counter, defaultdict
 import json
 import logging
-import math
 from pathlib import Path
 
 import numpy as np
@@ -18,99 +17,15 @@ from src.config import (
     COMMUNICATION_STEP_S,
     RELAY_GUARD_S,
     Q3_PLAN,
-    TERRAIN_CLEARANCE_M,
     SECONDS_PER_HOUR,
-    FEASIBILITY_TOL,
 )
 from src.core.inputs import load_inputs, load_relay_inputs, load_communication_inputs
-from src.core.energy import charge_time, energy_feasible, flight_time
-from src.core.numeric import positive
+from src.core.energy import charge_time, energy_feasible
 from src.core.physics import Physics
 from src.core.routes import evaluate_route, route_is_energy_feasible
-from src.core.terrain import horizontal_distance
 from src.core.io import write_csv, write_json
 from src.core.provenance import save_provenance
-from .communication import link_available, relay_sortie_energy
-
-
-class Communication:
-    def __init__(self, physics, parameters):
-        self.physics, self.parameters = physics, parameters
-        origin = physics.nodes["O01"]
-        self.gateway = (origin.lon, origin.lat, origin.elev + parameters.gateway_agl_m)
-
-    def link(self, first, second, budget):
-        terrain = self.physics.terrain
-        return link_available(
-            first,
-            second,
-            self.parameters.frequency_mhz,
-            budget,
-            self.parameters.obstruction_loss_db,
-            terrain,
-            terrain.dem,
-        )
-
-
-def sample_states(profile, physics, step_s=COMMUNICATION_STEP_S):
-    """Include both ends of every climb/cruise/descent/handover phase."""
-    positive(step_s, "communication step_s")
-    for phase, start, end, source, target, z0, z1, _distance in profile.phases:
-        count = max(1, math.ceil((end - start) / step_s))
-        first, second = physics.nodes[source], physics.nodes[target]
-        for index in range(count + 1):
-            fraction = index / count
-            if phase == "cruise":
-                # Same horizontal straight segment as DEM extraction.
-                lon = first.lon + (second.lon - first.lon) * fraction
-                lat = first.lat + (second.lat - first.lat) * fraction
-            else:
-                node = second if phase == "descent" else first
-                lon, lat = node.lon, node.lat
-            yield (
-                start + (end - start) * fraction,
-                (lon, lat, z0 + (z1 - z0) * fraction),
-            )
-
-
-def relay_travel(physics, spec, point):
-    origin = physics.nodes["O01"]
-    start = (origin.lon, origin.lat, origin.elev)
-    elevation = physics.terrain.elevation(*point[:2])
-    agl = point[2] - elevation
-    if not 0 <= agl <= spec.max_hover_agl_m + FEASIBILITY_TOL:
-        raise ValueError(f"Relay hover AGL out of bounds: {agl}")
-    distance = horizontal_distance(start, point)
-    # A relay can hover above the terrain-clearance altitude: cruise must also
-    # reach its selected hover altitude. This endpoint rule is explicit.
-    cruise = max(
-        physics.terrain.maximum(start, point) + TERRAIN_CLEARANCE_M, start[2], point[2]
-    )
-    climb, descent = cruise - start[2], cruise - point[2]
-    outbound = flight_time(
-        distance,
-        climb,
-        descent,
-        spec.cruise_speed_mps,
-        spec.climb_speed_mps,
-        spec.descent_speed_mps,
-    )
-    inbound = flight_time(
-        distance,
-        descent,
-        climb,
-        spec.cruise_speed_mps,
-        spec.climb_speed_mps,
-        spec.descent_speed_mps,
-    )
-    # The UAV is airborne during link setup, so include hover + radio power.
-    energy = relay_sortie_energy(spec, distance, climb, descent, spec.link_setup_s)
-    return dict(
-        outbound=outbound,
-        inbound=inbound,
-        lead=spec.prep_s + outbound + spec.link_setup_s,
-        fixed_energy=energy,
-    )
+from src.core.communication import Communication, sample_states, relay_travel
 
 
 def prepare_plan(plan, physics, box_map, drones, batteries, relay_inputs, comm, step_s):
