@@ -12,6 +12,15 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 
+TRANSPORT_FULL_CHARGE = {
+    "A": 1800.0,
+    "B": 2400.0,
+    "C": 3000.0,
+}
+RELAY_TURNAROUND = 300.0
+RELAY_FULL_CHARGE = 1800.0
+
+
 def read_csv(path: Path):
     with path.open("r", encoding="utf-8-sig", newline="") as f:
         return list(csv.DictReader(f))
@@ -19,6 +28,16 @@ def read_csv(path: Path):
 
 def intervals_overlap(a0, a1, b0, b1, eps=1e-9):
     return max(a0, b0) < min(a1, b1) - eps
+
+
+def recharge_time(full_charge: float, soc_percent: float) -> float:
+    """Two-stage recharge rule used in Q2/Q3."""
+    s = max(0.0, min(1.0, soc_percent / 100.0))
+    if s < 0.90:
+        return full_charge * (
+            0.65 * (0.90 - s) / 0.90 + 0.35
+        )
+    return full_charge * 0.35 * (1.0 - s) / 0.10
 
 
 def check_no_overlap(rows, resource_key, start_key, end_key, label):
@@ -36,6 +55,41 @@ def check_no_overlap(rows, resource_key, start_key, end_key, label):
             ):
                 problems.append(
                     (label, resource, left[2], right[2])
+                )
+    return problems
+
+
+def check_transport_battery_reuse(rows):
+    groups = defaultdict(list)
+    for r in rows:
+        drone_type = r["机型编号"]
+        end = float(r["返回O01时刻_s"])
+        recharge_end = end + recharge_time(
+            TRANSPORT_FULL_CHARGE[drone_type],
+            float(r["返航SOC_pct"]),
+        )
+        groups[r["电池编号"]].append(
+            (
+                float(r["开始时刻_s"]),
+                recharge_end,
+                r["架次编号"],
+            )
+        )
+
+    problems = []
+    for battery, items in groups.items():
+        items.sort()
+        for left, right in zip(items, items[1:]):
+            if intervals_overlap(
+                left[0], left[1], right[0], right[1]
+            ):
+                problems.append(
+                    (
+                        "transport battery reuse before full recharge",
+                        battery,
+                        left[2],
+                        right[2],
+                    )
                 )
     return problems
 
@@ -108,16 +162,23 @@ def main():
             "transport UAV overlap",
         )
     )
+    errors.extend(check_transport_battery_reuse(q3_trips))
 
     q3_relay = read_csv(
         root / "q3" / "Q3_relay_sorties.csv"
     )
+    relay_by_id = {
+        r["中继架次编号"]: r
+        for r in q3_relay
+    }
+
     relay_groups = defaultdict(list)
     for r in q3_relay:
         relay_groups[r["中继无人机编号"]].append(
             (
                 float(r["开始时刻_s"]),
-                float(r["返回O01时刻_s"]) + 300.0,
+                float(r["返回O01时刻_s"])
+                + RELAY_TURNAROUND,
                 r["中继架次编号"],
             )
         )
@@ -145,27 +206,50 @@ def main():
     q3_comm = read_csv(
         root / "q3" / "Q3_communication.csv"
     )
-    relay_ids = {
-        r["中继架次编号"]
-        for r in q3_relay
-    }
+    relay_ids = set(relay_by_id)
     trip_ids = {
         r["架次编号"]
         for r in q3_trips
     }
+
+    if len(q3_comm) != len(q3_trips):
+        errors.append(
+            f"Q3 communication rows != transport trips: "
+            f"{len(q3_comm)} vs {len(q3_trips)}"
+        )
+
     for r in q3_comm:
-        if r["运输架次编号"] not in trip_ids:
+        trip_id = r["运输架次编号"]
+        if trip_id not in trip_ids:
             errors.append(
                 "Unknown Q3 transport trip in communication table: "
-                + r["运输架次编号"]
+                + trip_id
             )
-        if (
-            r["保障方式"] == "中继"
-            and r["中继架次编号"] not in relay_ids
-        ):
-            errors.append(
-                f"Unknown relay sortie: {r['中继架次编号']}"
-            )
+
+        if r["保障方式"] == "中继":
+            relay_id = r["中继架次编号"]
+            if relay_id not in relay_ids:
+                errors.append(
+                    f"Unknown relay sortie: {relay_id}"
+                )
+                continue
+
+            relay = relay_by_id[relay_id]
+            comm_start = float(r["开始时刻_s"])
+            comm_end = float(r["结束时刻_s"])
+            relay_start = float(relay["建链完成时刻_s"])
+            relay_end = float(relay["服务结束时刻_s"])
+
+            if comm_start < relay_start - 1e-8:
+                errors.append(
+                    f"Relay service starts too late: "
+                    f"{trip_id} -> {relay_id}"
+                )
+            if comm_end > relay_end + 1e-8:
+                errors.append(
+                    f"Relay service ends too early: "
+                    f"{trip_id} -> {relay_id}"
+                )
 
     q4 = read_csv(
         root / "q4" / "Q4_resource_summary.csv"
