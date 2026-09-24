@@ -6,10 +6,21 @@ from pathlib import Path
 import json
 import hashlib
 import csv
+import sys
 import pandas as pd
 from paper_data import load_analysis
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from src.config import (
+    MAX_ROUTE_SERVICES,
+    TARDINESS_SCALE,
+    MAKESPAN_SCALE,
+    ENERGY_SCALE,
+    RELAY_GUARD_S,
+)
+from src.q4.partition import canonical_partitions
+
 DATA = ROOT / "paper/data"
 RESULTS = ROOT / "results"
 TABLES = ROOT / "paper/tables"
@@ -26,6 +37,9 @@ partition = pd.read_csv(RESULTS / "q4/Q4_partition_config.csv")
 resources = pd.read_csv(RESULTS / "q4/Q4_resource_summary.csv")
 c = pd.read_csv(DATA / "constraint_slacks.csv")
 m = a["metrics"]
+validation = json.loads((RESULTS / "validation.json").read_text(encoding="utf-8"))
+atom_count = validation["q4"]["atomic_groups"]
+capacity_scenarios = pd.read_csv(DATA / "payload_reserve.csv")
 macros = {
     "NumBoxes": str(len(a["boxes"])),
     "NumServices": str(len(a["nodes"]) - 1),
@@ -65,6 +79,20 @@ macros = {
     "CRestricted": str(
         (payload["C型最大安全载荷（kg）"] < a["types"]["C"]["max_payload"] - 1e-8).sum()
     ),
+    "CandidateCount": str(len(frontier)),
+    "CandidateMaxTrips": str(int(frontier.trips.max())),
+    "CandidateMinTrips": str(int(frontier.trips.min())),
+    "AtomicGroups": str(atom_count),
+    "PartitionsTwo": str(sum(1 for _ in canonical_partitions(atom_count, 2))),
+    "PartitionsThree": str(sum(1 for _ in canonical_partitions(atom_count, 3))),
+    "ReserveGridCount": str(capacity_scenarios.reserve.nunique()),
+    "CapacityCaseCount": str(len(capacity_scenarios)),
+    "BatchScenarioCount": str(len(sensitivity)),
+    "MaxRouteServices": str(MAX_ROUTE_SERVICES),
+    "MergeLateScale": f"{TARDINESS_SCALE:g}",
+    "MergeTimeScale": f"{MAKESPAN_SCALE:g}",
+    "MergeEnergyScale": f"{ENERGY_SCALE:g}",
+    "RelayGuard": f"{RELAY_GUARD_S:g}",
 }
 (TABLES / "numbers.tex").write_text(
     "% Auto-generated; never edit numbers here.\n"
@@ -169,6 +197,19 @@ table(
             f"{r.weighted_tardiness:.1f}",
         ]
         for r in frontier.itertuples()
+    ],
+)
+table(
+    "q2_selection",
+    ["架次", "能耗 / kWh", "完工 / s", "加权延误 / 系数·s"],
+    [
+        [
+            int(r.trips),
+            f"{r.energy:.3f}",
+            f"{r.makespan:.1f}",
+            f"{r.weighted_tardiness:.1f}",
+        ]
+        for r in frontier[abs(frontier.trips - m["q2"]["trips"]) <= 1].itertuples()
     ],
 )
 table(

@@ -34,5 +34,19 @@
   "TimeIncrease": "15.92",
   "CMinPayload": "58.91",
   "BMinPayload": "28.80",
-  "CRestricted": "5"
+  "CRestricted": "5",
+  "CandidateCount": "8",
+  "CandidateMaxTrips": "24",
+  "CandidateMinTrips": "17",
+  "AtomicGroups": "4",
+  "PartitionsTwo": "7",
+  "PartitionsThree": "6",
+  "ReserveGridCount": "61",
+  "CapacityCaseCount": "2745",
+  "BatchScenarioCount": "5",
+  "MaxRouteServices": "5",
+  "MergeLateScale": "200000",
+  "MergeTimeScale": "10000",
+  "MergeEnergyScale": "100",
+  "RelayGuard": "5"
 }

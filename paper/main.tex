@@ -2,7 +2,9 @@
 % Exact model version/release date must be confirmed from the team's interface.
 \documentclass[UTF8,zihao=-4,fontset=fandol,a4paper]{ctexart}
 \usepackage[left=25mm,right=25mm,top=23mm,bottom=23mm]{geometry}
-\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{unicode-math}
+\setmathfont{Latin Modern Math}
 \usepackage{graphicx,booktabs,longtable,tabularx,array}
 \usepackage{caption,float,placeins,enumitem}
 \usepackage[hidelinks]{hyperref}
@@ -39,11 +41,11 @@
 \input{sections/04_q1}
 \input{sections/05_q2}
 \input{sections/06_q3}
-\input{sections/07_sensitivity}
-\input{sections/08_validation}
-\input{sections/09_partition}
+\input{sections/07_q4}
+\input{sections/08_sensitivity}
+\input{sections/09_validation}
 \input{sections/10_conclusion}
-\FloatBarrier
+\clearpage
 \input{references}
 \clearpage
 \appendix
