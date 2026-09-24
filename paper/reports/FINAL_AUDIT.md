@@ -8,14 +8,18 @@
 | Code-result consistency | PASS | 24 文件对比、1723 单元格、34 个实际使用数字宏 |
 | Figure reproducibility | PASS | 同输入九图重新生成，PNG 哈希一致 |
 | Figure scientific quality | PASS | 九份契约、严格机械 QC 和逐图科学判断 |
-| Typography | PASS | 中文模板口径、三线表、完整字体映射、跨页附录、19 页排版 |
+| Typography | PASS（兼容版）/ WARNING（原生文字版） | 中文模板口径、三线表、完整字体映射、跨页附录、19 页排版 |
 | Result interpretation | PASS | 区分累计作业/完工时间、启发式/精确、条件 LP/原问题 |
 | Sensitivity analysis | PASS | 2745 能力场景、五个精确组批场景、固定能量阈值 |
 | Validation | PASS | 官方全流程、100 测试、独立几何反例、0.5 s 细化 |
 | Citation integrity | PASS | 七条书目信息以原始/官方来源核验，无编造 DOI |
 | Final PDF visual inspection | PASS | 19 页逐页检查，修正图漂移、超宽公式与残余尾页 |
 
-## 2026-09-24 字体兼容性更正
+## 2026-09-24 用户端仍失败后的处理
+
+用户截图显示映射修复后仍缺失中文，不能继续宣称原生文字版在其环境已修好。新增字体无关的矢量轮廓 PDF，19 页均为零字体、零栅格图，PDF.js 禁用系统字体和 FontFace 后全部页面仍完成绘制；逐页检查正文、公式与科研图。该版无法直接搜索/复制正文或供屏幕阅读器使用，LaTeX 和原生可检索 PDF 单独保留。机器证据见 `outlined_compatibility.json`。
+
+## 2026-09-24 字体映射修复历史
 
 此前的排版 PASS 只覆盖特定渲染器，漏检中文字体 ToUnicode 映射，不能据此确认跨阅读器兼容。现已复现 PDF.js 无外部 CMap 时的中文缺失和 pypdf 乱码；为三种 Fandol 字体显式嵌入 Adobe GB1 映射，加入发布前字体/中文检查和三项回归测试。30 个字体对象均嵌入且有 Unicode 映射，19 页通过中文提取及页面复查，修复前后 MuPDF 像素完全相同。详情见 `FONT_COMPATIBILITY.md`。
 

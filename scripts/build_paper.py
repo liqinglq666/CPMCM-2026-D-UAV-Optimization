@@ -16,6 +16,11 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--skip-figures", action="store_true")
+    parser.add_argument(
+        "--compatible",
+        action="store_true",
+        help="Also export a vector outlined PDF; requires Ghostscript",
+    )
     args = parser.parse_args()
     subprocess.run(
         [sys.executable, str(ROOT / "scripts/generate_paper_tables.py")],
@@ -53,6 +58,10 @@ def main():
         staged_pdf = Path(staging) / "main.pdf"
         embed_cjk_unicode(staged_pdf, ROOT / "paper/fonts/cmaps/Adobe-GB1-UCS2")
         audit_pdf(staged_pdf)
+        if args.compatible:
+            from export_compatible_pdf import export_compatible
+
+            export_compatible(staged_pdf, Path(staging) / "main-compatible.pdf")
         for artifact in Path(staging).iterdir():
             artifact.replace(out / artifact.name)
     print(out / "main.pdf")

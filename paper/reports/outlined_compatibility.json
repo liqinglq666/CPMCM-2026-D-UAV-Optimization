@@ -1,0 +1,233 @@
+{
+  "date": "2026-09-24",
+  "mode": "vector outlines, no fonts",
+  "native_pdf_sha256": "5ab3ec6dcf4359c214a1d2891f1410689f7a4a725333f57a3f41cd9814ee5c4c",
+  "compatible_pdf_sha256": "4adc731170d01600ca62d4578c7f0842963001b1dfb887447d8475123e705903",
+  "ghostscript_version": "10.02.1",
+  "pages": 19,
+  "fonts": 0,
+  "raster_images": 0,
+  "text_search_copy": false,
+  "tests_passed": 100,
+  "visual_comparison": [
+    {
+      "page": 1,
+      "original_ink_covered": 0.9997560640941593,
+      "new_ink_matches": 0.9999232351767127,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 2,
+      "original_ink_covered": 0.9996379262703547,
+      "new_ink_matches": 0.999942692862396,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 3,
+      "original_ink_covered": 0.9997707158251937,
+      "new_ink_matches": 0.9999078723110231,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 4,
+      "original_ink_covered": 0.9998586941162404,
+      "new_ink_matches": 0.9999564834256247,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 5,
+      "original_ink_covered": 0.9996994845003352,
+      "new_ink_matches": 0.9999185051516386,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 6,
+      "original_ink_covered": 0.9995694140442786,
+      "new_ink_matches": 1.0,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 7,
+      "original_ink_covered": 0.9998443246609197,
+      "new_ink_matches": 0.999961256828484,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 8,
+      "original_ink_covered": 0.9997487351097,
+      "new_ink_matches": 0.999850855857923,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 9,
+      "original_ink_covered": 0.9996587580689499,
+      "new_ink_matches": 0.9998953825669313,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 10,
+      "original_ink_covered": 0.9998644090778123,
+      "new_ink_matches": 1.0,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 11,
+      "original_ink_covered": 0.9997215577577806,
+      "new_ink_matches": 0.9999107734665783,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 12,
+      "original_ink_covered": 0.999434478404966,
+      "new_ink_matches": 0.9999605496745348,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 13,
+      "original_ink_covered": 0.999559353001236,
+      "new_ink_matches": 0.9999351666756713,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 14,
+      "original_ink_covered": 0.9996237993910253,
+      "new_ink_matches": 0.9999765128650782,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 15,
+      "original_ink_covered": 0.9991043333765454,
+      "new_ink_matches": 0.9999882434545433,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 16,
+      "original_ink_covered": 0.9998384752059442,
+      "new_ink_matches": 1.0,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 17,
+      "original_ink_covered": 1.0,
+      "new_ink_matches": 1.0,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 18,
+      "original_ink_covered": 1.0,
+      "new_ink_matches": 1.0,
+      "fonts": 0,
+      "raster_images": 0
+    },
+    {
+      "page": 19,
+      "original_ink_covered": 0.9996417559078289,
+      "new_ink_matches": 0.9998980748894749,
+      "fonts": 0,
+      "raster_images": 0
+    }
+  ],
+  "pdfjs": {
+    "engine": "PDF.js",
+    "version": "5.6.205",
+    "system_fonts": false,
+    "font_face": false,
+    "external_cmaps": false,
+    "pages": [
+      {
+        "page": 1,
+        "nonwhite_pixels": 66814
+      },
+      {
+        "page": 2,
+        "nonwhite_pixels": 107863
+      },
+      {
+        "page": 3,
+        "nonwhite_pixels": 89211
+      },
+      {
+        "page": 4,
+        "nonwhite_pixels": 92985
+      },
+      {
+        "page": 5,
+        "nonwhite_pixels": 88469
+      },
+      {
+        "page": 6,
+        "nonwhite_pixels": 56347
+      },
+      {
+        "page": 7,
+        "nonwhite_pixels": 107620
+      },
+      {
+        "page": 8,
+        "nonwhite_pixels": 90434
+      },
+      {
+        "page": 9,
+        "nonwhite_pixels": 107771
+      },
+      {
+        "page": 10,
+        "nonwhite_pixels": 61299
+      },
+      {
+        "page": 11,
+        "nonwhite_pixels": 81129
+      },
+      {
+        "page": 12,
+        "nonwhite_pixels": 78038
+      },
+      {
+        "page": 13,
+        "nonwhite_pixels": 94991
+      },
+      {
+        "page": 14,
+        "nonwhite_pixels": 86480
+      },
+      {
+        "page": 15,
+        "nonwhite_pixels": 87060
+      },
+      {
+        "page": 16,
+        "nonwhite_pixels": 45073
+      },
+      {
+        "page": 17,
+        "nonwhite_pixels": 47954
+      },
+      {
+        "page": 18,
+        "nonwhite_pixels": 38191
+      },
+      {
+        "page": 19,
+        "nonwhite_pixels": 80270
+      }
+    ]
+  },
+  "interpretation": "Mapping repair was insufficient in the user previewer. This output removes font loading from rendering and preserves the native searchable PDF separately."
+}

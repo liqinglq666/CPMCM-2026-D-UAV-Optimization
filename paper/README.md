@@ -54,3 +54,18 @@ python scripts/verify_paper.py --workbook outputs/submission/D_results.xlsx --te
 见 `reports/FINAL_AUDIT.md`、`VALIDATION.md`、`CONSISTENCY.md`、`FIGURE_QC.md` 和 `CITATIONS.md`。PDF 为匿名主体；身份封面及本次 AI 精确版本、发布日期须由参赛队提供。不得把候选计划或采样通过理解为实际飞行安全认证。
 
 2026-09-24 已修复旧版中文乱码，详见 `reports/FONT_COMPATIBILITY.md`。正文与九张科研图保持原排版，修复后的 19 页渲染像素与原稿相同。
+
+## 字体无关的显示兼容版（2026-09-24）
+
+用户反馈表明，补齐 ToUnicode 后其实际预览器仍丢失中文。原生文字版的该环境兼容性尚未解决。因此额外提供全矢量转曲版：
+
+```bash
+python scripts/build_paper.py --compatible
+# 已有验证过的正文 PDF 时，只需转换，不必重新计算或排版：
+python scripts/export_compatible_pdf.py
+```
+
+需要安装 Ghostscript（Linux/macOS 的 `gs`，Windows 的 `gswin64c` 或 `gswin32c`）。
+`outputs/paper/main-compatible.pdf` 是显示/打印兼容版，字形转为矢量轮廓，零字体资源、零页面栅格图；保持 19 页、官方排版和科研图形。正文无法直接搜索、复制或被屏幕阅读器读取。
+`outputs/paper/main.pdf` 保留文字与 Unicode 映射，供提取核验；LaTeX 源文件继续用于编辑。数值验证器检查此原生文字版，兼容版另外检查页面与图形。
+详见 `reports/OUTLINED_COMPATIBILITY.md`，不能把某个渲染器上的 PASS 当成用户端已解决的证据。
