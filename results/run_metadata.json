@@ -1,11 +1,11 @@
 {
   "solver_runtime_s": {
-    "Q1": 76.62627523999981,
-    "Q2": 4.878065864002565,
-    "Q3": 44.93886103100158,
-    "Q4": 0.07298656800048775
+    "Q1": 85.41103393699814,
+    "Q2": 5.513708967002458,
+    "Q3": 110.67717271999936,
+    "Q4": 0.07585317499979283
   },
-  "validation_runtime_s": 6.211495847001061,
+  "validation_runtime_s": 14.40510148100293,
   "python": "3.12.14",
   "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
   "numpy": "2.3.5",
@@ -26,7 +26,8 @@
     "src/core/physics.py": "36b58299dbdf77d62b1408a6fb26366860fdee938e8d650bed28f877712d362d",
     "src/core/provenance.py": "5b226b6cbe9f1d3744cab59a53e80fa2ba1bf2dea8c557095e37e4603392db4a",
     "src/core/routes.py": "716aedafd42b4769390c292bececb09a00674d9aa716786b09e85aa52b2dded7",
-    "src/core/search_config.py": "58b7fcdba2daa6c6dce91e75edfc22c826d7881ecc42a31a0904cb14b0f841d9",
+    "src/core/sampling.py": "188983ef81c12306bc997ca3b08e6dc150c93ca3cc15ab4a0dea99dcfc33153d",
+    "src/core/search_config.py": "078b91dad3f07e60d7ec722d5cd0ffb01ea65d1ea3c45cf96f18c06609507503",
     "src/core/terrain.py": "e6c89a7c35ef3600284bed34bcbbf30267d0ad285a298433b34ddd593f2ad164",
     "src/q1/__init__.py": "2c036d2aff49c24e049486d8b8d4885eb40f97bc0e827086f649ffcd561993ca",
     "src/q1/physics_engine.py": "997747a02f4fac4440d5c7139ebb0e7d48ac5bca72edafea4429171975b7748b",
@@ -36,14 +37,15 @@
     "src/q2/tradeoff.py": "cfdf0e093bc44f119d3110c72e3f08c9edb2880fa5a5c246ada88482c5331668",
     "src/q3/__init__.py": "a152947de949d73a6b3400facbe1f65a571a569fd60d02d46b7849c01c2686d9",
     "src/q3/communication.py": "9b4d1fcef45a71edfbb738d5245ed2aba86f4f3d83be4625085243b0967c74e5",
-    "src/q3/preparation.py": "876ee2dea631841b8a3bf8eb4efe08428bd813d45fe218eb0e9ba010ea1bb621",
-    "src/q3/search.py": "e9d5a90f725b16136e10d4ac28a586a7fcb385156388658fdd02a756533b8b35",
-    "src/q3/solver.py": "e5a0257c8a7dc215aecbe20ec8ccc73e3edce035ea81401e4741c8df2160c345",
+    "src/q3/preparation.py": "08a88c703a0788188184400e8d74b94b6950699947ca9d5954e26fc68d394f44",
+    "src/q3/search.py": "1e763f96b4621595fb492fc90a21d7211c6a226b5f38bc43d673db8f04cca2b5",
+    "src/q3/seed_repair.py": "3101e7ffcb99872fe023c5e2dc1921a7246a892ff727760bee4d2339d79ab8af",
+    "src/q3/solver.py": "df98768e984d131f1f1bdaa783cfbae88d9d2dac8fa42dded6d505682b679d3c",
     "src/q4/__init__.py": "e515ef2dfc007025eecc3f5ba308e6b43f0343fc64b0d1808ff493cda3f29f9d",
     "src/q4/partition.py": "a3b02c80ff2dd8578762dd1f106f47f8a996b78467ab0352500381faaf535eaa",
     "src/q4/provenance.py": "81031a0529464d7f6647364efff0307a70f461def2d0e9f87dcac40b685cd91c",
-    "src/validation.py": "ed8bf11a4bc783ff495ad72d5fb153cd81538b92ec15b20d05d69a4df8253bb6",
-    "config/q3_plan.json": "6e555794357e50ffb74fdcee6d1fd3be47b1d757b79f29483c994a77474c451d",
-    "config/search.json": "578c62c61af7dbff4d9e00e6b975f15917fd2221133db3c7bac742b55f20e03c"
+    "src/validation.py": "155cdb376b5fbe9bc9cffdb33fd60c82fbe356387adeb8b9cc21755e0de2c3aa",
+    "config/q3_plan.json": "1a27bbe50c67f30ed97cf6d020e2dac55d3f114da0bfbd809a35c5679aa153da",
+    "config/search.json": "4ab6b0ea0c1eb623293fecd1e9480505962e67e365d0a62f4d74492228713a98"
   }
 }

@@ -52,16 +52,16 @@ Q1 默认读取每个机型的官方返航余量；`python run_q1.py --rho 0.25`
 
 Q2 先重建原合并链作为可行种子，再搜索货箱迁移/交换/合并/拆分、destroy-repair、路线顺序、机型、实体无人机、电池和执行顺序。默认在硬截止零违反条件下按加权延误、架次数、makespan、能耗词典序选择；`--target-trips 22` 可显式限制所选架次数。`Q2_tradeoff_frontier.csv` 保留每种架次数的一个代表方案；真正的“已发现非支配解集”为 `Q2_pareto_frontier.csv`，其全部方案可重放并接受独立校验。
 
-Q3 的 `config/q3_plan.json` 是明确的初始可行解，不是最终答案。外层对运输分组、路线、型号、无人机、电池、中继点/高度、运输—中继匹配、中继合并/拆分和资源顺序做固定种子的离散搜索；内层 HiGHS LP 优化连续时序。组件复用时，外层选择官方分段充电函数的分支，LP 精确表达该分支的充电占用。每个可行候选均通过完整 1 s 空间通信预检、时间窗和资源校验；最终再独立重算通信。目标严格按硬截止零违反、通信零违反、加权延误、联合 makespan、联合能耗、中继架次数/服务时长排序。外层是启发式，LP 精确性只对给定离散方案和充电分支成立。
+Q3 的 `config/q3_plan.json` 是来源明确的离散初始解，不是最终答案；当前种子来自修复前正式方案，已知有一个0.5 s通信反例，必须先由有界中继位置枚举与条件LP修复，修复失败即退出。外层对运输分组、路线、型号、无人机、电池、中继点/高度、运输—中继匹配、中继合并/拆分和资源顺序做固定种子的离散搜索；内层 HiGHS LP 优化连续时序。组件复用时，外层选择官方分段充电函数的分支，LP 精确表达该分支的充电占用。每个可行候选均通过1 s与0.5 s网格并集的空间通信预检、时间窗和资源校验；最终再独立重算通信。目标严格按硬截止零违反、通信零违反、加权延误、联合 makespan、联合能耗、中继架次数/服务时长排序。外层是启发式，LP 精确性只对给定离散方案和充电分支成立。
 
 `config/search.json` 只保存种子、迭代预算和候选点生成参数。默认固定种子 20260924，Q2/Q3 分别执行 20000/5000 次邻域尝试；每次尝试、best-so-far、停止原因和运行时间均保存。所有解由官方输入重新计算，不读取历史结果充当求解。`results/q3/Q3_selected_plan.json` 是可重放的输出，不写回初始配置。Q4 继承最终 Q3，并记录任务/通信/资源文件指纹；枚举和库存口径不变。复现命令与环境版本见验证报告。
 
-通信逐阶段采样间隔不超过 1 s，中继窗口前后各留 5 s。DEM 净空与视线共用像元闭边界遍历：边界两侧、角点相接的像元均纳入，采用较高地形的保守约定，不再对坐标取整缓存。**离散采样仍不构成连续时间通信的解析证明。** 建链时无人机已在空中，因此其悬停及通信能耗计入中继能耗。
+通信保留逐阶段1 s与0.5 s两组非嵌套采样的并集，中继窗口前后各留 5 s。DEM 净空与视线共用像元闭边界遍历：边界两侧、角点相接的像元均纳入，采用较高地形的保守约定，不再对坐标取整缓存。**离散采样仍不构成连续时间通信的解析证明。** 建链时无人机已在空中，因此其悬停及通信能耗计入中继能耗。
 
 ## 项目结构
 
 ```text
-config/q3_plan.json              可解释的初始可行解，不含时刻/能耗结果
+config/q3_plan.json              可解释的离散初始解；须修复并重算，不含时刻/能耗结果
 config/search.json               固定种子、迭代预算和邻域参数
 src/config.py                   赛题规则、单位常数、算法参数
 src/core/                       官方输入、模型、地形、物理、路线、约束、I/O、溯源
@@ -73,7 +73,7 @@ src/core/discrete.py             共享运输邻域与固定资源顺序的精�
 src/core/communication.py        双向链路预算、中继物理与通信状态采样
 src/q3/communication.py          旧导入路径的兼容导出
 src/q3/solver.py                 给定离散方案的 HiGHS 联合时序 LP
-src/q3/preparation.py            真实物理与 1 s 通信预检、精确坐标缓存
+src/q3/preparation.py            真实物理与双网格通信预检、精确坐标缓存
 src/q3/search.py                 运输/中继离散搜索与可行解保护
 src/q4/partition.py              固定任务的分区枚举
 src/validation.py               从官方数据重算结果
@@ -112,4 +112,13 @@ python scripts/build_paper.py
 
 原 `scripts/make_figures.py` 的六幅图已由统一图形流水线替代并删除。`docs/paper/` 中旧稿仅作历史资料。当前证据及适用边界见 [论文终审](paper/reports/FINAL_AUDIT.md)，AI 记录见 `docs/AI_USAGE.md`。
 
-2026-09-24 已在算法优化结果上重构12图并同步论文。**独立0.5 s回放发现Q3存在1个未覆盖状态（−0.154251 dB），虽然正式1 s检查通过，当前候选仍不能声称连续通信可行。** 默认分析命令会拒绝通过；显式 `--allow-diagnostic-failures` 仅导出反例用于如实作图。算法内核和正式结果保持不变，审计与证据见 `paper/reports/FINAL_AUDIT.md`。
+2026-09-24 通信修复已完成：原0.5 s回放的1个未覆盖状态（−0.154251 dB）保存在 `archive/baseline-2a98f09/`。候选搜索和独立验证均采用1 s与0.5 s网格并集，先修复失效中继再继续5000次搜索。最终方案在1 s、0.5 s及未参与搜索的0.25 s回放中均为0未覆盖，最低余量0.02877762 dB；这仍不是连续时间证明。Q1/Q2正式决策保持一致，Q3与Q4全量重算，论文与图件同步更新。对比见 [通信修复对比](results/communication_repair_comparison.csv)，审计见 [修复审计](docs/audit/communication-repair/REPORT.md)。
+
+额外独立回放与修复前后对比：
+
+```bash
+python scripts/replay_communication.py --out results/communication_replay.json
+python scripts/compare_algorithms.py --baseline archive/baseline-2a98f09/results --baseline-label before-communication-repair --baseline-replay archive/baseline-2a98f09/communication_replay.json --results-replay results/communication_replay.json --out results/communication_repair_comparison.csv
+```
+
+通信比较区分检查网格：历史1 s通过不能自动填写为0.5 s通过。正式结果中的 `checked_states` 是双网格精确并集去重后的数量；论文独立回放按单独网格计数，包含相位端点重复，二者不可直接相加比较。

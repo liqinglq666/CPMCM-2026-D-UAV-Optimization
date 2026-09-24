@@ -9,45 +9,53 @@
     "relay_grid_rows": 4,
     "relay_grid_columns": 5,
     "relay_local_step_m": 250.0,
+    "q3_repair_radius_factors": [
+      0.1,
+      0.25,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "q3_repair_combination_limit": 256,
     "description": "Search parameters only. q3_plan.json is an initial incumbent, never a certified optimum. Fixed iteration counts are used for reproducibility; physical constants come only from the official inputs and src/core."
   },
   "iterations": 5000,
   "stop_reason": "iteration_budget",
-  "runtime_s": 38.89796435699827,
-  "unique_candidates": 2830,
+  "runtime_s": 96.86817098699976,
+  "unique_candidates": 2771,
   "initial_objective": [
     0,
     0,
-    705087.61778932,
-    12789.446029897668,
-    86.71173216579213,
-    6,
-    13811.4174120724
+    122947.98606974377,
+    10724.855339336147,
+    94.21359092168173,
+    4,
+    13703.596030708288
   ],
   "best_objective": [
     0,
     0,
-    122946.61939725942,
-    10724.855339336147,
-    94.20654523163945,
+    83206.85503347215,
+    10782.35682424435,
+    86.57057650342196,
     4,
-    13701.397807176952
+    10548.755474204514
   ],
   "status_counts": {
-    "No feasible type for cargo/route": 681,
-    "Joint scheduling LP failed: The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)": 1743,
-    "feasible": 1031,
-    "No covering relay for repaired transport route": 379,
-    "Cannot split singleton": 56,
-    "No alternate visit order": 150,
-    "improved": 55,
-    "No alternate covering relay": 149,
-    "duplicate": 575,
-    "No relay service group to split": 23,
-    "Unavailable relay backhaul": 46,
-    "Outside the bounded route neighborhood": 4,
-    "Transport reserve violated": 29,
-    "Route cargo exceeds mass/volume capacity": 79
+    "Joint scheduling LP failed: The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)": 1765,
+    "feasible": 972,
+    "No feasible type for cargo/route": 663,
+    "No alternate visit order": 130,
+    "No covering relay for repaired transport route": 328,
+    "duplicate": 764,
+    "Cannot split singleton": 23,
+    "Unavailable relay backhaul": 39,
+    "No alternate covering relay": 159,
+    "improved": 33,
+    "Route cargo exceeds mass/volume capacity": 105,
+    "Transport reserve violated": 16,
+    "No relay service group to split": 1,
+    "Outside the bounded route neighborhood": 2
   },
   "operator_attempts": {
     "relocate": 278,
@@ -70,7 +78,11 @@
     "relay_charge_branch": 277
   },
   "communication_step_s": 1.0,
+  "communication_sampling_steps_s": [
+    1.0,
+    0.5
+  ],
   "continuous_time_proof": false,
   "exactness": "HiGHS timing conditional on discrete decisions and charging branches; outer search heuristic",
-  "spatial_candidate_count": 41
+  "spatial_candidate_count": 39
 }

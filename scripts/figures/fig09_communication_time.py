@@ -1,4 +1,4 @@
-"""Faithful minima at original times; reveal a missed state instead of smoothing it."""
+"""Faithful minima and a non-interpolated comparison of the two audit grids."""
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -33,6 +33,7 @@ fig, (ax, local, window) = plt.subplots(
     layout="constrained",
 )
 critical = fine.loc[fine.available_margin_db.idxmin()]
+critical_color = RED if critical.available_margin_db < 0 else LIGHT_BLUE
 rows = fine.loc[fine.groupby(np.floor(fine.time_s / 20)).available_margin_db.idxmin()]
 ax.scatter(rows.time_s / 60, rows.available_margin_db, s=12, fc=DIRECT, ec=INK, lw=0.2)
 ax.scatter(
@@ -40,7 +41,7 @@ ax.scatter(
     critical.available_margin_db,
     s=75,
     marker="*",
-    fc=RED,
+    fc=critical_color,
     ec=INK,
     lw=0.5,
     zorder=5,
@@ -59,7 +60,13 @@ key_note(
     xytext=(0.34, 0.95),
 )
 grid(ax, "y")
-panel(ax, "a", "1 s 检查通过，0.5 s 回放发现漏检状态")
+panel(
+    ax,
+    "a",
+    "加密回放通过，最紧链路余量仍较小"
+    if critical.available_margin_db >= 0
+    else "加密回放发现未覆盖状态",
+)
 vals = []
 for data, marker, color, label in [
     (coarse, "o", DIRECT, "1.0 s 采样"),
@@ -79,17 +86,25 @@ for data, marker, color, label in [
     )
     vals.extend(g.available_margin_db)
 local.scatter(
-    0, critical.available_margin_db, s=75, marker="*", fc=RED, ec=INK, lw=0.5, zorder=5
+    0,
+    critical.available_margin_db,
+    s=75,
+    marker="*",
+    fc=critical_color,
+    ec=INK,
+    lw=0.5,
+    zorder=5,
 )
 threshold(local, 0)
+span = max(max(vals) - min(vals), abs(critical.available_margin_db), 0.02)
 local.set(
     xlabel="相对最紧时刻 (s)",
     ylabel="链路余量 (dB)",
-    ylim=(min(-0.5, min(vals) - 0.15), max(vals) * 1.15 + 0.05),
+    ylim=(min(0.0, min(vals)) - span * 0.25, max(0.0, max(vals)) + span * 0.5),
 )
 fig.legend(*local.get_legend_handles_labels(), loc="outside upper center", ncol=2)
 grid(local, "y")
-panel(local, "b", f"{critical.trip}：遮挡突变可落在两次采样之间")
+panel(local, "b", f"{critical.trip}：两种网格独立复核最紧区间")
 for i, (_, row) in enumerate(r.iterrows()):
     begin, end = row["建链完成时刻_s"] / 60, row["服务结束时刻_s"] / 60
     window.barh(

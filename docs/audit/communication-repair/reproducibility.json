@@ -1,0 +1,117 @@
+{
+  "formal_files_identical": [
+    {
+      "path": "results/q1/Q1_batch_solution.csv",
+      "sha256": "a28c5e3eb7660ec0789969d122025445c61b67140d6bbb91f3a740423dece05c"
+    },
+    {
+      "path": "results/q1/Q1_leg_physics.csv",
+      "sha256": "1957936788eca03a6dd4d168053f023a7a212bf124b22bfe8f967a799e99f314"
+    },
+    {
+      "path": "results/q1/Q1_max_safe_payload.csv",
+      "sha256": "2c3decbfea44e95c1e77d84ce9db8c4f13581189774f930fd4e66ed7a8c1e023"
+    },
+    {
+      "path": "results/q1/Q1_metrics.json",
+      "sha256": "3df457b62741f0236f9cf2fd1d20918d9383fa2b645bf3a0c42fbe807145b7eb"
+    },
+    {
+      "path": "results/q1/Q1_sensitivity_summary.csv",
+      "sha256": "608793bfdea2401f95a0f0d1dca3fb62142e6324be0307f3b923a400f40e3d77"
+    },
+    {
+      "path": "results/q1/input_manifest.json",
+      "sha256": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12"
+    },
+    {
+      "path": "results/q2/Q2_box_delivery_balanced.csv",
+      "sha256": "3aad6300454e9652b033f0ded4d1bc5d88d192e4d15224608247c516dfff85c6"
+    },
+    {
+      "path": "results/q2/Q2_frontier_plans.json",
+      "sha256": "fe8ac41b5ea7beef7500609e8f1c7f4393bdf8c59e40a1380cb58f6652db5fc0"
+    },
+    {
+      "path": "results/q2/Q2_metrics.json",
+      "sha256": "70388c484e1b2ec5e405bd24d79feb1500527441a3dc40b84de79cd345120611"
+    },
+    {
+      "path": "results/q2/Q2_pareto_frontier.csv",
+      "sha256": "b342ee661bd070b3d3ead676b6741ef21560cb1116722cafeec604337f3def0c"
+    },
+    {
+      "path": "results/q2/Q2_pareto_plans.json",
+      "sha256": "ac32d2a36845f292621598205f34b98a30d7363f274a994c7a375cea38d3ccbc"
+    },
+    {
+      "path": "results/q2/Q2_resource_check.csv",
+      "sha256": "bba161c76b4a34f37547371410a724a7d148d4f7b1fc880068a0d96dbf2a9f50"
+    },
+    {
+      "path": "results/q2/Q2_tradeoff_frontier.csv",
+      "sha256": "28edda6f0da3b4f004cb049732c96cfa71570afdd609d36045360c668a512741"
+    },
+    {
+      "path": "results/q2/Q2_transport_trips_balanced.csv",
+      "sha256": "fd80d90754f224b2946cc961e11fd76fb8d1090ac7b12ec7bdacfc60a3ab2ced"
+    },
+    {
+      "path": "results/q2/input_manifest.json",
+      "sha256": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12"
+    },
+    {
+      "path": "results/q3/Q3_box_delivery.csv",
+      "sha256": "13cd9436ce9b6392733ceb11731e8317bdc6c07d8cdb4f7f194f394720d34abf"
+    },
+    {
+      "path": "results/q3/Q3_communication.csv",
+      "sha256": "1a3d99c71d883a416874912292a2f7db73ad1854da5057e6d2b029a7520f19cf"
+    },
+    {
+      "path": "results/q3/Q3_incumbents.json",
+      "sha256": "7afe7739a7ef9759ce076014d91e298c28bbb2aa469be05b1c1a0b74a0f18076"
+    },
+    {
+      "path": "results/q3/Q3_metrics.json",
+      "sha256": "cbd13212750608addf98ee2de1c625daf745d9b89ee28f60cf5984b5e519b03d"
+    },
+    {
+      "path": "results/q3/Q3_relay_sorties.csv",
+      "sha256": "6856ac2c92fff6b2b9c7b3255a6932631e45188193f2f20959f3037c7c2a8ce6"
+    },
+    {
+      "path": "results/q3/Q3_resource_check.csv",
+      "sha256": "a98477a3ba0015b1c0cd86f434ffc2ec19447450dfdc34f5381143e15773ce7a"
+    },
+    {
+      "path": "results/q3/Q3_selected_plan.json",
+      "sha256": "75a577ef4a3dccb008912a00dff1eda61d7d28f2490d3bbe213956d6ed9f61da"
+    },
+    {
+      "path": "results/q3/Q3_transport_trips.csv",
+      "sha256": "f5f434f38e4ddc79159f339ce582c687c448a0ad9ee49987d58d6b352eb6f38c"
+    },
+    {
+      "path": "results/q3/input_manifest.json",
+      "sha256": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12"
+    },
+    {
+      "path": "results/q4/Q4_partition_config.csv",
+      "sha256": "34d1d3e632e60e9e7b4e6df7ef0c8c963cfc576b3f191902698aedf69a6fe1a1"
+    },
+    {
+      "path": "results/q4/Q4_resource_summary.csv",
+      "sha256": "b3a18d11b6c33e2baa46bf04e628f45fbcd1d3ee5092384516a8927d4d909ce5"
+    },
+    {
+      "path": "results/q4/Q4_source_manifest.json",
+      "sha256": "6e5cd65dabeb1c0b54944e3e358ef62614faa490223dab6b2a2623e9a05f6e32"
+    },
+    {
+      "path": "results/q4/input_manifest.json",
+      "sha256": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12"
+    }
+  ],
+  "search_traces_identical_excluding_elapsed": true
+}

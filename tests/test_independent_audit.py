@@ -141,6 +141,7 @@ def test_q3_metrics_cannot_invent_hard_deadline_slack(boxes, bad_slack):
         weighted_tardiness=0,
         checked_states=5,
         communication_step_s=1,
+        communication_sampling_steps_s=[1.0, 0.5],
         minimum_hard_slack_s=100,
         continuous_time_proof=False,
     )

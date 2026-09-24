@@ -16,6 +16,7 @@ def load_search_parameters():
         "q3_restart_interval",
         "relay_grid_rows",
         "relay_grid_columns",
+        "q3_repair_combination_limit",
     ):
         value = params[name]
         if (
@@ -27,4 +28,9 @@ def load_search_parameters():
     from .numeric import positive
 
     positive(params["relay_local_step_m"], "relay local step")
+    factors = params["q3_repair_radius_factors"]
+    if not isinstance(factors, list) or not factors:
+        raise ValueError("Seed repair radii must be a nonempty list")
+    for factor in factors:
+        positive(factor, "seed repair radius factor")
     return params

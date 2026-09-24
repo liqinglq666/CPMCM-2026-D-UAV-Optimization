@@ -2,7 +2,7 @@
   "seed": 20260924,
   "iterations": 20000,
   "stop_reason": "iteration_budget",
-  "search_runtime_s": 3.8490785600006348,
+  "search_runtime_s": 4.448965785999462,
   "pareto_points": 73,
   "unique_candidates": 11545,
   "baseline_objectives": [
@@ -72,6 +72,14 @@
     "relay_grid_rows": 4,
     "relay_grid_columns": 5,
     "relay_local_step_m": 250.0,
+    "q3_repair_radius_factors": [
+      0.1,
+      0.25,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "q3_repair_combination_limit": 256,
     "description": "Search parameters only. q3_plan.json is an initial incumbent, never a certified optimum. Fixed iteration counts are used for reproducibility; physical constants come only from the official inputs and src/core."
   }
 }

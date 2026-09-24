@@ -1,5 +1,3 @@
-# 当前图文数据一致性
+# 当前图文一致性
 
-正式结果、派生诊断、图形来源摘要、63个数字宏、表格及正文逐项核验，机器记录见consistency.json。12图以同一输入重复生成，PNG完全一致。
-
-Q3 1 s采样通过而0.5 s发现负余量，当前论文保留此反例。因此文档一致性PASS和通信加密失败同时成立；两者不能混为同一结论。
+修复后69个数字宏、1725个工作簿单元格、12图重复PNG哈希及A4/目录/引用/字体检查通过。consistency.json的refined_communication_passed为true；三组步长的独立通信证据见results/communication_replay.json。采样通过不构成连续证明。

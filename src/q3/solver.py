@@ -25,6 +25,7 @@ from src.core.physics import Physics
 from src.core.io import write_csv, write_json
 from src.core.provenance import save_provenance
 from src.core.communication import Communication, sample_states as sample_states
+from src.core.sampling import audit_steps
 
 
 def prepare_plan(plan, physics, box_map, drones, batteries, relay_inputs, comm, step_s):
@@ -259,6 +260,7 @@ def solve_q3(
             if box_map[r["货箱编号"]].hard_deadline is not None
         ),
         "communication_step_s": step_s,
+        "communication_sampling_steps_s": list(audit_steps(step_s)),
         "checked_states": sum(j["checked_states"] for j in jobs),
         "continuous_time_proof": False,
     }

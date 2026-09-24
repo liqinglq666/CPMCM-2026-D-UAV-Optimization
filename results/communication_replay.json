@@ -1,0 +1,63 @@
+{
+  "sampling": [
+    {
+      "step_s": 1.0,
+      "checked_states": 42873,
+      "violations": 0,
+      "minimum_margin_db": 0.028777619739614124,
+      "critical_state": {
+        "trip": "Q3-016",
+        "time_s": 10008.357292884732,
+        "point": [
+          109.2541424,
+          23.0552989,
+          230.0
+        ],
+        "available_margin_db": 0.028777619739614124
+      },
+      "uncovered_states": []
+    },
+    {
+      "step_s": 0.5,
+      "checked_states": 85405,
+      "violations": 0,
+      "minimum_margin_db": 0.028777619739614124,
+      "critical_state": {
+        "trip": "Q3-016",
+        "time_s": 10008.357292884732,
+        "point": [
+          109.2541424,
+          23.0552989,
+          230.0
+        ],
+        "available_margin_db": 0.028777619739614124
+      },
+      "uncovered_states": []
+    },
+    {
+      "step_s": 0.25,
+      "checked_states": 170461,
+      "violations": 0,
+      "minimum_margin_db": 0.028777619739614124,
+      "critical_state": {
+        "trip": "Q3-016",
+        "time_s": 10008.357292884732,
+        "point": [
+          109.2541424,
+          23.0552989,
+          230.0
+        ],
+        "available_margin_db": 0.028777619739614124
+      },
+      "uncovered_states": []
+    }
+  ],
+  "continuous_time_proof": false,
+  "source_sha256": {
+    "Q3_box_delivery.csv": "13cd9436ce9b6392733ceb11731e8317bdc6c07d8cdb4f7f194f394720d34abf",
+    "Q3_communication.csv": "1a3d99c71d883a416874912292a2f7db73ad1854da5057e6d2b029a7520f19cf",
+    "Q3_relay_sorties.csv": "6856ac2c92fff6b2b9c7b3255a6932631e45188193f2f20959f3037c7c2a8ce6",
+    "Q3_resource_check.csv": "a98477a3ba0015b1c0cd86f434ffc2ec19447450dfdc34f5381143e15773ce7a",
+    "Q3_transport_trips.csv": "f5f434f38e4ddc79159f339ce582c687c448a0ad9ee49987d58d6b352eb6f38c"
+  }
+}

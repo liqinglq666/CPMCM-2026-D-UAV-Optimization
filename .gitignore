@@ -39,3 +39,6 @@ paper/fonts/*.ttf
 paper/data/communication_states.csv
 paper/data/terrain_map.json
 paper/data/communication_states_05s.csv
+
+# Atomic full-run staging directories
+/.uav-run-*/

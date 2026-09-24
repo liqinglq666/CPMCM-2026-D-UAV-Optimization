@@ -42,6 +42,11 @@ atom_count = validation["q4"]["atomic_groups"]
 capacity_scenarios = pd.read_csv(DATA / "payload_reserve.csv")
 search_parameters = json.loads((ROOT / "config/search.json").read_text())
 reserve_stairs = pd.read_csv(DATA / "reserve_staircase.csv")
+replay = json.loads((RESULTS / "communication_replay.json").read_text(encoding="utf-8"))
+quarter = next(r for r in replay["sampling"] if r["step_s"] == 0.25)
+before_repair = json.loads(
+    (ROOT / "archive/baseline-2a98f09/results/q3/Q3_metrics.json").read_text()
+)
 q1_utilization = (
     c[c.question == "q1"][["mass_fraction", "volume_fraction", "energy_fraction"]]
     .idxmax(axis=1)
@@ -77,6 +82,12 @@ macros = {
     "StatesHalf": str(a["sampling_validation"][1]["checked_states"]),
     "MarginOne": f"{a['sampling_validation'][0]['minimum_margin_db']:.3f}",
     "MarginHalf": f"{a['sampling_validation'][1]['minimum_margin_db']:.3f}",
+    "StatesQuarter": str(quarter["checked_states"]),
+    "MarginQuarter": f"{quarter['minimum_margin_db']:.3f}",
+    "ViolationsQuarter": str(quarter["violations"]),
+    "RepairLateReduction": f"{100 * (1 - m['q3']['weighted_tardiness'] / before_repair['weighted_tardiness']):.2f}",
+    "RepairEnergyReduction": f"{100 * (1 - (m['q3']['transport_energy_kwh'] + m['q3']['relay_energy_kwh']) / (before_repair['transport_energy_kwh'] + before_repair['relay_energy_kwh'])):.2f}",
+    "RepairTimeIncrease": f"{m['q3']['joint_makespan_s'] - before_repair['joint_makespan_s']:.2f}",
     "ViolationsHalf": str(a["sampling_validation"][1]["violations"]),
     "CriticalTripHalf": a["sampling_validation"][1]["critical_state"]["trip"],
     "CriticalTimeHalf": f"{a['sampling_validation'][1]['critical_state']['time_s']:.3f}",
