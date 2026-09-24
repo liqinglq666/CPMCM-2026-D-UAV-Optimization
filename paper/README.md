@@ -36,7 +36,7 @@ python scripts/build_paper.py
 
 XeLaTeX 另需 TeX Live/MiKTeX 中的 ctex、xeCJK、zhnumber、Fandol 及常用数学/表格包。本次使用 ctex 2.5.10；须与发行版 expl3 匹配。实际 Python 版本见 `environment.json`。正文使用 Fandol 宋/黑体和 Latin Modern Roman；科研图用 Noto Sans SC TrueType，SVG 转字形路径。字体下载受 SHA256 校验。
 
-全流程无随机仿真；没有虚构置信区间。绘图前核对全部正式结果摘要，拒绝混用新结果和旧诊断。图形在临时目录成功生成后发布；XeLaTeX 失败保留上一份完整 PDF 并输出错误日志。
+全流程无随机仿真；没有虚构置信区间。绘图前核对全部正式结果摘要，拒绝混用新结果和旧诊断。图形在临时目录成功生成后发布；XeLaTeX 失败保留上一份完整 PDF 并输出错误日志。构建末尾显式嵌入 Adobe GB1 Unicode 映射，逐页检查中文可读性及全部字体嵌入；验证失败不发布。请使用上述构建脚本：单独调用 XeLaTeX 会跳过此兼容性处理与门禁。
 
 ## 官方 Excel
 
@@ -52,3 +52,5 @@ python scripts/verify_paper.py --workbook outputs/submission/D_results.xlsx --te
 ## 状态与提交前信息
 
 见 `reports/FINAL_AUDIT.md`、`VALIDATION.md`、`CONSISTENCY.md`、`FIGURE_QC.md` 和 `CITATIONS.md`。PDF 为匿名主体；身份封面及本次 AI 精确版本、发布日期须由参赛队提供。不得把候选计划或采样通过理解为实际飞行安全认证。
+
+2026-09-24 已修复旧版中文乱码，详见 `reports/FONT_COMPATIBILITY.md`。正文与九张科研图保持原排版，修复后的 19 页渲染像素与原稿相同。
