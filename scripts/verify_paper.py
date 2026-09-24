@@ -89,6 +89,15 @@ def verify(workbook: Path, template: Path, rebuild_figures: bool = False):
         "JointTime": f"{max(float(r['返回O01时刻_s']) for r in q3 + relays):.3f}",
         "MinSoc": f"{min(float(r['返航SOC_pct']) for r in q3):.2f}",
     }
+    candidates = records("results/q2/Q2_tradeoff_frontier.csv")
+    q4_resources = records("results/q4/Q4_resource_summary.csv")
+    expected_numbers.update(
+        CandidateCount=str(len(candidates)),
+        CandidateMaxTrips=str(max(int(r["trips"]) for r in candidates)),
+        CandidateMinTrips=str(min(int(r["trips"]) for r in candidates)),
+        GapTwo=str(sum(int(r["缺口"]) for r in q4_resources if r["K"] == "2")),
+        GapThree=str(sum(int(r["缺口"]) for r in q4_resources if r["K"] == "3")),
+    )
     assert all(numbers[key] == value for key, value in expected_numbers.items())
     for rows in (q1, q2, q3):
         cargo = [item for r in rows for item in r["货箱编号列表"].split(",")]
@@ -134,8 +143,28 @@ def verify(workbook: Path, template: Path, rebuild_figures: bool = False):
     assert all(text.strip().endswith(str(i)) for i, text in enumerate(pages, 1))
     text = re.sub(r"\s+", "", "".join(pages))
     assert "??" not in text
-    source = "\n".join(
-        p.read_text(encoding="utf-8") for p in (ROOT / "paper/sections").glob("*.tex")
+    # Inspect the included manuscript, not orphan .tex files left by a reorder.
+    main_source = (ROOT / "paper/main.tex").read_text(encoding="utf-8")
+    section_paths = re.findall(r"\\input\{(sections/[^}]+)\}", main_source)
+    assert len(section_paths) == len(set(section_paths)), "Duplicate section inclusion"
+    included = [ROOT / "paper" / (name + ".tex") for name in section_paths]
+    assert set(included) == set((ROOT / "paper/sections").glob("*.tex")), (
+        "Orphan/missing section"
+    )
+    sources = [path.read_text(encoding="utf-8") for path in included]
+    source = "\n".join(sources)
+    section_number = 0
+    figure_sections = {}
+    for content in sources:
+        section_number += len(re.findall(r"\\section\{", content))
+        for figure_id in re.findall(r"\\paperfig\{([^}]+)\}", content):
+            assert figure_id not in figure_sections, "Duplicate figure inclusion"
+            figure_sections[figure_id] = str(section_number)
+    assert figure_sections == {c["figure_id"]: c["section"] for c in figures}, (
+        "Stale figure section contract"
+    )
+    assert list(figure_sections) == [c["figure_id"] for c in figures], (
+        "Stale figure order"
     )
     used = set(re.findall(r"\\(" + "|".join(numbers) + r")\b", source))
     assert all(numbers[key] in text for key in used), [
@@ -151,6 +180,9 @@ def verify(workbook: Path, template: Path, rebuild_figures: bool = False):
     citations = re.findall(r"\\cite\{([^}]+)\}", source)
     references = (ROOT / "paper/references.tex").read_text(encoding="utf-8")
     assert set(citations) == set(re.findall(r"\\bibitem\{([^}]+)\}", references))
+    assert list(dict.fromkeys(citations)) == re.findall(
+        r"\\bibitem\{([^}]+)\}", references
+    ), "References must follow first citation order"
 
     result = {
         "status": "PASS",
@@ -163,10 +195,13 @@ def verify(workbook: Path, template: Path, rebuild_figures: bool = False):
         "generated_number_macros": len(numbers),
         "used_macros_found_in_pdf": len(used),
         "figures": len(figures),
+        "figure_sections": figure_sections,
+        "included_sections": section_paths,
         "figure_files": len(figures) * 3,
         "pdf_pages": len(paper.pages),
         "pdf_font_audit": font_audit,
-        "reference_entries": len(citations),
+        "reference_entries": len(set(citations)),
+        "citation_occurrences": len(citations),
         "reproduced_png_sha256": reproduced,
         "pdf_sha256": hashlib.sha256(
             (ROOT / "outputs/paper/main.pdf").read_bytes()
