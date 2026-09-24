@@ -40,7 +40,15 @@ m = a["metrics"]
 validation = json.loads((RESULTS / "validation.json").read_text(encoding="utf-8"))
 atom_count = validation["q4"]["atomic_groups"]
 capacity_scenarios = pd.read_csv(DATA / "payload_reserve.csv")
+q1_utilization = (
+    c[c.question == "q1"][["mass_fraction", "volume_fraction", "energy_fraction"]]
+    .idxmax(axis=1)
+    .value_counts()
+)
 macros = {
+    "MassTightBatches": str(q1_utilization.get("mass_fraction", 0)),
+    "VolumeTightBatches": str(q1_utilization.get("volume_fraction", 0)),
+    "EnergyTightBatches": str(q1_utilization.get("energy_fraction", 0)),
     "NumBoxes": str(len(a["boxes"])),
     "NumServices": str(len(a["nodes"]) - 1),
     "QOneTrips": str(m["q1"]["trips"]),
@@ -426,6 +434,7 @@ with (ROOT / "paper/figure_manifest.csv").open(
 ) as stream:
     writer = csv.DictWriter(
         stream,
+        lineterminator="\n",
         fieldnames=[
             "figure_id",
             "core_claim",

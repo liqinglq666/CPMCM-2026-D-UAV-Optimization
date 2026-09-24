@@ -1,207 +1,250 @@
 [
   {
     "figure_id": "fig01_framework",
+    "section": "1",
     "core_claim": "统一物理底座逐层扩展到运输执行、通信保障和独立资源配置；继承规则与继承固定方案严格区分",
     "source_data": [
       "paper/data/analysis.json",
       "results/q4/Q4_resource_summary.csv"
     ],
-    "hero_panel": "Q1→Q4 四层决策与新增矛盾",
-    "supporting_panels": "明确继承对象；由源结果读取的四问结果锚点",
-    "uncertainty": "确定性官方算例；无统计置信区间；DEM 误差分布不可得；通信仅采样验证",
-    "key_annotation": "Q1→Q2 重新组批；Q2→Q3 固定独立候选；Q3→Q4 固定正式安排",
-    "visual_hierarchy": "四条递进主线占主体，右侧结果与求解范围为辅助；颜色与文字双重编码",
+    "script": "scripts/figures/fig01_framework.py",
     "export_formats": [
       "pdf",
       "svg",
       "png"
     ],
     "png_dpi": 300,
-    "script": "scripts/figures/fig01_framework.py",
-    "section": "1",
-    "randomness": "无随机步骤"
+    "randomness": "无随机步骤",
+    "uncertainty": "确定性算例；无统计置信区间；采样通过非连续通信证明",
+    "visual_hierarchy": "一图一主张；近白背景；机型固定语义色；标记、纹理与文字保障灰度可读",
+    "key_annotation": "统一物理底座逐层扩展到运输执行、通信保障和独立资源配置；继承规则与继承固定方案严格区分"
   },
   {
-    "figure_id": "fig02_physics",
+    "figure_id": "fig02_task_map",
+    "section": "2",
+    "core_claim": "原始地形与任务节点建立空间背景，参考连线不冒充运输路线",
+    "source_data": [
+      "paper/data/analysis.json",
+      "paper/data/terrain_map.json"
+    ],
+    "script": "scripts/figures/fig02_task_map.py",
+    "export_formats": [
+      "pdf",
+      "svg",
+      "png"
+    ],
+    "png_dpi": 300,
+    "randomness": "无随机步骤",
+    "uncertainty": "确定性算例；无统计置信区间；采样通过非连续通信证明",
+    "visual_hierarchy": "一图一主张；近白背景；机型固定语义色；标记、纹理与文字保障灰度可读",
+    "key_annotation": "原始地形与任务节点建立空间背景，参考连线不冒充运输路线"
+  },
+  {
+    "figure_id": "fig03_physics",
+    "section": "3",
     "core_claim": "地形抬高巡航高度，去程载荷与返程空载产生不同能耗",
     "source_data": [
       "paper/data/terrain_profile.csv",
       "paper/data/energy_components.csv",
-      "paper/data/analysis.json"
+      "paper/data/analysis.json",
+      "src/config.py"
     ],
-    "hero_panel": "真实航段剖面",
-    "supporting_panels": "分段水平与爬升能耗",
-    "uncertainty": "确定性官方算例；无统计置信区间；DEM 误差分布不可得；通信仅采样验证",
-    "key_annotation": "由源数据计算的最紧约束、阈值或关键方案",
-    "visual_hierarchy": "一个主图占约 65%；诊断面板占约 35%；颜色与线型/标记双重编码",
+    "script": "scripts/figures/fig03_physics.py",
     "export_formats": [
       "pdf",
       "svg",
       "png"
     ],
     "png_dpi": 300,
-    "script": "scripts/figures/fig02_physics.py",
-    "section": "3",
-    "randomness": "无随机步骤"
+    "randomness": "无随机步骤",
+    "uncertainty": "确定性算例；无统计置信区间；采样通过非连续通信证明",
+    "visual_hierarchy": "一图一主张；近白背景；机型固定语义色；标记、纹理与文字保障灰度可读",
+    "key_annotation": "地形抬高巡航高度，去程载荷与返程空载产生不同能耗"
   },
   {
-    "figure_id": "fig03_payload_boundary",
+    "figure_id": "fig04_payload_boundary",
+    "section": "4",
     "core_claim": "额定载荷与能量上限共同限制安全运载能力",
     "source_data": [
       "results/q1/Q1_max_safe_payload.csv",
       "paper/data/analysis.json"
     ],
-    "hero_panel": "全部服务区的安全载荷边界",
-    "supporting_panels": "额定载荷参考与受限点注释",
-    "uncertainty": "确定性官方算例；无统计置信区间；DEM 误差分布不可得；通信仅采样验证",
-    "key_annotation": "由源数据计算的最紧约束、阈值或关键方案",
-    "visual_hierarchy": "一个主图占约 65%；诊断面板占约 35%；颜色与线型/标记双重编码",
+    "script": "scripts/figures/fig04_payload_boundary.py",
     "export_formats": [
       "pdf",
       "svg",
       "png"
     ],
     "png_dpi": 300,
-    "script": "scripts/figures/fig03_payload_boundary.py",
-    "section": "4",
-    "randomness": "无随机步骤"
+    "randomness": "无随机步骤",
+    "uncertainty": "确定性算例；无统计置信区间；采样通过非连续通信证明",
+    "visual_hierarchy": "一图一主张；近白背景；机型固定语义色；标记、纹理与文字保障灰度可读",
+    "key_annotation": "额定载荷与能量上限共同限制安全运载能力"
   },
   {
-    "figure_id": "fig04_batching",
+    "figure_id": "fig05_batching",
+    "section": "4",
     "core_claim": "不可拆分货箱通过精确集合划分形成最低架次数组批",
     "source_data": [
       "results/q1/Q1_batch_solution.csv",
       "paper/data/constraint_slacks.csv",
       "paper/data/analysis.json"
     ],
-    "hero_panel": "按货类堆叠的货箱质量与箱数分配",
-    "supporting_panels": "质量、体积、能量约束利用率",
-    "uncertainty": "确定性官方算例；无统计置信区间；DEM 误差分布不可得；通信仅采样验证",
-    "key_annotation": "由源数据计算的最紧约束、阈值或关键方案",
-    "visual_hierarchy": "一个主图占约 65%；诊断面板占约 35%；颜色与线型/标记双重编码",
+    "script": "scripts/figures/fig05_batching.py",
     "export_formats": [
       "pdf",
       "svg",
       "png"
     ],
     "png_dpi": 300,
-    "script": "scripts/figures/fig04_batching.py",
-    "section": "4",
-    "randomness": "无随机步骤"
+    "randomness": "无随机步骤",
+    "uncertainty": "确定性算例；无统计置信区间；采样通过非连续通信证明",
+    "visual_hierarchy": "一图一主张；近白背景；机型固定语义色；标记、纹理与文字保障灰度可读",
+    "key_annotation": "不可拆分货箱通过精确集合划分形成最低架次数组批"
   },
   {
-    "figure_id": "fig05_optimization",
-    "core_claim": "架次数减少伴随时效损失，折中解须显式选择",
+    "figure_id": "fig06_tradeoff",
+    "section": "5",
+    "core_claim": "压缩架次付出及时性代价；所选点是有限候选的显式折中",
     "source_data": [
       "results/q2/Q2_tradeoff_frontier.csv",
       "results/q2/Q2_transport_trips_balanced.csv"
     ],
-    "hero_panel": "候选集能耗—加权延误",
-    "supporting_panels": "22 架次实体资源甘特",
-    "uncertainty": "确定性官方算例；无统计置信区间；DEM 误差分布不可得；通信仅采样验证",
-    "key_annotation": "由源数据计算的最紧约束、阈值或关键方案",
-    "visual_hierarchy": "一个主图占约 65%；诊断面板占约 35%；颜色与线型/标记双重编码",
+    "script": "scripts/figures/fig06_tradeoff.py",
     "export_formats": [
       "pdf",
       "svg",
       "png"
     ],
     "png_dpi": 300,
-    "script": "scripts/figures/fig05_optimization.py",
+    "randomness": "无随机步骤",
+    "uncertainty": "确定性算例；无统计置信区间；采样通过非连续通信证明",
+    "visual_hierarchy": "一图一主张；近白背景；机型固定语义色；标记、纹理与文字保障灰度可读",
+    "key_annotation": "压缩架次付出及时性代价；所选点是有限候选的显式折中"
+  },
+  {
+    "figure_id": "fig07_resources",
     "section": "5",
-    "randomness": "无随机步骤"
-  },
-  {
-    "figure_id": "fig06_communication",
-    "core_claim": "中继恢复直连不足状态的通信，但保证仅覆盖已检查状态",
+    "core_claim": "飞机返航释放与电池充满释放分别约束实体资源时序",
     "source_data": [
-      "paper/data/communication_states.csv",
-      "paper/data/terrain_map.json",
-      "results/q3/Q3_relay_sorties.csv",
-      "paper/data/analysis.json"
+      "results/q2/Q2_resource_check.csv"
     ],
-    "hero_panel": "真实轨迹与需中继采样点",
-    "supporting_panels": "最小通信余量随时间",
-    "uncertainty": "确定性官方算例；无统计置信区间；DEM 误差分布不可得；通信仅采样验证",
-    "key_annotation": "由源数据计算的最紧约束、阈值或关键方案",
-    "visual_hierarchy": "一个主图占约 65%；诊断面板占约 35%；颜色与线型/标记双重编码",
+    "script": "scripts/figures/fig07_resources.py",
     "export_formats": [
       "pdf",
       "svg",
       "png"
     ],
     "png_dpi": 300,
-    "script": "scripts/figures/fig06_communication.py",
-    "section": "6",
-    "randomness": "无随机步骤"
+    "randomness": "无随机步骤",
+    "uncertainty": "确定性算例；无统计置信区间；采样通过非连续通信证明",
+    "visual_hierarchy": "一图一主张；近白背景；机型固定语义色；标记、纹理与文字保障灰度可读",
+    "key_annotation": "飞机返航释放与电池充满释放分别约束实体资源时序"
   },
   {
-    "figure_id": "fig09_partition",
-    "core_claim": "独立分区约束使固定方案出现可量化资源缺口",
+    "figure_id": "fig08_communication_map",
+    "section": "6",
+    "core_claim": "直连不足发生在航段内部；固定离散计划与LP连续时序分开",
+    "source_data": [
+      "paper/data/analysis.json",
+      "paper/data/terrain_map.json",
+      "paper/data/communication_states_05s.csv",
+      "results/q3/Q3_relay_sorties.csv"
+    ],
+    "script": "scripts/figures/fig08_communication_map.py",
+    "export_formats": [
+      "pdf",
+      "svg",
+      "png"
+    ],
+    "png_dpi": 300,
+    "randomness": "无随机步骤",
+    "uncertainty": "确定性算例；无统计置信区间；采样通过非连续通信证明",
+    "visual_hierarchy": "一图一主张；近白背景；机型固定语义色；标记、纹理与文字保障灰度可读",
+    "key_annotation": "直连不足发生在航段内部；固定离散计划与LP连续时序分开"
+  },
+  {
+    "figure_id": "fig09_communication_time",
+    "section": "6",
+    "core_claim": "中继窗口保障已检查状态；最紧采样余量仍不能证明连续安全",
+    "source_data": [
+      "paper/data/analysis.json",
+      "paper/data/communication_states_05s.csv",
+      "results/q3/Q3_relay_sorties.csv"
+    ],
+    "script": "scripts/figures/fig09_communication_time.py",
+    "export_formats": [
+      "pdf",
+      "svg",
+      "png"
+    ],
+    "png_dpi": 300,
+    "randomness": "无随机步骤",
+    "uncertainty": "确定性算例；无统计置信区间；采样通过非连续通信证明",
+    "visual_hierarchy": "一图一主张；近白背景；机型固定语义色；标记、纹理与文字保障灰度可读",
+    "key_annotation": "中继窗口保障已检查状态；最紧采样余量仍不能证明连续安全"
+  },
+  {
+    "figure_id": "fig10_partition",
+    "section": "7",
+    "core_claim": "不可拆连通分量限制分组，库存总量不能抵消按类型资源缺口",
     "source_data": [
       "results/q4/Q4_resource_summary.csv",
       "results/q4/Q4_partition_config.csv",
-      "paper/data/analysis.json"
+      "results/q3/Q3_transport_trips.csv"
     ],
-    "hero_panel": "各类资源库存与分区需求",
-    "supporting_panels": "服务区分组对应关系",
-    "uncertainty": "确定性官方算例；无统计置信区间；DEM 误差分布不可得；通信仅采样验证",
-    "key_annotation": "由源数据计算的最紧约束、阈值或关键方案",
-    "visual_hierarchy": "一个主图占约 65%；诊断面板占约 35%；颜色与线型/标记双重编码",
+    "script": "scripts/figures/fig10_partition.py",
     "export_formats": [
       "pdf",
       "svg",
       "png"
     ],
     "png_dpi": 300,
-    "script": "scripts/figures/fig09_partition.py",
-    "section": "7",
-    "randomness": "无随机步骤"
+    "randomness": "无随机步骤",
+    "uncertainty": "确定性算例；无统计置信区间；采样通过非连续通信证明",
+    "visual_hierarchy": "一图一主张；近白背景；机型固定语义色；标记、纹理与文字保障灰度可读",
+    "key_annotation": "不可拆连通分量限制分组，库存总量不能抵消按类型资源缺口"
   },
   {
-    "figure_id": "fig07_sensitivity",
-    "core_claim": "不变架次数不能替代对临界储备和能量余量的检查",
+    "figure_id": "fig11_sensitivity",
+    "section": "8",
+    "core_claim": "连续能力收缩与离散组批跳变须分开；固定方案阈值不是全局分界",
     "source_data": [
       "paper/data/payload_reserve.csv",
       "results/q1/Q1_sensitivity_summary.csv",
       "paper/data/analysis.json"
     ],
-    "hero_panel": "安全储备—载荷能力曲线",
-    "supporting_panels": "5 个组批场景；固定方案阈值",
-    "uncertainty": "确定性官方算例；无统计置信区间；DEM 误差分布不可得；通信仅采样验证",
-    "key_annotation": "由源数据计算的最紧约束、阈值或关键方案",
-    "visual_hierarchy": "一个主图占约 65%；诊断面板占约 35%；颜色与线型/标记双重编码",
+    "script": "scripts/figures/fig11_sensitivity.py",
     "export_formats": [
       "pdf",
       "svg",
       "png"
     ],
     "png_dpi": 300,
-    "script": "scripts/figures/fig07_sensitivity.py",
-    "section": "8",
-    "randomness": "无随机步骤"
+    "randomness": "无随机步骤",
+    "uncertainty": "确定性算例；无统计置信区间；采样通过非连续通信证明",
+    "visual_hierarchy": "一图一主张；近白背景；机型固定语义色；标记、纹理与文字保障灰度可读",
+    "key_annotation": "连续能力收缩与离散组批跳变须分开；固定方案阈值不是全局分界"
   },
   {
-    "figure_id": "fig08_validation",
-    "core_claim": "最紧约束与采样细化共同界定结果可信范围",
+    "figure_id": "fig12_validation",
+    "section": "9",
+    "core_claim": "可行不等于稳健；SOC、硬时限、加密通信证据共同界定边界",
     "source_data": [
       "paper/data/constraint_slacks.csv",
       "paper/data/hard_deadline_slacks.csv",
       "paper/data/analysis.json"
     ],
-    "hero_panel": "逐架次电量与逐箱硬时限余量",
-    "supporting_panels": "1 s 与 0.5 s 检查状态和最小通信余量",
-    "uncertainty": "确定性官方算例；无统计置信区间；DEM 误差分布不可得；通信仅采样验证",
-    "key_annotation": "由源数据计算的最紧约束、阈值或关键方案",
-    "visual_hierarchy": "一个主图占约 65%；诊断面板占约 35%；颜色与线型/标记双重编码",
+    "script": "scripts/figures/fig12_validation.py",
     "export_formats": [
       "pdf",
       "svg",
       "png"
     ],
     "png_dpi": 300,
-    "script": "scripts/figures/fig08_validation.py",
-    "section": "9",
-    "randomness": "无随机步骤"
+    "randomness": "无随机步骤",
+    "uncertainty": "确定性算例；无统计置信区间；采样通过非连续通信证明",
+    "visual_hierarchy": "一图一主张；近白背景；机型固定语义色；标记、纹理与文字保障灰度可读",
+    "key_annotation": "可行不等于稳健；SOC、硬时限、加密通信证据共同界定边界"
   }
 ]

@@ -1265,7 +1265,16 @@
     "q3/input_manifest.json": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
     "q4/Q4_partition_config.csv": "8dec4be509bea35dbb265ad5c985635f6e9c7ae50aa14abc62a1baf5d404c5d3",
     "q4/Q4_resource_summary.csv": "61b9bbfc2d4b6f71abc72f665b12ec5a509ba7ffcc0f2258642c8195bb28155e",
-    "q4/input_manifest.json": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
-    "validation.json": "26b8ab283062b1507c0bf43cc858ebbfe417a1b78dbf67ea6deb5ec84ad629cb"
+    "q4/input_manifest.json": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12"
+  },
+  "diagnostic_hashes": {
+    "terrain_profile.csv": "c34c4ee5ac5a9c43634942281add1b27bddf57857ac82f52fda619f1ab335f00",
+    "energy_components.csv": "3e4f6543642dde4a4c5269f2926ab4d480f8c40f45ce3c9e23fb09b499e61888",
+    "constraint_slacks.csv": "72896d493b44d1e627f19eab07e581a94f12a1d386312a45760e63b126f28967",
+    "payload_reserve.csv": "c149305739ec9e2a5e9fe96d8c7d06ec0190c10c07160713791f742063d2df18",
+    "terrain_map.json": "f608b5ca850b4f7e5f5ad66fa6fcea211ff50a1c3dc2ca090d2c85301a63d5b5",
+    "communication_states.csv": "e9d1f018a8aa6792decca87414c7eba07af4ab388c9052e8c7342372f4d72574",
+    "communication_states_05s.csv": "feb9705259949168a3f4e377603c8541e5a6735b0c5d6ec6bb15df007440bc1e",
+    "hard_deadline_slacks.csv": "897cf9cf063882cd3810f97ef82ce414832c87a8ae1fa5398e86ee678f743758"
   }
 }

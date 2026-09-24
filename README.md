@@ -101,7 +101,7 @@ python scripts/setup_paper_fonts.py
 python scripts/build_paper.py
 ```
 
-新论文在 [paper/](paper/README.md)：25 页匿名论文（含附录）、9 张主图、16 张表。主图均输出 PDF/SVG/300 dpi PNG，数字由结果文件生成。构建另需 XeLaTeX、ctex、xeCJK、Fandol，完整命令和 Excel 导出见论文 README。
+新论文在 [paper/](paper/README.md)：32 页匿名论文（含两页自动目录和附录）、12 张主图、16 张表。主图均输出 PDF/SVG/300 dpi PNG，数字由结果文件生成。构建另需 XeLaTeX、ctex、xeCJK、Fandol，完整命令和 Excel 导出见论文 README。
 
 原 `scripts/make_figures.py` 的六幅图已由统一图形流水线替代并删除。`docs/paper/` 中旧稿仅作历史资料。当前证据及适用边界见 [论文终审](paper/reports/FINAL_AUDIT.md)，AI 记录见 `docs/AI_USAGE.md`。
 

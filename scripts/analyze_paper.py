@@ -5,12 +5,12 @@ Exact model version/release date: not available in the execution context.
 No random experiments; all scenarios are deterministic and conditional.
 """
 
-from pathlib import Path
 import argparse
 import hashlib
 import json
 import sys
 from dataclasses import asdict
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -19,13 +19,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from src.config import DEFAULT_DATA_ROOT
-from src.core.inputs import load_inputs, load_relay_inputs, load_communication_inputs
-from src.core.physics import Physics
-from src.core.energy import leg_energy
-from src.core.routes import evaluate_route
 from src.core.communication import Communication, sample_states
-from src.core.constraints import validate_transport, validate_relays
+from src.core.constraints import validate_relays, validate_transport
+from src.core.energy import leg_energy
+from src.core.inputs import load_communication_inputs, load_inputs, load_relay_inputs
 from src.core.io import read_csv, write_csv, write_json
+from src.core.physics import Physics
+from src.core.routes import evaluate_route
 from src.q1.physics_engine import compute_segments, max_safe_payload
 
 
@@ -182,25 +182,29 @@ def analyze(data_root, results, out):
                     }
                 )
     write_csv(out / "payload_reserve.csv", response)
-    # Store a modest, explicitly display-only terrain grid for vector contouring.
-    lons = np.linspace(
-        min(n.lon for n in nodes.values()) - 0.007,
-        max(n.lon for n in nodes.values()) + 0.007,
-        130,
-    )
-    lats = np.linspace(
-        min(n.lat for n in nodes.values()) - 0.007,
-        max(n.lat for n in nodes.values()) + 0.007,
-        130,
-    )
-    heights = [[physics.terrain.elevation(lon, lat) for lon in lons] for lat in lats]
+    # Native DEM pixel centres in the task extent; no graphical resampling.
+    terrain = physics.terrain
+    west = min(n.lon for n in nodes.values()) - 0.007
+    east = max(n.lon for n in nodes.values()) + 0.007
+    south = min(n.lat for n in nodes.values()) - 0.007
+    north = max(n.lat for n in nodes.values()) + 0.007
+    c0, r0 = terrain.pixel(west, north)
+    c1, r1 = terrain.pixel(east, south)
+    cols = np.arange(int(c0), int(c1) + 1)
+    rows = np.arange(int(r0), int(r1) + 1)
+    lons = [float((terrain.transform * (c + 0.5, 0))[0]) for c in cols]
+    lats = [float((terrain.transform * (0, r + 0.5))[1]) for r in rows]
+    heights = terrain.values(rows[:, None], cols[None, :])
     write_json(
         out / "terrain_map.json",
         {
-            "longitude": lons.tolist(),
-            "latitude": lats.tolist(),
-            "elevation_m": heights,
-            "purpose": "display-only sample; all physical/LOS computations traverse original closed DEM cells",
+            "longitude": lons,
+            "latitude": lats,
+            "elevation_m": heights.tolist(),
+            "purpose": "native DEM pixel centres; contours are display only",
+            "crs": "EPSG:4326",
+            "resampled": False,
+            "grid_step_degrees": [terrain.transform.a, terrain.transform.e],
         },
     )
     summaries = []
@@ -248,8 +252,12 @@ def analyze(data_root, results, out):
                 "critical_state": critical,
             }
         )
-        if step == 1.0:
-            frame.to_csv(out / "communication_states.csv", index=False)
+        filename = (
+            "communication_states.csv"
+            if step == 1.0
+            else "communication_states_05s.csv"
+        )
+        frame.to_csv(out / filename, index=False)
         print("Communication:", summaries[-1], flush=True)
         if violations:
             raise ValueError(
@@ -272,6 +280,20 @@ def analyze(data_root, results, out):
         str(p.relative_to(results)): hashlib.sha256(p.read_bytes()).hexdigest()
         for p in sorted(results.rglob("*"))
         if p.is_file()
+    }
+    diagnostic_names = [
+        "terrain_profile.csv",
+        "energy_components.csv",
+        "constraint_slacks.csv",
+        "payload_reserve.csv",
+        "terrain_map.json",
+        "communication_states.csv",
+        "communication_states_05s.csv",
+        "hard_deadline_slacks.csv",
+    ]
+    analysis["diagnostic_hashes"] = {
+        name: hashlib.sha256((out / name).read_bytes()).hexdigest()
+        for name in diagnostic_names
     }
     write_json(out / "analysis.json", analysis)
     print("Paper data saved to", out, flush=True)
