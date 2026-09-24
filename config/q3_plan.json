@@ -1,5 +1,5 @@
 {
-  "description": "Fixed route, cargo, resource and relay assignments inherited from upstream e668347. All times, energy, SOC and link results must be recomputed. This is a conditional scheduling heuristic, not a route optimality claim.",
+  "description": "Explicit initial feasible incumbent inherited from e668347. Cargo/routes/resources/relay sites initialize the discrete search; all times, energy, SOC and communication are recomputed. This is not a fixed final answer or a global-optimality claim.",
   "jobs": [
     {
       "id": "Q3-003",

@@ -11,24 +11,25 @@
     "operation_time_s": 32776.015748915874
   },
   "q2": {
-    "trips": 22,
+    "trips": 23,
     "boxes": 80,
-    "energy_kwh": 79.76059654204991,
-    "makespan_s": 11033.023069572368
+    "energy_kwh": 81.61125507775549,
+    "makespan_s": 10482.305736731878,
+    "pareto_points": 73
   },
   "q3": {
-    "trips": 24,
+    "trips": 27,
     "boxes": 80,
-    "energy_kwh": 80.84470332812647,
-    "makespan_s": 12339.411873284695,
-    "checked_states": 41572,
-    "relay_energy_kwh": 5.867028837665667,
-    "joint_makespan_s": 12789.446029897668
+    "energy_kwh": 89.05671860775453,
+    "makespan_s": 10724.855339336147,
+    "checked_states": 46102,
+    "relay_energy_kwh": 5.149826623884925,
+    "joint_makespan_s": 10724.855339336147
   },
   "q4": {
-    "atomic_groups": 4,
+    "atomic_groups": 3,
     "shortages": {
-      "2": 4,
+      "2": 3,
       "3": 7
     }
   },

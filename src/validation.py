@@ -204,26 +204,7 @@ def validate_frontier(
         raise ValueError("Q2 frontier does not match saved plans")
     for row in rows:
         plan = plans[row["trips"]]
-        profiles, _resources = validate_transport(
-            plan["trips"], plan["deliveries"], "q2", physics, boxes, drones, batteries
-        )
-        close(row["trips"], len(profiles), "frontier trips")
-        close(
-            row["energy"],
-            sum(profile.energy for profile, _ in profiles.values()),
-            "frontier energy",
-        )
-        close(
-            row["makespan"],
-            max(start + profile.duration for profile, start in profiles.values()),
-            "frontier makespan",
-        )
-        close(
-            row["weighted_tardiness"],
-            sum(float(r["加权延误"]) for r in plan["deliveries"]),
-            "frontier tardiness",
-        )
-        close(row["hard_violations"], 0, "frontier hard violations")
+        validate_q2_plan(row, plan, physics, boxes, drones, batteries)
     if selected_trips is not None:
         selected = plans.get(str(len(selected_trips)))
         if selected is None:
@@ -234,6 +215,49 @@ def validate_frontier(
             selected["deliveries"],
             "Q2 selected frontier deliveries",
         )
+
+
+def validate_q2_plan(row, plan, physics, boxes, drones, batteries):
+    profiles, _resources = validate_transport(
+        plan["trips"], plan["deliveries"], "q2", physics, boxes, drones, batteries
+    )
+    for key, expected in (
+        ("trips", len(profiles)),
+        ("energy", sum(profile.energy for profile, _ in profiles.values())),
+        (
+            "makespan",
+            max(start + profile.duration for profile, start in profiles.values()),
+        ),
+        ("weighted_tardiness", sum(float(r["加权延误"]) for r in plan["deliveries"])),
+        ("hard_violations", 0),
+    ):
+        close(row[key], expected, "frontier " + key)
+
+
+def validate_pareto(directory, physics, boxes, drones, batteries):
+    from src.core.discrete import dominates
+
+    rows = read_csv(directory / "Q2_pareto_frontier.csv")
+    plans = json.loads((directory / "Q2_pareto_plans.json").read_text(encoding="utf-8"))
+    if Counter(r["plan_id"] for r in rows) != Counter(plans.keys()):
+        raise ValueError("Pareto frontier/plan IDs mismatch")
+    objectives = []
+    for row in rows:
+        validate_q2_plan(row, plans[row["plan_id"]], physics, boxes, drones, batteries)
+        objectives.append(
+            tuple(
+                float(row[k])
+                for k in ("weighted_tardiness", "trips", "makespan", "energy")
+            )
+        )
+    if any(
+        dominates(a, b)
+        for i, a in enumerate(objectives)
+        for j, b in enumerate(objectives)
+        if i != j
+    ):
+        raise ValueError("Pareto archive contains a dominated solution")
+    return len(rows)
 
 
 def validate_q3_metrics(metrics, summary, trips, relay_rows, deliveries, boxes, step_s):
@@ -309,6 +333,10 @@ def validate_results(root: Path, results: Path, step_s=COMMUNICATION_STEP_S):
             validate_frontier(
                 results / question, physics, boxes, drones, batteries, trips, deliveries
             )
+            if (results / question / "Q2_search_summary.json").exists():
+                summary[question]["pareto_points"] = validate_pareto(
+                    results / question, physics, boxes, drones, batteries
+                )
             for key, expected in (
                 ("trips", len(trips)),
                 ("energy", summary[question]["energy_kwh"]),
@@ -343,6 +371,14 @@ def validate_results(root: Path, results: Path, step_s=COMMUNICATION_STEP_S):
             validate_q3_metrics(
                 metrics, summary[question], trips, relay_rows, deliveries, boxes, step_s
             )
+    if (results / "q3/Q3_search_summary.json").exists():
+        from src.q4.provenance import q3_fingerprints
+
+        inherited = json.loads(
+            (results / "q4/Q4_source_manifest.json").read_text(encoding="utf-8")
+        )
+        if inherited != q3_fingerprints(results / "q3"):
+            raise ValueError("Q4 does not inherit the finalized Q3 generation")
     with tempfile.TemporaryDirectory(prefix="uav-q4-validation-") as directory:
         expected = solve_partitions(results / "q3", Path(directory), root)
         for filename in ("Q4_partition_config.csv", "Q4_resource_summary.csv"):

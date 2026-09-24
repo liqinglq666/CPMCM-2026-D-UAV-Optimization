@@ -1,0 +1,11 @@
+{
+  "seed": 20260924,
+  "q2_iterations": 20000,
+  "q2_restart_interval": 300,
+  "q3_iterations": 5000,
+  "q3_restart_interval": 250,
+  "relay_grid_rows": 4,
+  "relay_grid_columns": 5,
+  "relay_local_step_m": 250.0,
+  "description": "Search parameters only. q3_plan.json is an initial incumbent, never a certified optimum. Fixed iteration counts are used for reproducibility; physical constants come only from the official inputs and src/core."
+}

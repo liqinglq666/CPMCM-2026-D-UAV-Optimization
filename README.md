@@ -2,7 +2,7 @@
 
 赛题、原始 Excel、DEM 是输入事实来源；`src/core/` 统一距离、地形、时间、载荷、能耗、充电和资源检查。仓库保持私有。
 
-最新独立审计以已合并的 `4a00465` 为起点，重新扫描并运行 baseline，未沿用上轮 PASS 结论。新增问题、修复与回归证据见 [独立审计报告](docs/audit/independent-pass-2/REPORT.md)。更早一轮从 `e668347` 修复 Q3 入口故障的记录保留在 [历史审计报告](docs/audit/REFACTOR_REPORT.md) 和 `archive/baseline-e668347/`。
+本轮算法优化以 `bf2e053` 为基准：保留 Q1 精确 DP 和 Q4 分区枚举，增加 Q2 邻域搜索及 Q3 外层离散搜索。修改前审计、算法边界与独立复核见 [算法审计](docs/audit/algorithm-search/AUDIT.md) 和 [验证报告](docs/audit/algorithm-search/REPORT.md)，真实重算对比见 [algorithm_comparison.csv](results/algorithm_comparison.csv)。历史审计保留在 `docs/audit/independent-pass-2/` 和 `docs/audit/REFACTOR_REPORT.md`。
 
 ## 安装与数据
 
@@ -42,32 +42,39 @@ python scripts/validate_results.py /path/to/D_problem_unpacked --results /path/t
 | 问题 | 模型与输入 | 主要输出 |
 |---|---|---|
 | Q1 | 官方参数、DEM；单点往返能力与词典序集合划分 DP | 最大安全载荷、18 个批次、余量敏感性 |
-| Q2 | 共享物理引擎；时限优先构造、可行合并、无人机和电池调度 | 选定方案、前沿 CSV、每个前沿方案的可重放 JSON、资源表 |
-| Q3 | 官方通信与中继参数、共享物理引擎、显式离散方案 | 联合时刻、逐箱交付、通信窗口、中继能耗与资源表 |
+| Q2 | 共享物理引擎；基准合并链 + 分组/路线/资源邻域搜索 | 选定方案、前沿 CSV、每个前沿方案的可重放 JSON、资源表 |
+| Q3 | 官方通信与中继参数、外层离散搜索 + 内层 HiGHS LP | 联合时刻、逐箱交付、通信窗口、中继能耗与资源表 |
 | Q4 | 固定 Q3 任务和通信关系、官方库存 | K=2 / K=3 分区与独立资源缺口 |
 
 Q1 使用题目给定的计划速度，未引入风场。风速、顺逆风、侧风不是官方输入，也未用于调整正式结果。内部单位为 m、s、kg、m³、kWh、kW；只有输出小时、SOC 百分数及无线链路距离 km 时进行单位转换。
 
 Q1 默认读取每个机型的官方返航余量；`python run_q1.py --rho 0.25` 才会统一覆盖所有机型。`Q1_metrics.json` 中 `reserve_fraction: null` 表示未覆盖，实际余量见 `reserve_by_type`。默认官方 A/B/C 均为 20%，所以本轮正式数值不变。
 
-Q2 默认导出从初始 24 架次到 17 架次的可行合并前沿，选择 22 架次。`--target-trips` 改变选择，`--frontier-min` 改变搜索下界；无法达到指定架次数会明确报错。
+Q2 先重建原合并链作为可行种子，再搜索货箱迁移/交换/合并/拆分、destroy-repair、路线顺序、机型、实体无人机、电池和执行顺序。默认在硬截止零违反条件下按加权延误、架次数、makespan、能耗词典序选择；`--target-trips 22` 可显式限制所选架次数。`Q2_tradeoff_frontier.csv` 保留每种架次数的一个代表方案；真正的“已发现非支配解集”为 `Q2_pareto_frontier.csv`，其全部方案可重放并接受独立校验。
 
-Q3 的 `config/q3_plan.json` 保存继承自历史可行方案的**货箱分组、路线、中继点、资源分配及顺序**，不保存最终时刻、能耗、SOC 或链路计算结果。程序根据 DEM 重新确定悬停海拔，通过线性规划依次优化加权延误、联合完成时间和中继服务时长。它是固定离散方案条件下的调度求解器，**不能声称自动搜索了全部路线/中继点或得到全局最优**。Q3 不再按易变的 Q2 行号继承任务，修改 Q2 参数不会自动改变这份离散方案；如需改变任务分组，编辑 JSON 后重新校验。
+Q3 的 `config/q3_plan.json` 是明确的初始可行解，不是最终答案。外层对运输分组、路线、型号、无人机、电池、中继点/高度、运输—中继匹配、中继合并/拆分和资源顺序做固定种子的离散搜索；内层 HiGHS LP 优化连续时序。组件复用时，外层选择官方分段充电函数的分支，LP 精确表达该分支的充电占用。每个可行候选均通过完整 1 s 空间通信预检、时间窗和资源校验；最终再独立重算通信。目标严格按硬截止零违反、通信零违反、加权延误、联合 makespan、联合能耗、中继架次数/服务时长排序。外层是启发式，LP 精确性只对给定离散方案和充电分支成立。
+
+`config/search.json` 只保存种子、迭代预算和候选点生成参数。默认固定种子 20260924，Q2/Q3 分别执行 20000/5000 次邻域尝试；每次尝试、best-so-far、停止原因和运行时间均保存。所有解由官方输入重新计算，不读取历史结果充当求解。`results/q3/Q3_selected_plan.json` 是可重放的输出，不写回初始配置。Q4 继承最终 Q3，并记录任务/通信/资源文件指纹；枚举和库存口径不变。复现命令与环境版本见验证报告。
 
 通信逐阶段采样间隔不超过 1 s，中继窗口前后各留 5 s。DEM 净空与视线共用像元闭边界遍历：边界两侧、角点相接的像元均纳入，采用较高地形的保守约定，不再对坐标取整缓存。**离散采样仍不构成连续时间通信的解析证明。** 建链时无人机已在空中，因此其悬停及通信能耗计入中继能耗。
 
 ## 项目结构
 
 ```text
-config/q3_plan.json              已选离散方案，不含硬编码结果
+config/q3_plan.json              可解释的初始可行解，不含时刻/能耗结果
+config/search.json               固定种子、迭代预算和邻域参数
 src/config.py                   赛题规则、单位常数、算法参数
 src/core/                       官方输入、模型、地形、物理、路线、约束、I/O、溯源
 src/q1/physics_engine.py         单点能力与精确组批
 src/q2/heuristic.py              初始可行构造
-src/q2/tradeoff.py               缓存路线评价、合并前沿与资源调度
+src/q2/tradeoff.py               原合并链种子、结果导出
+src/q2/search.py                 分组/路线/资源邻域及 Pareto 档案
+src/core/discrete.py             共享运输邻域与固定资源顺序的精确时刻
 src/core/communication.py        双向链路预算、中继物理与通信状态采样
 src/q3/communication.py          旧导入路径的兼容导出
-src/q3/solver.py                 通信采样与固定离散方案的联合时刻求解
+src/q3/solver.py                 给定离散方案的 HiGHS 联合时序 LP
+src/q3/preparation.py            真实物理与 1 s 通信预检、精确坐标缓存
+src/q3/search.py                 运输/中继离散搜索与可行解保护
 src/q4/partition.py              固定任务的分区枚举
 src/validation.py               从官方数据重算结果
 src/cli.py                      统一入口

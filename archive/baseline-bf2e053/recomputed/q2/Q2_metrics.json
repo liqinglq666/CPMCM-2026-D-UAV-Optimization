@@ -1,0 +1,7 @@
+{
+  "trips": 22,
+  "makespan": 11033.023069572368,
+  "energy": 79.76059654204991,
+  "weighted_tardiness": 327498.24887705693,
+  "hard_violations": 0
+}

@@ -8,7 +8,6 @@ from pathlib import Path
 from src.config import (
     DEFAULT_DATA_ROOT,
     PROJECT_ROOT,
-    BALANCED_TRIPS,
     FRONTIER_MIN_TRIPS,
     Q3_PLAN,
 )
@@ -34,7 +33,12 @@ def run_question(question, argv=None):
             help="Override all type reserves; default: official per-type values",
         )
     elif question == "q2":
-        parser.add_argument("--target-trips", type=int, default=BALANCED_TRIPS)
+        parser.add_argument(
+            "--target-trips",
+            type=int,
+            default=None,
+            help="Optional fixed trip count; default selects the lexicographic incumbent",
+        )
         parser.add_argument("--frontier-min", type=int, default=FRONTIER_MIN_TRIPS)
     elif question == "q3":
         parser.add_argument("--plan", type=Path, default=Q3_PLAN)
@@ -89,11 +93,52 @@ def run_all(argv=None):
         else:
             stage.mkdir()
         (stage / "validation.json").unlink(missing_ok=True)
-        solve_q1(args.root, out_dir=stage / "q1")
-        solve_q2(args.root, stage / "q2")
-        solve_q3(args.root, stage / "q3")
-        solve_partitions(stage / "q3", stage / "q4", args.root)
+        from time import perf_counter
+        from src.core.io import write_json
+        import platform
+        import hashlib
+        import scipy
+        import numpy
+
+        runtimes = {}
+        for question, solve in (
+            ("Q1", lambda: solve_q1(args.root, out_dir=stage / "q1")),
+            ("Q2", lambda: solve_q2(args.root, stage / "q2")),
+            ("Q3", lambda: solve_q3(args.root, stage / "q3")),
+            ("Q4", lambda: solve_partitions(stage / "q3", stage / "q4", args.root)),
+        ):
+            started = perf_counter()
+            solve()
+            runtimes[question] = perf_counter() - started
+        started = perf_counter()
         summary = validate_results(args.root, stage)
+        write_json(
+            stage / "run_metadata.json",
+            dict(
+                solver_runtime_s=runtimes,
+                validation_runtime_s=perf_counter() - started,
+                python=platform.python_version(),
+                platform=platform.platform(),
+                numpy=numpy.__version__,
+                scipy=scipy.__version__,
+                algorithm_sha256={
+                    str(p.relative_to(PROJECT_ROOT)): hashlib.sha256(
+                        p.read_bytes()
+                    ).hexdigest()
+                    for folder in ("src", "config")
+                    for p in sorted((PROJECT_ROOT / folder).rglob("*"))
+                    if p.is_file() and p.suffix in (".py", ".json")
+                },
+            ),
+        )
+        # Reporting consumes the validated generations; solvers never consume
+        # historical result tables. Do not retain a stale comparison after reruns.
+        (stage / "algorithm_comparison.csv").unlink(missing_ok=True)
+        baseline = PROJECT_ROOT / "archive/baseline-bf2e053/recomputed"
+        if (baseline / "validation.json").is_file():
+            from scripts.compare_algorithms import main as compare_algorithms
+
+            compare_algorithms(["--baseline", str(baseline), "--results", str(stage)])
         backup = Path(directory) / "previous"
         if args.out.exists():
             args.out.rename(backup)
