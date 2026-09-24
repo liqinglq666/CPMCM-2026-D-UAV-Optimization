@@ -99,7 +99,7 @@ axes[1].scatter(
     critical.latitude,
     s=95,
     marker="*",
-    fc=RED,
+    fc=RED if violations else LIGHT_BLUE,
     ec=INK,
     lw=0.6,
     zorder=8,
@@ -127,14 +127,23 @@ for ax in axes:
 axes[1].set_ylabel("")
 axes[1].tick_params(labelleft=False)
 panel(axes[0], "a", "无中继：直连不足轨迹")
-panel(axes[1], "b", f"正式中继：加密发现 {violations} 处不足")
+panel(axes[1], "b", f"正式中继：加密未覆盖 {violations} 处")
 fig.legend(
     handles=[
         Line2D([], [], color=DIRECT, lw=0.8, label="直连可用轨迹"),
         Line2D([], [], color=RED, lw=1.5, ls="--", label="直连不足"),
         Line2D([], [], color=LIGHT_BLUE, lw=1.5, ls="-.", label="指定中继保障段"),
         Line2D([], [], ls="", marker="^", mfc=LIGHT_BLUE, mec=INK, label="中继悬停点"),
-        Line2D([], [], ls="", marker="*", mfc=RED, mec=INK, ms=9, label="最紧加密状态"),
+        Line2D(
+            [],
+            [],
+            ls="",
+            marker="*",
+            mfc=RED if violations else LIGHT_BLUE,
+            mec=INK,
+            ms=9,
+            label="最紧加密状态",
+        ),
     ],
     loc="outside lower center",
     ncol=3,

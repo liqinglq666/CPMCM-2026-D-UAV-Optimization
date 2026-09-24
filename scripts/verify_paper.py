@@ -97,6 +97,23 @@ def verify(workbook: Path, template: Path, rebuild_figures: bool = False):
         GapTwo=str(sum(int(r["缺口"]) for r in q4_resources if r["K"] == "2")),
         GapThree=str(sum(int(r["缺口"]) for r in q4_resources if r["K"] == "3")),
     )
+    replay = json.loads((ROOT / "results/communication_replay.json").read_text())
+    assert replay["source_sha256"] == {
+        p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+        for p in sorted((ROOT / "results/q3").glob("Q3_*.csv"))
+    }
+    quarter = next(r for r in replay["sampling"] if r["step_s"] == 0.25)
+    expected_numbers.update(
+        StatesQuarter=str(quarter["checked_states"]),
+        MarginQuarter=f"{quarter['minimum_margin_db']:.3f}",
+        ViolationsQuarter=str(quarter["violations"]),
+    )
+    for diagnostic in analysis["sampling_validation"]:
+        extra = next(
+            r for r in replay["sampling"] if r["step_s"] == diagnostic["step_s"]
+        )
+        for key in ("checked_states", "violations", "minimum_margin_db"):
+            assert extra[key] == diagnostic[key]
     assert all(numbers[key] == value for key, value in expected_numbers.items())
     for rows in (q1, q2, q3):
         cargo = [item for r in rows for item in r["货箱编号列表"].split(",")]

@@ -1,4 +1,4 @@
-"""Equal-width evidence panels, including zero time slack and refined link failure."""
+"""Equal-width evidence panels for SOC, hard deadlines and refined link margins."""
 
 import matplotlib.pyplot as plt
 import numpy as np

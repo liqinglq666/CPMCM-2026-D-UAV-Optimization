@@ -1,7 +1,8 @@
 """Discrete transport/relay neighborhoods with exact conditional HiGHS timing.
 
 The initial JSON is an incumbent, not an answer. Every candidate is rebuilt
-from official physics, audited at <= 1 s, and hard-feasible before scoring.
+from official physics, audited on the union of 1 s and 0.5 s grids, and
+hard-feasible before scoring.
 """
 
 from copy import deepcopy
@@ -113,7 +114,7 @@ def evaluate(plan, preparer, drones, batteries):
             or times["end", job["relay"]]
             < start + last + RELAY_GUARD_S - RESULT_TOLERANCE
         ):
-            raise ValueError("Relay unavailable in the 1 s communication audit")
+            raise ValueError("Relay unavailable in the union-grid communication audit")
     return dict(jobs=jobs, relays=relays, times=times, objective=objective(rows))
 
 
@@ -258,7 +259,11 @@ def search_plan(
         physics, boxes, drones, batteries, relay_inputs, communication, step_s
     )
     initial = build_plan(initial)
-    baseline = evaluate(initial, preparer, drones, batteries)
+    from .seed_repair import repair_seed
+
+    initial, baseline = repair_seed(
+        initial, preparer, drones, batteries, params, out_dir
+    )
     best_plan, best = initial, baseline
     current_plan, current = best_plan, best
     points = candidate_points(initial, physics, params)
@@ -341,6 +346,7 @@ def search_plan(
             status_counts=dict(Counter(r["status"] for r in trace)),
             operator_attempts=dict(Counter(r["operator"] for r in trace)),
             communication_step_s=step_s,
+            communication_sampling_steps_s=list(preparer.audit_steps),
             continuous_time_proof=False,
             exactness="HiGHS timing conditional on discrete decisions and charging branches; outer search heuristic",
             spatial_candidate_count=len(points),

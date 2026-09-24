@@ -18,19 +18,19 @@
     "pareto_points": 73
   },
   "q3": {
-    "trips": 27,
+    "trips": 25,
     "boxes": 80,
-    "energy_kwh": 89.05671860775453,
-    "makespan_s": 10724.855339336147,
-    "checked_states": 46102,
-    "relay_energy_kwh": 5.149826623884925,
-    "joint_makespan_s": 10724.855339336147
+    "energy_kwh": 82.3783818905649,
+    "makespan_s": 10780.84594421038,
+    "checked_states": 102325,
+    "relay_energy_kwh": 4.1921946128570555,
+    "joint_makespan_s": 10782.35682424435
   },
   "q4": {
-    "atomic_groups": 3,
+    "atomic_groups": 4,
     "shortages": {
       "2": 3,
-      "3": 7
+      "3": 6
     }
   },
   "input_sha256": {
@@ -42,5 +42,9 @@
     "30米DEM.tif": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03"
   },
   "communication_step_s": 1.0,
+  "communication_sampling_steps_s": [
+    1.0,
+    0.5
+  ],
   "continuous_time_proof": false
 }

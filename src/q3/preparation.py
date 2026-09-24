@@ -1,10 +1,11 @@
-"""Fresh physical and 1 s communication prechecks, cached without coordinate rounding."""
+"""Fresh physics and union-grid communication checks, without coordinate rounding."""
 
 from functools import lru_cache
 from copy import deepcopy
 
 from src.core.discrete import TransportEvaluator
-from src.core.communication import sample_states, relay_travel
+from src.core.communication import relay_travel
+from src.core.sampling import sample_audit_states, audit_steps
 
 
 class PlanPreparer(TransportEvaluator):
@@ -15,6 +16,7 @@ class PlanPreparer(TransportEvaluator):
         self.relay_inputs = relay_inputs
         self.comm = communication
         self.step_s = step_s
+        self.audit_steps = audit_steps(step_s)
         # Exact argument keys, lifetime limited to this input/DEM generation.
         self.link = lru_cache(maxsize=250000)(communication.link)
         self.outage_cache = {}
@@ -27,7 +29,9 @@ class PlanPreparer(TransportEvaluator):
     def outages(self, job):
         key = self.key(job)
         if key not in self.outage_cache:
-            states = list(sample_states(self.profile(job), self.physics, self.step_s))
+            states = list(
+                sample_audit_states(self.profile(job), self.physics, self.step_s)
+            )
             outages = [
                 (t, point)
                 for t, point in states
@@ -84,7 +88,9 @@ class PlanPreparer(TransportEvaluator):
                 raise ValueError("Unknown relay sortie")
             checked, outages = self.outages(job)
             if outages and (rid is None or not self.covers(job, relay_map[rid])):
-                raise ValueError("Uncovered 1 s communication state")
+                raise ValueError(
+                    "Uncovered union-grid communication state (1 s + 0.5 s)"
+                )
             job.update(
                 profile=self.profile(job),
                 checked_states=checked,

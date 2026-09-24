@@ -28,7 +28,8 @@ from src.q1.physics_engine import (
     roundtrip_time,
     optimize_service_q1,
 )
-from src.core.communication import Communication, sample_states
+from src.core.communication import Communication
+from src.core.sampling import sample_audit_states, audit_steps
 from src.q4.partition import solve_partitions
 
 
@@ -154,7 +155,7 @@ def validate_communication(profiles, comm_rows, relays, physics, communication, 
         if mode == "直连" and rid:
             raise ValueError("Direct link row must not reference a relay")
         outages = []
-        for offset, point in sample_states(profile, physics, step_s):
+        for offset, point in sample_audit_states(profile, physics, step_s):
             checked += 1
             if communication.link(
                 point, communication.gateway, communication.parameters.direct_budget_db
@@ -288,6 +289,8 @@ def validate_q3_metrics(metrics, summary, trips, relay_rows, deliveries, boxes, 
         close(metrics[key], expected, "Q3 metric " + key)
     if metrics["continuous_time_proof"] is not False:
         raise ValueError("Sampled communication cannot certify continuous time")
+    if metrics.get("communication_sampling_steps_s") != list(audit_steps(step_s)):
+        raise ValueError("Q3 metrics omit a required communication sampling grid")
 
 
 def validate_results(root: Path, results: Path, step_s=COMMUNICATION_STEP_S):
@@ -410,6 +413,7 @@ def validate_results(root: Path, results: Path, step_s=COMMUNICATION_STEP_S):
         }
     summary["input_sha256"] = fingerprints
     summary["communication_step_s"] = step_s
+    summary["communication_sampling_steps_s"] = list(audit_steps(step_s))
     summary["continuous_time_proof"] = False
     write_json(results / "validation.json", summary)
     return summary
