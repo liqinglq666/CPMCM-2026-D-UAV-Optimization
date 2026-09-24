@@ -10,7 +10,7 @@ paper/sections/              摘要、正文、附录
 paper/references.tex         七条已核验参考文献
 paper/tables/                自动三线表、跨页表与数字宏
 paper/data/                  场景诊断、统一数字与工作簿数据
-paper/figure_contracts.json  九张图的主张、层级与边界
+paper/figure_contracts.json  十二张图的主张、层级与边界
 paper/figure_manifest.csv    图、来源、脚本、章节及来源 SHA256
 paper/fonts/                字体及许可
 paper/reports/              验证、一致性、科学与页面终审
@@ -19,7 +19,7 @@ outputs/figures/             PDF / SVG / 300 dpi PNG
 outputs/paper/main.pdf       论文 PDF
 ```
 
-大型派生通信轨迹、展示 DEM 网格、字体与渲染文件不进 Git，完整交付 ZIP 含这些文件。原始赛题、工作簿、DEM 和官方模板原样保留。
+大型派生通信轨迹、原始 DEM 裁剪网格、字体与渲染文件不进 Git，完整交付 ZIP 含这些文件。原始赛题、工作簿、DEM 和官方模板原样保留。
 
 ## 重建
 
@@ -47,7 +47,7 @@ node scripts/export_submission.mjs /path/to/结果提交模板.xlsx paper/data/w
 python scripts/verify_paper.py --workbook outputs/submission/D_results.xlsx --template /path/to/结果提交模板.xlsx --rebuild-figures
 ```
 
-验证只读 Excel。`--rebuild-figures` 重画全部九图并比较相同环境、相同输入下 PNG 的 SHA256；计算来源是 CSV，Excel 是官方格式的静态结果视图。
+验证只读 Excel。`--rebuild-figures` 重画全部十二图并比较相同环境、相同输入下 PNG 的 SHA256；计算来源是 CSV，Excel 是官方格式的静态结果视图。
 
 ## 状态与提交前信息
 
@@ -66,12 +66,16 @@ python scripts/export_compatible_pdf.py
 ```
 
 需要安装 Ghostscript（Linux/macOS 的 `gs`，Windows 的 `gswin64c` 或 `gswin32c`）。
-`outputs/paper/main-compatible.pdf` 是显示/打印兼容版，字形转为矢量轮廓，零字体资源、零页面栅格图；当前为 25 页，保留正文排版和科研图形。正文无法直接搜索、复制或被屏幕阅读器读取。
+`outputs/paper/main-compatible.pdf` 是显示/打印兼容版，字形转为矢量轮廓，零字体资源、零页面栅格图；当前页数见终审报告，保留正文排版和科研图形。正文无法直接搜索、复制或被屏幕阅读器读取。
 `outputs/paper/main.pdf` 保留文字与 Unicode 映射，供提取核验；LaTeX 源文件继续用于编辑。数值验证器检查此原生文字版，兼容版另外检查页面与图形。
 详见 `reports/OUTLINED_COMPATIBILITY.md`，不能把某个渲染器上的 PASS 当成用户端已解决的证据。
 
 ## 本轮结构重构
 
-详细目录及每节的论证任务见 `blueprint.md`；重写前发现见 `reports/STRUCTURE_AUDIT.md`。Q4 现位于第 7 节，敏感性和验证分别位于第 8、9 节。图形文件 ID 保持稳定，显示编号随引用顺序生成。
+详细目录及每节的论证任务见 `blueprint.md`；重写前发现见 `reports/STRUCTURE_AUDIT.md`。Q4 现位于第 7 节，敏感性和验证分别位于第 8、9 节。图形文件 ID 已按 01–12 的正文顺序统一，显示编号随引用顺序自动生成。
 
-新稿共 25 页、9 图、16 表；50 个生成宏中正文实际使用 47 个。新增 Q2 相邻候选表、继承关系表和结论范围表。新的 `verify_paper.py` 还检查孤立章节、重复插入、图形章节契约和参考文献首次引用顺序。数学字体采用 Unicode OpenType，避免新增大括号/大算子触发旧 CMEX10 缺少 ToUnicode 的问题，严格字体门禁没有放宽。
+终稿加入摘要后的自动目录（两级标题、参考文献、附录），保留页码与内部跳转。12 图统一采用用户指定的语义色板；A/B/C 机型使用圆/方/三角及实线/虚线/点划线，货类与资源以纹理补充灰度识别。Q1 组批的相对最紧约束统计自动生成，不冒充最低架次数证明。
+
+`analyze_paper.py` 额外保存完整 0.5 s 通信状态，并记录八个派生数据文件的 SHA256。绘图和表格生成前同时核对正式结果与诊断摘要。`verify_paper.py` 验证图形清单来源、细化采样最紧状态、目录条目页码和链接，以及图形顺序、表格、引用、中文字体。目录排版分页不硬写正文页码；三次 XeLaTeX 更新交叉引用。
+
+旧图已从绘图入口和交付包移除；旧审计运行日志按历史证据保留，不能代替当前 `reports/FINAL_AUDIT.md` 的验收。

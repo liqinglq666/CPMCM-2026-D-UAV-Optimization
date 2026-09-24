@@ -1,0 +1,131 @@
+[fig] fig01_framework: PDF / SVG / 300 dpi PNG
+[fig] fig02_task_map: PDF / SVG / 300 dpi PNG
+[fig] fig03_physics: PDF / SVG / 300 dpi PNG
+[fig] fig04_payload_boundary: PDF / SVG / 300 dpi PNG
+[fig] fig05_batching: PDF / SVG / 300 dpi PNG
+[fig] fig06_tradeoff: PDF / SVG / 300 dpi PNG
+[fig] fig07_resources: PDF / SVG / 300 dpi PNG
+[fig] fig08_communication_map: PDF / SVG / 300 dpi PNG
+[fig] fig09_communication_time: PDF / SVG / 300 dpi PNG
+[fig] fig10_partition: PDF / SVG / 300 dpi PNG
+[fig] fig11_sensitivity: PDF / SVG / 300 dpi PNG
+[fig] fig12_validation: PDF / SVG / 300 dpi PNG
+{
+  "status": "PASS",
+  "source_result_files": 23,
+  "workbook_sheets": 8,
+  "workbook_cells_compared": 1723,
+  "preserved_official_sheets": 6,
+  "added_transport_detail_sheets": 2,
+  "independent_aggregates": {
+    "QOneTrips": "18",
+    "QTwoTrips": "22",
+    "QThreeTrips": "24",
+    "RelayTrips": "6",
+    "QOneEnergy": "59.130",
+    "QOneTime": "32776.016",
+    "QTwoEnergy": "79.761",
+    "QTwoTime": "11033.023",
+    "JointEnergy": "86.712",
+    "JointTime": "12789.446",
+    "MinSoc": "20.84",
+    "CandidateCount": "8",
+    "CandidateMaxTrips": "24",
+    "CandidateMinTrips": "17",
+    "GapTwo": "4",
+    "GapThree": "7"
+  },
+  "generated_number_macros": 53,
+  "used_macros_found_in_pdf": 50,
+  "figures": 12,
+  "figure_sections": {
+    "fig01_framework": "1",
+    "fig02_task_map": "2",
+    "fig03_physics": "3",
+    "fig04_payload_boundary": "4",
+    "fig05_batching": "4",
+    "fig06_tradeoff": "5",
+    "fig07_resources": "5",
+    "fig08_communication_map": "6",
+    "fig09_communication_time": "6",
+    "fig10_partition": "7",
+    "fig11_sensitivity": "8",
+    "fig12_validation": "9"
+  },
+  "included_sections": [
+    "sections/abstract",
+    "sections/01_problem",
+    "sections/02_data",
+    "sections/03_physics",
+    "sections/04_q1",
+    "sections/05_q2",
+    "sections/06_q3",
+    "sections/07_q4",
+    "sections/08_sensitivity",
+    "sections/09_validation",
+    "sections/10_conclusion",
+    "sections/appendix"
+  ],
+  "figure_files": 36,
+  "pdf_pages": 32,
+  "toc_entries_checked": 50,
+  "toc_links": 50,
+  "pdf_font_audit": {
+    "status": "PASS",
+    "embedded_fonts_with_unicode": 21,
+    "pages": 32,
+    "chinese_characters_per_page": [
+      599,
+      247,
+      278,
+      761,
+      659,
+      549,
+      410,
+      480,
+      576,
+      493,
+      720,
+      450,
+      1005,
+      384,
+      363,
+      428,
+      801,
+      542,
+      278,
+      513,
+      890,
+      359,
+      649,
+      875,
+      359,
+      404,
+      976,
+      55,
+      147,
+      127,
+      39,
+      410
+    ]
+  },
+  "reference_entries": 7,
+  "citation_occurrences": 8,
+  "reproduced_png_sha256": {
+    "fig01_framework": "05c22a29e1ab1f9dc80d88dfe1b692ec7591f63a64d360fc4d7409a98610c143",
+    "fig02_task_map": "df68cc7b2ac6951857ec095aa02ea3bacaea6ec66e9fb580eab3f1730d614747",
+    "fig03_physics": "22cd50ba5297319e69e18289609c188575ba753fa9e447d65d527c5087389b42",
+    "fig04_payload_boundary": "72c0484c18ded8b281bc0e464ab26047bf79b152ec091335c94565585a57dbce",
+    "fig05_batching": "cabb3c199434659e28f812d5d5b9bb4d382fa02f8b49c035e6bf60241278df5d",
+    "fig06_tradeoff": "abe4c299f43db6adcf11baf784c55d373dc0c19e25b2f579bf52b63cd5a2d126",
+    "fig07_resources": "e37edb1b0956908c0bb63b9c166ace707d08b68c96f472ecf954cd30569635f3",
+    "fig08_communication_map": "dacf1f4921739397f0f911b5052af325becf489600dc1ec07e890bb8c3837768",
+    "fig09_communication_time": "675f138cc36484e7263b41213b7fe80c3e481cf6188372b501becbca321e3e2b",
+    "fig10_partition": "043fbac4f8fbf51ab9f06ffd38432b35083c2ee3e273e1e9491f3f128ff58696",
+    "fig11_sensitivity": "a26f0d137e2e31bf9dc3249c6b63841cf500b5ca31e73aa14a8cd8a6d83ca770",
+    "fig12_validation": "e7416df6b6e1138203bda66084f483fdb8aa9f8fa1757c6fd84cbcefbef581d5"
+  },
+  "pdf_sha256": "e074602ba0a7ff944de75df1e5c909d91f739d725ed131060aa38d0c829d5374",
+  "workbook_sha256": "27812796a9fdfd8d9ee01e218e33d2ce60e772380613990235fd5a4578e5303e",
+  "interpretation": "Deterministic official model; sampled communication is not a continuous certificate."
+}

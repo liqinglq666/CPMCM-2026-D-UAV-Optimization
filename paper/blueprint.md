@@ -19,7 +19,8 @@
 | 2 模型假设、数据与符号 | 官方规则、补充假设、算法选择需要可区分且可追溯。 |
 | 2.1 题设规则与适用假设 | 无风场、确定性输入和地形近似限制了结论外推。 |
 | 2.2 数据校验与结果溯源 | 编号、单位和文件版本一致是后续计算的前提。 |
-| 2.3 统一符号与时间口径 | 累计作业与并行完工不能混为一谈。 |
+| 2.3 任务空间与地形背景 | 地形与节点确立能力模型的空间基础。 |
+| 2.4 统一符号与时间口径 | 累计作业与并行完工不能混为一谈。 |
 | 3 地形—载荷—能量统一计算模型 | 所有任务从相同航段对象获得时间、能量与状态。 |
 | 3.1 DEM 航高与飞行阶段 | 最高沿途地形决定巡航高度，多点投送须逐次重新爬升。 |
 | 3.2 动态载荷与等效航程 | 卸货改变后续能耗，返程为空载但仍耗能。 |
@@ -65,9 +66,24 @@
 
 ## 图表论证契约
 
-九张图各保留一个主要任务：总路线（四问继承）；地形/能量（距离不足以定能力）；安全载荷（额定/能量双边界）；组批（不可拆货箱）；Q2 权衡与甘特（选点和执行）；Q3 轨迹/余量（全过程通信）；Q4 库存/分组（独立性代价）；敏感性（连续参数/离散跳变）；验证（最紧约束/加密采样）。图形文件 ID 保持稳定，论文显示编号按新的引用顺序自动生成，契约章节同步更新。
+十二张主图按正文顺序命名，并各有一个主要论证任务。摘要后新增自动目录，包含两级标题、参考文献与附录，页码和链接由 LaTeX 生成。
 
-新增的 Q2 相邻候选表来自原有 CSV，不新增求解或实验；关键结果均使用生成宏。图形阴影表示服务区范围，不代表置信区间。
+| 图 | 论证任务 | 主要证据 |
+|---|---|---|
+| 1 / fig01_framework | 统一物理底座逐层扩展到运输执行、通信保障和独立资源配置；继承规则与继承固定方案严格区分 | paper/data/analysis.json；results/q4/Q4_resource_summary.csv |
+| 2 / fig02_task_map | 原始地形与任务节点建立空间背景，参考连线不冒充运输路线 | paper/data/analysis.json；paper/data/terrain_map.json |
+| 3 / fig03_physics | 地形抬高巡航高度，去程载荷与返程空载产生不同能耗 | paper/data/terrain_profile.csv；paper/data/energy_components.csv；paper/data/analysis.json；src/config.py |
+| 4 / fig04_payload_boundary | 额定载荷与能量上限共同限制安全运载能力 | results/q1/Q1_max_safe_payload.csv；paper/data/analysis.json |
+| 5 / fig05_batching | 不可拆分货箱通过精确集合划分形成最低架次数组批 | results/q1/Q1_batch_solution.csv；paper/data/constraint_slacks.csv；paper/data/analysis.json |
+| 6 / fig06_tradeoff | 压缩架次付出及时性代价；所选点是有限候选的显式折中 | results/q2/Q2_tradeoff_frontier.csv；results/q2/Q2_transport_trips_balanced.csv |
+| 7 / fig07_resources | 飞机返航释放与电池充满释放分别约束实体资源时序 | results/q2/Q2_resource_check.csv |
+| 8 / fig08_communication_map | 直连不足发生在航段内部；固定离散计划与LP连续时序分开 | paper/data/analysis.json；paper/data/terrain_map.json；paper/data/communication_states_05s.csv；results/q3/Q3_relay_sorties.csv |
+| 9 / fig09_communication_time | 中继窗口保障已检查状态；最紧采样余量仍不能证明连续安全 | paper/data/analysis.json；paper/data/communication_states_05s.csv；results/q3/Q3_relay_sorties.csv |
+| 10 / fig10_partition | 不可拆连通分量限制分组，库存总量不能抵消按类型资源缺口 | results/q4/Q4_resource_summary.csv；results/q4/Q4_partition_config.csv；results/q3/Q3_transport_trips.csv |
+| 11 / fig11_sensitivity | 连续能力收缩与离散组批跳变须分开；固定方案阈值不是全局分界 | paper/data/payload_reserve.csv；results/q1/Q1_sensitivity_summary.csv；paper/data/analysis.json |
+| 12 / fig12_validation | 可行不等于稳健；SOC、硬时限、加密通信证据共同界定边界 | paper/data/constraint_slacks.csv；paper/data/hard_deadline_slacks.csv；paper/data/analysis.json |
+
+Q2 权衡和实体资源分别成图，Q3 空间与时域分别成图；新增原始 DEM 与节点空间背景。图中所有数值来自真实输出；原始 DEM 只在显示时绘制离散高程带。储备图的细线为服务区能力，不是置信区间；五个重新优化场景不插值为阶梯曲线。
 
 ## 事实与继承约束
 

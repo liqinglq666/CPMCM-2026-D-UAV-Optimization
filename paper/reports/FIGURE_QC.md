@@ -1,44 +1,24 @@
-# 图形与页面终检 — 2026-09-24 结构重构版
+# 12 图与页面终检 — 2026-09-24
 
-本轮保留九图及统一蓝灰、青绿、橙色体系。图 1 改为四问任务继承示意，其余八张数据图保留原来的真实数据及图形结构。显示图号按新章节顺序生成，文件 ID 为稳定名称，不再等同于显示图号。
+全部图由真实 CSV/JSON/DEM 自动绘制；统一用户指定语义色板。黄色仅作星号强调；浅色填充配深色文字/边框。主图按正文首次论证顺序插入，全部 PDF/SVG 为矢量，PNG 为 300 dpi。
 
-| 显示图号 / 文件 | 唯一论证任务 | 人工检查与边界 |
+| 图 | 主张 | 数据 |
 |---|---|---|
-| 1 / fig01_framework | 四问依次解决能力、执行、通信、独立配置 | 每条箭头标明继承对象，结果锚点自动读取；结构图不装成数值实验图 |
-| 2 / fig02_physics | 沿途 DEM 与载荷影响不同能量阶段 | 真实 S014 剖面、实际去程货箱与空载返程；下降规则明确 |
-| 3 / fig03_payload_boundary | 额定载荷与能源共同形成边界 | 全部服务区—机型组合；不把不同地形连线解释为纯距离效应 |
-| 4 / fig04_batching | 不可拆货箱构成实际可行批次 | 箱数、质量、货类和三种约束占用对应；无虚构 Q1 调度 |
-| 5 / fig05_optimization | 架次减少付出及时性代价 | 只显示实际有限候选；甘特核对实体无人机，电池另由记录验证 |
-| 6 / fig06_communication | 沿轨迹检查而非只查目标点 | 真实直连不足点、指定中继、最紧状态；只有离散采样证据 |
-| 7 / fig09_partition | 禁止跨组共享增加配置需求 | 库存和组别对应；中继按组完整复制；件数不等于经济成本 |
-| 8 / fig07_sensitivity | 连续能力下降触发离散组批变化 | 阴影为服务区范围，不是 CI；重组批与固定计划阈值分开 |
-| 9 / fig08_validation | 最紧余量界定可信度 | 运输 SOC、硬时限、1 s/0.5 s 通信余量；不将记录数当统计样本 |
+| 1 / fig01_framework | 统一物理底座逐层扩展到运输执行、通信保障和独立资源配置；继承规则与继承固定方案严格区分 | paper/data/analysis.json；results/q4/Q4_resource_summary.csv |
+| 2 / fig02_task_map | 原始地形与任务节点建立空间背景，参考连线不冒充运输路线 | paper/data/analysis.json；paper/data/terrain_map.json |
+| 3 / fig03_physics | 地形抬高巡航高度，去程载荷与返程空载产生不同能耗 | paper/data/terrain_profile.csv；paper/data/energy_components.csv；paper/data/analysis.json；src/config.py |
+| 4 / fig04_payload_boundary | 额定载荷与能量上限共同限制安全运载能力 | results/q1/Q1_max_safe_payload.csv；paper/data/analysis.json |
+| 5 / fig05_batching | 不可拆分货箱通过精确集合划分形成最低架次数组批 | results/q1/Q1_batch_solution.csv；paper/data/constraint_slacks.csv；paper/data/analysis.json |
+| 6 / fig06_tradeoff | 压缩架次付出及时性代价；所选点是有限候选的显式折中 | results/q2/Q2_tradeoff_frontier.csv；results/q2/Q2_transport_trips_balanced.csv |
+| 7 / fig07_resources | 飞机返航释放与电池充满释放分别约束实体资源时序 | results/q2/Q2_resource_check.csv |
+| 8 / fig08_communication_map | 直连不足发生在航段内部；固定离散计划与LP连续时序分开 | paper/data/analysis.json；paper/data/terrain_map.json；paper/data/communication_states_05s.csv；results/q3/Q3_relay_sorties.csv |
+| 9 / fig09_communication_time | 中继窗口保障已检查状态；最紧采样余量仍不能证明连续安全 | paper/data/analysis.json；paper/data/communication_states_05s.csv；results/q3/Q3_relay_sorties.csv |
+| 10 / fig10_partition | 不可拆连通分量限制分组，库存总量不能抵消按类型资源缺口 | results/q4/Q4_resource_summary.csv；results/q4/Q4_partition_config.csv；results/q3/Q3_transport_trips.csv |
+| 11 / fig11_sensitivity | 连续能力收缩与离散组批跳变须分开；固定方案阈值不是全局分界 | paper/data/payload_reserve.csv；results/q1/Q1_sensitivity_summary.csv；paper/data/analysis.json |
+| 12 / fig12_validation | 可行不等于稳健；SOC、硬时限、加密通信证据共同界定边界 | paper/data/constraint_slacks.csv；paper/data/hard_deadline_slacks.csv；paper/data/analysis.json |
 
-## 机械检查的适用范围
+图 9 的时间窗最小值使用真实 argmin 时刻，不把窗首当事件时刻，不连接跨任务/模式跳变。全局最紧原始记录单独放大。图 11 不把不可达填为零，不为五个离散重算点虚构阶梯阈值。
 
-当前 `icarus-critique.txt` 是本轮实际重跑日志。八张有数值坐标轴的数据图严格检查为 PASS。总路线图触发“无坐标轴、无不确定性、无样本量”的 1 FAIL/2 WARN；它是解释固定任务继承的结构示意，这三条数值绘图规则不适用。保留原始检查结果，不伪造坐标轴、误差带或统计 N，也不宣称九图全部机械 PASS。图 1 以结构是否忠于代码、数字是否溯源、灰度时标签是否明确为人工验收依据。
+32 页逐页审查范围：1 摘要；2–3 目录；4–7 总体/数据/地图；8–9 公共物理；10–12 Q1；13–16 Q2 及资源；17–20 Q3；21–23 Q4及敏感性起点；24–27 敏感性/验证/结论；28 文献；29–32 跨页完整结果与辅助说明。部分页底留白用于维持主图与解释的阅读顺序，未通过缩小正文或裁图强行压页。
 
-九图三格式文件有效，PNG 为 300 dpi，SVG 无栅格截图。相同环境重新绘图的九张 PNG 哈希均保持一致。原图 1 的 DEM 和甘特对象已分别在后续数据图充分展示，替换它避免重复面板，服务于评阅者先读懂四问关系的目标。
-
-## 25 页逐页视觉检查
-
-用 Poppler 渲染全页，检查所有页面，另放大摘要、通信公式、Q4 资源表、结论及原生/矢量差异最大区域。
-
-| 页码 | 内容 | 检查 |
-|---|---|---|
-| 1 | 结果型摘要、关键词 | 独立摘要页、自动数字、逐问性质与紧余量完整 |
-| 2–3 | 总体分析、继承表、路线图、假设 | 四问完整，路线箭头不暗示代码不存在的直接继承 |
-| 4–6 | 数据/符号、统一物理、Q1 起点 | 单位、载荷和质量区分；公式未超宽 |
-| 7–9 | 安全载荷、DP、分批、转 Q2 | 图表与解释对应，精确性与累计时间范围明确 |
-| 10–11 | Q2 搜索、选点表、权衡图、转 Q3 | 相邻候选可比较；不称全局最优 |
-| 12–13 | 通信、窗口、LP、联合结果 | 双向与指定中继、固定高度、组件单次使用均明确 |
-| 14–16 | 通信图、Q4、配置图、敏感性起点 | Q4 接续 Q3；库存缺口与复制解释对应 |
-| 17–18 | 压力边界、验证证据 | 不把运输储备容忍度扩展到整个排程 |
-| 19–20 | 余量图、范围表、评价、结论 | 范围表在评价前呈现；无英文孤页或正文残句尾页 |
-| 21 | 参考文献 | 七条合于一页，按首次引用顺序 |
-| 22–24 | 完整结果跨页表 | 重复表头、无裁切，数值可读 |
-| 25 | 中继明细、复现、辅助声明 | 末页内容完整，未另留数行尾页；无身份信息 |
-
-原生 PDF 字体资源全有嵌入与 Unicode，数学字体改为 Latin Modern Math。正文按官方题目三号黑体、一级标题四号黑体居中、正文小四宋体与单倍行距设置；页码从摘要开始，页脚居中，无页眉。图内字号和 Noto Sans SC 单独说明，不将字体技术验证当作所有格式规则的自动认证。
-
-矢量兼容版不依赖字体，放大检查无缺字。与原生版的 108 dpi 墨迹比较最低覆盖率 99.9049%（2 像素容差），不是像素完全一致；差异最大区域已检查为笔画/标点栅格化差异。完整机器证据见 `outlined_compatibility.json`。
+12 图重画 PNG SHA 均一致；原生/转曲 PDF 已检查字形、分页、公式断行、坐标单位、阈值、图例及匿名信息。机器结果见 `consistency.json`；兼容逐页渲染见 `final-visual-run/browser-check.json` 与 `compatibility.json`。旧 `icarus-critique.txt` 属前一轮九图历史检查，不充当本轮验收。
