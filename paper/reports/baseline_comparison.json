@@ -1,29 +1,150 @@
 {
-  "unchanged_files": [
-    "q1/Q1_batch_solution.csv",
-    "q1/Q1_leg_physics.csv",
-    "q1/Q1_max_safe_payload.csv",
-    "q1/Q1_metrics.json",
-    "q1/Q1_sensitivity_summary.csv",
-    "q1/input_manifest.json",
-    "q2/Q2_box_delivery_balanced.csv",
-    "q2/Q2_frontier_plans.json",
-    "q2/Q2_metrics.json",
-    "q2/Q2_resource_check.csv",
-    "q2/Q2_tradeoff_frontier.csv",
-    "q2/Q2_transport_trips_balanced.csv",
-    "q2/input_manifest.json",
-    "q3/Q3_box_delivery.csv",
-    "q3/Q3_communication.csv",
-    "q3/Q3_metrics.json",
-    "q3/Q3_relay_sorties.csv",
-    "q3/Q3_resource_check.csv",
-    "q3/Q3_transport_trips.csv",
-    "q3/input_manifest.json",
-    "q4/Q4_partition_config.csv",
-    "q4/Q4_resource_summary.csv",
-    "q4/input_manifest.json",
-    "validation.json"
-  ],
-  "changed_files": []
+  "baseline_remote_commit": "26cee5f580ebdbbe0db6f82d48afab0a6e557ff4",
+  "formal_results_unchanged": true,
+  "files": [
+    {
+      "path": "results/q1/Q1_batch_solution.csv",
+      "old_sha256": "a28c5e3eb7660ec0789969d122025445c61b67140d6bbb91f3a740423dece05c",
+      "new_sha256": "a28c5e3eb7660ec0789969d122025445c61b67140d6bbb91f3a740423dece05c",
+      "equal": true
+    },
+    {
+      "path": "results/q1/Q1_leg_physics.csv",
+      "old_sha256": "1957936788eca03a6dd4d168053f023a7a212bf124b22bfe8f967a799e99f314",
+      "new_sha256": "1957936788eca03a6dd4d168053f023a7a212bf124b22bfe8f967a799e99f314",
+      "equal": true
+    },
+    {
+      "path": "results/q1/Q1_max_safe_payload.csv",
+      "old_sha256": "2c3decbfea44e95c1e77d84ce9db8c4f13581189774f930fd4e66ed7a8c1e023",
+      "new_sha256": "2c3decbfea44e95c1e77d84ce9db8c4f13581189774f930fd4e66ed7a8c1e023",
+      "equal": true
+    },
+    {
+      "path": "results/q1/Q1_metrics.json",
+      "old_sha256": "3df457b62741f0236f9cf2fd1d20918d9383fa2b645bf3a0c42fbe807145b7eb",
+      "new_sha256": "3df457b62741f0236f9cf2fd1d20918d9383fa2b645bf3a0c42fbe807145b7eb",
+      "equal": true
+    },
+    {
+      "path": "results/q1/Q1_sensitivity_summary.csv",
+      "old_sha256": "608793bfdea2401f95a0f0d1dca3fb62142e6324be0307f3b923a400f40e3d77",
+      "new_sha256": "608793bfdea2401f95a0f0d1dca3fb62142e6324be0307f3b923a400f40e3d77",
+      "equal": true
+    },
+    {
+      "path": "results/q1/input_manifest.json",
+      "old_sha256": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+      "new_sha256": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+      "equal": true
+    },
+    {
+      "path": "results/q2/Q2_box_delivery_balanced.csv",
+      "old_sha256": "b8493cdae41c74cc0e00bd96ba0334e23824c608098c1e29fe6541dd0ed821c4",
+      "new_sha256": "b8493cdae41c74cc0e00bd96ba0334e23824c608098c1e29fe6541dd0ed821c4",
+      "equal": true
+    },
+    {
+      "path": "results/q2/Q2_frontier_plans.json",
+      "old_sha256": "a2496996aa1933c5c098e133db2b48b8632abf0e2e82869155c58725ad1b043f",
+      "new_sha256": "a2496996aa1933c5c098e133db2b48b8632abf0e2e82869155c58725ad1b043f",
+      "equal": true
+    },
+    {
+      "path": "results/q2/Q2_metrics.json",
+      "old_sha256": "3c3231f6784f34e1e808343cdb04bd5e58ef9e86e61f4e770bd1172e3ca93132",
+      "new_sha256": "3c3231f6784f34e1e808343cdb04bd5e58ef9e86e61f4e770bd1172e3ca93132",
+      "equal": true
+    },
+    {
+      "path": "results/q2/Q2_resource_check.csv",
+      "old_sha256": "19e50d273bfebda65195f555be17e5553e482cdc05cea6b796d33bb0c1506dc6",
+      "new_sha256": "19e50d273bfebda65195f555be17e5553e482cdc05cea6b796d33bb0c1506dc6",
+      "equal": true
+    },
+    {
+      "path": "results/q2/Q2_tradeoff_frontier.csv",
+      "old_sha256": "036a984db110d6622be9ef3a0f71907b39cc240724cbe76d63a6ffd7a81c37e7",
+      "new_sha256": "036a984db110d6622be9ef3a0f71907b39cc240724cbe76d63a6ffd7a81c37e7",
+      "equal": true
+    },
+    {
+      "path": "results/q2/Q2_transport_trips_balanced.csv",
+      "old_sha256": "b38fea8d79eb5e6335d21d1609b3dffb78b75b517a45897c7371f3e1c037eb11",
+      "new_sha256": "b38fea8d79eb5e6335d21d1609b3dffb78b75b517a45897c7371f3e1c037eb11",
+      "equal": true
+    },
+    {
+      "path": "results/q2/input_manifest.json",
+      "old_sha256": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+      "new_sha256": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+      "equal": true
+    },
+    {
+      "path": "results/q3/Q3_box_delivery.csv",
+      "old_sha256": "fe276dcfaeaac8fcef7869ea0a145bbc6e1debdb5ac25fb3d44cd16a23612c77",
+      "new_sha256": "fe276dcfaeaac8fcef7869ea0a145bbc6e1debdb5ac25fb3d44cd16a23612c77",
+      "equal": true
+    },
+    {
+      "path": "results/q3/Q3_communication.csv",
+      "old_sha256": "d9dacd7a0403510e53062df7063fec1132b9a081e8236e0dbc2f30ed6363e7ee",
+      "new_sha256": "d9dacd7a0403510e53062df7063fec1132b9a081e8236e0dbc2f30ed6363e7ee",
+      "equal": true
+    },
+    {
+      "path": "results/q3/Q3_metrics.json",
+      "old_sha256": "59ed2f2f824c03013dd6aaabbc2a7acd7b20ab030bea5c895663f142677ef032",
+      "new_sha256": "59ed2f2f824c03013dd6aaabbc2a7acd7b20ab030bea5c895663f142677ef032",
+      "equal": true
+    },
+    {
+      "path": "results/q3/Q3_relay_sorties.csv",
+      "old_sha256": "0fe08d2648ce0069567c62bfa16f99c533da2a5acac630cbd3a47287cee61fa7",
+      "new_sha256": "0fe08d2648ce0069567c62bfa16f99c533da2a5acac630cbd3a47287cee61fa7",
+      "equal": true
+    },
+    {
+      "path": "results/q3/Q3_resource_check.csv",
+      "old_sha256": "c24026abd5f90199140caeda66b976a9fdadcf2b55e80e3b094862f04d39e02c",
+      "new_sha256": "c24026abd5f90199140caeda66b976a9fdadcf2b55e80e3b094862f04d39e02c",
+      "equal": true
+    },
+    {
+      "path": "results/q3/Q3_transport_trips.csv",
+      "old_sha256": "76a8a45d39da0c7a3aeac45a7e00fd2e3fd260b69752e9df824e6e1765132e41",
+      "new_sha256": "76a8a45d39da0c7a3aeac45a7e00fd2e3fd260b69752e9df824e6e1765132e41",
+      "equal": true
+    },
+    {
+      "path": "results/q3/input_manifest.json",
+      "old_sha256": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+      "new_sha256": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+      "equal": true
+    },
+    {
+      "path": "results/q4/Q4_partition_config.csv",
+      "old_sha256": "8dec4be509bea35dbb265ad5c985635f6e9c7ae50aa14abc62a1baf5d404c5d3",
+      "new_sha256": "8dec4be509bea35dbb265ad5c985635f6e9c7ae50aa14abc62a1baf5d404c5d3",
+      "equal": true
+    },
+    {
+      "path": "results/q4/Q4_resource_summary.csv",
+      "old_sha256": "61b9bbfc2d4b6f71abc72f665b12ec5a509ba7ffcc0f2258642c8195bb28155e",
+      "new_sha256": "61b9bbfc2d4b6f71abc72f665b12ec5a509ba7ffcc0f2258642c8195bb28155e",
+      "equal": true
+    },
+    {
+      "path": "results/q4/input_manifest.json",
+      "old_sha256": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+      "new_sha256": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+      "equal": true
+    },
+    {
+      "path": "results/validation.json",
+      "old_sha256": "26b8ab283062b1507c0bf43cc858ebbfe417a1b78dbf67ea6deb5ec84ad629cb",
+      "new_sha256": "26b8ab283062b1507c0bf43cc858ebbfe417a1b78dbf67ea6deb5ec84ad629cb",
+      "equal": true
+    }
+  ]
 }

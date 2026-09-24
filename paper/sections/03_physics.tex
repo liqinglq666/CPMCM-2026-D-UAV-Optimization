@@ -1,46 +1,57 @@
-\section{地形、载荷与能量的统一物理模型}
-\subsection{地形决定航段高度与时间}
-记线路经过的闭 DEM 像元集合为 $\mathcal C_{ij}$，像元高程为 $h_c$。设中心作业海拔等于地面海拔，服务区作业海拔为地面以上 30 m，则
-\begin{equation}
-H_{ij}=\max_{c\in\mathcal C_{ij}}h_c+50,\quad
-h^+_{ij}=H_{ij}-z_i,\quad h^-_{ij}=H_{ij}-z_j,
-\qquad
-\tau_{gij}=\frac{h^+_{ij}}{v_g^\uparrow}+\frac{d_{ij}}{v_g^c}+\frac{h^-_{ij}}{v_g^\downarrow}.
-\label{eq:flight}
-\end{equation}
-高度差以 m 计、速度以 m/s 计，所得时间为 s。每次服务后都从该点作业高度重新爬升；不将多个访问节点拼成一条等高度巡航，从而避免漏算中间爬升。
-\paperfig{fig02_physics}{同一航段的地形高度与载荷分别决定飞行阶段和能量构成。S014 示例逐像元展示 DEM 剖面与 50 m 巡航净空；下图按实际 Q1 货箱载荷计算去程和空载返程能耗。下降附加能耗取零是官方计算规则。}{physics}
-图\ref{fig:physics}说明，路径的最高地形而非终点地面高度决定巡航海拔。返程虽然卸货为空载，仍要重新爬升并完成水平飞行，因此不能仅用去程能耗乘一或按载货质量比例缩减返程。地形对短航段的爬升占比尤其重要，距离排序不能代替逐航段 DEM 检查。
+\section{地形—载荷—能量统一计算模型}\label{sec:physics}
+四问要在同一标准场景下衔接，首先必须让同一条路线得到相同的时间、能耗和状态序列。本文将运输架次表示为“货箱集合、机型、访问顺序”，公共引擎据此返回逐段载荷、飞行阶段、交付偏移、总时长与总能耗。上层算法决定怎样组批和排程，不能改变这套物理计算。
 
-\subsection{剩余载荷、能耗与储备约束}
-按官方附录的等效航程规则，机型 $g$ 在当前有效载荷 $q$ 下满足
+\subsection{DEM 航高与飞行阶段}
+山区航线的代价并不只由水平距离决定：沿途一处高地就会抬升整个航段的计划巡航海拔。记线路经过的闭 DEM 像元集合为 $\mathcal C_{ij}$，像元高程为 $h_c$；O01 作业海拔取地面高程，服务区作业海拔取地面以上 30 m。对不同节点间航段，有
 \begin{align}
-L_g(q)&=L_g^0-(L_g^0-L_g^F)(q/Q_g)^{3/2},\quad 0\le q\le Q_g,\label{eq:range}\\
-E_{gij}(q)&=E_g\frac{d_{ij}}{L_g(q)}+
-\frac{(m_g^0+q)g_0 h^+_{ij}}{\eta_g\,3.6\times10^6}.\label{eq:energy}
+H_{ij}&=\max_{c\in\mathcal C_{ij}}h_c+50,\qquad
+h^+_{ij}=H_{ij}-z_i,\quad h^-_{ij}=H_{ij}-z_j,\label{eq:altitude}\\
+\tau_{gij}&=\frac{h^+_{ij}}{v_g^\uparrow}+\frac{d_{ij}}{v_g^c}+\frac{h^-_{ij}}{v_g^\downarrow}.\label{eq:flight}
 \end{align}
-式\eqref{eq:energy}两项单位均为 kWh，$g_0=9.80665$ m/s$^2$，$m_g^0$ 为含电池空载总质量。该等效模型直接遵循赛题，不将其解释为经过本文实飞辨识的功率模型。
+长度以 m、速度以 m/s 计，所得时间为 s。每次完成服务区交付后，下一航段从该点作业高度重新爬升；不能把多点配送当成一次起降、全程等高巡航。同一节点到自身的零航段则取零距离、零升降。
+\paperfig{fig02_physics}{最高沿途地形决定航高，返程卸货后仍有水平与爬升能耗。S014 的真实 DEM 剖面对应上图，实际 Q1 批次的去程载货与返程空载能量分解对应下图；下降附加能耗为零遵循题设规则。}{physics}
+图\ref{fig:physics}把航高与能量联系起来：终点较低并不意味着沿途无需高爬升，空载返程也不能省略。因而相同水平距离可对应不同的山区运输代价，后续载荷边界须逐航段计算。
 
-设 $\mathcal B_p$ 为架次的货箱集合，访问顺序为 $\pi_p$。在驶向下一节点前，状态为
+\subsection{动态载荷与等效航程}
+载荷相关能耗会改变配送路线的可行域\cite{dorling}，但不同能耗模型具有各自适用条件\cite{zhang}。本题已有统一计算规则，故直接使用官方等效航程，不再用外部经验模型替换。机型 $g$ 携带有效载荷 $q$ 时，
+\begin{equation}
+L_g(q)=L_g^0-(L_g^0-L_g^F)(q/Q_g)^{3/2},\qquad 0\le q\le Q_g.\label{eq:range}
+\end{equation}
+对架次 $p$，令 $\mathcal B_p$ 为其货箱集合，$\pi_p$ 为从 O01 出发并返回的节点序列。进入航段 $i\to j$ 时，
+\begin{equation}
+q_{p,ij}=\sum_{b\in\mathcal B_p:\,b\text{尚未完成交付}}m_b.\label{eq:payloadstate}
+\end{equation}
+每个服务区完成交接后移除对应货箱，再计算下一段。由此，载荷不是“起飞质量一直保持不变”，也不是“每段都按空载”；全部货物交付后的返航段才取 $q=0$。
+
+\subsection{分阶段能量与返航储备}
+水平航程和正向爬升分别消耗电量：
+\begin{equation}
+E_{gij}(q)=E_g\frac{d_{ij}}{L_g(q)}+
+\frac{(m_g^0+q)g_0h^+_{ij}}{\eta_g\,3.6\times10^6}.\label{eq:energy}
+\end{equation}
+其中 $m_g^0$ 为含电池空载总质量，$g_0=9.80665$ m/s$^2$，$\eta_g$ 为爬升效率。第二项由焦耳换算为 kWh，与第一项一致。下降附加项按题设取零，并不意味着真实下降过程不耗电，而是本题等效模型的规定。
+
+架次可行性同时要求
 \begin{equation}
 \begin{gathered}
-q_{p,ij}=\sum_{b\in\mathcal B_p:\,b\text{尚未完成交付}}m_b,\qquad
-E_p=\sum_{(i,j)\in\pi_p}E_{g_pij}(q_{p,ij}),\\
-\sum_{b\in\mathcal B_p}v_b\le V_{g_p},\qquad
-E_p\le(1-\rho_{g_p})E_{g_p}.
+\sum_{b\in\mathcal B_p}m_b\le Q_{g_p},\qquad
+\sum_{b\in\mathcal B_p}v_b\le V_{g_p},\\
+E_p=\sum_{(i,j)\in\pi_p}E_{g_pij}(q_{p,ij})
+\le(1-\rho_{g_p})E_{g_p}.\label{eq:feasible}
 \end{gathered}
-\label{eq:feasible}
 \end{equation}
-出发货箱总质量还须不超过 $Q_{g_p}$。由于只交付、不取货，起飞载荷与体积约束足以约束其后各段，但能耗必须按剩余载荷更新。交付完成时刻定义为该服务区基础交接时间和逐箱附加时间全部结束的时刻，不能以到达作业高度的时刻代替。
+质量限制回答“是否超载”，体积限制回答“能否装入”，能源限制回答“能否完成全程并留出返航储备”。由于只卸货、不取货，起飞质量和体积是全程最大值；电量则必须累计所有航段。共享这一判据，比单纯要求四问使用相同参数名称更重要。
 
-\subsection{能源资源的独立占用}
-运输架次从固定准备和逐箱装载开始计时，依次累加飞行与交接时间。实体无人机占用至返航；电池占用还要延伸到充电完成。设返航荷电状态 $s=1-E_p/E_g$，则
+\subsection{无人机与能源资源的独立占用}
+作业从固定准备和逐箱装载开始。各段飞行之后，按服务区基础交接时间及逐箱附加时间计算完成时刻；货箱的交付偏移 $\delta_{pb}$ 取交接结束，不能用到达代替。公共引擎最终给出 $(t_p,E_p,\delta_{pb})$，Q2、Q3 再通过 $C_b=s_p+\delta_{pb}$ 转成绝对时刻。
+
+无人机返航即可结束该运输架次占用；电池还须充至满电。令 $\sigma_p=1-E_p/E_{g_p}$，官方两阶段充电时间为
 \begin{equation}
- t_{\rm chg}(s)=T_{\rm full}
+ t_{\rm chg}(\sigma)=T_{\rm full}
  \begin{cases}
- 0.65(0.90-s)/0.90+0.35,&0\le s<0.90,\\
- 0.35(1-s)/0.10,&0.90\le s\le1.
+ 0.65(0.90-\sigma)/0.90+0.35,&0\le\sigma<0.90,\\
+ 0.35(1-\sigma)/0.10,&0.90\le\sigma\le1.
  \end{cases}\label{eq:charge}
 \end{equation}
-不同机型电池不能混用；相同机型的电池可在不同实体无人机之间复用。该区分解释了为什么“飞机已返航”并不等于“整套资源可立即再出发”。
+于是无人机和电池占用区间分别为 $[s_p,s_p+t_p)$ 与 $[s_p,s_p+t_p+t_{\rm chg}(\sigma_p))$。半开区间允许资源在前一任务释放的时刻立即投入下一任务。它们将在 Q2 约束排程，在 Q3 约束时序 LP，并在 Q4 转为独立资源需求，构成四问之间可核验的公共接口。
 \FloatBarrier

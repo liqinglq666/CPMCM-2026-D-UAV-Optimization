@@ -1,3 +1,12 @@
+[fig] saved fig01_framework.pdf/.svg/.png @300dpi
+[fig] saved fig02_physics.pdf/.svg/.png @300dpi
+[fig] saved fig03_payload_boundary.pdf/.svg/.png @300dpi
+[fig] saved fig04_batching.pdf/.svg/.png @300dpi
+[fig] saved fig05_optimization.pdf/.svg/.png @300dpi
+[fig] saved fig06_communication.pdf/.svg/.png @300dpi
+[fig] saved fig09_partition.pdf/.svg/.png @300dpi
+[fig] saved fig07_sensitivity.pdf/.svg/.png @300dpi
+[fig] saved fig08_validation.pdf/.svg/.png @300dpi
 {
   "status": "PASS",
   "source_result_files": 24,
@@ -16,42 +25,89 @@
     "QTwoTime": "11033.023",
     "JointEnergy": "86.712",
     "JointTime": "12789.446",
-    "MinSoc": "20.84"
+    "MinSoc": "20.84",
+    "CandidateCount": "8",
+    "CandidateMaxTrips": "24",
+    "CandidateMinTrips": "17",
+    "GapTwo": "4",
+    "GapThree": "7"
   },
-  "generated_number_macros": 36,
-  "used_macros_found_in_pdf": 34,
+  "generated_number_macros": 50,
+  "used_macros_found_in_pdf": 47,
   "figures": 9,
+  "figure_sections": {
+    "fig01_framework": "1",
+    "fig02_physics": "3",
+    "fig03_payload_boundary": "4",
+    "fig04_batching": "4",
+    "fig05_optimization": "5",
+    "fig06_communication": "6",
+    "fig09_partition": "7",
+    "fig07_sensitivity": "8",
+    "fig08_validation": "9"
+  },
+  "included_sections": [
+    "sections/abstract",
+    "sections/01_problem",
+    "sections/02_data",
+    "sections/03_physics",
+    "sections/04_q1",
+    "sections/05_q2",
+    "sections/06_q3",
+    "sections/07_q4",
+    "sections/08_sensitivity",
+    "sections/09_validation",
+    "sections/10_conclusion",
+    "sections/appendix"
+  ],
   "figure_files": 27,
-  "pdf_pages": 19,
+  "pdf_pages": 25,
   "pdf_font_audit": {
     "status": "PASS",
-    "embedded_fonts_with_unicode": 30,
-    "pages": 19,
+    "embedded_fonts_with_unicode": 21,
+    "pages": 25,
     "chinese_characters_per_page": [
-      575,
-      679,
-      689,
-      445,
-      725,
-      415,
-      399,
+      606,
+      840,
+      868,
       609,
-      874,
-      314,
-      676,
-      619,
-      802,
-      384,
-      482,
+      478,
+      685,
+      611,
+      508,
+      968,
+      780,
+      579,
+      649,
+      670,
+      533,
+      820,
+      469,
+      618,
+      1039,
+      265,
+      913,
+      55,
       147,
       127,
       39,
-      448
+      410
     ]
   },
   "reference_entries": 7,
-  "reproduced_png_sha256": null,
-  "pdf_sha256": "5ab3ec6dcf4359c214a1d2891f1410689f7a4a725333f57a3f41cd9814ee5c4c",
+  "citation_occurrences": 8,
+  "reproduced_png_sha256": {
+    "fig01_framework": "5c8d09b86d3a3c739dec53cead0185118a98bf96903db484fbe45d9e33e93094",
+    "fig02_physics": "0dd2f72d23a599d56254d4a913f9cc575688d56e1180b2f5e8494922ab45dd36",
+    "fig03_payload_boundary": "774c4ef83fdfedbe61c05a1137bc654e633f6be9295d10990ab490da8a1c6672",
+    "fig04_batching": "48a66b238449e9d8b6608299694bb445f73d190f994207ec60ff298ff8be8c81",
+    "fig05_optimization": "6ea2f14495cf6cd265876ecef7badbd20bcfb3e7ef9b38488a6fe93adf8fe91e",
+    "fig06_communication": "5b2597186afbb3cbd6c83f8d2f4ac6ced9535084d0fbc69d680f286b5cfdcfc5",
+    "fig09_partition": "fd5c0b6447268bf408427ed1a9fbf6a8529df021a4ecf9a2b6b33915bb5fb297",
+    "fig07_sensitivity": "d0d1fc15a16e333c2a72af958211ba6a02bda6bc5ecb77f4826b7a444120fa7c",
+    "fig08_validation": "fa9ecdd55d8d4f852987da3deab41130f2a5c7b7c585c3d70f6754371b8aae34"
+  },
+  "pdf_sha256": "78a0c1fbe2b3b5c59a7f0ad0284a3726d48575e223a3e8aa1e2df9654ff5c3a4",
   "workbook_sha256": "27812796a9fdfd8d9ee01e218e33d2ce60e772380613990235fd5a4578e5303e",
   "interpretation": "Deterministic official model; sampled communication is not a continuous certificate."
 }

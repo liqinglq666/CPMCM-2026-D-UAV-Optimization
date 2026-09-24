@@ -7,7 +7,12 @@ Reproducibility (§F)
   ok  all checks pass
 
 Axis 3 — Unimpeachable (uncertainty / N / units / B&W)
-  ok  all checks pass
+  XXX [U1] no axis labels found
+        -> set_xlabel / set_ylabel with unit + symbol
+  !   [U3] no uncertainty drawn on the figure
+        -> add a CI band / error bars, or state on the figure why none (axis 3)
+  !   [U4] N not annotated on the figure
+        -> a skeptic asks 'N=?': annotate the sample size per series
 
 Axis 4 — Visible gap (journal-grade craft)
   ok  all checks pass
@@ -21,8 +26,8 @@ Judgment — the script cannot decide these; you must (see figure-critique.md):
   ?  Axis 3 — Grayscale: Print it in B&W: does every series stay distinguishable by marker/linestyle, not colour alone?
   ?  Axis 4 — 0.5 s test: Glance for half a second: does it read 'this came from a paper', or 'homework'? Hero/method figure must NOT be a generic boxes-and-arrows flowchart (§I).
 ================================================================
-Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
-Mechanical floor cleared — now answer the four judgment prompts before 'done'.
+Mechanical verdict: FAIL  (1 FAIL, 2 WARN, 5 PASS)
+
 
 Figure critique — scripts/figures/fig02_physics.py
   figures: fig02_physics
@@ -49,6 +54,7 @@ Judgment — the script cannot decide these; you must (see figure-critique.md):
 Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
 Mechanical floor cleared — now answer the four judgment prompts before 'done'.
 
+
 Figure critique — scripts/figures/fig03_payload_boundary.py
   figures: fig03_payload_boundary
 ================================================================
@@ -73,6 +79,7 @@ Judgment — the script cannot decide these; you must (see figure-critique.md):
 ================================================================
 Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
 Mechanical floor cleared — now answer the four judgment prompts before 'done'.
+
 
 Figure critique — scripts/figures/fig04_batching.py
   figures: fig04_batching
@@ -99,6 +106,7 @@ Judgment — the script cannot decide these; you must (see figure-critique.md):
 Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
 Mechanical floor cleared — now answer the four judgment prompts before 'done'.
 
+
 Figure critique — scripts/figures/fig05_optimization.py
   figures: fig05_optimization
 ================================================================
@@ -123,6 +131,7 @@ Judgment — the script cannot decide these; you must (see figure-critique.md):
 ================================================================
 Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
 Mechanical floor cleared — now answer the four judgment prompts before 'done'.
+
 
 Figure critique — scripts/figures/fig06_communication.py
   figures: fig06_communication
@@ -149,6 +158,7 @@ Judgment — the script cannot decide these; you must (see figure-critique.md):
 Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
 Mechanical floor cleared — now answer the four judgment prompts before 'done'.
 
+
 Figure critique — scripts/figures/fig07_sensitivity.py
   figures: fig07_sensitivity
 ================================================================
@@ -174,6 +184,7 @@ Judgment — the script cannot decide these; you must (see figure-critique.md):
 Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
 Mechanical floor cleared — now answer the four judgment prompts before 'done'.
 
+
 Figure critique — scripts/figures/fig08_validation.py
   figures: fig08_validation
 ================================================================
@@ -198,6 +209,7 @@ Judgment — the script cannot decide these; you must (see figure-critique.md):
 ================================================================
 Mechanical verdict: PASS  (0 FAIL, 0 WARN, 8 PASS)
 Mechanical floor cleared — now answer the four judgment prompts before 'done'.
+
 
 Figure critique — scripts/figures/fig09_partition.py
   figures: fig09_partition

@@ -101,6 +101,8 @@ python scripts/setup_paper_fonts.py
 python scripts/build_paper.py
 ```
 
-新论文在 [paper/](paper/README.md)：19 页匿名正文、9 张主图、13 张表与完整附录。主图均输出 PDF/SVG/300 dpi PNG，数字由结果文件生成。构建另需 XeLaTeX、ctex、xeCJK、Fandol，完整命令和 Excel 导出见论文 README。
+新论文在 [paper/](paper/README.md)：25 页匿名论文（含附录）、9 张主图、16 张表。主图均输出 PDF/SVG/300 dpi PNG，数字由结果文件生成。构建另需 XeLaTeX、ctex、xeCJK、Fandol，完整命令和 Excel 导出见论文 README。
 
 原 `scripts/make_figures.py` 的六幅图已由统一图形流水线替代并删除。`docs/paper/` 中旧稿仅作历史资料。当前证据及适用边界见 [论文终审](paper/reports/FINAL_AUDIT.md)，AI 记录见 `docs/AI_USAGE.md`。
+
+2026-09-24 已按“统一物理底座 → Q1–Q4 → 敏感性 → 验证评价 → 结论”重构论文。逻辑审计见 `paper/reports/STRUCTURE_AUDIT.md`，逐节论证目标见 `paper/blueprint.md`。计算内核、Q3 离散计划及 24 个正式结果文件保持不变。

@@ -1,149 +1,223 @@
 {
-  "date": "2026-09-24",
-  "mode": "vector outlines, no fonts",
-  "native_pdf_sha256": "5ab3ec6dcf4359c214a1d2891f1410689f7a4a725333f57a3f41cd9814ee5c4c",
-  "compatible_pdf_sha256": "4adc731170d01600ca62d4578c7f0842963001b1dfb887447d8475123e705903",
-  "ghostscript_version": "10.02.1",
-  "pages": 19,
-  "fonts": 0,
-  "raster_images": 0,
-  "text_search_copy": false,
-  "tests_passed": 100,
-  "visual_comparison": [
+  "status": "PASS",
+  "pages": 25,
+  "native_font_audit": {
+    "status": "PASS",
+    "embedded_fonts_with_unicode": 21,
+    "pages": 25,
+    "chinese_characters_per_page": [
+      606,
+      840,
+      868,
+      609,
+      478,
+      685,
+      611,
+      508,
+      968,
+      780,
+      579,
+      649,
+      670,
+      533,
+      820,
+      469,
+      618,
+      1039,
+      265,
+      913,
+      55,
+      147,
+      127,
+      39,
+      410
+    ]
+  },
+  "outlined_font_objects": 0,
+  "outlined_raster_images": 0,
+  "raster_check_dpi": 108,
+  "ink_tolerance_pixels": 2,
+  "minimum_ink_coverage": 0.999049911325057,
+  "maximum_missing_component_pixels": 18,
+  "comparison": [
     {
       "page": 1,
-      "original_ink_covered": 0.9997560640941593,
-      "new_ink_matches": 0.9999232351767127,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.999381810862877,
+      "outlined_ink_covered": 0.9999854979987238,
+      "missing_pixels": 43,
+      "largest_missing_component_pixels": 7
     },
     {
       "page": 2,
-      "original_ink_covered": 0.9996379262703547,
-      "new_ink_matches": 0.999942692862396,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9994915125877681,
+      "outlined_ink_covered": 0.9998035770796276,
+      "missing_pixels": 47,
+      "largest_missing_component_pixels": 7
     },
     {
       "page": 3,
-      "original_ink_covered": 0.9997707158251937,
-      "new_ink_matches": 0.9999078723110231,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.999049911325057,
+      "outlined_ink_covered": 0.9999362698758325,
+      "missing_pixels": 90,
+      "largest_missing_component_pixels": 18
     },
     {
       "page": 4,
-      "original_ink_covered": 0.9998586941162404,
-      "new_ink_matches": 0.9999564834256247,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9996641749275489,
+      "outlined_ink_covered": 0.9998133399701344,
+      "missing_pixels": 27,
+      "largest_missing_component_pixels": 6
     },
     {
       "page": 5,
-      "original_ink_covered": 0.9996994845003352,
-      "new_ink_matches": 0.9999185051516386,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9996098887625672,
+      "outlined_ink_covered": 0.9998771471330609,
+      "missing_pixels": 35,
+      "largest_missing_component_pixels": 7
     },
     {
       "page": 6,
-      "original_ink_covered": 0.9995694140442786,
-      "new_ink_matches": 1.0,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9994526546250684,
+      "outlined_ink_covered": 0.9998417432588715,
+      "missing_pixels": 45,
+      "largest_missing_component_pixels": 7
     },
     {
       "page": 7,
-      "original_ink_covered": 0.9998443246609197,
-      "new_ink_matches": 0.999961256828484,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9993733926869705,
+      "outlined_ink_covered": 0.9998687095461289,
+      "missing_pixels": 48,
+      "largest_missing_component_pixels": 6
     },
     {
       "page": 8,
-      "original_ink_covered": 0.9997487351097,
-      "new_ink_matches": 0.999850855857923,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9998844947533962,
+      "outlined_ink_covered": 0.9999558561262868,
+      "missing_pixels": 13,
+      "largest_missing_component_pixels": 2
     },
     {
       "page": 9,
-      "original_ink_covered": 0.9996587580689499,
-      "new_ink_matches": 0.9998953825669313,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9993188075347456,
+      "outlined_ink_covered": 0.9998378466028863,
+      "missing_pixels": 72,
+      "largest_missing_component_pixels": 9
     },
     {
       "page": 10,
-      "original_ink_covered": 0.9998644090778123,
-      "new_ink_matches": 1.0,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9993933947427545,
+      "outlined_ink_covered": 0.9998530309539422,
+      "missing_pixels": 54,
+      "largest_missing_component_pixels": 9
     },
     {
       "page": 11,
-      "original_ink_covered": 0.9997215577577806,
-      "new_ink_matches": 0.9999107734665783,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9997064142612209,
+      "outlined_ink_covered": 0.9998941774057003,
+      "missing_pixels": 25,
+      "largest_missing_component_pixels": 6
     },
     {
       "page": 12,
-      "original_ink_covered": 0.999434478404966,
-      "new_ink_matches": 0.9999605496745348,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9993981719472899,
+      "outlined_ink_covered": 0.9998489425981874,
+      "missing_pixels": 48,
+      "largest_missing_component_pixels": 8
     },
     {
       "page": 13,
-      "original_ink_covered": 0.999559353001236,
-      "new_ink_matches": 0.9999351666756713,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9991821533273777,
+      "outlined_ink_covered": 0.9997729881070991,
+      "missing_pixels": 65,
+      "largest_missing_component_pixels": 8
     },
     {
       "page": 14,
-      "original_ink_covered": 0.9996237993910253,
-      "new_ink_matches": 0.9999765128650782,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9994172817581441,
+      "outlined_ink_covered": 0.9999581683306376,
+      "missing_pixels": 42,
+      "largest_missing_component_pixels": 7
     },
     {
       "page": 15,
-      "original_ink_covered": 0.9991043333765454,
-      "new_ink_matches": 0.9999882434545433,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9994860121888538,
+      "outlined_ink_covered": 0.9999053239498848,
+      "missing_pixels": 49,
+      "largest_missing_component_pixels": 8
     },
     {
       "page": 16,
-      "original_ink_covered": 0.9998384752059442,
-      "new_ink_matches": 1.0,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9996879550655294,
+      "outlined_ink_covered": 0.9998854512699289,
+      "missing_pixels": 30,
+      "largest_missing_component_pixels": 6
     },
     {
       "page": 17,
-      "original_ink_covered": 1.0,
-      "new_ink_matches": 1.0,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9996864861917614,
+      "outlined_ink_covered": 0.9999041030207548,
+      "missing_pixels": 23,
+      "largest_missing_component_pixels": 3
     },
     {
       "page": 18,
-      "original_ink_covered": 1.0,
-      "new_ink_matches": 1.0,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9995161694443725,
+      "outlined_ink_covered": 0.9998694562417322,
+      "missing_pixels": 56,
+      "largest_missing_component_pixels": 7
     },
     {
       "page": 19,
-      "original_ink_covered": 0.9996417559078289,
-      "new_ink_matches": 0.9998980748894749,
-      "fonts": 0,
-      "raster_images": 0
+      "native_ink_covered": 0.9998046350338226,
+      "outlined_ink_covered": 0.9999513370154992,
+      "missing_pixels": 8,
+      "largest_missing_component_pixels": 6
+    },
+    {
+      "page": 20,
+      "native_ink_covered": 0.9998015361105047,
+      "outlined_ink_covered": 0.9998801246703428,
+      "missing_pixels": 20,
+      "largest_missing_component_pixels": 7
+    },
+    {
+      "page": 21,
+      "native_ink_covered": 0.9998473437818034,
+      "outlined_ink_covered": 1.0,
+      "missing_pixels": 6,
+      "largest_missing_component_pixels": 6
+    },
+    {
+      "page": 22,
+      "native_ink_covered": 0.9998387319725384,
+      "outlined_ink_covered": 1.0,
+      "missing_pixels": 7,
+      "largest_missing_component_pixels": 4
+    },
+    {
+      "page": 23,
+      "native_ink_covered": 1.0,
+      "outlined_ink_covered": 1.0,
+      "missing_pixels": 0,
+      "largest_missing_component_pixels": 0
+    },
+    {
+      "page": 24,
+      "native_ink_covered": 1.0,
+      "outlined_ink_covered": 1.0,
+      "missing_pixels": 0,
+      "largest_missing_component_pixels": 0
+    },
+    {
+      "page": 25,
+      "native_ink_covered": 0.9996189975694673,
+      "outlined_ink_covered": 0.999829818429355,
+      "missing_pixels": 29,
+      "largest_missing_component_pixels": 6
     }
   ],
+  "native_sha256": "78a0c1fbe2b3b5c59a7f0ad0284a3726d48575e223a3e8aa1e2df9654ff5c3a4",
+  "outlined_sha256": "68575c24de21d01caa523eedc9d014f492c857eb35d8d1c0e96f574fa07d8365",
   "pdfjs": {
     "engine": "PDF.js",
     "version": "5.6.205",
@@ -153,81 +227,109 @@
     "pages": [
       {
         "page": 1,
-        "nonwhite_pixels": 66814
+        "nonwhite_pixels": 71262
       },
       {
         "page": 2,
-        "nonwhite_pixels": 107863
+        "nonwhite_pixels": 94694
       },
       {
         "page": 3,
-        "nonwhite_pixels": 89211
+        "nonwhite_pixels": 100157
       },
       {
         "page": 4,
-        "nonwhite_pixels": 92985
+        "nonwhite_pixels": 83034
       },
       {
         "page": 5,
-        "nonwhite_pixels": 88469
+        "nonwhite_pixels": 90979
       },
       {
         "page": 6,
-        "nonwhite_pixels": 56347
+        "nonwhite_pixels": 84524
       },
       {
         "page": 7,
-        "nonwhite_pixels": 107620
+        "nonwhite_pixels": 77870
       },
       {
         "page": 8,
-        "nonwhite_pixels": 90434
+        "nonwhite_pixels": 117706
       },
       {
         "page": 9,
-        "nonwhite_pixels": 107771
+        "nonwhite_pixels": 108251
       },
       {
         "page": 10,
-        "nonwhite_pixels": 61299
+        "nonwhite_pixels": 91866
       },
       {
         "page": 11,
-        "nonwhite_pixels": 81129
+        "nonwhite_pixels": 87907
       },
       {
         "page": 12,
-        "nonwhite_pixels": 78038
+        "nonwhite_pixels": 81638
       },
       {
         "page": 13,
-        "nonwhite_pixels": 94991
+        "nonwhite_pixels": 81700
       },
       {
         "page": 14,
-        "nonwhite_pixels": 86480
+        "nonwhite_pixels": 74654
       },
       {
         "page": 15,
-        "nonwhite_pixels": 87060
+        "nonwhite_pixels": 97663
       },
       {
         "page": 16,
-        "nonwhite_pixels": 45073
+        "nonwhite_pixels": 97664
       },
       {
         "page": 17,
-        "nonwhite_pixels": 47954
+        "nonwhite_pixels": 75355
       },
       {
         "page": 18,
-        "nonwhite_pixels": 38191
+        "nonwhite_pixels": 119743
       },
       {
         "page": 19,
-        "nonwhite_pixels": 80270
+        "nonwhite_pixels": 42229
+      },
+      {
+        "page": 20,
+        "nonwhite_pixels": 103096
+      },
+      {
+        "page": 21,
+        "nonwhite_pixels": 40025
+      },
+      {
+        "page": 22,
+        "nonwhite_pixels": 45150
+      },
+      {
+        "page": 23,
+        "nonwhite_pixels": 48001
+      },
+      {
+        "page": 24,
+        "nonwhite_pixels": 38208
+      },
+      {
+        "page": 25,
+        "nonwhite_pixels": 78109
       }
     ]
   },
-  "interpretation": "Mapping repair was insufficient in the user previewer. This output removes font loading from rendering and preserves the native searchable PDF separately."
+  "visual_review": "All 25 pages reviewed; worst 108 dpi difference enlarged and inspected: glyphs and long dash remain complete; rasterization is not pixel-identical.",
+  "initial_90dpi_check": {
+    "minimum_observed_coverage_page_one": 0.998968189074485,
+    "note": "This triggered full-page comparison at the prior audit setting of 108 dpi and inspection of the largest difference; no font or glyph loss found."
+  }
 }

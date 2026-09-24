@@ -1,44 +1,79 @@
-\section{通信保障下的运输与中继联合时序}
-\subsection{双向链路与单跳中继}
-空中中继可以补充灾后地面覆盖，但其位置、回传链路与服务时段必须同时可行\cite{zeng}。按官方通信规则，双向允许传播损耗取两个方向预算的较小值。对三维端点间距离 $D_{ij}(t)$（km）和频率 $f$（MHz），定义
+\section{Q3：通信保障下的运输—中继联合时序}\label{sec:q3}
+运输可执行并不保证指挥与交接链路可用。山区地形既通过航高影响能量，也通过遮挡影响通信；单看目的地信号，会漏掉爬升、巡航或下降途中出现的不足。中继能够补充覆盖，但必须同时保证接入、回传和服务时段\cite{zeng}。因此本问在全阶段通信检查的基础上，将运输开始时刻与中继窗口联合安排。
+
+\subsection{离散计划与连续变量的边界}
+原问题包含分组、路线、机型、资源与中继位置等离散或空间选择，以及开始时刻和服务窗口等连续选择。当前实现将两层分开：配置文件固定货箱分组、访问顺序、机型、实体无人机与电池及其先后关系、中继平面坐标、保障关系和中继资源顺序；悬停海拔由 DEM 地面高程加官方允许离地上限确定，未作为优化变量。
+
+随后重算所有航段、能耗和通信需求，只优化运输开始 $s_p$、中继建链完成 $a_r$、服务结束 $b_r$、逐箱延误 $\ell_b$ 与联合完工 $T_3$。配置不保存最终开始时刻、能耗或 SOC，故结果仍由当前数据计算。当前中继能源组件各用一次，LP 没有求解组件重复使用时的充电排序。\textbf{下文的最优性仅限这套固定离散方案和采样约束形成的时序问题}，不覆盖货箱、路线、中继坐标与高度的联合全局搜索。
+
+\subsection{双向预算、地形遮挡与单跳判定}
+\subsubsection{双向链路预算与 DEM 遮挡}
+对通信端点 $i,j$，单方向允许损耗由发射功率、两端天线增益、系统损耗、接收灵敏度及衰落裕量共同给出；双向链路取两个方向预算的较小值，记为 $L^{\max}_{i\leftrightarrow j}$。用同一时刻端点的水平距离和海拔差计算三维距离 $D_{ij}(t)$（km），传播损耗与余量为
 \begin{align}
-L_{ij}(t)&=32.45+20\log_{10}f+20\log_{10}D_{ij}(t)+L_{\rm obs}\,b_{ij}(t),\label{eq:fspl}\\
+L_{ij}(t)&=32.45+20\log_{10}f+20\log_{10}D_{ij}(t)
+                 +L_{\rm obs}\,b_{ij}(t),\label{eq:fspl}\\
 M_{ij}(t)&=L^{\max}_{i\leftrightarrow j}-L_{ij}(t).\label{eq:margin}
 \end{align}
-自由空间项采用与 ITU-R P.525 一致的频率、距离量纲\cite{itu}。$b_{ij}=1$ 表示视线射线与闭 DEM 像元地形相交，包括切触；有遮挡时附加题设损耗。官方参数给出 2400 MHz、遮挡附加 10 dB，直连、接入和回传预算分别为 122、116、126 dB。
+$f$ 以 MHz 计，自由空间项的量纲与 ITU-R P.525 一致\cite{itu}。$b_{ij}=1$ 表示视线与闭 DEM 像元地形相交或切触。按题设参数，频率为 2400 MHz，遮挡附加损耗为 10 dB，直连、接入及回传预算分别为 122、116、126 dB。遮挡并非直接判定中断，而是加损耗后再与对应预算比较；反之，无遮挡也不能保证距离过远时仍可用。
 
-令 $\mathcal R(t)$ 为已完成建链且尚未结束服务的中继集合，则运输状态可用的必要判据写为
+\subsubsection{全阶段直连与指定中继保障}
+令 $r(p)$ 为离散计划给架次 $p$ 指定的保障中继，$G$ 为固定网关。已完成建链且尚未结束服务时定义
 \begin{equation}
-M_p(t)=\max\left\{M_{pG}(t),\ \max_{r\in\mathcal R(t)}\min[M_{pr}(t),M_{rG}(t)]\right\}\ge0.
-\label{eq:comm}
+\widetilde M_{p,r(p)}(t)=
+\begin{cases}
+\min\{M_{p,r(p)}(t),M_{r(p),G}(t)\},&a_{r(p)}\le t\le b_{r(p)},\\
+-\infty,&\text{无指定中继或不在服务窗内}.
+\end{cases}\label{eq:relaymargin}
 \end{equation}
-实现中逐运输架次使用其配置的单个保障中继，不能把不可同时工作的不同中继的链路拼接，也不允许中继之间多跳。直连足够时可直接连接网关；需要中继时接入、回传与时间窗口必须同时成立。
-
-\subsection{中继能量与固定离散方案的线性规划}
-一个中继架次的能耗由往返巡航、正向爬升、建链与服务组成：
+于是实现中的可用性判据为
 \begin{equation}
-E_r=E_r^{\rm cruise}+E_r^{\rm climb}
- +(P_r^{\rm hover}+P_r^{\rm comm})\frac{t_r^{\rm setup}+b_r-a_r}{3600},
-\qquad E_r\le(1-\rho_r)E_r^{\rm use}.
-\label{eq:relay}
+\max\{M_{pG}(t),\widetilde M_{p,r(p)}(t)\}\ge0.\label{eq:comm}
 \end{equation}
-其中两个功率以 kW 计，服务与建链时间以 s 计。中继悬停点位于 DEM 内且离地不超过 300 m。来回航段既满足地形净空，也到达选定悬停海拔；建链完成前不计为可提供服务。
+直连足够时直接连接；不足时须由指定中继同时满足接入、回传和窗口。这里不在所有中继之间任意切换，更不允许多跳拼接。为避免遗漏中间状态，按照第\ref{sec:physics}节的爬升、巡航、下降、交接相位采样，并包含每个相位端点。构造阶段内部步长不超过 1 s，最终再用 0.5 s 回放同一计划。
 
-配置文件固定货箱、路径、机型、资源先后关系以及中继坐标。对该离散方案，逐相位采样得到需要中继的相对时间范围 $[\alpha_p,\beta_p]$，加入
+\subsection{服务窗口与中继能量}
+对运输架次 $p$，以相对开始时刻记录直连不足的采样点，并用首末点包络成 $[\alpha_p,\beta_p]$。将多个不足区间合成一个连续窗口可能多占中继时间，但能保证该固定中继覆盖所有已发现区间。保护约束为
 \begin{equation}
-a_{r(p)}\le s_p+\alpha_p-5,\qquad
-b_{r(p)}\ge s_p+\beta_p+5.
-\label{eq:window}
+a_{r(p)}\le s_p+\alpha_p-\RelayGuard,\qquad
+b_{r(p)}\ge s_p+\beta_p+\RelayGuard.\label{eq:window}
 \end{equation}
-再加入式\eqref{eq:deadline}、资源顺序、建链前飞行时间、中继周转时间和式\eqref{eq:relay}。由于航段及载荷固定，上述约束对开始时刻和服务窗口均为线性。依次最小化加权延误、联合完工历时、中继服务总时长，前一层最优值以数值容差锁定后求下一层，使用 HiGHS 线性规划求解器\cite{highs}。运输能耗此时固定，中继服务时长最小化也就减少了可调整的联合能耗。
+没有直连不足点的架次无需此约束。保护秒数并不能补偿未定位到的遮挡变化，仍须依靠最终通信回放。
 
-这一步只证明给定离散方案下的时序最优性。悬停点的全空间搜索、货箱组批和资源顺序的联合全局最优性没有由该 LP 证明。论文保留这一条件，防止把“LP 已最优”扩大解释为 Q3 原问题全局最优。
+中继飞行同样逐段检查地形净空，巡航高度还须不低于已选悬停海拔。设 $\lambda_r$ 为准备、出航与建链的总时间，$\mu_r$ 为返航时间，则出发和返回分别为 $a_r-\lambda_r$、$b_r+\mu_r$。把往返巡航、爬升和建链耗能汇总为固定项，得到
+\begin{align}
+E_r^{\rm fix}&=E_r^{\rm cruise}+E_r^{\rm climb}
+ +(P_r^{\rm hover}+P_r^{\rm comm})t_r^{\rm setup}/3600,\nonumber\\
+E_r&=E_r^{\rm fix}+(P_r^{\rm hover}+P_r^{\rm comm})(b_r-a_r)/3600
+       \le(1-\rho_r)E_r^{\rm use}.\label{eq:relay}
+\end{align}
+功率以 kW、时间以 s 计，能量为 kWh。开始服务前的建链也在空中，不能漏计。位置固定后，中继能量只随服务窗长度线性变化，窗口过长会直接消耗返航储备。
 
-\subsection{联合方案与通信保障代价}
-\textbf{联合候选含 \QThreeTrips{} 个运输架次与 \RelayTrips{} 个中继架次，总能耗 \JointEnergy{} kWh，联合完工 \JointTime{} s。}其中运输能耗 \QThreeTransportEnergy{} kWh，中继能耗 \RelayEnergy{} kWh；运输完工时刻为 \QThreeTransportTime{} s。加权延误为 \QThreeLate{} 优先系数·s，硬截止最小余量 \HardSlack{} s。
-\paperfig{fig06_communication}{中继覆盖实际轨迹上直连不足的采样状态。橙点表示直连不足，空心三角为中继悬停点，星号为最紧通信状态；下图为 60 s 时间窗内全部在途状态的最小可用链路余量。检查包含每个飞行与交接相位的端点，共 \StatesOne{} 个状态，最小余量 \MarginOne{} dB；该结论仅针对采样集合。}{communication}
+\subsection{固定方案下的词典序线性规划}
+离散计划已固定，$t_p,E_p,\delta_{pb},\lambda_r,\mu_r$ 都是可复核常量，因此无需再用启发式搜索连续时刻。将式\eqref{eq:deadline}、\eqref{eq:window}和\eqref{eq:relay}纳入 LP。若 $p\prec p'$ 表示某资源的指定相邻任务，资源约束为
+\begin{align}
+s_{p'}&\ge s_p+t_p &&\text{同一运输无人机},\nonumber\\
+s_{p'}&\ge s_p+t_p+t_{\rm chg}(\sigma_p)&&\text{同一运输电池},\label{eq:transportorder}\\
+a_{r'}&\ge b_r+\mu_r+t_r^{\rm turn}+\lambda_{r'}&&\text{同一中继无人机}.\label{eq:relayorder}
+\end{align}
+式\eqref{eq:relayorder}说明中继返航并完成周转后，才能开始下一个架次的准备与飞行。另有 $s_p\ge0$、$a_r\ge\lambda_r$、$b_r\ge a_r$，以及
+\begin{equation}
+T_3\ge s_p+t_p\quad(\forall p),\qquad
+T_3\ge b_r+\mu_r\quad(\forall r).\label{eq:jointfinish}
+\end{equation}
+这些约束分别对应可用资源、非负出发、有效服务窗和最后返航。当前中继组件不复用，故不存在同一组件的后续架次；通用验证仍计算其返航 SOC 与充电占用，供 Q4 配置使用。
 
-与选定 Q2 候选相比，Q3 联合能耗增加 \EnergyIncrease\%，完工历时增加 \TimeIncrease\%。这是当前两个候选在不同约束集合下的结果差异，不是通信约束的理论最小代价。图\ref{fig:communication}显示，通信困难并非只发生在目的节点；只检查起点、终点和中继位置会漏掉航段中的遮挡状态。
+使用 HiGHS\cite{highs}依次最小化
+\begin{equation}
+\operatorname{lexmin}\left(\sum_bw_b\ell_b,\ T_3,\ \sum_r(b_r-a_r)\right),\label{eq:q3objective}
+\end{equation}
+每一层的最优值用数值容差锁定后求下一层，并检查最终约束残差。在当前同型中继功率相同、运输能耗和中继飞行固定的条件下，第三层也减少了可调整的联合能耗。架次数已被配置固定，LP 没有在少用运输或中继架次之间继续权衡。
 
-射线遮挡是离散地形上的非光滑判定，通信余量很小的区间尤其需要谨慎。尽管所有已检查状态通过，仍不能据此断言“任意连续时刻均满足题设”。第\ref{sec:validation}节进一步加密采样并报告余量变化。
+\subsection{联合结果、采样证据与小结}
+\textbf{当前联合候选包含 \QThreeTrips{} 个运输架次、\RelayTrips{} 个中继架次，总能耗 \JointEnergy{} kWh，联合完工 \JointTime{} s。}运输与中继能耗分别为 \QThreeTransportEnergy{} 和 \RelayEnergy{} kWh；运输先在 \QThreeTransportTime{} s 完成，之后尚须等待中继返航。加权延误 \QThreeLate{} 系数·s，最小硬截止余量 \HardSlack{} s。
+\paperfig{fig06_communication}{直连不足发生在实际轨迹内部，中继须按位置与时间共同保障。橙点为直连不足状态，三角为悬停点，星号为最紧状态；下图汇总每个 60 s 时间窗内的最小可用余量。图中主轨迹检查采用 1 s 设置，共 \StatesOne{} 条状态记录。}{communication}
+图\ref{fig:communication}说明端点检查不足以覆盖全过程。1 s 与 0.5 s 回放均未发现中断，但加密后最小链路余量降至 \MarginHalf{} dB；最低运输返航 SOC 仅 \MinSoc\%，固定运输能耗统一上浮容忍度约 \QThreeEnergyTolerance\%。这些余量支持“当前样本可行”，同时提示其抗额外损耗和能量误差能力有限，详见第\ref{sec:sensitivity}、\ref{sec:validation}节。
+
+相比所选 Q2 候选，Q3 联合能耗和完工历时分别增加 \EnergyIncrease\%、\TimeIncrease\%。两问的运输分组不同，故这些是当前候选之间的结果差异，不能称为通信的理论最小代价。LP 的最优性也无法弥补离散方案未全局搜索、连续通信未证明这两项不足。
+
+\textbf{本问小结。}在固定离散方案下，我们把沿程通信不足转为中继窗口，再与运输资源和时限联立求得条件时序最优解。可信依据是完整物理重算、时序约束和两种步长的通信回放，结论仍限于采样证据。Q4 将直接继承本问的运输架次、服务区关系、时间安排和中继保障关系，考察失去跨组资源共享后需要增加多少配置。
 \FloatBarrier
