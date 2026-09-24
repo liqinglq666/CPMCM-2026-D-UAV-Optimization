@@ -1,19 +1,16 @@
 [
   {
     "figure_id": "fig01_framework",
-    "core_claim": "统一物理口径贯穿能力边界、资源调度与通信保障",
+    "core_claim": "统一物理底座逐层扩展到运输执行、通信保障和独立资源配置；继承规则与继承固定方案严格区分",
     "source_data": [
-      "results/q3/Q3_transport_trips.csv",
-      "results/q3/Q3_relay_sorties.csv",
-      "paper/data/terrain_profile.csv",
-      "paper/data/payload_reserve.csv",
-      "paper/data/analysis.json"
+      "paper/data/analysis.json",
+      "results/q4/Q4_resource_summary.csv"
     ],
-    "hero_panel": "Q3 运输与中继的真实联合调度",
-    "supporting_panels": "真实 DEM 剖面；安全载荷边界；自动结果指标",
+    "hero_panel": "Q1→Q4 四层决策与新增矛盾",
+    "supporting_panels": "明确继承对象；由源结果读取的四问结果锚点",
     "uncertainty": "确定性官方算例；无统计置信区间；DEM 误差分布不可得；通信仅采样验证",
-    "key_annotation": "由源数据计算的最紧约束、阈值或关键方案",
-    "visual_hierarchy": "一个主图占约 65%；诊断面板占约 35%；颜色与线型/标记双重编码",
+    "key_annotation": "Q1→Q2 重新组批；Q2→Q3 固定独立候选；Q3→Q4 固定正式安排",
+    "visual_hierarchy": "四条递进主线占主体，右侧结果与求解范围为辅助；颜色与文字双重编码",
     "export_formats": [
       "pdf",
       "svg",
@@ -139,6 +136,29 @@
     "randomness": "无随机步骤"
   },
   {
+    "figure_id": "fig09_partition",
+    "core_claim": "独立分区约束使固定方案出现可量化资源缺口",
+    "source_data": [
+      "results/q4/Q4_resource_summary.csv",
+      "results/q4/Q4_partition_config.csv",
+      "paper/data/analysis.json"
+    ],
+    "hero_panel": "各类资源库存与分区需求",
+    "supporting_panels": "服务区分组对应关系",
+    "uncertainty": "确定性官方算例；无统计置信区间；DEM 误差分布不可得；通信仅采样验证",
+    "key_annotation": "由源数据计算的最紧约束、阈值或关键方案",
+    "visual_hierarchy": "一个主图占约 65%；诊断面板占约 35%；颜色与线型/标记双重编码",
+    "export_formats": [
+      "pdf",
+      "svg",
+      "png"
+    ],
+    "png_dpi": 300,
+    "script": "scripts/figures/fig09_partition.py",
+    "section": "7",
+    "randomness": "无随机步骤"
+  },
+  {
     "figure_id": "fig07_sensitivity",
     "core_claim": "不变架次数不能替代对临界储备和能量余量的检查",
     "source_data": [
@@ -158,7 +178,7 @@
     ],
     "png_dpi": 300,
     "script": "scripts/figures/fig07_sensitivity.py",
-    "section": "7",
+    "section": "8",
     "randomness": "无随机步骤"
   },
   {
@@ -181,29 +201,6 @@
     ],
     "png_dpi": 300,
     "script": "scripts/figures/fig08_validation.py",
-    "section": "8",
-    "randomness": "无随机步骤"
-  },
-  {
-    "figure_id": "fig09_partition",
-    "core_claim": "独立分区约束使固定方案出现可量化资源缺口",
-    "source_data": [
-      "results/q4/Q4_resource_summary.csv",
-      "results/q4/Q4_partition_config.csv",
-      "paper/data/analysis.json"
-    ],
-    "hero_panel": "各类资源库存与分区需求",
-    "supporting_panels": "服务区分组对应关系",
-    "uncertainty": "确定性官方算例；无统计置信区间；DEM 误差分布不可得；通信仅采样验证",
-    "key_annotation": "由源数据计算的最紧约束、阈值或关键方案",
-    "visual_hierarchy": "一个主图占约 65%；诊断面板占约 35%；颜色与线型/标记双重编码",
-    "export_formats": [
-      "pdf",
-      "svg",
-      "png"
-    ],
-    "png_dpi": 300,
-    "script": "scripts/figures/fig09_partition.py",
     "section": "9",
     "randomness": "无随机步骤"
   }
