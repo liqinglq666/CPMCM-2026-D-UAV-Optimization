@@ -75,7 +75,7 @@ for r in d.itertuples():
 ax.set(xlabel="运输总能耗 (kWh)", ylabel="加权延误 ($10^3$ 系数·s)")
 ax.margins(x=0.11, y=0.14)
 grid(ax, "both")
-panel(ax, "a", "压缩运输架次可能付出明显延误代价")
+panel(ax, "a", "已发现候选的能耗与软延误取舍")
 fig.legend(
     handles=[
         Line2D(

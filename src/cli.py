@@ -37,7 +37,7 @@ def run_question(question, argv=None):
             "--target-trips",
             type=int,
             default=None,
-            help="Optional fixed trip count; default selects the lexicographic incumbent",
+            help="Optional fixed trip count; default uses the configured Pareto target",
         )
         parser.add_argument("--frontier-min", type=int, default=FRONTIER_MIN_TRIPS)
     elif question == "q3":

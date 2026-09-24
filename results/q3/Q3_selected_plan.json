@@ -1,10 +1,24 @@
 {
   "jobs": [
     {
-      "id": "Q3-003",
+      "id": "Q3-012",
       "type": "B",
       "drone": "U05",
       "battery": "B-BAT-01",
+      "boxes": [
+        "S001-WAT-05",
+        "S001-WAT-08"
+      ],
+      "route": [
+        "S001"
+      ],
+      "relay": null
+    },
+    {
+      "id": "Q3-003",
+      "type": "B",
+      "drone": "U05",
+      "battery": "B-BAT-03",
       "boxes": [
         "S007-WAT-01",
         "S007-WAT-02"
@@ -33,8 +47,8 @@
     {
       "id": "Q3-005",
       "type": "A",
-      "drone": "U04",
-      "battery": "A-BAT-01",
+      "drone": "U02",
+      "battery": "A-BAT-04",
       "boxes": [
         "S014-FOD-01",
         "S014-WAT-01"
@@ -45,17 +59,34 @@
       "relay": "R02-01"
     },
     {
+      "id": "Q3-011",
+      "type": "B",
+      "drone": "U05",
+      "battery": "B-BAT-01",
+      "boxes": [
+        "S003-WAT-04",
+        "S015-FOD-01",
+        "S015-MED-01"
+      ],
+      "route": [
+        "S015",
+        "S003"
+      ],
+      "relay": "R01-03"
+    },
+    {
       "id": "Q3-019",
       "type": "C",
       "drone": "U08",
       "battery": "C-BAT-04",
       "boxes": [
+        "S001-FOD-01",
         "S001-FOD-03",
-        "S001-HYG-01",
         "S001-HYG-02",
-        "S001-WAT-05",
-        "S001-WAT-07",
-        "S001-WAT-08"
+        "S001-WAT-03",
+        "S001-WAT-04",
+        "S001-WAT-06",
+        "S001-WAT-07"
       ],
       "route": [
         "S001"
@@ -68,13 +99,11 @@
       "drone": "U06",
       "battery": "B-BAT-04",
       "boxes": [
-        "S010-MED-01",
-        "S010-WAT-01",
-        "S013-FOD-01"
+        "S010-FOD-01",
+        "S010-WAT-01"
       ],
       "route": [
-        "S010",
-        "S013"
+        "S010"
       ],
       "relay": "R02-01"
     },
@@ -93,28 +122,16 @@
       "relay": "R02-01"
     },
     {
-      "id": "Q3-008",
-      "type": "B",
-      "drone": "U05",
-      "battery": "B-BAT-03",
-      "boxes": [
-        "S001-WAT-03",
-        "S001-WAT-06"
-      ],
-      "route": [
-        "S001"
-      ],
-      "relay": null
-    },
-    {
       "id": "Q3-009",
       "type": "A",
-      "drone": "U02",
+      "drone": "U04",
       "battery": "A-BAT-05",
       "boxes": [
+        "S001-FOD-02",
         "S012-WAT-01"
       ],
       "route": [
+        "S001",
         "S012"
       ],
       "relay": "R02-01"
@@ -127,15 +144,15 @@
       "boxes": [
         "S002-MED-01",
         "S002-WAT-01",
-        "S002-WAT-04",
         "S009-MED-01",
-        "S013-MED-01",
-        "S013-WAT-01"
+        "S009-WAT-01",
+        "S013-FOD-01",
+        "S013-MED-01"
       ],
       "route": [
-        "S013",
+        "S009",
         "S002",
-        "S009"
+        "S013"
       ],
       "relay": "R01-02"
     },
@@ -145,14 +162,15 @@
       "drone": "U08",
       "battery": "C-BAT-02",
       "boxes": [
-        "S001-FOD-01",
+        "S001-HYG-01",
         "S001-MED-01",
         "S001-MED-02",
         "S001-WAT-01",
         "S001-WAT-02",
+        "S005-FOD-01",
         "S005-MED-01",
-        "S005-WAT-01",
-        "S011-MED-01"
+        "S011-MED-01",
+        "S011-WAT-01"
       ],
       "route": [
         "S001",
@@ -162,30 +180,14 @@
       "relay": "R01-03"
     },
     {
-      "id": "Q3-012",
-      "type": "A",
-      "drone": "U01",
-      "battery": "A-BAT-06",
-      "boxes": [
-        "S001-WAT-04",
-        "S006-FOD-01"
-      ],
-      "route": [
-        "S006",
-        "S001"
-      ],
-      "relay": null
-    },
-    {
       "id": "Q3-014",
       "type": "C",
       "drone": "U07",
       "battery": "C-BAT-03",
       "boxes": [
-        "S003-FOD-02",
-        "S003-HYG-01",
         "S003-MED-01",
         "S003-WAT-01",
+        "S003-WAT-02",
         "S003-WAT-03",
         "S006-WAT-02",
         "S006-WAT-03"
@@ -197,13 +199,44 @@
       "relay": "R01-03"
     },
     {
-      "id": "Q3-015B",
-      "type": "A",
-      "drone": "U02",
-      "battery": "A-BAT-01",
+      "id": "split-292-Q3-011",
+      "type": "B",
+      "drone": "U06",
+      "battery": "B-BAT-02",
       "boxes": [
+        "S008-HYG-01",
+        "S008-WAT-02"
+      ],
+      "route": [
+        "S008"
+      ],
+      "relay": "R02-02"
+    },
+    {
+      "id": "Q3-015B",
+      "type": "B",
+      "drone": "U06",
+      "battery": "B-BAT-04",
+      "boxes": [
+        "S008-FOD-01",
+        "S008-MED-01",
+        "S008-WAT-01"
+      ],
+      "route": [
+        "S008"
+      ],
+      "relay": "R02-02"
+    },
+    {
+      "id": "Q3-022",
+      "type": "C",
+      "drone": "U07",
+      "battery": "C-BAT-04",
+      "boxes": [
+        "S004-FOD-01",
         "S004-MED-01",
-        "S004-WAT-01"
+        "S004-WAT-01",
+        "S004-WAT-02"
       ],
       "route": [
         "S004"
@@ -225,50 +258,17 @@
       "relay": "R02-02"
     },
     {
-      "id": "Q3-018",
-      "type": "B",
-      "drone": "U06",
-      "battery": "B-BAT-02",
-      "boxes": [
-        "S004-FOD-01",
-        "S004-WAT-02"
-      ],
-      "route": [
-        "S004"
-      ],
-      "relay": "R02-02"
-    },
-    {
-      "id": "Q3-022",
-      "type": "C",
-      "drone": "U07",
-      "battery": "C-BAT-04",
-      "boxes": [
-        "S008-FOD-01",
-        "S008-HYG-01",
-        "S008-MED-01",
-        "S008-WAT-01",
-        "S008-WAT-02"
-      ],
-      "route": [
-        "S008"
-      ],
-      "relay": "R02-02"
-    },
-    {
       "id": "Q3-023",
       "type": "A",
       "drone": "U03",
-      "battery": "A-BAT-06",
+      "battery": "A-BAT-05",
       "boxes": [
-        "S003-WAT-02",
-        "S015-MED-01"
+        "S011-FOD-01"
       ],
       "route": [
-        "S003",
-        "S015"
+        "S011"
       ],
-      "relay": "R01-03"
+      "relay": null
     },
     {
       "id": "split-436-Q3-015A",
@@ -276,57 +276,51 @@
       "drone": "U01",
       "battery": "A-BAT-02",
       "boxes": [
-        "S010-FOD-01",
+        "S010-MED-01",
+        "S013-WAT-01",
         "S014-MED-01"
       ],
       "route": [
+        "S013",
         "S010",
         "S014"
       ],
       "relay": "R02-01"
     },
     {
-      "id": "Q3-011",
-      "type": "B",
-      "drone": "U05",
-      "battery": "B-BAT-01",
-      "boxes": [
-        "S006-HYG-01",
-        "S011-WAT-01"
-      ],
-      "route": [
-        "S011",
-        "S006"
-      ],
-      "relay": null
-    },
-    {
-      "id": "Q3-010",
-      "type": "A",
-      "drone": "U01",
-      "battery": "A-BAT-03",
-      "boxes": [
-        "S003-WAT-04",
-        "S007-FOD-01"
-      ],
-      "route": [
-        "S003",
-        "S007"
-      ],
-      "relay": "R01-03"
-    },
-    {
       "id": "Q3-017",
       "type": "A",
-      "drone": "U04",
-      "battery": "A-BAT-04",
+      "drone": "U02",
+      "battery": "A-BAT-06",
       "boxes": [
+        "S002-WAT-02",
         "S009-FOD-01"
       ],
       "route": [
+        "S002",
         "S009"
       ],
       "relay": "R02-02"
+    },
+    {
+      "id": "Q3-021",
+      "type": "C",
+      "drone": "U07",
+      "battery": "C-BAT-02",
+      "boxes": [
+        "S005-HYG-01",
+        "S005-WAT-01",
+        "S005-WAT-02",
+        "S005-WAT-03",
+        "S006-HYG-01",
+        "S007-HYG-01"
+      ],
+      "route": [
+        "S005",
+        "S007",
+        "S006"
+      ],
+      "relay": "R01-03"
     },
     {
       "id": "Q3-020",
@@ -334,16 +328,14 @@
       "drone": "U08",
       "battery": "C-BAT-01",
       "boxes": [
-        "S001-FOD-02",
         "S002-FOD-01",
         "S002-FOD-02",
         "S002-HYG-01",
-        "S002-WAT-02",
-        "S002-WAT-03"
+        "S002-WAT-03",
+        "S002-WAT-04"
       ],
       "route": [
-        "S002",
-        "S001"
+        "S002"
       ],
       "relay": "R02-02"
     },
@@ -354,47 +346,30 @@
       "battery": "C-BAT-03",
       "boxes": [
         "S003-FOD-01",
-        "S015-FOD-01",
+        "S003-FOD-02",
+        "S003-HYG-01",
+        "S007-FOD-01",
         "S015-WAT-01"
       ],
       "route": [
-        "S015",
-        "S003"
+        "S007",
+        "S003",
+        "S015"
       ],
       "relay": "R01-03"
     },
     {
       "id": "Q3-016",
-      "type": "B",
-      "drone": "U05",
-      "battery": "B-BAT-04",
+      "type": "A",
+      "drone": "U01",
+      "battery": "A-BAT-03",
       "boxes": [
-        "S009-WAT-01"
+        "S006-FOD-01"
       ],
       "route": [
-        "S009"
+        "S006"
       ],
-      "relay": "R01-03"
-    },
-    {
-      "id": "Q3-021",
-      "type": "C",
-      "drone": "U07",
-      "battery": "C-BAT-02",
-      "boxes": [
-        "S005-FOD-01",
-        "S005-HYG-01",
-        "S005-WAT-02",
-        "S005-WAT-03",
-        "S007-HYG-01",
-        "S011-FOD-01"
-      ],
-      "route": [
-        "S011",
-        "S005",
-        "S007"
-      ],
-      "relay": "R01-03"
+      "relay": null
     }
   ],
   "relays": [
@@ -407,14 +382,6 @@
       "lat": 23.035467111065913
     },
     {
-      "id": "R02-01",
-      "drone": "R02",
-      "component": "R-BAT-04",
-      "candidate": "generated",
-      "lon": 109.2688578,
-      "lat": 23.0129522455537
-    },
-    {
       "id": "R01-03",
       "drone": "R01",
       "component": "R-BAT-03",
@@ -423,13 +390,22 @@
       "lat": 23.030952231885475
     },
     {
+      "id": "R02-01",
+      "drone": "R02",
+      "component": "R-BAT-04",
+      "candidate": "generated",
+      "lon": 109.2688578,
+      "lat": 23.015209699999993
+    },
+    {
       "id": "R02-02",
       "drone": "R02",
       "component": "R-BAT-05",
       "candidate": "generated",
       "lon": 109.230418106827,
       "lat": 23.066952242128142,
-      "agl_m": 300.0
+      "agl_m": 300.0,
+      "charge_regime": "above_knee_soc"
     }
   ]
 }

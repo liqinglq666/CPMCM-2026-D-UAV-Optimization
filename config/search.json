@@ -1,13 +1,22 @@
 {
   "seed": 20260924,
-  "q2_iterations": 20000,
-  "q2_restart_interval": 300,
-  "q3_iterations": 5000,
-  "q3_restart_interval": 250,
+  "q2_iterations": 500000,
+  "q2_restart_interval": 1000,
+  "q3_iterations": 20000,
+  "q3_restart_interval": 500,
+  "q3_target_transport_trips": 23,
+  "q3_target_relay_sorties": 3,
   "relay_grid_rows": 4,
   "relay_grid_columns": 5,
   "relay_local_step_m": 250.0,
-  "q3_repair_radius_factors": [0.1, 0.25, 0.5, 1.0, 2.0],
+  "q3_repair_radius_factors": [
+    0.1,
+    0.25,
+    0.5,
+    1.0,
+    2.0
+  ],
   "q3_repair_combination_limit": 256,
-  "description": "Search parameters only. q3_plan.json is an initial incumbent, never a certified optimum. Fixed iteration counts are used for reproducibility; physical constants come only from the official inputs and src/core."
+  "description": "Search parameters only. q3_plan.json is an initial incumbent, never a certified optimum. Fixed iteration counts are used for reproducibility; physical constants come only from the official inputs and src/core.",
+  "q2_resource_iterations": 100000
 }

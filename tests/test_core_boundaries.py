@@ -12,6 +12,7 @@ from src.core.energy import (
 from src.core.terrain import horizontal_distance
 from src.core.routes import evaluate_route
 from src.core.constraints import check_intervals
+from src.core.discrete import service_components
 from src.q1.physics_engine import SegmentPhysics, max_safe_payload, roundtrip_energy
 from src.q3.communication import free_space_path_loss, link_available
 from src.q3.solver import sample_states
@@ -181,3 +182,20 @@ def test_partitions_complete_and_zero_intervals():
     for n, k in [(0, 0), (2, 3), (2, 0)]:
         with pytest.raises(ValueError):
             list(canonical_partitions(n, k))
+
+
+def test_service_components_preserve_q4_partition_atoms():
+    routes = (
+        route
+        for route in [
+            ["S001", "S002"],
+            ["S002", "S003"],
+            ["S004"],
+            ["S005", "S006"],
+        ]
+    )
+    assert service_components(routes) == [
+        ["S001", "S002", "S003"],
+        ["S005", "S006"],
+        ["S004"],
+    ]

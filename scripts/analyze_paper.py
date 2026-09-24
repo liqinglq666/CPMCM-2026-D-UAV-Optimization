@@ -75,6 +75,9 @@ def analyze(data_root, results, out, allow_diagnostic_failures=False):
             for q in ("q1", "q2", "q3")
         },
     }
+    from diagnose_transport_load import diagnose
+
+    analysis["q2_workload_bound"] = diagnose(data_root, results / "q2")
     # An exact closed-cell terrain profile, independent of graphical sampling.
     segments = compute_segments(nodes, dem)
     critical_service = max(segments, key=lambda k: segments[k].out_up)

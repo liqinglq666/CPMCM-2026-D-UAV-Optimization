@@ -20,6 +20,28 @@ from src.core.discrete import (
 )
 from src.core.io import write_csv, write_json
 from .tradeoff import Profile, solution_rows
+from src.core.resource_rebuild import rebuild_resources, reorder_and_rebuild
+
+
+FIXED_COUNT_MOVES = tuple(
+    move for move in TRANSPORT_MOVES if move not in ("merge", "split")
+)
+
+
+def target_score(result):
+    """Search score inside a fixed trip-count Pareto slice.
+
+    Hard deadlines are enforced by ``TransportEvaluator``.  At an explicitly
+    selected trip count, makespan is optimized first, followed by energy and
+    weighted tardiness.  The global archive still uses the full nondominance
+    relation and therefore does not turn this search preference into a claim
+    of global optimality.
+    """
+    return (
+        result["makespan"],
+        result["energy"],
+        result["weighted_tardiness"],
+    )
 
 
 def discrete_plan(result):
@@ -103,21 +125,40 @@ def improve_frontier(
     allowed = [s for s in seeds if target_trips is None or len(s[0]) == target_trips]
     if not allowed:
         raise ValueError("Requested trip count has no feasible seed")
-    best_plan, best = min(allowed, key=lambda item: q2_objective(item[1]))
+    selection_score = target_score if target_trips is not None else q2_objective
+    best_plan, best = min(allowed, key=lambda item: selection_score(item[1]))
     current_plan, current = best_plan, best
     visited = {fingerprint(plan) for plan, _result in seeds}
-    for iteration in range(1, params["q2_iterations"] + 1):
+    total_iterations = params["q2_iterations"] + params.get("q2_resource_iterations", 0)
+    for iteration in range(1, total_iterations + 1):
+        polishing = iteration > params["q2_iterations"]
+        if iteration == params["q2_iterations"] + 1:
+            current_plan, current = best_plan, best
         if iteration % params["q2_restart_interval"] == 0:
-            # Alternate archived tradeoffs and original seeds, not result-file replay.
-            choices = seeds + [(p, r) for _o, p, r in archive]
-            current_plan, current = rng.choice(choices)
-        operator = TRANSPORT_MOVES[(iteration - 1) % len(TRANSPORT_MOVES)]
+            # Fixed-count intensification returns to the protected incumbent;
+            # the unrestricted mode alternates freshly generated tradeoffs.
+            if target_trips is not None:
+                current_plan, current = best_plan, best
+            else:
+                choices = seeds + [(p, r) for _o, p, r in archive]
+                current_plan, current = rng.choice(choices)
+        moves = FIXED_COUNT_MOVES if target_trips is not None else TRANSPORT_MOVES
+        operator = moves[(iteration - 1) % len(moves)]
+        if polishing and iteration % 2 == 0:
+            operator = "resource_rebuild"
         status, accepted, signature = "infeasible", False, ""
         objective = None
         try:
-            proposal = transport_neighbor(
-                current_plan, operator, rng, evaluator, iteration
-            )
+            if operator == "resource_rebuild":
+                proposal = reorder_and_rebuild(current_plan, evaluator, rng)
+            else:
+                proposal = transport_neighbor(
+                    current_plan, operator, rng, evaluator, iteration
+                )
+                if polishing:
+                    proposal = rebuild_resources(proposal, evaluator)
+            if target_trips is not None and len(proposal) != target_trips:
+                raise ValueError("Fixed-count neighborhood changed trip count")
             signature = fingerprint(proposal)
             if signature in visited:
                 status = "duplicate"
@@ -126,29 +167,40 @@ def improve_frontier(
                 result = evaluator.schedule(proposal)
                 objective = q2_objective(result)
                 retain(proposal, result)
-                if improves(objective, q2_objective(current)) or iteration % 79 == 0:
+                if (
+                    selection_score(result) < selection_score(current)
+                    or iteration % 97 == 0
+                ):
                     current_plan, current, accepted = proposal, result, True
                 if (
                     target_trips is None or result["trips"] == target_trips
-                ) and improves(objective, q2_objective(best)):
+                ) and selection_score(result) < selection_score(best):
                     best_plan, best = proposal, result
                     status = "improved"
                 else:
                     status = "feasible"
         except ValueError as error:
             status = str(error)
-        trace.append(
-            dict(
-                iteration=iteration,
-                operator=operator,
-                status=status,
-                accepted=accepted,
-                candidate_objective=objective,
-                best_so_far=q2_objective(best),
-                plan_sha256=signature,
-                elapsed_s=perf_counter() - started,
+        # Small test runs retain every step; production runs retain all
+        # improvements plus periodic checkpoints to keep the audit compact.
+        if (
+            params["q2_iterations"] <= 10_000
+            or status == "improved"
+            or iteration % 1000 == 0
+        ):
+            trace.append(
+                dict(
+                    iteration=iteration,
+                    operator=operator,
+                    status=status,
+                    accepted=accepted,
+                    candidate_objective=objective,
+                    best_so_far=q2_objective(best),
+                    best_selection_score=selection_score(best),
+                    plan_sha256=signature,
+                    elapsed_s=perf_counter() - started,
+                )
             )
-        )
     elapsed = perf_counter() - started
     result = exportable(best, box_map)
     # Keep the selected plan byte-for-byte representable in the by-count output.
@@ -190,13 +242,15 @@ def improve_frontier(
         out_dir / "Q2_search_summary.json",
         dict(
             seed=params["seed"],
-            iterations=params["q2_iterations"],
+            iterations=total_iterations,
+            resource_polish_iterations=params.get("q2_resource_iterations", 0),
             stop_reason="iteration_budget",
             search_runtime_s=elapsed,
             pareto_points=len(pareto),
             unique_candidates=len(visited),
             baseline_objectives=[q2_objective(s[1]) for s in seeds],
             best_objective=q2_objective(best),
+            best_selection_score=selection_score(best),
             target_trips=target_trips,
             exactness="heuristic discrete search; exact conditional earliest starts",
             parameters=params,
