@@ -8,17 +8,16 @@ import csv
 import hashlib
 import json
 import math
-from pathlib import Path
 import re
 import subprocess
 import sys
+from pathlib import Path
 
 from openpyxl import load_workbook
-from PIL import Image
-from pypdf import PdfReader
-
 from paper_data import load_analysis
 from pdf_quality import audit_pdf
+from PIL import Image
+from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -126,7 +125,15 @@ def verify(workbook: Path, template: Path, rebuild_figures: bool = False):
         }
         assert before == after, "Identical input produced different figure pixels"
         reproduced = after
+    manifest = {r["figure_id"]: r for r in records("paper/figure_manifest.csv")}
+    assert set(manifest) == {c["figure_id"] for c in figures}
     for contract in figures:
+        declared = json.loads(manifest[contract["figure_id"]]["data_sha256"])
+        assert set(declared) == set(contract["source_data"])
+        assert all(
+            hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == digest
+            for name, digest in declared.items()
+        )
         assert (ROOT / contract["script"]).is_file()
         assert all((ROOT / source).is_file() for source in contract["source_data"])
         stem = ROOT / "outputs/figures" / contract["figure_id"]
@@ -137,12 +144,47 @@ def verify(workbook: Path, template: Path, rebuild_figures: bool = False):
         svg = stem.with_suffix(".svg").read_text(encoding="utf-8")
         assert "<svg" in svg and "<image" not in svg  # no raster screenshots
 
+    for filename, summary in zip(
+        ["communication_states.csv", "communication_states_05s.csv"],
+        analysis["sampling_validation"],
+    ):
+        states = records("paper/data/" + filename)
+        assert len(states) == summary["checked_states"]
+        critical = min(states, key=lambda r: float(r["available_margin_db"]))
+        assert float(critical["available_margin_db"]) == summary["minimum_margin_db"]
+        assert float(critical["time_s"]) == summary["critical_state"]["time_s"]
+        assert critical["trip"] == summary["critical_state"]["trip"]
     paper = PdfReader(ROOT / "outputs/paper/main.pdf")
     font_audit = audit_pdf(ROOT / "outputs/paper/main.pdf")
     pages = [p.extract_text() for p in paper.pages]
     assert all(text.strip().endswith(str(i)) for i, text in enumerate(pages, 1))
     text = re.sub(r"\s+", "", "".join(pages))
     assert "??" not in text
+    toc_source = (ROOT / "outputs/paper/main.toc").read_text(encoding="utf-8")
+    toc_entries = re.findall(
+        r"\\contentsline \{(?:sub)?section\}.*?\}\{(\d+)\}\{([^}]+)\}", toc_source
+    )
+    assert len(toc_entries) > 10, "Missing automatic table of contents"
+    for page_number, destination in toc_entries:
+        assert destination in paper.named_destinations
+        assert paper.get_destination_page_number(
+            paper.named_destinations[destination]
+        ) + 1 == int(page_number)
+    assert "目录" in pages[1]
+    toc_pages = range(1, int(toc_entries[0][0]) - 1)
+
+    def annotation_count(page):
+        return len(page["/Annots"]) if "/Annots" in page else 0
+
+    toc_links = sum(annotation_count(paper.pages[i]) for i in toc_pages)
+    assert toc_links >= len(toc_entries), "TOC links missing"
+    compatibility = PdfReader(ROOT / "outputs/paper/main-compatible.pdf")
+    assert len(compatibility.pages) == len(paper.pages)
+    assert all(
+        annotation_count(compatibility.pages[i]) == annotation_count(paper.pages[i])
+        for i in toc_pages
+    )
+
     # Inspect the included manuscript, not orphan .tex files left by a reorder.
     main_source = (ROOT / "paper/main.tex").read_text(encoding="utf-8")
     section_paths = re.findall(r"\\input\{(sections/[^}]+)\}", main_source)
@@ -199,6 +241,8 @@ def verify(workbook: Path, template: Path, rebuild_figures: bool = False):
         "included_sections": section_paths,
         "figure_files": len(figures) * 3,
         "pdf_pages": len(paper.pages),
+        "toc_entries_checked": len(toc_entries),
+        "toc_links": toc_links,
         "pdf_font_audit": font_audit,
         "reference_entries": len(set(citations)),
         "citation_occurrences": len(citations),
