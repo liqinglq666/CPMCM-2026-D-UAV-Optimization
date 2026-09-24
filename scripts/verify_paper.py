@@ -18,6 +18,7 @@ from PIL import Image
 from pypdf import PdfReader
 
 from paper_data import load_analysis
+from pdf_quality import audit_pdf
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -128,6 +129,7 @@ def verify(workbook: Path, template: Path, rebuild_figures: bool = False):
         assert "<svg" in svg and "<image" not in svg  # no raster screenshots
 
     paper = PdfReader(ROOT / "outputs/paper/main.pdf")
+    font_audit = audit_pdf(ROOT / "outputs/paper/main.pdf")
     pages = [p.extract_text() for p in paper.pages]
     assert all(text.strip().endswith(str(i)) for i, text in enumerate(pages, 1))
     text = re.sub(r"\s+", "", "".join(pages))
@@ -163,6 +165,7 @@ def verify(workbook: Path, template: Path, rebuild_figures: bool = False):
         "figures": len(figures),
         "figure_files": len(figures) * 3,
         "pdf_pages": len(paper.pages),
+        "pdf_font_audit": font_audit,
         "reference_entries": len(citations),
         "reproduced_png_sha256": reproduced,
         "pdf_sha256": hashlib.sha256(

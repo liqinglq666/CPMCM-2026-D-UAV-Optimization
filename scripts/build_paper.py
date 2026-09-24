@@ -8,6 +8,7 @@ import subprocess
 import sys
 import shutil
 import tempfile
+from pdf_quality import audit_pdf, embed_cjk_unicode
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -49,6 +50,9 @@ def main():
             if build.returncode:
                 print(build.stdout[-6000:], file=sys.stderr)
                 build.check_returncode()
+        staged_pdf = Path(staging) / "main.pdf"
+        embed_cjk_unicode(staged_pdf, ROOT / "paper/fonts/cmaps/Adobe-GB1-UCS2")
+        audit_pdf(staged_pdf)
         for artifact in Path(staging).iterdir():
             artifact.replace(out / artifact.name)
     print(out / "main.pdf")
