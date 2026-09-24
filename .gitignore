@@ -38,3 +38,4 @@ paper/reports/pytest.xml
 paper/fonts/*.ttf
 paper/data/communication_states.csv
 paper/data/terrain_map.json
+paper/data/communication_states_05s.csv
