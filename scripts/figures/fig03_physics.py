@@ -1,10 +1,12 @@
 # AI assistance: ChatGPT/Codex, OpenAI, 2026-09-23; exact model/release unavailable.
 """Real DEM/energy mechanism; no statistical confidence interval is applicable."""
 
-from common import BLUE, DATA, GRAY, ORANGE, load_analysis, panel, paper_style, save
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
+from common import BLUE, DATA, GRAY, ORANGE, load_analysis, panel, paper_style, save
 from matplotlib.collections import PolyCollection
+
+from src.config import SERVICE_ALTITUDE_M, TERRAIN_CLEARANCE_M
 
 paper_style()
 a = load_analysis()
@@ -16,7 +18,7 @@ chosen = e[e.service == sid]
 fig, (ax, diag) = plt.subplots(
     2,
     1,
-    figsize=(7, 4.8),
+    figsize=(6.5, 4.7),
     gridspec_kw={"height_ratios": [2.2, 1]},
     layout="constrained",
 )
@@ -33,18 +35,18 @@ polys = [
 ax.add_collection(PolyCollection(polys, facecolor="#DDE2E5", edgecolor="none"))
 d = s["distance"] / 1000
 z0 = a["nodes"]["O01"]["elev"]
-z1 = a["nodes"][sid]["elev"] + 30
+z1 = a["nodes"][sid]["elev"] + SERVICE_ALTITUDE_M
 ax.plot([0, 0, d, d], [z0, s["cruise_alt"], s["cruise_alt"], z1], color=BLUE, lw=2)
 ax.axhline(s["max_dem"], color=GRAY, ls=":", lw=1)
 ax.annotate(
-    "50 m 净空",
+    f"{TERRAIN_CLEARANCE_M:g} m 净空",
     xy=(d * 0.54, s["cruise_alt"]),
     xytext=(d * 0.54, s["cruise_alt"] + 85),
     ha="center",
     arrowprops={"arrowstyle": "->", "color": BLUE},
 )
 ax.text(d * 0.04, z0 + 35, "O01")
-ax.text(d * 0.84, z1 - 55, sid + " +30 m")
+ax.text(d * 0.84, z1 - 55, sid + f" +{SERVICE_ALTITUDE_M:g} m")
 ax.set(
     xlim=(-0.08, d + 0.08),
     ylim=(0, s["cruise_alt"] + 140),
@@ -78,7 +80,7 @@ diag.set_yticks(
 diag.set_xlabel("航段能耗 (kWh)")
 diag.set_ylabel("阶段")
 diag.set_xlim(0, (chosen.horizontal_kwh + chosen.climb_kwh).max() * 1.22)
-diag.legend(ncol=2, loc="upper center", bbox_to_anchor=(0.5, -0.4))
+diag.legend(ncol=2, loc="upper center", bbox_to_anchor=(0.5, -0.5))
 panel(diag, "b", "同一路径，载荷改变水平与爬升能耗")
-fig.text(0.63, 0.97, f"N={len(chosen)} 航段；无统计不确定性", fontsize=8, ha="center")
-save(fig, "fig02_physics")
+
+save(fig, "fig03_physics")

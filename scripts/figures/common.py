@@ -1,28 +1,30 @@
-"""One visual system for the paper. Original code, informed by Icarus-Figures.
-AI assistance: ChatGPT/Codex (OpenAI), 2026-09-23; exact model/release unavailable.
-"""
+"""Shared, semantically fixed scientific figure style; original data-driven artwork."""
 
-from pathlib import Path
 import json
 import sys
 import tempfile
+from pathlib import Path
+
 import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib import font_manager
 import numpy as np
+from matplotlib import font_manager
+from matplotlib.ticker import MaxNLocator
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
+sys.path.insert(0, str(ROOT))
 from paper_data import load_analysis as load_verified_analysis
 
-DATA = ROOT / "paper/data"
-RESULTS = ROOT / "results"
-OUT = ROOT / "outputs/figures"
-BLUE, ORANGE, TEAL, GRAY, RED = "#365B75", "#C87334", "#258275", "#939BA2", "#A23E48"
-COLORS = {"A": BLUE, "B": TEAL, "C": ORANGE}
+DATA, RESULTS, OUT = ROOT / "paper/data", ROOT / "results", ROOT / "outputs/figures"
+BLUE, GREEN, ORANGE = "#299EDF", "#91D477", "#F66532"
+LIGHT_BLUE, PALE_BLUE, YELLOW = "#78C3FE", "#ABE5FB", "#FADA00"
+RED, GRAY, INK, BACKGROUND = "#E72451", "#BFC4C8", "#222222", "#FDFFFF"
+COLORS = {"A": BLUE, "B": GREEN, "C": ORANGE}
 MARKERS = {"A": "o", "B": "s", "C": "^"}
+LINESTYLES = {"A": "-", "B": "--", "C": "-."}
 HATCH = {"A": "", "B": "//", "C": ".."}
 
 
@@ -42,24 +44,27 @@ def paper_style():
             "font.family": [font, "DejaVu Sans"],
             "font.size": 10,
             "axes.labelsize": 10,
-            "axes.titlesize": 11,
+            "axes.titlesize": 10.5,
             "axes.titleweight": "bold",
             "xtick.labelsize": 9,
             "ytick.labelsize": 9,
             "legend.fontsize": 9,
             "axes.spines.top": False,
             "axes.spines.right": False,
-            "axes.linewidth": 0.7,
-            "axes.edgecolor": "#65727B",
-            "text.color": "#24333E",
-            "axes.labelcolor": "#24333E",
+            "axes.linewidth": 0.6,
+            "axes.edgecolor": GRAY,
+            "text.color": INK,
+            "axes.labelcolor": INK,
+            "xtick.color": INK,
+            "ytick.color": INK,
             "xtick.direction": "out",
             "ytick.direction": "out",
-            "lines.linewidth": 1.5,
+            "lines.linewidth": 1.4,
             "legend.frameon": False,
             "axes.unicode_minus": False,
-            "figure.facecolor": "white",
-            "savefig.facecolor": "white",
+            "figure.facecolor": BACKGROUND,
+            "axes.facecolor": BACKGROUND,
+            "savefig.facecolor": BACKGROUND,
             "savefig.dpi": 300,
             "pdf.fonttype": 42,
             "svg.fonttype": "path",
@@ -78,92 +83,98 @@ def save(fig, name):
     OUT.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(dir=OUT) as staging:
         for ext in ("pdf", "svg", "png"):
-            target = Path(staging) / f"{name}.{ext}"
-            fig.savefig(target, dpi=300, bbox_inches="tight", pad_inches=0.06)
+            fig.savefig(
+                Path(staging) / f"{name}.{ext}",
+                dpi=300,
+                bbox_inches="tight",
+                pad_inches=0.07,
+            )
         for target in Path(staging).iterdir():
             target.replace(OUT / target.name)
     plt.close(fig)
-    print(f"[fig] saved {name}.pdf/.svg/.png @300dpi", flush=True)
+    print(f"[fig] {name}: PDF / SVG / 300 dpi PNG", flush=True)
 
 
 def panel(ax, label, title):
-    ax.set_title(f"{label}  {title}", loc="left", pad=9)
+    ax.set_title(f"({label})  {title}", loc="left", pad=10)
 
 
-def note(fig, text):
-    fig.text(0.01, 0.006, text, fontsize=8, color="#59656F", va="bottom")
-
-
-def gantt(ax, trips, question, small=False):
-    sf, ef = (
-        ("开始时刻（s）", "返回O01时刻（s）")
-        if question == "q2"
-        else ("开始时刻_s", "返回O01时刻_s")
-    )
-    ids = sorted(trips["无人机编号"].unique())
-    for _, r in trips.iterrows():
-        y = ids.index(r["无人机编号"])
-        ax.barh(
-            y,
-            (r[ef] - r[sf]) / 3600,
-            left=r[sf] / 3600,
-            height=0.58,
-            color=COLORS[r["机型编号"]],
-            edgecolor="white",
-            linewidth=0.7,
-            hatch=HATCH[r["机型编号"]],
-        )
-        if not small:
-            ax.text(
-                (r[ef] + r[sf]) / 7200,
-                y,
-                str(r["架次编号"]).split("-")[-1],
-                ha="center",
-                va="center",
-                fontsize=7,
-                color="white",
-            )
-    ax.set_yticks(range(len(ids)), ids)
-    ax.set_xlabel("时刻 $t$ (h)")
-    ax.set_ylabel("实体无人机")
-    ax.set_xlim(left=0)
-    ax.invert_yaxis()
-    ax.grid(axis="x", alpha=0.15)
+def grid(ax, axis="x"):
+    ax.grid(axis=axis, color=GRAY, alpha=0.25, linewidth=0.5)
+    ax.set_axisbelow(True)
 
 
 def nodes_xy(analysis):
-    # Coordinates remain longitude/latitude; plots correct the visual aspect ratio.
     return {k: (v["lon"], v["lat"]) for k, v in analysis["nodes"].items()}
 
 
 def terrain_map(ax, analysis, labels=True):
-    with (DATA / "terrain_map.json").open(encoding="utf-8") as f:
-        dem = json.load(f)
+    dem = json.loads((DATA / "terrain_map.json").read_text())
+    levels = np.linspace(
+        np.floor(np.min(dem["elevation_m"]) / 100) * 100,
+        np.ceil(np.max(dem["elevation_m"]) / 100) * 100,
+        7,
+    )
+    # Discrete subdued elevation bands, never a continuous gradient or rainbow.
+    terrain = ax.contourf(
+        dem["longitude"],
+        dem["latitude"],
+        dem["elevation_m"],
+        levels=levels,
+        colors=["#F8FBFC", "#EDF3F4", "#E3ECEB", "#D8E4E0", "#CBDAD3", "#BBCDC3"],
+        zorder=0,
+    )
     ax.contour(
         dem["longitude"],
         dem["latitude"],
         dem["elevation_m"],
-        levels=7,
-        colors="#C9CDCF",
-        linewidths=0.4,
-        zorder=0,
+        levels=levels,
+        colors=GRAY,
+        linewidths=0.35,
+        zorder=1,
     )
     xy = nodes_xy(analysis)
+    # Label offsets are layout choices; coordinates are always read from inputs.
+    offsets = {
+        "O01": (-7, -15),
+        "S001": (5, -12),
+        "S003": (5, -10),
+        "S007": (5, -11),
+        "S011": (-7, 6),
+        "S014": (5, -12),
+    }
     for key, (lon, lat) in xy.items():
         ax.scatter(
             lon,
             lat,
             marker="s" if key == "O01" else "o",
-            s=35 if key == "O01" else 13,
-            color=BLUE,
-            zorder=4,
+            s=45 if key == "O01" else 25,
+            facecolor=INK if key == "O01" else BLUE,
+            edgecolor=INK,
+            linewidth=0.5,
+            zorder=5,
         )
         if labels:
+            dx, dy = offsets.get(key, (5, 5))
             ax.annotate(
-                key, (lon, lat), xytext=(3, 3), textcoords="offset points", fontsize=7.5
+                key,
+                (lon, lat),
+                xytext=(dx, dy),
+                textcoords="offset points",
+                fontsize=9,
+                ha="right" if dx < 0 else "left",
+                zorder=6,
+                bbox={
+                    "facecolor": BACKGROUND,
+                    "edgecolor": "none",
+                    "pad": 0.4,
+                    "alpha": 0.85,
+                },
             )
     ax.set_xlabel("经度 (°E)")
     ax.set_ylabel("纬度 (°N)")
     ax.set_aspect(1 / np.cos(np.deg2rad(np.mean(dem["latitude"]))))
     ax.ticklabel_format(useOffset=False, axis="both")
-    return xy
+    ax.xaxis.set_major_locator(MaxNLocator(5))
+    ax.yaxis.set_major_locator(MaxNLocator(5))
+    return xy, terrain
