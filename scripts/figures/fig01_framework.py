@@ -1,125 +1,165 @@
-"""Argument architecture and exactly scoped inheritance; results read from files."""
+"""Academic method diagram: shared rules are not inherited transport batches."""
 
 import matplotlib.pyplot as plt
-import pandas as pd
-from common import (
-    BACKGROUND,
-    BLUE,
-    GRAY,
-    INK,
-    PALE_BLUE,
-    RESULTS,
-    load_analysis,
-    paper_style,
-    save,
-)
-from matplotlib.patches import FancyArrowPatch, Rectangle
+from matplotlib.patches import Rectangle, FancyArrowPatch
+from common import WIDTH, GRAY, INK, BLUE, BACKGROUND, load_analysis, paper_style, save
 
 paper_style()
 a = load_analysis()
 m = a["metrics"]
-gaps = pd.read_csv(RESULTS / "q4/Q4_resource_summary.csv").groupby("K")["缺口"].sum()
-fig, ax = plt.subplots(figsize=(6.5, 6.3))
+fig, ax = plt.subplots(figsize=(WIDTH, 7.05))
+fig.subplots_adjust(left=0.012, right=0.988, top=0.992, bottom=0.008)
 ax.set(xlim=(0, 1), ylim=(0, 1))
 ax.axis("off")
-ax.text(
-    0.5,
-    0.975,
-    "官方题目 · 节点与货箱 · 30 m DEM · 机型与库存",
-    ha="center",
-    va="top",
-    fontsize=11,
-    weight="bold",
+
+
+def box(x, y, w, h, text, fs=8.5, bold=False):
+    ax.add_patch(
+        Rectangle((x, y), w, h, facecolor=BACKGROUND, edgecolor=GRAY, lw=0.6, zorder=2)
+    )
+    ax.text(
+        x + w / 2,
+        y + h / 2,
+        text,
+        ha="center",
+        va="center",
+        fontsize=fs,
+        weight="bold" if bold else "normal",
+        zorder=3,
+        linespacing=1.4,
+    )
+
+
+def arrow(p, q):
+    ax.add_patch(
+        FancyArrowPatch(
+            p, q, arrowstyle="-|>", mutation_scale=8, color=INK, lw=0.65, zorder=1
+        )
+    )
+
+
+box(
+    0.025,
+    0.91,
+    0.95,
+    0.071,
+    "输入数据与统一约束\n节点与货箱 / 30 m DEM / 机型与库存 / 交付时限 / 通信参数",
+    8.5,
+    True,
 )
+arrow((0.5, 0.91), (0.5, 0.882))
+box(
+    0.025,
+    0.811,
+    0.95,
+    0.071,
+    "统一物理计算共享底座\nDEM 航高 → 动态载荷 → 分阶段能量 → 返航储备、充电与链路",
+    8.5,
+    True,
+)
+# A dashed enclosure denotes scope, not another dependency edge.
 ax.add_patch(
-    Rectangle((0.02, 0.805), 0.96, 0.105, facecolor=PALE_BLUE, edgecolor=GRAY, lw=0.6)
+    Rectangle(
+        (0.014, 0.234), 0.972, 0.55, fill=False, edgecolor=GRAY, lw=0.85, ls=(0, (4, 3))
+    )
 )
-ax.text(0.5, 0.877, "统一物理计算", ha="center", fontsize=12, weight="bold")
 ax.text(
-    0.5,
-    0.834,
-    "航高 → 动态载荷 → 分阶段能量 → 返航储备与充电",
-    ha="center",
-    fontsize=10,
+    0.035,
+    0.77,
+    "共享输入、物理规则与校验口径",
+    fontsize=8,
+    color=INK,
+    va="center",
+    bbox={"facecolor": BACKGROUND, "edgecolor": "none", "pad": 2},
 )
-rows = [
+arrow((0.25, 0.811), (0.25, 0.736))
+arrow((0.75, 0.811), (0.75, 0.736))
+# Shared base feeds the lower modules via the outside margins.
+for x, mid in [(0.006, 0.25), (0.994, 0.75)]:
+    ax.plot([0.5, x, x, mid], [0.795, 0.795, 0.496, 0.496], color=GRAY, lw=0.65)
+    arrow((mid, 0.496), (mid, 0.477))
+modules = [
     (
-        0.70,
-        "Q1  能不能运",
-        "安全载荷 → 不可拆货箱划分",
-        f"{m['q1']['trips']} 架次\n单点组批精确",
+        0.045,
+        0.514,
+        "Q1  单点能力与精确组批",
+        [
+            "逐机型安全载荷边界",
+            "不可拆货箱可行子集",
+            "词典序集合划分 DP",
+            f"{m['q1']['trips']} 批：单点组批精确解",
+        ],
+        None,
     ),
     (
-        0.52,
-        "Q2  能否按时",
-        "实体飞机 + 共享电池 + 交付时限",
-        f"{m['q2']['trips']} 架次折中\n有限启发式候选",
+        0.545,
+        0.514,
+        "Q2  多点运输与资源调度",
+        [
+            "重新构造多点运输任务",
+            "迁移 / 交换 / 合并 / 拆分",
+            "路线与资源邻域搜索",
+            f"选定 {m['q2']['trips']} 架次并检验占用",
+        ],
+        "不沿用 Q1 单点批次",
     ),
     (
-        0.34,
-        "Q3  能否通信",
-        "地形遮挡 + 指定中继 + 服务窗口",
-        f"{m['q3']['transport_trips']} 运输 / {m['q3']['relay_sorties']} 中继\n固定方案时序 LP",
+        0.045,
+        0.257,
+        "Q3  运输—中继联合优化",
+        [
+            "分组 / 路线 / 中继 / 资源外层搜索",
+            "固定候选：HiGHS 词典序时序 LP",
+            "1 s 通信终检与独立可行性验证",
+            f"{m['q3']['transport_trips']} 运输 / {m['q3']['relay_sorties']} 中继联合方案",
+        ],
+        "固定离散候选后优化时序",
     ),
     (
-        0.16,
-        "Q4  能否独立",
-        "不可拆分量 → 分区 → 资源缺口",
-        f"两组缺 {gaps.loc[2]} / 三组缺 {gaps.loc[3]}\n固定计划精确枚举",
+        0.545,
+        0.257,
+        "Q4  固定计划的独立配置",
+        [
+            "固定正式联合方案",
+            "提取不可拆分任务分量",
+            "分区枚举与区间峰值核算",
+            "独立资源需求与分类缺口",
+        ],
+        "固定正式联合方案后配置资源",
     ),
 ]
-for y, title, model, result in rows:
-    ax.add_patch(
-        Rectangle(
-            (0.02, y - 0.052), 0.96, 0.105, facecolor=BACKGROUND, edgecolor=GRAY, lw=0.6
-        )
+for x, y, title, steps, note in modules:
+    ax.text(
+        x + 0.205, y + 0.222, title, ha="center", va="center", fontsize=9, weight="bold"
     )
-    ax.plot([0.02, 0.02], [y - 0.052, y + 0.053], color=BLUE, lw=3)
-    ax.text(0.04, y + 0.019, title, fontsize=11, weight="bold")
-    ax.text(0.04, y - 0.023, model, fontsize=9.5)
-    ax.plot([0.70, 0.70], [y - 0.037, y + 0.037], color=GRAY, lw=0.6)
-    ax.text(0.84, y, result, ha="center", va="center", fontsize=9.5, linespacing=1.5)
-for y, label in [
-    (0.61, "重新多点组批；并不沿用 Q1 批次"),
-    (0.43, "另行固定离散候选；非机械继承所选 Q2 分组"),
-    (0.25, "固定正式联合计划：架次、时刻与中继保障关系"),
-]:
-    ax.add_patch(
-        FancyArrowPatch(
-            (0.07, y + 0.027),
-            (0.07, y - 0.027),
-            arrowstyle="-|>",
-            mutation_scale=12,
-            color=INK,
-            lw=0.8,
-        )
-    )
-    ax.text(0.12, y, label, va="center", fontsize=9)
-for start, end in [(0.94, 0.915), (0.801, 0.763)]:
-    ax.add_patch(
-        FancyArrowPatch(
-            (0.5, start),
-            (0.5, end),
-            arrowstyle="-|>",
-            mutation_scale=12,
-            color=INK,
-            lw=0.8,
-        )
-    )
-ax.text(
-    0.5,
-    0.052,
-    "敏感性与固定方案压力边界  ·  逐箱 / 资源 / 通信验证",
-    ha="center",
-    fontsize=10,
-    weight="bold",
+    ax.plot([x, x + 0.41], [y + 0.209, y + 0.209], color=BLUE, lw=1)
+    for i, text in enumerate(steps):
+        sy = y + 0.156 - i * 0.039
+        box(x, sy, 0.41, 0.03, text, 8)
+        if i < 3:
+            arrow((x + 0.205, sy), (x + 0.205, sy - 0.009))
+    if note:
+        ax.text(x + 0.205, y + 0.008, note, ha="center", va="center", fontsize=7.5)
+# Only this cross-question arrow denotes transfer of a formal plan.
+arrow((0.456, 0.346), (0.544, 0.346))
+ax.text(0.5, 0.375, "计划", ha="center", fontsize=7.5)
+ax.text(0.5, 0.31, "继承", ha="center", fontsize=7.5)
+for mid in (0.25, 0.75):
+    arrow((mid, 0.232), (mid, 0.201))
+box(
+    0.025,
+    0.091,
+    0.95,
+    0.11,
+    "统一检验与边界分析\n逐箱交付 / 飞机与电池占用 / SOC / 硬截止 / 通信回放\n储备敏感性与固定计划压力界限",
+    8.5,
+    True,
 )
 ax.text(
     0.5,
-    0.015,
-    "同一事实来源；精确求解、启发式与条件最优分别限定",
+    0.049,
+    "精确组批 / 启发式离散搜索 / 条件时序最优 / 固定计划枚举",
     ha="center",
-    fontsize=9,
+    fontsize=8,
 )
-fig.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
 save(fig, "fig01_framework")

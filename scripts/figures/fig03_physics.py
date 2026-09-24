@@ -1,11 +1,23 @@
-# AI assistance: ChatGPT/Codex, OpenAI, 2026-09-23; exact model/release unavailable.
-"""Real DEM/energy mechanism; no statistical confidence interval is applicable."""
+"""DEM determines cruise altitude; observed payload changes the energy budget."""
 
 import matplotlib.pyplot as plt
 import pandas as pd
-from common import BLUE, DATA, GRAY, ORANGE, load_analysis, panel, paper_style, save
 from matplotlib.collections import PolyCollection
-
+from matplotlib.patches import Patch
+from common import (
+    WIDTH,
+    BLUE,
+    DATA,
+    INK,
+    GRAY,
+    PALE_BLUE,
+    DIRECT,
+    load_analysis,
+    panel,
+    paper_style,
+    save,
+    grid,
+)
 from src.config import SERVICE_ALTITUDE_M, TERRAIN_CLEARANCE_M
 
 paper_style()
@@ -15,11 +27,11 @@ e = pd.read_csv(DATA / "energy_components.csv")
 s = a["terrain_example"]
 sid = s["service"]
 chosen = e[e.service == sid]
-fig, (ax, diag) = plt.subplots(
+fig, (ax, energy) = plt.subplots(
     2,
     1,
-    figsize=(6.5, 4.7),
-    gridspec_kw={"height_ratios": [2.2, 1]},
+    figsize=(WIDTH, 4.6),
+    gridspec_kw={"height_ratios": [1.8, 1]},
     layout="constrained",
 )
 polys = [
@@ -32,55 +44,78 @@ polys = [
     for r in p.itertuples()
     if r.end_m > r.begin_m
 ]
-ax.add_collection(PolyCollection(polys, facecolor="#DDE2E5", edgecolor="none"))
+ax.add_collection(PolyCollection(polys, facecolor="#DDE4E0", edgecolor="none"))
 d = s["distance"] / 1000
 z0 = a["nodes"]["O01"]["elev"]
 z1 = a["nodes"][sid]["elev"] + SERVICE_ALTITUDE_M
-ax.plot([0, 0, d, d], [z0, s["cruise_alt"], s["cruise_alt"], z1], color=BLUE, lw=2)
-ax.axhline(s["max_dem"], color=GRAY, ls=":", lw=1)
+ax.plot(
+    [0, 0, d, d],
+    [z0, s["cruise_alt"], s["cruise_alt"], z1],
+    color=BLUE,
+    lw=1.65,
+    label="计划飞行高度",
+)
+ax.axhline(s["max_dem"], color=GRAY, ls="--", lw=0.65)
 ax.annotate(
     f"{TERRAIN_CLEARANCE_M:g} m 净空",
-    xy=(d * 0.54, s["cruise_alt"]),
-    xytext=(d * 0.54, s["cruise_alt"] + 85),
+    xy=(d * 0.53, s["cruise_alt"]),
+    xytext=(d * 0.70, s["cruise_alt"] + 75),
     ha="center",
-    arrowprops={"arrowstyle": "->", "color": BLUE},
+    fontsize=8,
+    arrowprops={"arrowstyle": "-", "color": INK, "lw": 0.65},
 )
-ax.text(d * 0.04, z0 + 35, "O01")
-ax.text(d * 0.84, z1 - 55, sid + f" +{SERVICE_ALTITUDE_M:g} m")
+ax.text(0.08, z0 - 50, "O01", fontsize=8)
+ax.text(d - 0.03, z1 - 55, sid, ha="right", fontsize=8)
 ax.set(
     xlim=(-0.08, d + 0.08),
-    ylim=(0, s["cruise_alt"] + 140),
+    ylim=(0, s["cruise_alt"] + 150),
     xlabel="沿航段水平距离 (km)",
     ylabel="海拔 (m)",
 )
-panel(ax, "a", f"最高地形约束航高：O01 → {sid}")
+panel(ax, "a", f"O01–{sid}：沿途地形决定巡航高度")
+ax.legend(loc="upper left", bbox_to_anchor=(0, 1.0), fontsize=7.5)
 for i, r in enumerate(chosen.itertuples()):
-    diag.barh(i, r.horizontal_kwh, color=BLUE, label="水平航程" if i == 0 else None)
-    diag.barh(
+    energy.barh(
+        i, r.horizontal_kwh, height=0.52, color=PALE_BLUE, edgecolor=INK, lw=0.45
+    )
+    energy.barh(
         i,
         r.climb_kwh,
         left=r.horizontal_kwh,
-        color=ORANGE,
-        edgecolor="#24333E",
-        linewidth=0,
-        hatch="//",
-        label="爬升附加" if i == 0 else None,
+        height=0.52,
+        color=DIRECT,
+        hatch="///",
+        edgecolor=INK,
+        lw=0.45,
     )
-    diag.text(
-        r.horizontal_kwh + r.climb_kwh + 0.03,
+    energy.text(
+        r.horizontal_kwh + r.climb_kwh + 0.035,
         i,
-        f"{r.payload_kg:g} kg",
+        f"{r.horizontal_kwh + r.climb_kwh:.2f} kWh",
         va="center",
-        fontsize=9,
+        fontsize=8,
     )
-diag.set_yticks(
+energy.set_yticks(
     range(len(chosen)),
-    ["去程载货" if k == "outbound" else "返程空载" for k in chosen.direction],
+    [
+        ("去程载货" if r.direction == "outbound" else "返程空载")
+        + f" · {r.payload_kg:g} kg"
+        for r in chosen.itertuples()
+    ],
 )
-diag.set_xlabel("航段能耗 (kWh)")
-diag.set_ylabel("阶段")
-diag.set_xlim(0, (chosen.horizontal_kwh + chosen.climb_kwh).max() * 1.22)
-diag.legend(ncol=2, loc="upper center", bbox_to_anchor=(0.5, -0.5))
-panel(diag, "b", "同一路径，载荷改变水平与爬升能耗")
-
+energy.invert_yaxis()
+energy.set(
+    xlabel="航段能耗 (kWh)",
+    xlim=(0, (chosen.horizontal_kwh + chosen.climb_kwh).max() * 1.26),
+)
+grid(energy)
+energy.legend(
+    handles=[
+        Patch(fc=PALE_BLUE, ec=INK, lw=0.4, label="水平航程"),
+        Patch(fc=DIRECT, ec=INK, lw=0.4, hatch="///", label="爬升附加"),
+    ],
+    ncol=2,
+    loc="lower right",
+)
+panel(energy, "b", "同一水平航段，载荷改变能量组成")
 save(fig, "fig03_physics")

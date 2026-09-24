@@ -40,6 +40,8 @@ m = a["metrics"]
 validation = json.loads((RESULTS / "validation.json").read_text(encoding="utf-8"))
 atom_count = validation["q4"]["atomic_groups"]
 capacity_scenarios = pd.read_csv(DATA / "payload_reserve.csv")
+search_parameters = json.loads((ROOT / "config/search.json").read_text())
+reserve_stairs = pd.read_csv(DATA / "reserve_staircase.csv")
 q1_utilization = (
     c[c.question == "q1"][["mass_fraction", "volume_fraction", "energy_fraction"]]
     .idxmax(axis=1)
@@ -75,9 +77,19 @@ macros = {
     "StatesHalf": str(a["sampling_validation"][1]["checked_states"]),
     "MarginOne": f"{a['sampling_validation'][0]['minimum_margin_db']:.3f}",
     "MarginHalf": f"{a['sampling_validation'][1]['minimum_margin_db']:.3f}",
+    "ViolationsHalf": str(a["sampling_validation"][1]["violations"]),
+    "CriticalTripHalf": a["sampling_validation"][1]["critical_state"]["trip"],
+    "CriticalTimeHalf": f"{a['sampling_validation'][1]['critical_state']['time_s']:.3f}",
+    "ParetoCount": str(len(pd.read_csv(RESULTS / "q2/Q2_pareto_frontier.csv"))),
+    "SearchSeed": str(search_parameters["seed"]),
+    "QTwoIterations": str(search_parameters["q2_iterations"]),
+    "QThreeIterations": str(search_parameters["q3_iterations"]),
+    "ReserveTripBreak": f"{reserve_stairs.iloc[0].reserve_upper * 100:.2f}",
+    "ReserveReachabilityLimit": f"{reserve_stairs[~reserve_stairs.reachable].reserve_lower.min() * 100:.2f}",
     "MinSoc": f"{c[c.question == 'q3'].soc_pct.min():.2f}",
     "QOneReserveLimit": f"{100 * a['fixed_plan_thresholds']['q1']['maximum_common_reserve']:.2f}",
     "QThreeEnergyTolerance": f"{100 * (a['fixed_plan_thresholds']['q3']['maximum_energy_multiplier'] - 1):.2f}",
+    "QTwoEnergyTolerance": f"{100 * (a['fixed_plan_thresholds']['q2']['maximum_energy_multiplier'] - 1):.2f}",
     "GapTwo": str(resources[resources.K == 2]["缺口"].sum()),
     "GapThree": str(resources[resources.K == 3]["缺口"].sum()),
     "EnergyIncrease": f"{100 * ((m['q3']['transport_energy_kwh'] + m['q3']['relay_energy_kwh']) / m['q2']['energy'] - 1):.2f}",
@@ -235,7 +247,7 @@ table(
 )
 table(
     "sampling",
-    ["步长 / s", "状态数", "中断数", "最小余量 / dB"],
+    ["步长 / s", "状态数", "未覆盖状态数", "最小余量 / dB"],
     [
         [
             f"{r['step_s']:.1f}",

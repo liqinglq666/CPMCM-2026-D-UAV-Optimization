@@ -27,9 +27,10 @@ from src.core.io import read_csv, write_csv, write_json
 from src.core.physics import Physics
 from src.core.routes import evaluate_route
 from src.q1.physics_engine import compute_segments, max_safe_payload
+from paper_sensitivity import reserve_staircase
 
 
-def analyze(data_root, results, out):
+def analyze(data_root, results, out, allow_diagnostic_failures=False):
     out.mkdir(parents=True, exist_ok=True)
     nodes, types, drones, batteries, boxes, dem = load_inputs(data_root)
     physics = Physics(nodes, types, dem)
@@ -58,7 +59,7 @@ def analyze(data_root, results, out):
     analysis = {
         "assumptions": {
             "wind": "not specified; official planned speed",
-            "randomness": "none",
+            "randomness": "Q2/Q3 fixed-seed search; diagnostics have no random steps",
             "confidence_intervals": "not applicable",
             "continuous_time_proof": False,
         },
@@ -182,6 +183,9 @@ def analyze(data_root, results, out):
                     }
                 )
     write_csv(out / "payload_reserve.csv", response)
+    stairs, reserve_limits = reserve_staircase(boxes, types, segments)
+    write_csv(out / "reserve_staircase.csv", stairs)
+    analysis["reserve_partition_limits"] = reserve_limits
     # Native DEM pixel centres in the task extent; no graphical resampling.
     terrain = physics.terrain
     west = min(n.lon for n in nodes.values()) - 0.007
@@ -259,11 +263,34 @@ def analyze(data_root, results, out):
         )
         frame.to_csv(out / filename, index=False)
         print("Communication:", summaries[-1], flush=True)
-        if violations:
+        if violations and not allow_diagnostic_failures:
             raise ValueError(
                 f"Finer paper validation detected {violations} uncovered states at step {step}"
             )
     analysis["sampling_validation"] = summaries
+    critical = summaries[-1]["critical_state"]
+    rid = assigned[critical["trip"]]
+    counterexample = {
+        "state": critical,
+        "assigned_relay": rid,
+        "direct_margin_db": critical["direct_margin_db"],
+        "refined_check_passed": summaries[-1]["violations"] == 0,
+    }
+    if rid:
+        relay_point, begin, end = relay_map[rid]
+        point = tuple(critical[k] for k in ("longitude", "latitude", "altitude_m"))
+        access = comm.link(point, relay_point, radio.access_budget_db)
+        counterexample.update(
+            relay_active=begin <= critical["time_s"] <= end,
+            access_margin_db=radio.access_budget_db - access[1],
+            access_obstructed=bool(access[2]),
+            backhaul_margin_db=backhauls[rid],
+        )
+    write_json(out / "communication_critical_state.json", counterexample)
+    analysis["refined_communication_passed"] = not any(
+        s["violations"] for s in summaries
+    )
+    analysis["diagnostic_failures_exported"] = bool(allow_diagnostic_failures)
     hard = [
         {
             "box": r["货箱编号"],
@@ -290,6 +317,8 @@ def analyze(data_root, results, out):
         "communication_states.csv",
         "communication_states_05s.csv",
         "hard_deadline_slacks.csv",
+        "reserve_staircase.csv",
+        "communication_critical_state.json",
     ]
     analysis["diagnostic_hashes"] = {
         name: hashlib.sha256((out / name).read_bytes()).hexdigest()
@@ -304,5 +333,10 @@ if __name__ == "__main__":
     parser.add_argument("--data", type=Path, default=DEFAULT_DATA_ROOT)
     parser.add_argument("--results", type=Path, default=ROOT / "results")
     parser.add_argument("--out", type=Path, default=ROOT / "paper/data")
+    parser.add_argument(
+        "--allow-diagnostic-failures",
+        action="store_true",
+        help="Export failed diagnostic evidence for honest reporting; never declares feasibility",
+    )
     args = parser.parse_args()
-    analyze(args.data, args.results.resolve(), args.out)
+    analyze(args.data, args.results.resolve(), args.out, args.allow_diagnostic_failures)
