@@ -21,6 +21,7 @@ from src.core.discrete import (
     improves,
     transport_neighbor,
     TRANSPORT_MOVES,
+    service_components,
 )
 from src.core.constraints import validate_transport, validate_relays, RESULT_TOLERANCE
 from src.core.io import write_json
@@ -48,6 +49,7 @@ RELAY_MOVES = (
     "relay_charge_branch",
 )
 Q3_TOLERANCES = (0, 0, 1e-5, 1e-5, 1e-9, 0, 1e-6)
+TARGET_TOLERANCES = (0, 0, 1e-5, 1e-5, 1e-9, 1e-6)
 
 
 def build_plan(plan):
@@ -74,6 +76,8 @@ def objective(rows):
 
 
 def evaluate(plan, preparer, drones, batteries):
+    if len(service_components(job["route"] for job in plan["jobs"])) < 3:
+        raise ValueError("Q3 plan cannot support the required Q4 three-way partition")
     jobs, relays = preparer.prepare(plan)
     times = optimize_timing(
         jobs,
@@ -116,6 +120,19 @@ def evaluate(plan, preparer, drones, batteries):
         ):
             raise ValueError("Relay unavailable in the union-grid communication audit")
     return dict(jobs=jobs, relays=relays, times=times, objective=objective(rows))
+
+
+def target_score(candidate, params):
+    """Condition the heuristic search on declared Pareto aspiration counts."""
+    value = candidate["objective"]
+    return (
+        abs(len(candidate["jobs"]) - params["q3_target_transport_trips"]),
+        abs(len(candidate["relays"]) - params["q3_target_relay_sorties"]),
+        value[2],
+        value[3],
+        value[4],
+        value[6],
+    )
 
 
 def candidate_points(initial, physics, params):
@@ -273,10 +290,12 @@ def search_plan(
         [],
         [dict(iteration=0, plan=initial, objective=baseline["objective"])],
     )
+    status_counts, operator_attempts = Counter(), Counter()
     for iteration in range(1, params["q3_iterations"] + 1):
         if iteration % params["q3_restart_interval"] == 0:
             current_plan, current = best_plan, best
         operator = moves[(iteration - 1) % len(moves)]
+        operator_attempts[operator] += 1
         status, signature, accepted, value = "infeasible", "", False, None
         try:
             if operator in TRANSPORT_MOVES:
@@ -297,12 +316,20 @@ def search_plan(
                 candidate = evaluate(proposal, preparer, drones, batteries)
                 value = candidate["objective"]
                 if (
-                    improves(value, current["objective"], Q3_TOLERANCES)
+                    improves(
+                        target_score(candidate, params),
+                        target_score(current, params),
+                        TARGET_TOLERANCES,
+                    )
                     or iteration % 97 == 0
                 ):
                     current_plan, current, accepted = proposal, candidate, True
                 status = "feasible"
-                if improves(value, best["objective"], Q3_TOLERANCES):
+                if improves(
+                    target_score(candidate, params),
+                    target_score(best, params),
+                    TARGET_TOLERANCES,
+                ):
                     best_plan, best = proposal, candidate
                     status = "improved"
                     incumbents.append(
@@ -310,23 +337,27 @@ def search_plan(
                     )
         except (ValueError, RuntimeError) as error:
             status = str(error)
-        trace.append(
-            dict(
-                iteration=iteration,
-                operator=operator,
-                status=status,
-                accepted=accepted,
-                objective=value,
-                best_so_far=best["objective"],
-                plan_sha256=signature,
-                elapsed_s=perf_counter() - started,
+        status_counts[status] += 1
+        if status == "improved" or iteration % 100 == 0:
+            trace.append(
+                dict(
+                    iteration=iteration,
+                    operator=operator,
+                    status=status,
+                    accepted=accepted,
+                    objective=value,
+                    best_so_far=best["objective"],
+                    best_target_score=target_score(best, params),
+                    plan_sha256=signature,
+                    elapsed_s=perf_counter() - started,
+                )
             )
-        )
         if iteration % 100 == 0:
             logging.getLogger(__name__).info(
-                "Q3 search %d/%d best=%s",
+                "Q3 search %d/%d target=%s objective=%s",
                 iteration,
                 params["q3_iterations"],
+                target_score(best, params),
                 best["objective"],
             )
     write_json(out_dir / "Q3_search_trace.json", trace)
@@ -343,8 +374,10 @@ def search_plan(
             unique_candidates=len(visited),
             initial_objective=baseline["objective"],
             best_objective=best["objective"],
-            status_counts=dict(Counter(r["status"] for r in trace)),
-            operator_attempts=dict(Counter(r["operator"] for r in trace)),
+            initial_target_score=target_score(baseline, params),
+            best_target_score=target_score(best, params),
+            status_counts=dict(status_counts),
+            operator_attempts=dict(operator_attempts),
             communication_step_s=step_s,
             communication_sampling_steps_s=list(preparer.audit_steps),
             continuous_time_proof=False,

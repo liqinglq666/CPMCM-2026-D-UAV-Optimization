@@ -21,38 +21,14 @@ from src.core.energy import two_stage_charge_time
 from src.core.io import write_csv, write_json
 from .provenance import q3_fingerprints, check_task_relations, read_q3_relations
 from src.core.constraints import max_overlap as max_overlap
+from src.core.discrete import service_components
 from src.core.provenance import save_provenance, check_question_provenance
 
 
 def atomic_components(transport_rows):
-    services = sorted(
-        {s for row in transport_rows for s in row["访问服务区顺序"].split("->")}
+    return service_components(
+        row["访问服务区顺序"].split("->") for row in transport_rows
     )
-    parent = {s: s for s in services}
-
-    def find(x):
-        while parent[x] != x:
-            parent[x] = parent[parent[x]]
-            x = parent[x]
-        return x
-
-    def union(a, b):
-        a, b = find(a), find(b)
-        if a != b:
-            parent[b] = a
-
-    for row in transport_rows:
-        route = row["访问服务区顺序"].split("->")
-        for a, b in zip(route, route[1:]):
-            union(a, b)
-
-    components = defaultdict(list)
-    for service in services:
-        components[find(service)].append(service)
-
-    atoms = list(components.values())
-    atoms.sort(key=lambda x: (-len(x), x))
-    return atoms
 
 
 def canonical_partitions(n: int, k: int):

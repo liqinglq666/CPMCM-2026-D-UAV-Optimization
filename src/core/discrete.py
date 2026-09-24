@@ -31,6 +31,32 @@ TRANSPORT_MOVES = (
 OBJECTIVE_TOLERANCES = (1e-5, 0, 1e-6, 1e-9)
 
 
+def service_components(routes):
+    """Connected service sets induced by indivisible multi-stop routes."""
+    routes = [tuple(route) for route in routes]
+    services = sorted({service for route in routes for service in route})
+    parent = {service: service for service in services}
+
+    def find(item):
+        while parent[item] != item:
+            parent[item] = parent[parent[item]]
+            item = parent[item]
+        return item
+
+    def union(left, right):
+        left, right = find(left), find(right)
+        if left != right:
+            parent[right] = left
+
+    for route in routes:
+        for left, right in zip(route, route[1:]):
+            union(left, right)
+    components = {}
+    for service in services:
+        components.setdefault(find(service), []).append(service)
+    return sorted(components.values(), key=lambda values: (-len(values), values))
+
+
 def clean_jobs(jobs):
     return [{k: deepcopy(j[k]) for k in JOB_KEYS if k in j} for j in jobs]
 

@@ -54,6 +54,33 @@ def test_fixed_resource_order_waits_for_full_recharge(physics, boxes):
     assert evaluator.schedule(plan)["jobs"][1]["start"] == 0
 
 
+def test_coupled_rebuild_uses_parallel_inventory_without_changing_cargo(physics, boxes):
+    from src.core.resource_rebuild import rebuild_resources
+
+    drones, batteries = resources()
+    evaluator = TransportEvaluator(physics, {b.id: b for b in boxes}, drones, batteries)
+    plan = jobs(boxes)
+    frozen = deepcopy(plan)
+    rebuilt = rebuild_resources(plan, evaluator)
+    result = evaluator.schedule(rebuilt)
+    assert all(job["start"] == 0 for job in result["jobs"])
+    assert result["makespan"] < evaluator.schedule(plan)["makespan"]
+    assert [j["boxes"] for j in rebuilt] == [j["boxes"] for j in plan]
+    assert plan == frozen
+
+
+def test_coupled_rebuild_retains_battery_recharge_wait(physics, boxes):
+    from src.core.resource_rebuild import rebuild_resources
+
+    drones, batteries = resources()
+    evaluator = TransportEvaluator(physics, {b.id: b for b in boxes}, drones, batteries[:1])
+    rebuilt = rebuild_resources(jobs(boxes), evaluator)
+    first, second = evaluator.schedule(rebuilt)["jobs"]
+    assert second["start"] == pytest.approx(
+        first["end"] + charge_time(physics.types["T"], first["soc"] / 100)
+    )
+
+
 @pytest.mark.parametrize(
     "change",
     ["duplicate", "missing", "mass", "volume", "deadline", "battery_type", "energy"],

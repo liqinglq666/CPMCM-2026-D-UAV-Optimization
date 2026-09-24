@@ -11,26 +11,26 @@
     "operation_time_s": 32776.015748915874
   },
   "q2": {
-    "trips": 23,
+    "trips": 21,
     "boxes": 80,
-    "energy_kwh": 81.61125507775549,
-    "makespan_s": 10482.305736731878,
-    "pareto_points": 73
+    "energy_kwh": 65.70258445897791,
+    "makespan_s": 8025.75489074723,
+    "pareto_points": 28
   },
   "q3": {
-    "trips": 25,
+    "trips": 23,
     "boxes": 80,
-    "energy_kwh": 82.3783818905649,
-    "makespan_s": 10780.84594421038,
-    "checked_states": 102325,
-    "relay_energy_kwh": 4.1921946128570555,
-    "joint_makespan_s": 10782.35682424435
+    "energy_kwh": 77.14513454587482,
+    "makespan_s": 10982.356408223772,
+    "checked_states": 92947,
+    "relay_energy_kwh": 4.775832642468767,
+    "joint_makespan_s": 10982.356408223772
   },
   "q4": {
     "atomic_groups": 4,
     "shortages": {
-      "2": 3,
-      "3": 6
+      "2": 4,
+      "3": 8
     }
   },
   "input_sha256": {

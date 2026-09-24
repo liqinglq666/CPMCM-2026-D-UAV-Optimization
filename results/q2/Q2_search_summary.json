@@ -1,10 +1,11 @@
 {
   "seed": 20260924,
-  "iterations": 20000,
+  "iterations": 600000,
+  "resource_polish_iterations": 100000,
   "stop_reason": "iteration_budget",
-  "search_runtime_s": 4.448965785999462,
-  "pareto_points": 73,
-  "unique_candidates": 11545,
+  "search_runtime_s": 107.3971211600001,
+  "pareto_points": 28,
+  "unique_candidates": 186722,
   "baseline_objectives": [
     [
       956243.9130299015,
@@ -56,19 +57,26 @@
     ]
   ],
   "best_objective": [
-    134765.93779121415,
-    23,
-    10482.305736731878,
-    81.61125507775549
+    158955.74343045225,
+    21,
+    8025.75489074723,
+    65.70258445897791
   ],
-  "target_trips": null,
+  "best_selection_score": [
+    8025.75489074723,
+    65.70258445897791,
+    158955.74343045225
+  ],
+  "target_trips": 21,
   "exactness": "heuristic discrete search; exact conditional earliest starts",
   "parameters": {
     "seed": 20260924,
-    "q2_iterations": 20000,
-    "q2_restart_interval": 300,
-    "q3_iterations": 5000,
-    "q3_restart_interval": 250,
+    "q2_iterations": 500000,
+    "q2_restart_interval": 1000,
+    "q3_iterations": 20000,
+    "q3_restart_interval": 500,
+    "q3_target_transport_trips": 23,
+    "q3_target_relay_sorties": 3,
     "relay_grid_rows": 4,
     "relay_grid_columns": 5,
     "relay_local_step_m": 250.0,
@@ -80,6 +88,7 @@
       2.0
     ],
     "q3_repair_combination_limit": 256,
-    "description": "Search parameters only. q3_plan.json is an initial incumbent, never a certified optimum. Fixed iteration counts are used for reproducibility; physical constants come only from the official inputs and src/core."
+    "description": "Search parameters only. q3_plan.json is an initial incumbent, never a certified optimum. Fixed iteration counts are used for reproducibility; physical constants come only from the official inputs and src/core.",
+    "q2_resource_iterations": 100000
   }
 }

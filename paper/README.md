@@ -1,8 +1,7 @@
 # 论文与科研图重构
 
-本轮在已完成的12图重构基础上，修复 main `2a98f09` 的Q3加密通信缺口，重新计算Q3/Q4并同步论文。官方物理公式与参数不变；Q1/Q2正式决策不变。
+本轮接续PR #10通信修复，冻结Q1，完成Q2/Q3对标搜索及Q4继承结果的图文同步。Q2为21架次；Q3保留23运输/4中继，尚未找到23+3可行解。正文明确目标切片、搜索预算差异、软延误代价和有限采样边界。最新数值与验证见 `reports/FINAL_AUDIT.md` 及 `../docs/external_benchmark_algorithm_audit.md`。
 
-**已修复0.5 s回放中的通信反例。** 最终1 s、0.5 s及独立0.25 s回放均无未覆盖状态，最小余量0.02877762 dB。图8、9、12、摘要、正文和Q4继承结果均已更新。采样检查通过仍不构成连续时间证明，详见 `reports/FINAL_AUDIT.md`。
 
 ## 重建
 
@@ -12,6 +11,7 @@
 python -m pip install -r requirements-paper-lock.txt
 python scripts/setup_paper_fonts.py
 python run_all.py
+python scripts/diagnose_transport_load.py
 python scripts/replay_communication.py --out results/communication_replay.json
 python scripts/analyze_paper.py
 python scripts/build_paper.py --compatible
@@ -29,7 +29,7 @@ python scripts/build_paper.py --compatible
 
 ## 图级检查
 
-图2/8直接使用原DEM像元及轻量显示晕渲。仅高程背景允许栅格嵌入，坐标、轮廓、轨迹、数据点和文字为矢量。图6黄色星号是当前23架次正式方案；22架次只作对照。图9保留20 s展示窗内最小值的原始时刻，不平滑、不改变通信突变。图11通过完整货箱子集的储备临界DP补算阶梯，并与原Q1求解器逐区间交叉核对，不用五个场景插值。
+图2/8直接使用原DEM像元及轻量显示晕渲。仅高程背景允许栅格嵌入，坐标、轮廓、轨迹、数据点和文字为矢量。图6黄色星号是当前21架次正式方案；其余架次数是搜索预算不同的代表候选。图9保留20 s展示窗内最小值的原始时刻，不平滑、不改变通信突变。图11通过完整货箱子集的储备临界DP补算阶梯，并与原Q1求解器逐区间交叉核对，不用五个场景插值。
 
 `verify_paper.py` 核查来源、数字宏、图序、PNG重现、A4宽度、字号、目录、引用和字体。其PASS表示图文数据一致性；通信可行性另由结果验证器与三组独立回放证明至采样层面。详见当前 `reports/FIGURE_QC.md`、`reports/consistency.json`；历史日志不可替代本轮证据。
 

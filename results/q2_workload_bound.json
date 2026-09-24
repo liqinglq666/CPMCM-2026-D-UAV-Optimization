@@ -1,0 +1,27 @@
+{
+  "scope": "fixed cargo groups, route orders and types only; not global",
+  "formula": "max_type(sum(profile.duration) / available_drones)",
+  "fleet_bounds": [
+    {
+      "type": "A",
+      "workload_s": 8657.93193827376,
+      "drones": 4,
+      "lower_bound_s": 2164.48298456844
+    },
+    {
+      "type": "B",
+      "workload_s": 15496.338294391611,
+      "drones": 2,
+      "lower_bound_s": 7748.169147195806
+    },
+    {
+      "type": "C",
+      "workload_s": 16011.089212838344,
+      "drones": 2,
+      "lower_bound_s": 8005.544606419172
+    }
+  ],
+  "lower_bound_s": 8005.544606419172,
+  "makespan_s": 8025.75489074723,
+  "maximum_rescheduling_gain_s": 20.21028432805815
+}

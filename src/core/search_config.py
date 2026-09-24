@@ -11,9 +11,12 @@ def load_search_parameters():
     for name in (
         "seed",
         "q2_iterations",
+        "q2_resource_iterations",
         "q2_restart_interval",
         "q3_iterations",
         "q3_restart_interval",
+        "q3_target_transport_trips",
+        "q3_target_relay_sorties",
         "relay_grid_rows",
         "relay_grid_columns",
         "q3_repair_combination_limit",
@@ -22,7 +25,7 @@ def load_search_parameters():
         if (
             isinstance(value, bool)
             or not isinstance(value, int)
-            or value < (0 if name in ("seed", "q2_iterations", "q3_iterations") else 1)
+            or value < (0 if name in ("seed", "q2_iterations", "q2_resource_iterations", "q3_iterations") else 1)
         ):
             raise ValueError(f"Invalid search parameter: {name}")
     from .numeric import positive
