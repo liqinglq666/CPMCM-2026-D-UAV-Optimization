@@ -1,21 +1,25 @@
-"""Feasible is not robust: energy, time and sampling are distinct deterministic evidence."""
+"""Equal-width evidence panels, including zero time slack and refined link failure."""
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from matplotlib.lines import Line2D
 from common import (
-    BLUE,
+    WIDTH,
     COLORS,
     DATA,
     INK,
     MARKERS,
-    ORANGE,
     RED,
+    DIRECT,
+    LIGHT_BLUE,
     grid,
     load_analysis,
     panel,
     paper_style,
     save,
+    threshold,
+    key_note,
 )
 
 paper_style()
@@ -23,89 +27,93 @@ a = load_analysis()
 c = pd.read_csv(DATA / "constraint_slacks.csv")
 c = c[c.question == "q3"].sort_values("soc_pct")
 h = pd.read_csv(DATA / "hard_deadline_slacks.csv").sort_values("slack_s")
-fig = plt.figure(figsize=(6.5, 5.7), layout="constrained")
-gs = fig.add_gridspec(2, 2, height_ratios=[1.1, 1])
-ax = fig.add_subplot(gs[0, :])
-b = fig.add_subplot(gs[1, 0])
-comm = fig.add_subplot(gs[1, 1])
+v = a["sampling_validation"]
+fig, axes = plt.subplots(1, 3, figsize=(WIDTH, 3.05), layout="constrained")
+ax, b, comm = axes
 for kind in COLORS:
     mask = c.type == kind
     ax.scatter(
-        np.arange(len(c))[mask],
+        np.arange(1, len(c) + 1)[mask],
         c.soc_pct[mask],
-        s=34,
-        facecolor=COLORS[kind],
-        edgecolor=INK,
-        lw=0.5,
+        s=19,
+        fc=COLORS[kind],
+        ec=INK,
+        lw=0.4,
         marker=MARKERS[kind],
-        label=f"{kind} 型",
     )
-ax.axhline(20, color=RED, ls="--", lw=0.9)
-ax.set_xticks(range(len(c)), c.trip.str.replace("Q3-", ""), rotation=90)
+threshold(ax, 20)
 ax.set(
-    xlabel="运输架次（按 SOC 排序）",
+    xlabel="运输架次（排序）",
     ylabel="返航 SOC (%)",
-    ylim=(17, c.soc_pct.max() + 6),
+    ylim=(15, 104),
+    xticks=[1, 14, len(c)],
 )
-grid(ax, "y")
-ax.legend(ncol=3, loc="upper left", fontsize=9)
-ax.annotate(
-    f"最低 {c.soc_pct.min():.2f}%",
-    (0, c.soc_pct.min()),
-    xytext=(3, 36),
-    arrowprops={"arrowstyle": "->", "color": INK, "lw": 0.7},
-    fontsize=9,
+key_note(
+    ax, (1, c.soc_pct.min()), "最小 SOC", f"{c.soc_pct.min():.2f}%", xytext=(0.06, 0.97)
 )
-panel(ax, "a", "全部达到 20% 储备；最紧架次余量有限")
-b.scatter(
-    np.arange(1, len(h) + 1),
-    h.slack_s / 60,
-    s=18,
-    facecolor=BLUE,
-    edgecolor=INK,
-    lw=0.3,
+panel(ax, "a", "能源储备")
+b.scatter(np.arange(1, len(h) + 1), h.slack_s / 60, s=16, fc=DIRECT, ec=INK, lw=0.3)
+threshold(b, 0)
+b.set(
+    xlabel="硬时限货箱（排序）",
+    ylabel="硬截止余量 (min)",
+    ylim=(-3, h.slack_s.max() / 60 * 1.45),
+    xticks=[1, 10, len(h)],
 )
-b.axhline(0, color=RED, ls="--", lw=0.8)
-b.set(xlabel="硬时限货箱（排序）", ylabel="硬截止余量 (min)")
-grid(b, "y")
-panel(b, "b", f"{len(h)} 个硬时限均满足")
-b.text(
-    0.04,
-    0.95,
-    f"最小 {h.slack_s.min():.3f} s",
-    transform=b.transAxes,
-    va="top",
-    fontsize=9,
+key_note(
+    b,
+    (1, h.slack_s.min() / 60),
+    "最小时间余量",
+    f"{h.slack_s.min():.3f} s",
+    xytext=(0.06, 0.97),
 )
-v = a["sampling_validation"]
-for i, r in enumerate(v):
+panel(b, "b", "硬截止")
+for i, row in enumerate(v):
     comm.scatter(
         i,
-        r["minimum_margin_db"],
-        s=55,
+        row["minimum_margin_db"],
+        s=40,
         marker=["o", "s"][i],
-        facecolor=[BLUE, ORANGE][i],
-        edgecolor=INK,
+        fc=LIGHT_BLUE if row["violations"] == 0 else RED,
+        ec=INK,
         lw=0.6,
+        zorder=4,
     )
-    comm.annotate(
-        f"{r['minimum_margin_db']:.3f} dB\n{r['checked_states']:,} 条",
-        (i, r["minimum_margin_db"]),
-        xytext=(0, -15),
-        textcoords="offset points",
-        ha="center",
-        va="top",
-        fontsize=9,
-    )
-comm.axhline(0, color=RED, ls="--", lw=0.8)
+threshold(comm, 0)
+val = min(r["minimum_margin_db"] for r in v)
+idx = min(range(len(v)), key=lambda i: v[i]["minimum_margin_db"])
+extent = max(abs(r["minimum_margin_db"]) for r in v)
 comm.set(
-    xlim=(-0.45, 1.45),
-    ylim=(-0.01, 0.17),
-    xticks=[0, 1],
-    xticklabels=[f"{r['step_s']:.1f} s" for r in v],
-    xlabel="最大回放步长",
+    xlabel="最大采样步长",
     ylabel="最小链路余量 (dB)",
+    xlim=(-0.45, 1.45),
+    ylim=(
+        min(-0.04, val - extent * 0.28),
+        max(r["minimum_margin_db"] for r in v) + extent * 1.15,
+    ),
+    xticks=[0, 1],
+    xticklabels=["1.0 s", "0.5 s"],
 )
-grid(comm, "y")
-panel(comm, "c", "加密通过仍非连续证明")
+key_note(comm, (idx, val), "最小通信余量", f"{val:.3f} dB", xytext=(0.06, 0.97))
+panel(comm, "c", "通信加密复核")
+for target in axes:
+    grid(target, "y")
+fig.legend(
+    handles=[
+        Line2D(
+            [],
+            [],
+            marker=MARKERS[k],
+            mfc=COLORS[k],
+            mec=INK,
+            ls="",
+            ms=4,
+            label=f"{k} 型",
+        )
+        for k in COLORS
+    ]
+    + [Line2D([], [], color=RED, ls="--", lw=0.8, label="可行阈值")],
+    loc="outside upper center",
+    ncol=4,
+)
 save(fig, "fig12_validation")

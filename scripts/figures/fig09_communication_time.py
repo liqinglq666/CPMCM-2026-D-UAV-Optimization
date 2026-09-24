@@ -1,124 +1,124 @@
-"""Actual argmin times, refined critical-state inset and relay windows; no smoothed claims."""
+"""Faithful minima at original times; reveal a missed state instead of smoothing it."""
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from common import (
-    BLUE,
+    WIDTH,
     DATA,
     INK,
     LIGHT_BLUE,
     RED,
+    DIRECT,
     RESULTS,
-    YELLOW,
     grid,
     load_analysis,
     panel,
     paper_style,
     save,
+    threshold,
+    key_note,
 )
 
 paper_style()
 a = load_analysis()
-d = pd.read_csv(DATA / "communication_states_05s.csv")
+fine = pd.read_csv(DATA / "communication_states_05s.csv")
+coarse = pd.read_csv(DATA / "communication_states.csv")
 r = pd.read_csv(RESULTS / "q3/Q3_relay_sorties.csv")
-fig, (ax, inset, window) = plt.subplots(
+fig, (ax, local, window) = plt.subplots(
     3,
     1,
-    figsize=(6.5, 6.3),
-    gridspec_kw={"height_ratios": [2.1, 1, 1.1]},
+    figsize=(WIDTH, 5.7),
+    gridspec_kw={"height_ratios": [1.55, 1.1, 1.0]},
     layout="constrained",
 )
-# Each plotted minimum retains the exact time of that row. Separate categories;
-# neither joining disconnected tasks nor interpolating mode/occlusion transitions.
-display_maxima = []
-for mask, color, mark, label in [
-    (d.direct_margin_db >= 0, BLUE, "o", "直连可用"),
-    (d.direct_margin_db < 0, LIGHT_BLUE, "^", "需指定中继"),
-]:
-    group = d[mask].assign(bin=np.floor(d[mask].time_s / 30))
-    rows = d.loc[group.groupby("bin").available_margin_db.idxmin()]
-    display_maxima.append(rows.available_margin_db.max())
-    ax.scatter(
-        rows.time_s / 3600,
-        rows.available_margin_db,
-        s=18,
-        facecolor=color,
-        edgecolor=INK,
-        lw=0.25,
-        marker=mark,
-        label=label,
-    )
-critical = d.loc[d.available_margin_db.idxmin()]
-ax.axhline(0, color=RED, ls="--", lw=0.8)
+critical = fine.loc[fine.available_margin_db.idxmin()]
+rows = fine.loc[fine.groupby(np.floor(fine.time_s / 20)).available_margin_db.idxmin()]
+ax.scatter(rows.time_s / 60, rows.available_margin_db, s=12, fc=DIRECT, ec=INK, lw=0.2)
 ax.scatter(
-    critical.time_s / 3600,
+    critical.time_s / 60,
     critical.available_margin_db,
-    s=110,
+    s=75,
     marker="*",
-    facecolor=YELLOW,
-    edgecolor=INK,
+    fc=RED,
+    ec=INK,
+    lw=0.5,
     zorder=5,
 )
+threshold(ax, 0)
 ax.set(
-    xlabel="任务时刻 (h)",
-    ylabel="可用链路余量 (dB)",
-    ylim=(-1, np.ceil(max(display_maxima) / 5) * 5),
+    ylabel="窗口最小余量 (dB)",
+    xlabel="任务时间 (min)",
+    ylim=(-2, rows.available_margin_db.max() * 1.2),
+)
+key_note(
+    ax,
+    (critical.time_s / 60, critical.available_margin_db),
+    "最小链路余量",
+    f"{critical.available_margin_db:.3f} dB",
+    xytext=(0.34, 0.95),
 )
 grid(ax, "y")
-ax.legend(loc="upper right", fontsize=9)
-panel(ax, "a", "0.5 s 回放：局部最小余量仍接近阈值")
-# Inset displays individual consecutive records around the exact critical time.
-
-local = d[(d.trip == critical.trip) & (abs(d.time_s - critical.time_s) <= 3)]
-inset.scatter(
-    local.time_s - critical.time_s,
-    local.available_margin_db,
-    s=14,
-    color=BLUE,
-    edgecolor=INK,
-    lw=0.3,
+panel(ax, "a", "1 s 检查通过，0.5 s 回放发现漏检状态")
+vals = []
+for data, marker, color, label in [
+    (coarse, "o", DIRECT, "1.0 s 采样"),
+    (fine, "s", LIGHT_BLUE, "0.5 s 采样"),
+]:
+    g = data[(data.trip == critical.trip) & (abs(data.time_s - critical.time_s) <= 3)]
+    local.scatter(
+        g.time_s - critical.time_s,
+        g.available_margin_db,
+        s=27,
+        marker=marker,
+        fc="white" if marker == "o" else color,
+        ec=INK,
+        lw=0.6,
+        label=label,
+        zorder=3,
+    )
+    vals.extend(g.available_margin_db)
+local.scatter(
+    0, critical.available_margin_db, s=75, marker="*", fc=RED, ec=INK, lw=0.5, zorder=5
 )
-inset.scatter(
-    0,
-    critical.available_margin_db,
-    s=70,
-    marker="*",
-    facecolor=YELLOW,
-    edgecolor=INK,
-    zorder=4,
+threshold(local, 0)
+local.set(
+    xlabel="相对最紧时刻 (s)",
+    ylabel="链路余量 (dB)",
+    ylim=(min(-0.5, min(vals) - 0.15), max(vals) * 1.15 + 0.05),
 )
-inset.axhline(0, color=RED, ls="--", lw=0.7)
-inset.set_ylim(-0.025, max(0.3, local.available_margin_db.max() * 1.1))
-inset.set_xlabel("相对最紧时刻 (s)", fontsize=8.5, labelpad=1)
-inset.tick_params(labelsize=8.5)
-panel(
-    inset,
-    "b",
-    f"{critical.trip} 局部回放：最小 {critical.available_margin_db:.3f} dB（直连）",
-)
-inset.set_ylabel("链路余量 (dB)")
-grid(inset, "y")
+fig.legend(*local.get_legend_handles_labels(), loc="outside upper center", ncol=2)
+grid(local, "y")
+panel(local, "b", f"{critical.trip}：遮挡突变可落在两次采样之间")
 for i, (_, row) in enumerate(r.iterrows()):
-    begin, end = row["建链完成时刻_s"] / 3600, row["服务结束时刻_s"] / 3600
+    begin, end = row["建链完成时刻_s"] / 60, row["服务结束时刻_s"] / 60
     window.barh(
         i,
         end - begin,
         left=begin,
         height=0.6,
-        facecolor=LIGHT_BLUE,
-        edgecolor=INK,
-        lw=0.6,
-        hatch="//" if row["中继无人机编号"] == "R02" else "",
+        fc=LIGHT_BLUE,
+        ec=INK,
+        lw=0.5,
+        hatch="//" if i % 2 else "",
+    )
+    window.text(
+        (begin + end) / 2,
+        i,
+        row["中继无人机编号"],
+        ha="center",
+        va="center",
+        fontsize=7.5,
+        bbox={"fc": "white", "ec": "none", "alpha": 0.85, "pad": 0.1},
     )
 window.set_yticks(range(len(r)), r["中继架次编号"])
 window.invert_yaxis()
 window.set(
-    xlabel="任务时刻 (h)",
+    xlabel="任务时间 (min)",
     ylabel="中继服务窗",
-    xlim=(0, max(d.time_s.max(), r["服务结束时刻_s"].max()) / 3600 * 1.02),
+    xlim=(0, max(fine.time_s.max(), r["服务结束时刻_s"].max()) / 60 * 1.02),
 )
 ax.set_xlim(window.get_xlim())
 grid(window)
-panel(window, "c", "服务窗口将空间覆盖落实到任务时间轴")
+panel(window, "c", "正式中继服务窗口与运输时序对应")
 save(fig, "fig09_communication_time")

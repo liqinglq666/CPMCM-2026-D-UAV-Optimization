@@ -1,24 +1,28 @@
-# 12 图与页面终检 — 2026-09-24
+# 12图重构与A4检查
 
-全部图由真实 CSV/JSON/DEM 自动绘制；统一用户指定语义色板。黄色仅作星号强调；浅色填充配深色文字/边框。主图按正文首次论证顺序插入，全部 PDF/SVG 为矢量，PNG 为 300 dpi。
+本报告对应算法优化后 main `6772cb9` 的正式结果。图文一致性通过不代表Q3通信加密通过。
 
-| 图 | 主张 | 数据 |
-|---|---|---|
-| 1 / fig01_framework | 统一物理底座逐层扩展到运输执行、通信保障和独立资源配置；继承规则与继承固定方案严格区分 | paper/data/analysis.json；results/q4/Q4_resource_summary.csv |
-| 2 / fig02_task_map | 原始地形与任务节点建立空间背景，参考连线不冒充运输路线 | paper/data/analysis.json；paper/data/terrain_map.json |
-| 3 / fig03_physics | 地形抬高巡航高度，去程载荷与返程空载产生不同能耗 | paper/data/terrain_profile.csv；paper/data/energy_components.csv；paper/data/analysis.json；src/config.py |
-| 4 / fig04_payload_boundary | 额定载荷与能量上限共同限制安全运载能力 | results/q1/Q1_max_safe_payload.csv；paper/data/analysis.json |
-| 5 / fig05_batching | 不可拆分货箱通过精确集合划分形成最低架次数组批 | results/q1/Q1_batch_solution.csv；paper/data/constraint_slacks.csv；paper/data/analysis.json |
-| 6 / fig06_tradeoff | 压缩架次付出及时性代价；所选点是有限候选的显式折中 | results/q2/Q2_tradeoff_frontier.csv；results/q2/Q2_transport_trips_balanced.csv |
-| 7 / fig07_resources | 飞机返航释放与电池充满释放分别约束实体资源时序 | results/q2/Q2_resource_check.csv |
-| 8 / fig08_communication_map | 直连不足发生在航段内部；固定离散计划与LP连续时序分开 | paper/data/analysis.json；paper/data/terrain_map.json；paper/data/communication_states_05s.csv；results/q3/Q3_relay_sorties.csv |
-| 9 / fig09_communication_time | 中继窗口保障已检查状态；最紧采样余量仍不能证明连续安全 | paper/data/analysis.json；paper/data/communication_states_05s.csv；results/q3/Q3_relay_sorties.csv |
-| 10 / fig10_partition | 不可拆连通分量限制分组，库存总量不能抵消按类型资源缺口 | results/q4/Q4_resource_summary.csv；results/q4/Q4_partition_config.csv；results/q3/Q3_transport_trips.csv |
-| 11 / fig11_sensitivity | 连续能力收缩与离散组批跳变须分开；固定方案阈值不是全局分界 | paper/data/payload_reserve.csv；results/q1/Q1_sensitivity_summary.csv；paper/data/analysis.json |
-| 12 / fig12_validation | 可行不等于稳健；SOC、硬时限、加密通信证据共同界定边界 | paper/data/constraint_slacks.csv；paper/data/hard_deadline_slacks.csv；paper/data/analysis.json |
+|图|核心主张|最终宽度|最小字号|
+|---|---|---:|---:|
+|fig01_framework|统一物理底座支撑精确组批、离散搜索、条件时序优化与固定方案资源配置|160 mm|7.5 pt|
+|fig02_task_map|地形与任务节点共同决定运输空间，水平距离不能替代航段检查|160 mm|7.5 pt|
+|fig03_physics|沿途地形抬高巡航高度，载荷改变去返程能量组成|160 mm|7.5 pt|
+|fig04_payload_boundary|额定载荷与能源约束共同限制山区安全运载能力|160 mm|7.5 pt|
+|fig05_batching|18批精确划分同时满足质量、体积与能源约束|160 mm|7.5 pt|
+|fig06_tradeoff|压缩架次具有及时性代价；正式23架次按延误优先规则选出|160 mm|7.5 pt|
+|fig07_resources|正式方案在实体无人机与电池充电时间轴上无冲突|160 mm|7.5 pt|
+|fig08_communication_map|中继补充直连不足覆盖，但0.5 s回放揭示一个未覆盖状态|160 mm|7.5 pt|
+|fig09_communication_time|1 s检查通过不排除采样间漏检，0.5 s回放的最小余量为负|160 mm|7.5 pt|
+|fig10_partition|固定联合方案独立分区引出按资源类型核算的缺口|160 mm|7.5 pt|
+|fig11_sensitivity|连续载荷能力收缩导致精确最少架次的离散跳变|160 mm|7.5 pt|
+|fig12_validation|SOC满足与硬截止无违反不代表通信加密验证通过|160 mm|7.5 pt|
 
-图 9 的时间窗最小值使用真实 argmin 时刻，不把窗首当事件时刻，不连接跨任务/模式跳变。全局最紧原始记录单独放大。图 11 不把不可达填为零，不为五个离散重算点虚构阶梯阈值。
+每图输出PDF、SVG及300 dpi PNG。字体Noto Sans SC；A/B/C颜色与marker固定；货类使用独立浅色及hatch；阈值虚线；图12三个数据panel等宽。
 
-32 页逐页审查范围：1 摘要；2–3 目录；4–7 总体/数据/地图；8–9 公共物理；10–12 Q1；13–16 Q2 及资源；17–20 Q3；21–23 Q4及敏感性起点；24–27 敏感性/验证/结论；28 文献；29–32 跨页完整结果与辅助说明。部分页底留白用于维持主图与解释的阅读顺序，未通过缩小正文或裁图强行压页。
+检查并修正：图6旧坐标范围会裁掉新解；图7共享时间轴曾截去末尾充电，已延长到完整充电结束；图9采样图例从数据区移至图外；图8轨迹仅合并重复和共线显示点，未删减诊断状态。
 
-12 图重画 PNG SHA 均一致；原生/转曲 PDF 已检查字形、分页、公式断行、坐标单位、阈值、图例及匿名信息。机器结果见 `consistency.json`；兼容逐页渲染见 `final-visual-run/browser-check.json` 与 `compatibility.json`。旧 `icarus-critique.txt` 属前一轮九图历史检查，不充当本轮验收。
+图2/8的真实DEM是栅格数据，PDF/SVG允许高程与晕渲背景栅格嵌入，轨迹、轮廓、坐标和标注仍为矢量。没有AI生成科研图片。
+
+通信关键值从旧0.119 dB更新为当前0.5 s回放的−0.154251 dB，并明确标注1处未覆盖。正式23架次黄色星标取代旧22架次选点；旧22架次仍作对照。
+
+最终逐图PNG重复生成一致性、数字宏、目录页码及字体检查见consistency.json；打印尺寸记录见figure-rebuild/print_qa.json。

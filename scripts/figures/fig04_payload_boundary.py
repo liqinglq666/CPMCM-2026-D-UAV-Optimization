@@ -1,14 +1,16 @@
-"""Formal Q1 safe payloads; service order shows geography without a false distance response."""
+"""Categorical service comparisons, not a distance-only payload response."""
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from matplotlib.lines import Line2D
 from common import (
+    WIDTH,
     COLORS,
     GRAY,
     INK,
-    LINESTYLES,
     MARKERS,
+    LINESTYLES,
     RESULTS,
     grid,
     load_analysis,
@@ -23,7 +25,7 @@ d = pd.read_csv(RESULTS / "q1/Q1_max_safe_payload.csv")
 fig, (ax, ratio) = plt.subplots(
     2,
     1,
-    figsize=(6.5, 4.5),
+    figsize=(WIDTH, 3.9),
     sharex=True,
     gridspec_kw={"height_ratios": [1.5, 1]},
     layout="constrained",
@@ -32,40 +34,57 @@ x = np.arange(len(d))
 for kind in COLORS:
     values = d[f"{kind}型最大安全载荷（kg）"]
     rated = a["types"][kind]["max_payload"]
-    for target, y in [(ax, values), (ratio, 100 * values / rated)]:
-        target.plot(
-            x,
-            y,
-            color=COLORS[kind],
-            marker=MARKERS[kind],
-            ls=LINESTYLES[kind],
-            ms=4.5,
-            mec=INK,
-            mew=0.45,
-            label=f"{kind} 型",
-        )
-    ax.axhline(rated, color=GRAY, ls="--", lw=0.65, zorder=0)
     restricted = values < rated - 1e-8
-    if kind == "C":
-        ax.scatter(
-            x[restricted],
-            values[restricted],
-            s=85,
-            facecolor="none",
-            edgecolor=INK,
-            lw=0.6,
-            zorder=4,
-            label="C 型能源受限",
-        )
-ax.set(ylabel="最大安全载荷 (kg)", ylim=(0, 92))
-ax.legend(ncol=4, loc="upper left", fontsize=9)
-panel(ax, "a", "额定载荷并非各服务区都能用足")
-ratio.axhline(100, color=GRAY, ls="--", lw=0.7)
-ratio.set(
-    ylabel="额定载荷占比 (%)", ylim=(65, 105), xlabel="服务区编号（连线仅便于对照）"
+    for target, y in [(ax, values), (ratio, 100 * values / rated)]:
+        target.plot(x, y, color=COLORS[kind], ls=LINESTYLES[kind], lw=1.15)
+        for mask, filled in [(~restricted, True), (restricted, False)]:
+            target.scatter(
+                x[mask],
+                y[mask],
+                s=22,
+                marker=MARKERS[kind],
+                facecolor=COLORS[kind] if filled else "white",
+                edgecolor=INK,
+                lw=0.65,
+                zorder=4,
+            )
+    ax.axhline(rated, color=GRAY, ls="--", lw=0.65, zorder=0)
+ax.set(
+    ylabel="最大安全载荷 (kg)",
+    ylim=(0, max(t["max_payload"] for t in a["types"].values()) * 1.13),
 )
-ratio.set_xticks(x, d["服务区编号"].str.replace("S0", ""), rotation=0)
+fig.legend(
+    handles=[
+        Line2D(
+            [],
+            [],
+            color=COLORS[k],
+            marker=MARKERS[k],
+            ls=LINESTYLES[k],
+            mec=INK,
+            ms=4,
+            label=f"{k} 型",
+        )
+        for k in COLORS
+    ]
+    + [
+        Line2D(
+            [], [], color=INK, marker="o", mfc="white", ls="", ms=4, label="能源受限"
+        ),
+        Line2D([], [], color=GRAY, ls="--", label="额定上限"),
+    ],
+    loc="outside upper center",
+    ncol=5,
+)
+panel(ax, "a", "额定载荷不能在所有服务区用足")
+ratio.axhline(100, color=GRAY, ls="--", lw=0.65)
+ratio.set(
+    ylabel="额定载荷占比 (%)",
+    ylim=(65, 105),
+    xlabel="服务区编号（分类比较，连线仅辅助阅读）",
+)
+ratio.set_xticks(x, d["服务区编号"].str.replace("S0", ""))
+panel(ratio, "b", "地形与能量造成不同程度的能力收缩")
 for target in (ax, ratio):
     grid(target, "y")
-panel(ratio, "b", "同一储备下，各机型受限程度不同")
 save(fig, "fig04_payload_boundary")

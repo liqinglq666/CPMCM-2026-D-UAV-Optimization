@@ -142,7 +142,15 @@ def verify(workbook: Path, template: Path, rebuild_figures: bool = False):
             assert min(im.info["dpi"]) >= 299.9
             im.verify()
         svg = stem.with_suffix(".svg").read_text(encoding="utf-8")
-        assert "<svg" in svg and "<image" not in svg  # no raster screenshots
+        assert "<svg" in svg
+        # A native DEM is raster data; only map backgrounds may embed images.
+        if contract["figure_id"] not in {"fig02_task_map", "fig08_communication_map"}:
+            assert "<image" not in svg
+        qa = json.loads(
+            (ROOT / "outputs/figure-qa" / (contract["figure_id"] + ".json")).read_text()
+        )
+        assert math.isclose(qa["width_mm"], 160, abs_tol=1e-7)
+        assert qa["minimum_text_pt"] >= 7.5 and not qa["canvas_clipped_text"]
 
     for filename, summary in zip(
         ["communication_states.csv", "communication_states_05s.csv"],
@@ -154,6 +162,10 @@ def verify(workbook: Path, template: Path, rebuild_figures: bool = False):
         assert float(critical["available_margin_db"]) == summary["minimum_margin_db"]
         assert float(critical["time_s"]) == summary["critical_state"]["time_s"]
         assert critical["trip"] == summary["critical_state"]["trip"]
+        assert (
+            sum(float(r["available_margin_db"]) < 0 for r in states)
+            == summary["violations"]
+        )
     paper = PdfReader(ROOT / "outputs/paper/main.pdf")
     font_audit = audit_pdf(ROOT / "outputs/paper/main.pdf")
     pages = [p.extract_text() for p in paper.pages]
@@ -228,6 +240,11 @@ def verify(workbook: Path, template: Path, rebuild_figures: bool = False):
 
     result = {
         "status": "PASS",
+        "status_scope": "artifact consistency, not a certificate of communication feasibility",
+        "refined_communication_passed": analysis["refined_communication_passed"],
+        "sampling_violations": [
+            r["violations"] for r in analysis["sampling_validation"]
+        ],
         "source_result_files": len(analysis["hashes"]),
         "workbook_sheets": len(payload["sheets"]),
         "workbook_cells_compared": cells,

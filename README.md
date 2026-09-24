@@ -103,13 +103,13 @@ python scripts/validate_results.py
 
 ```bash
 python -m pip install -r requirements-paper.txt
-python scripts/analyze_paper.py
+python scripts/analyze_paper.py --allow-diagnostic-failures
 python scripts/setup_paper_fonts.py
 python scripts/build_paper.py
 ```
 
-新论文在 [paper/](paper/README.md)：32 页匿名论文（含两页自动目录和附录）、12 张主图、16 张表。主图均输出 PDF/SVG/300 dpi PNG，数字由结果文件生成。构建另需 XeLaTeX、ctex、xeCJK、Fandol，完整命令和 Excel 导出见论文 README。
+新论文在 [paper/](paper/README.md)：同步最新算法结果的匿名论文（含自动目录和附录）、12 张主图、16 张表。主图均输出 PDF/SVG/300 dpi PNG，数字由结果文件生成。构建另需 XeLaTeX、ctex、xeCJK、Fandol，完整命令和 Excel 导出见论文 README。
 
 原 `scripts/make_figures.py` 的六幅图已由统一图形流水线替代并删除。`docs/paper/` 中旧稿仅作历史资料。当前证据及适用边界见 [论文终审](paper/reports/FINAL_AUDIT.md)，AI 记录见 `docs/AI_USAGE.md`。
 
-2026-09-24 已按“统一物理底座 → Q1–Q4 → 敏感性 → 验证评价 → 结论”重构论文。逻辑审计见 `paper/reports/STRUCTURE_AUDIT.md`，逐节论证目标见 `paper/blueprint.md`。计算内核、Q3 离散计划及 24 个正式结果文件保持不变。
+2026-09-24 已在算法优化结果上重构12图并同步论文。**独立0.5 s回放发现Q3存在1个未覆盖状态（−0.154251 dB），虽然正式1 s检查通过，当前候选仍不能声称连续通信可行。** 默认分析命令会拒绝通过；显式 `--allow-diagnostic-failures` 仅导出反例用于如实作图。算法内核和正式结果保持不变，审计与证据见 `paper/reports/FINAL_AUDIT.md`。
