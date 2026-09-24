@@ -29,7 +29,7 @@ $f$ 以 MHz 计，自由空间项的量纲与 ITU-R P.525 一致\cite{itu}。$b_
 \begin{equation}
 \max\{M_{pG}(t),\widetilde M_{p,r(p)}(t)\}\ge0.\label{eq:comm}
 \end{equation}
-直连足够时直接连接；不足时须由指定中继同时满足接入、回传和窗口。这里不在所有中继之间任意切换，更不允许多跳拼接。为避免遗漏中间状态，按照第\ref{sec:physics}节的爬升、巡航、下降、交接相位采样，并包含每个相位端点。构造阶段内部步长不超过 1 s，最终再用 0.5 s 回放同一计划。
+直连足够时无需中继；不足时须由指定中继同时满足接入、回传和窗口。派生记录中的较优余量方式仅是两种可用路径的数值比较，不是实际切换日志；图中因此按“直连可用”和“需指定中继”分类。这里不在所有中继之间任意切换，更不允许多跳拼接。为避免遗漏中间状态，按照第\ref{sec:physics}节的爬升、巡航、下降、交接相位采样，并包含每个相位端点。构造阶段内部步长不超过 1 s，最终再用 0.5 s 回放同一计划。
 
 \subsection{服务窗口与中继能量}
 对运输架次 $p$，以相对开始时刻记录直连不足的采样点，并用首末点包络成 $[\alpha_p,\beta_p]$。将多个不足区间合成一个连续窗口可能多占中继时间，但能保证该固定中继覆盖所有已发现区间。保护约束为
@@ -70,8 +70,10 @@ T_3\ge b_r+\mu_r\quad(\forall r).\label{eq:jointfinish}
 
 \subsection{联合结果、采样证据与小结}
 \textbf{当前联合候选包含 \QThreeTrips{} 个运输架次、\RelayTrips{} 个中继架次，总能耗 \JointEnergy{} kWh，联合完工 \JointTime{} s。}运输与中继能耗分别为 \QThreeTransportEnergy{} 和 \RelayEnergy{} kWh；运输先在 \QThreeTransportTime{} s 完成，之后尚须等待中继返航。加权延误 \QThreeLate{} 系数·s，最小硬截止余量 \HardSlack{} s。
-\paperfig{fig06_communication}{直连不足发生在实际轨迹内部，中继须按位置与时间共同保障。橙点为直连不足状态，三角为悬停点，星号为最紧状态；下图汇总每个 60 s 时间窗内的最小可用余量。图中主轨迹检查采用 1 s 设置，共 \StatesOne{} 条状态记录。}{communication}
-图\ref{fig:communication}说明端点检查不足以覆盖全过程。1 s 与 0.5 s 回放均未发现中断，但加密后最小链路余量降至 \MarginHalf{} dB；最低运输返航 SOC 仅 \MinSoc\%，固定运输能耗统一上浮容忍度约 \QThreeEnergyTolerance\%。这些余量支持“当前样本可行”，同时提示其抗额外损耗和能量误差能力有限，详见第\ref{sec:sensitivity}、\ref{sec:validation}节。
+\paperfig{fig08_communication_map}{直连不足发生在实际航段内部，指定中继须在合适位置补充覆盖。底图使用原始 DEM，橙色标出 0.5 s 回放中的直连不足状态，三角为中继位置，黄星为最紧采样状态；下方区分固定离散方案与 LP 真正优化的时序变量。}{communicationmap}
+图\ref{fig:communicationmap}说明端点检查不足以覆盖全过程；图\ref{fig:communicationtime}进一步将可用余量与中继窗口对应。为兼顾可读性与时刻真实性，上图分别对直连可用、需中继两类状态，在每个 30 s 展示窗保留最小余量及其原始时刻，不连接跨任务或遮挡突变。局部放大展示最紧架次的原始相邻采样记录。
+\paperfig{fig09_communication_time}{中继服务窗口把空间覆盖落实到执行时间轴，但最紧采样余量仍仅 \MarginHalf{} dB。散点为各展示窗、各保障类别的真实最小值，星号与局部放大保留全局最紧状态；下图为正式中继服务窗口。0.5 s 回放通过不构成连续时间证明。}{communicationtime}
+最紧状态仍使用直连；地形遮挡已经计入损耗，但链路尚有小的正余量。因此既不能把它称为中继最弱点，也不能把“发生遮挡”直接解释为通信中断。1 s 与 0.5 s 回放均未发现中断，但加密后最小链路余量降至 \MarginHalf{} dB；最低运输返航 SOC 仅 \MinSoc\%，固定运输能耗统一上浮容忍度约 \QThreeEnergyTolerance\%。这些余量支持“当前样本可行”，同时提示其抗额外损耗和能量误差能力有限，详见第\ref{sec:sensitivity}、\ref{sec:validation}节。
 
 相比所选 Q2 候选，Q3 联合能耗和完工历时分别增加 \EnergyIncrease\%、\TimeIncrease\%。两问的运输分组不同，故这些是当前候选之间的结果差异，不能称为通信的理论最小代价。LP 的最优性也无法弥补离散方案未全局搜索、连续通信未证明这两项不足。
 

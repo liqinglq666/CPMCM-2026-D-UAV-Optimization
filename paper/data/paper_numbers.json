@@ -1,4 +1,7 @@
 {
+  "MassTightBatches": "5",
+  "VolumeTightBatches": "9",
+  "EnergyTightBatches": "4",
   "NumBoxes": "80",
   "NumServices": "15",
   "QOneTrips": "18",
