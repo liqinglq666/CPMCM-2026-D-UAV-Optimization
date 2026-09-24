@@ -1,11 +1,11 @@
-"""Recompute a fixed route/relay plan and optimize its timing by linear programming.
+"""Search discrete route/relay plans and optimize conditional timing by LP.
 
 The JSON plan contains only discrete decisions (cargo, route, resource order,
 relay coordinates). No start time, energy, SOC or communication result is read
 from historical outputs. Exactness is conditional on those discrete decisions.
 """
 
-from collections import Counter, defaultdict
+from collections import defaultdict
 import json
 import logging
 from pathlib import Path
@@ -22,86 +22,21 @@ from src.config import (
 from src.core.inputs import load_inputs, load_relay_inputs, load_communication_inputs
 from src.core.energy import charge_time, energy_feasible
 from src.core.physics import Physics
-from src.core.routes import evaluate_route, route_is_energy_feasible
 from src.core.io import write_csv, write_json
 from src.core.provenance import save_provenance
-from src.core.communication import Communication, sample_states, relay_travel
+from src.core.communication import Communication, sample_states as sample_states
 
 
 def prepare_plan(plan, physics, box_map, drones, batteries, relay_inputs, comm, step_s):
-    jobs, relays = plan["jobs"], plan["relays"]
-    if not jobs or not relays:
-        raise ValueError("Empty joint plan")
-    for rows in (jobs, relays):
-        if len({row["id"] for row in rows}) != len(rows):
-            raise ValueError("Duplicate plan job/sortie ID")
-    cargo = [box for job in jobs for box in job["boxes"]]
-    if Counter(cargo) != Counter(box_map.keys()):
-        raise ValueError("Q3 plan must contain every official box exactly once")
-    drone_types, battery_types = (
-        {r.id: r.type for r in group} for group in (drones, batteries)
-    )
-    relay_map = {relay["id"]: relay for relay in relays}
-    # This fixed-plan LP uses each component once; reuse is verified in the
-    # general result validator but requires a different LP topology.
-    if len({r["component"] for r in relays}) != len(relays):
-        raise ValueError("Fixed-plan LP requires distinct relay components")
-    for relay in relays:
-        if (
-            relay["drone"] not in relay_inputs.drone_ids
-            or relay["component"] not in relay_inputs.component_ids
-        ):
-            raise ValueError("Relay resource outside official inventory")
-        lon, lat = relay["lon"], relay["lat"]
-        relay["point"] = (
-            lon,
-            lat,
-            physics.terrain.elevation(lon, lat) + relay_inputs.spec.max_hover_agl_m,
-        )
-        if not comm.link(
-            relay["point"], comm.gateway, comm.parameters.backhaul_budget_db
-        )[0]:
-            raise ValueError(f"Unavailable relay backhaul: {relay['id']}")
-        relay["travel"] = relay_travel(physics, relay_inputs.spec, relay["point"])
-    for job in jobs:
-        if (
-            drone_types.get(job["drone"]) != job["type"]
-            or battery_types.get(job["battery"]) != job["type"]
-        ):
-            raise ValueError(f"Transport resource/type mismatch: {job['id']}")
-        profile = evaluate_route(
-            physics, job["type"], [box_map[b] for b in job["boxes"]], job["route"]
-        )
-        if not route_is_energy_feasible(profile, physics.types[job["type"]]):
-            raise ValueError(f"Transport energy infeasible: {job['id']}")
-        relay = relay_map.get(job["relay"])
-        if job["relay"] is not None and relay is None:
-            raise ValueError(f"Unknown relay sortie: {job['relay']}")
-        outages = []
-        checked = 0
-        for time_s, point in sample_states(profile, physics, step_s):
-            checked += 1
-            if comm.link(point, comm.gateway, comm.parameters.direct_budget_db)[0]:
-                continue
-            if (
-                relay is None
-                or not comm.link(
-                    point, relay["point"], comm.parameters.access_budget_db
-                )[0]
-            ):
-                raise ValueError(
-                    f"Uncovered communication state: {job['id']} at {time_s:.6f}s"
-                )
-            outages.append(time_s)
-        job.update(
-            profile=profile,
-            checked_states=checked,
-            outage=(min(outages), max(outages)) if outages else None,
-        )
-    return jobs, relays
+    """Compatibility entry point: recompute without mutating the caller's plan."""
+    from .preparation import PlanPreparer
+
+    return PlanPreparer(
+        physics, box_map, drones, batteries, relay_inputs, comm, step_s
+    ).prepare(plan)
 
 
-def optimize_timing(jobs, relays, box_map, types, relay_spec):
+def optimize_timing(jobs, relays, box_map, types, relay_spec, relay_full_charge_s=None):
     """LP variables: transport starts, relay service windows, box tardiness, makespan.
 
     Lexicographic objectives: weighted tardiness, joint makespan, relay service
@@ -173,6 +108,58 @@ def optimize_timing(jobs, relays, box_map, types, relay_spec):
                 + right["travel"]["lead"]
             )
             constraint({("end", left["id"]): 1, ("begin", right["id"]): -1}, -interval)
+    by_component = defaultdict(list)
+    for relay in relays:
+        by_component[relay["component"]].append(relay)
+    for group in by_component.values():
+        for left, right in zip(group, group[1:]):
+            if relay_full_charge_s is None:
+                raise ValueError(
+                    "Relay component reuse requires official recharge time"
+                )
+            from src.config import CHARGE_KNEE_SOC, CHARGE_FAST_FRACTION
+
+            rid = left["id"]
+            energy_fraction = (
+                left["travel"]["fixed_energy"] / relay_spec.usable_energy_kwh
+            )
+            slope_fraction = power / relay_spec.usable_energy_kwh
+            knee = 1 - CHARGE_KNEE_SOC
+            regime = left.get("charge_regime", "below_knee_soc")
+            if regime == "above_knee_soc":
+                # Returned SOC >= 90%; only the slow finishing phase is needed.
+                slope = relay_full_charge_s * (1 - CHARGE_FAST_FRACTION) / knee
+                intercept = 0.0
+                constraint(
+                    {("end", rid): slope_fraction, ("begin", rid): -slope_fraction},
+                    knee - energy_fraction,
+                )
+            elif regime == "below_knee_soc":
+                slope = relay_full_charge_s * CHARGE_FAST_FRACTION / CHARGE_KNEE_SOC
+                intercept = (
+                    relay_full_charge_s * (1 - CHARGE_FAST_FRACTION) - slope * knee
+                )
+                constraint(
+                    {("begin", rid): slope_fraction, ("end", rid): -slope_fraction},
+                    energy_fraction - knee,
+                )
+            else:
+                raise ValueError("Unknown relay charging branch")
+            coefficient = slope * slope_fraction
+            interval = (
+                left["travel"]["inbound"]
+                + right["travel"]["lead"]
+                + slope * energy_fraction
+                + intercept
+            )
+            constraint(
+                {
+                    ("end", rid): 1 + coefficient,
+                    ("begin", rid): -coefficient,
+                    ("begin", right["id"]): -1,
+                },
+                -interval,
+            )
     objectives = []
     tardiness = np.zeros(len(names))
     for bid, box in box_map.items():
@@ -203,17 +190,93 @@ def optimize_timing(jobs, relays, box_map, types, relay_spec):
     return {key: float(result.x[index]) for key, index in indices.items()}
 
 
-def solve_q3(root: Path, out_dir: Path, plan_path=Q3_PLAN, step_s=COMMUNICATION_STEP_S):
+def solve_q3(
+    root: Path,
+    out_dir: Path,
+    plan_path=Q3_PLAN,
+    step_s=COMMUNICATION_STEP_S,
+    search_parameters=None,
+):
+    from time import perf_counter
+    from src.core.search_config import load_search_parameters
+    from .search import search_plan
+
+    started = perf_counter()
+    parameters = (
+        load_search_parameters() if search_parameters is None else search_parameters
+    )
     nodes, types, drones, batteries, boxes, dem = load_inputs(root)
     box_map = {b.id: b for b in boxes}
     physics = Physics(nodes, types, dem)
     relay_inputs = load_relay_inputs(root)
     communication = Communication(physics, load_communication_inputs(root))
     plan = json.loads(Path(plan_path).read_text(encoding="utf-8"))
-    jobs, relays = prepare_plan(
-        plan, physics, box_map, drones, batteries, relay_inputs, communication, step_s
+    _selected_plan, selected = search_plan(
+        plan,
+        physics,
+        box_map,
+        drones,
+        batteries,
+        relay_inputs,
+        communication,
+        step_s,
+        parameters,
+        out_dir,
     )
-    times = optimize_timing(jobs, relays, box_map, types, relay_inputs.spec)
+    jobs, relays, times = selected["jobs"], selected["relays"], selected["times"]
+    transport_rows, box_rows, comm_rows, relay_rows = solution_rows(
+        jobs, relays, times, box_map, types, relay_inputs
+    )
+    from src.core.constraints import (
+        validate_transport,
+        validate_relays,
+        export_resource_check,
+    )
+
+    profiles, resources = validate_transport(
+        transport_rows, box_rows, "q3", physics, boxes, drones, batteries
+    )
+    relay_states = validate_relays(relay_rows, physics, relay_inputs, communication)
+    from src.validation import validate_communication
+
+    validate_communication(
+        profiles, comm_rows, relay_states, physics, communication, step_s
+    )
+    export_resource_check(out_dir / "Q3_resource_check.csv", resources)
+    metrics = {
+        "transport_trips": len(jobs),
+        "relay_sorties": len(relays),
+        "transport_energy_kwh": sum(r["架次能耗_kWh"] for r in transport_rows),
+        "relay_energy_kwh": sum(r["架次能耗_kWh"] for r in relay_rows),
+        "transport_makespan_s": max(r["返回O01时刻_s"] for r in transport_rows),
+        "joint_makespan_s": max(
+            r["返回O01时刻_s"] for r in transport_rows + relay_rows
+        ),
+        "weighted_tardiness": sum(r["加权延误"] for r in box_rows),
+        "minimum_hard_slack_s": min(
+            box_map[r["货箱编号"]].hard_deadline - r["交付完成时刻_s"]
+            for r in box_rows
+            if box_map[r["货箱编号"]].hard_deadline is not None
+        ),
+        "communication_step_s": step_s,
+        "checked_states": sum(j["checked_states"] for j in jobs),
+        "continuous_time_proof": False,
+    }
+    for filename, rows in (
+        ("Q3_transport_trips.csv", transport_rows),
+        ("Q3_box_delivery.csv", box_rows),
+        ("Q3_relay_sorties.csv", relay_rows),
+        ("Q3_communication.csv", comm_rows),
+    ):
+        write_csv(out_dir / filename, rows)
+    write_json(out_dir / "Q3_metrics.json", metrics)
+    logging.getLogger(__name__).info("Q3: %s", metrics)
+    write_json(out_dir / "runtime.json", {"solver_runtime_s": perf_counter() - started})
+    save_provenance(root, out_dir)
+    return metrics
+
+
+def solution_rows(jobs, relays, times, box_map, types, relay_inputs):
     transport_rows, box_rows, comm_rows, relay_rows = [], [], [], []
     for job in jobs:
         jid, profile, drone = job["id"], job["profile"], types[job["type"]]
@@ -286,44 +349,4 @@ def solve_q3(root: Path, out_dir: Path, plan_path=Q3_PLAN, step_s=COMMUNICATION_
                 "候选点": relay["candidate"],
             }
         )
-    from src.core.constraints import (
-        validate_transport,
-        validate_relays,
-        export_resource_check,
-    )
-
-    _, resources = validate_transport(
-        transport_rows, box_rows, "q3", physics, boxes, drones, batteries
-    )
-    validate_relays(relay_rows, physics, relay_inputs, communication)
-    export_resource_check(out_dir / "Q3_resource_check.csv", resources)
-    metrics = {
-        "transport_trips": len(jobs),
-        "relay_sorties": len(relays),
-        "transport_energy_kwh": sum(r["架次能耗_kWh"] for r in transport_rows),
-        "relay_energy_kwh": sum(r["架次能耗_kWh"] for r in relay_rows),
-        "transport_makespan_s": max(r["返回O01时刻_s"] for r in transport_rows),
-        "joint_makespan_s": max(
-            r["返回O01时刻_s"] for r in transport_rows + relay_rows
-        ),
-        "weighted_tardiness": sum(r["加权延误"] for r in box_rows),
-        "minimum_hard_slack_s": min(
-            box_map[r["货箱编号"]].hard_deadline - r["交付完成时刻_s"]
-            for r in box_rows
-            if box_map[r["货箱编号"]].hard_deadline is not None
-        ),
-        "communication_step_s": step_s,
-        "checked_states": sum(j["checked_states"] for j in jobs),
-        "continuous_time_proof": False,
-    }
-    for filename, rows in (
-        ("Q3_transport_trips.csv", transport_rows),
-        ("Q3_box_delivery.csv", box_rows),
-        ("Q3_relay_sorties.csv", relay_rows),
-        ("Q3_communication.csv", comm_rows),
-    ):
-        write_csv(out_dir / filename, rows)
-    write_json(out_dir / "Q3_metrics.json", metrics)
-    logging.getLogger(__name__).info("Q3: %s", metrics)
-    save_provenance(root, out_dir)
-    return metrics
+    return transport_rows, box_rows, comm_rows, relay_rows

@@ -1,13 +1,13 @@
 {
-  "transport_trips": 24,
-  "relay_sorties": 6,
-  "transport_energy_kwh": 80.84470332812647,
-  "relay_energy_kwh": 5.867028837665667,
-  "transport_makespan_s": 12339.411873284695,
-  "joint_makespan_s": 12789.446029897668,
-  "weighted_tardiness": 705087.61778932,
-  "minimum_hard_slack_s": 179.31480826738698,
+  "transport_trips": 27,
+  "relay_sorties": 4,
+  "transport_energy_kwh": 89.05671860775453,
+  "relay_energy_kwh": 5.149826623884925,
+  "transport_makespan_s": 10724.855339336147,
+  "joint_makespan_s": 10724.855339336147,
+  "weighted_tardiness": 122946.61939725942,
+  "minimum_hard_slack_s": 0.0,
   "communication_step_s": 1.0,
-  "checked_states": 41572,
+  "checked_states": 46102,
   "continuous_time_proof": false
 }

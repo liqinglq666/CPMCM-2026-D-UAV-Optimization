@@ -11,13 +11,15 @@ components are exhaustively enumerated.
 from __future__ import annotations
 
 from collections import defaultdict
+from functools import lru_cache
 from pathlib import Path
-from typing import Dict, Sequence, Set
+from typing import Dict, Sequence
 
 from src.config import DEFAULT_DATA_ROOT
 from src.core.inputs import load_inputs, load_relay_inputs
 from src.core.energy import two_stage_charge_time
-from src.core.io import read_csv as _read_csv, write_csv
+from src.core.io import write_csv, write_json
+from .provenance import q3_fingerprints, check_task_relations, read_q3_relations
 from src.core.constraints import max_overlap as max_overlap
 from src.core.provenance import save_provenance, check_question_provenance
 
@@ -93,10 +95,8 @@ def solve_partitions(
         relay_uav=len(relay_inputs.drone_ids),
         relay_comp=len(relay_inputs.component_ids),
     )
-    transport = _read_csv(q3_dir / "Q3_transport_trips.csv")
-    relay = _read_csv(q3_dir / "Q3_relay_sorties.csv")
-    communication = _read_csv(q3_dir / "Q3_communication.csv")
-    boxes = _read_csv(q3_dir / "Q3_box_delivery.csv")
+    transport, relay, communication, boxes = read_q3_relations(q3_dir)
+    check_task_relations(transport, relay, communication, boxes)
 
     atoms = atomic_components(transport)
 
@@ -127,7 +127,8 @@ def solve_partitions(
             )
         trip_atom[trip_id] = hits[0]
 
-    def group_stats(atom_indices: Set[int]):
+    @lru_cache(maxsize=None)
+    def group_stats(atom_indices: frozenset[int]):
         trip_ids = [
             row["架次编号"]
             for row in transport
@@ -212,7 +213,9 @@ def solve_partitions(
         groups = []
         for g in range(k):
             groups.append(
-                group_stats({i for i, value in enumerate(labels) if value == g})
+                group_stats(
+                    frozenset(i for i, value in enumerate(labels) if value == g)
+                )
             )
 
         totals = {key: sum(group["req"][key] for group in groups) for key in inventory}
@@ -267,22 +270,13 @@ def solve_partitions(
             raise ValueError(
                 f"Cannot divide {len(atoms)} indivisible service atoms into {k} groups"
             )
-        candidates = []
+        incumbent = None
         for labels in canonical_partitions(len(atoms), k):
-            if len(set(labels)) < k:
-                continue
-
             result = evaluate(labels, k)
-            candidates.append(
-                (
-                    result[0],
-                    labels,
-                    *result[1:],
-                )
-            )
-
-        candidates.sort(key=lambda x: x[0])
-        best[k] = candidates[0]
+            candidate = (result[0], labels, *result[1:])
+            if incumbent is None or candidate[0] < incumbent[0]:
+                incumbent = candidate
+        best[k] = incumbent
 
     out_dir.mkdir(
         parents=True,
@@ -342,6 +336,7 @@ def solve_partitions(
     ):
         write_csv(out_dir / filename, rows)
 
+    write_json(out_dir / "Q4_source_manifest.json", q3_fingerprints(q3_dir))
     save_provenance(root, out_dir)
     return {
         "atoms": atoms,

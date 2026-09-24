@@ -527,9 +527,18 @@ def export_solution(result, box_map, out_dir, frontier, solutions):
 def solve_q2(
     root: Path,
     out_dir: Path,
-    target_trips: int = BALANCED_TRIPS,
+    target_trips: int | None = None,
     frontier_min: int = FRONTIER_MIN_TRIPS,
+    search_parameters=None,
 ):
+    from time import perf_counter
+    from src.core.search_config import load_search_parameters
+
+    started = perf_counter()
+    parameters = (
+        load_search_parameters() if search_parameters is None else search_parameters
+    )
+    baseline_target = BALANCED_TRIPS if target_trips is None else target_trips
     initial = build_initial_solution(
         root,
         max_stops=3,
@@ -554,8 +563,21 @@ def solve_q2(
         types,
         drones,
         batteries,
-        target_trips=target_trips,
-        min_trips=min(frontier_min, target_trips),
+        target_trips=baseline_target,
+        min_trips=min(frontier_min, baseline_target),
+    )
+
+    from .search import improve_frontier
+
+    groups, result, frontier, solutions = improve_frontier(
+        solutions,
+        box_map,
+        physics,
+        drones,
+        batteries,
+        parameters,
+        out_dir,
+        target_trips,
     )
 
     export_solution(
@@ -592,6 +614,7 @@ def solve_q2(
             )
         },
     )
+    write_json(out_dir / "runtime.json", {"solver_runtime_s": perf_counter() - started})
     save_provenance(root, out_dir)
     logging.getLogger(__name__).info(
         "Q2: %d trips, %.6f kWh, %.3f s; %d frontier points",

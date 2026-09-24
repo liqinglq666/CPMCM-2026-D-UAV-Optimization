@@ -1,0 +1,17 @@
+{
+  "unchanged_official_physics_and_q1": [
+    "src/config.py",
+    "src/q1/physics_engine.py",
+    "src/core/energy.py",
+    "src/core/physics.py",
+    "src/core/routes.py",
+    "src/core/terrain.py",
+    "src/core/communication.py",
+    "src/core/inputs.py",
+    "src/core/models.py",
+    "src/core/constraints.py"
+  ],
+  "all_preexisting_tests_preserved": true,
+  "paper_and_figure_sources_unchanged": true,
+  "secondary_review": "Source review plus independent small-instance enumeration, literal charging checks, resource sweep, full result reconstruction. No claim of a separate human reviewer."
+}
