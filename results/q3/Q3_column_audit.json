@@ -10,171 +10,196 @@
     0,
     0,
     0.0,
-    7861.9065144189135,
-    68.84805472423993,
+    6004.239947229243,
+    69.19704356064,
     3,
-    7722.668565618175
+    6105.363898788459
   ],
   "master": {
     "catalogue_sorties": 71944,
-    "generated_start_columns": 13967,
-    "horizon_s": 8000,
-    "grid_step_s": 120,
-    "trip_cap": 19,
-    "objective": "100 * trips + energy_kwh; all deliveries on time",
-    "finite_catalogue_lp_lower_bound": 1821.080441157327,
+    "generated_start_columns": 16953,
+    "horizon_s": 6060,
+    "grid_step_s": 60,
+    "trip_cap": 25,
+    "objective": "0 * trips + energy_kwh; all deliveries on time",
+    "finite_catalogue_lp_lower_bound": 64.90399762961108,
     "pricing_trace": [
       {
         "iteration": 0,
         "active_columns": 0,
         "lp_objective": 800000.0,
         "artificial_cargo": 80.0,
-        "minimum_reduced_cost": -99896.6656050616,
-        "finite_catalogue_lower_bound": -1098036.6464961704
+        "minimum_reduced_cost": -99996.6656050616,
+        "finite_catalogue_lower_bound": -1699916.6401265399
       },
       {
         "iteration": 1,
         "active_columns": 1500,
-        "lp_objective": 700103.3343949384,
+        "lp_objective": 700003.3343949384,
         "artificial_cargo": 70.0,
-        "minimum_reduced_cost": -89895.5696579616,
-        "finite_catalogue_lower_bound": -1007912.4891063321
+        "minimum_reduced_cost": -89995.5696579616,
+        "finite_catalogue_lower_bound": -1549885.907054102
       },
       {
         "iteration": 2,
         "active_columns": 3000,
-        "lp_objective": 484358.53409500746,
-        "artificial_cargo": 48.400000000000006,
-        "minimum_reduced_cost": -79896.49146244497,
-        "finite_catalogue_lower_bound": -1033674.803691447
+        "lp_objective": 497516.3248408232,
+        "artificial_cargo": 49.75000000000001,
+        "minimum_reduced_cost": -69993.84650862654,
+        "finite_catalogue_lower_bound": -1252329.8378748402
       },
       {
         "iteration": 3,
         "active_columns": 4500,
-        "lp_objective": 306561.33912886993,
-        "artificial_cargo": 30.592760180995413,
-        "minimum_reduced_cost": -44218.926763007476,
-        "finite_catalogue_lower_bound": -533598.2693682722
+        "lp_objective": 444020.77520167443,
+        "artificial_cargo": 44.39999999999999,
+        "minimum_reduced_cost": -58994.8497173855,
+        "finite_catalogue_lower_bound": -1030850.467732963
       },
       {
         "iteration": 4,
         "active_columns": 6000,
-        "lp_objective": 163630.84143316656,
-        "artificial_cargo": 16.245617816091958,
-        "minimum_reduced_cost": -31381.55299299842,
-        "finite_catalogue_lower_bound": -432618.66543380346
+        "lp_objective": 369817.1758044582,
+        "artificial_cargo": 36.97916666666667,
+        "minimum_reduced_cost": -29998.284540546192,
+        "finite_catalogue_lower_bound": -380139.9377091966
       },
       {
         "iteration": 5,
         "active_columns": 7500,
-        "lp_objective": 79031.86709779673,
-        "artificial_cargo": 7.744443030298488,
-        "minimum_reduced_cost": -27286.287611078933,
-        "finite_catalogue_lower_bound": -439407.59751270304
+        "lp_objective": 262534.676381293,
+        "artificial_cargo": 26.25,
+        "minimum_reduced_cost": -31664.433562882223,
+        "finite_catalogue_lower_bound": -529076.1626907625
       },
       {
         "iteration": 6,
         "active_columns": 9000,
-        "lp_objective": 1898.4687965613853,
-        "artificial_cargo": 0.0,
-        "minimum_reduced_cost": -67.29649999549925,
-        "finite_catalogue_lower_bound": 619.8352966468997
+        "lp_objective": 180024.204197858,
+        "artificial_cargo": 17.998025016458193,
+        "minimum_reduced_cost": -29997.191986560058,
+        "finite_catalogue_lower_bound": -569905.5954661435
       },
       {
         "iteration": 7,
         "active_columns": 10500,
-        "lp_objective": 1863.1915231747093,
-        "artificial_cargo": 0.0,
-        "minimum_reduced_cost": -53.554408309344296,
-        "finite_catalogue_lower_bound": 845.6577652971678
+        "lp_objective": 150047.01715969478,
+        "artificial_cargo": 15.0,
+        "minimum_reduced_cost": -40145.62172222761,
+        "finite_catalogue_lower_bound": -853593.5258959954
       },
       {
         "iteration": 8,
         "active_columns": 12000,
-        "lp_objective": 1827.4733766116196,
-        "artificial_cargo": 0.0,
-        "minimum_reduced_cost": -20.747452676231077,
-        "finite_catalogue_lower_bound": 1433.2717757632292
+        "lp_objective": 43297.719808157184,
+        "artificial_cargo": 4.323219463894197,
+        "minimum_reduced_cost": -25029.991385180667,
+        "finite_catalogue_lower_bound": -582452.0648213595
       },
       {
         "iteration": 9,
         "active_columns": 13500,
-        "lp_objective": 1821.4478257183998,
-        "artificial_cargo": 0.0,
-        "minimum_reduced_cost": -12.328404129178416,
-        "finite_catalogue_lower_bound": 1587.20814726401
+        "lp_objective": 14774.955077695104,
+        "artificial_cargo": 1.4706465219446523,
+        "minimum_reduced_cost": -14064.710202152313,
+        "finite_catalogue_lower_bound": -336842.7999761127
       },
       {
         "iteration": 10,
-        "active_columns": 13687,
-        "lp_objective": 1821.1633873541477,
+        "active_columns": 15000,
+        "lp_objective": 65.48229674342777,
         "artificial_cargo": 0.0,
-        "minimum_reduced_cost": -9.28960465015976,
-        "finite_catalogue_lower_bound": 1644.6608990011123
+        "minimum_reduced_cost": -0.818429610525764,
+        "finite_catalogue_lower_bound": 45.021556480283664
       },
       {
         "iteration": 11,
-        "active_columns": 13904,
-        "lp_objective": 1821.0804411573286,
+        "active_columns": 16500,
+        "lp_objective": 64.97507325654664,
         "artificial_cargo": 0.0,
-        "minimum_reduced_cost": -1.2969649059727786,
-        "finite_catalogue_lower_bound": 1796.4381079438458
+        "minimum_reduced_cost": -0.40901742369829996,
+        "finite_catalogue_lower_bound": 54.749637664089136
       },
       {
         "iteration": 12,
-        "active_columns": 13916,
-        "lp_objective": 1821.0804411573313,
+        "active_columns": 16761,
+        "lp_objective": 64.90907540466246,
         "artificial_cargo": 0.0,
-        "minimum_reduced_cost": -3.8527347846021414,
-        "finite_catalogue_lower_bound": 1747.8784802498906
+        "minimum_reduced_cost": -0.1246859100683193,
+        "finite_catalogue_lower_bound": 61.79192765295448
       },
       {
         "iteration": 13,
-        "active_columns": 13967,
-        "lp_objective": 1821.0804411573313,
+        "active_columns": 16806,
+        "lp_objective": 64.90458465290415,
         "artificial_cargo": 0.0,
-        "minimum_reduced_cost": -2.2737367544323206e-13,
-        "finite_catalogue_lower_bound": 1821.080441157327
+        "minimum_reduced_cost": -0.39490622672928266,
+        "finite_catalogue_lower_bound": 55.03192898467208
+      },
+      {
+        "iteration": 14,
+        "active_columns": 16884,
+        "lp_objective": 64.90399762961113,
+        "artificial_cargo": 0.0,
+        "minimum_reduced_cost": -0.023402813613441598,
+        "finite_catalogue_lower_bound": 64.31892728927508
+      },
+      {
+        "iteration": 15,
+        "active_columns": 16886,
+        "lp_objective": 64.9039976296111,
+        "artificial_cargo": 0.0,
+        "minimum_reduced_cost": -0.29476457702665076,
+        "finite_catalogue_lower_bound": 57.53488320394483
+      },
+      {
+        "iteration": 16,
+        "active_columns": 16903,
+        "lp_objective": 64.90399762961114,
+        "artificial_cargo": 0.0,
+        "minimum_reduced_cost": -0.14120113737688028,
+        "finite_catalogue_lower_bound": 61.37396919518913
+      },
+      {
+        "iteration": 17,
+        "active_columns": 16953,
+        "lp_objective": 64.90399762961115,
+        "artificial_cargo": 0.0,
+        "minimum_reduced_cost": -2.886579864025407e-15,
+        "finite_catalogue_lower_bound": 64.90399762961108
       }
     ],
     "bound_scope": "enumerated sortie catalogue and allowed grid starts only",
     "global_continuous_bound": false,
-    "status": "Time limit reached. (HiGHS Status 13: Time limit reached)",
-    "runtime_s": 83.59253891999833,
-    "restricted_mip_objective": 1965.7285200299034,
-    "restricted_mip_dual_bound": 1871.2234220909136,
-    "restricted_mip_gap": 0.04807637320007555
+    "integer_start_columns": 8644,
+    "integer_reduced_cost_limit": 1.0,
+    "status": "Time limit reached. (HiGHS Status 13: model_status is Time limit reached; primal_status is None)",
+    "runtime_s": 148.9242872170007,
+    "restricted_mip_objective": null,
+    "restricted_mip_dual_bound": null,
+    "restricted_mip_gap": null
   },
   "proposed_relay_service_windows": [
     [
-      769.4311264178,
-      7383.606327805833
+      709.539902512323,
+      2633.969013466899
     ],
     [
-      732.5162540776348,
-      3200.0
+      679.5609616493416,
+      5534.391234090404
     ],
     [
-      4818.475007674391,
-      7429.903657902267
+      4180.835620989746,
+      5535.428152370661
     ]
-  ],
-  "integer_candidate_recomputed_objective": [
-    0,
-    0,
-    0.0,
-    7861.591843368823,
-    68.95055189436557,
-    3,
-    7445.477154858658
   ],
   "selected_recomputed_objective": [
     0,
     0,
     0.0,
-    7861.591843368823,
-    68.95055189436557,
+    6004.239947229243,
+    69.19704356064,
     3,
-    7445.477154858658
+    6105.363898788459
   ]
 }

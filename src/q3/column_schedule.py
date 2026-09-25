@@ -1,4 +1,4 @@
-"""Cargo column scheduling under three relay service-window choices.
+"""Cargo column scheduling under physically feasible relay service windows.
 
 A coarse geometric screen proposes columns. Every accepted complete plan is
 then independently checked on the mandatory 1 s/0.5 s union and timed by the
@@ -97,7 +97,10 @@ def improve_with_columns(baseline_plan, baseline, preparer, drones, batteries, p
                  relocation="return to O01, turnaround, new outbound and link setup",
                  global_continuous_bound=False)
     candidates = [(baseline_plan, baseline)]
+    completion = params.get("q3_selection_mode") == "completion"
     seed_path = PROJECT_ROOT / "config/q3_column_seed.json"
+    if completion and (PROJECT_ROOT / "config/q3_completion_seed.json").is_file():
+        seed_path = PROJECT_ROOT / "config/q3_completion_seed.json"
     if not seed_path.is_file():
         return baseline_plan, baseline
     seed = build_plan(json.loads(seed_path.read_text(encoding="utf-8")))
@@ -110,17 +113,32 @@ def improve_with_columns(baseline_plan, baseline, preparer, drones, batteries, p
     classes = cargo_classes(preparer.boxes.values())
     columns = enumerate_columns(preparer.physics, classes)
     try:
-        modes, windows = screen_windows(
-            columns, classes, preparer, seed["relays"], params["q3_column_horizon_s"],
-        )
+        if completion:
+            from .window_search import column_geometry, service_windows, start_windows
+
+            horizon = params["q3_column_horizon_s"]
+            # Full recomputation supplies proposal cutoffs, not historical times.
+            proposal = evaluate(seed, preparer, drones, batteries)
+            windows = service_windows(seed["relays"], preparer, horizon, {
+                r["id"]: proposal["times"]["end", r["id"]] for r in seed["relays"]
+            })
+            geometry = column_geometry(columns, classes, preparer, seed["relays"])
+            modes = start_windows(columns, geometry, seed["relays"], windows, horizon)
+        else:
+            modes, windows = screen_windows(
+                columns, classes, preparer, seed["relays"], params["q3_column_horizon_s"],
+            )
         master = IntervalMaster(
             columns, classes, drones, batteries, params["q3_column_horizon_s"],
-            params["column_grid_s"], params["q3_target_transport_trips"],
+            params["column_grid_s"], params["q3_trip_cap"] if completion
+            else params["q3_target_transport_trips"],
             windows=[[(lo, hi) for lo, hi, _rid in choices] for choices in modes],
+            trip_penalty=params.get("column_trip_penalty", 100.0),
         )
         choices, certificate = master.solve(
             iterations=params["column_iterations"], time_limit=params["column_mip_seconds"],
             mip_gap=0.02,
+            integer_reduced_cost_limit=params.get("column_integer_reduced_cost_limit"),
         )
         audit.update(master=certificate, proposed_relay_service_windows=windows)
         if choices:

@@ -1,5 +1,5 @@
 {
-  "seed": 20260924,
+  "seed": 20260925,
   "q2_iterations": 100000,
   "q2_restart_interval": 1000,
   "q3_iterations": 5000,
@@ -17,11 +17,37 @@
     2.0
   ],
   "q3_repair_combination_limit": 256,
-  "description": "Search budgets and aspirations only. Explicit discrete column seeds are freshly reconstructed from official inputs; no historical times, SOC or energy are accepted. Finite catalogue/grid bounds are not global continuous-time certificates.",
+  "description": "Completion preference: preserve zero tardiness, minimize makespan then energy; at most 25 transport and 4 relay sorties. Disclosed discrete seeds are fully recomputed. Catalogue/grid and CP bounds are restricted, not global continuous certificates.",
   "q2_resource_iterations": 10000,
   "column_iterations": 32,
-  "column_grid_s": 120,
-  "column_mip_seconds": 75,
-  "q2_column_horizon_s": 6600,
-  "q3_column_horizon_s": 8000
+  "column_grid_s": 60,
+  "column_mip_seconds": 120,
+  "q2_column_horizon_s": 6000,
+  "q3_column_horizon_s": 6060,
+  "q2_selection_mode": "completion",
+  "q3_selection_mode": "completion",
+  "q2_trip_cap": 25,
+  "q3_trip_cap": 25,
+  "q3_relay_cap": 4,
+  "column_trip_penalty": 0.0,
+  "column_integer_reduced_cost_limit": 1.0,
+  "q3_resource_iterations": 40,
+  "q3_resource_seconds": 2,
+  "q3_location_rounds": 1,
+  "q3_location_radii_m": [
+    0,
+    80,
+    160,
+    320,
+    640
+  ],
+  "q3_hover_height_fractions": [
+    0.1,
+    0.16666666666666666,
+    0.25,
+    0.3333333333333333,
+    0.5,
+    0.75,
+    1.0
+  ]
 }

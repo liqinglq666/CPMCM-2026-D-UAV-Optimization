@@ -125,7 +125,10 @@ def improve_frontier(
     allowed = [s for s in seeds if target_trips is None or len(s[0]) == target_trips]
     if not allowed:
         raise ValueError("Requested trip count has no feasible seed")
-    selection_score = target_score if target_trips is not None else q2_objective
+    completion = params.get("q2_selection_mode") == "completion"
+    selection_score = (lambda item: (
+        item["weighted_tardiness"], item["makespan"], item["energy"], item["trips"],
+    )) if completion else (target_score if target_trips is not None else q2_objective)
     best_plan, best = min(allowed, key=lambda item: selection_score(item[1]))
     current_plan, current = best_plan, best
     visited = {fingerprint(plan) for plan, _result in seeds}
@@ -159,6 +162,8 @@ def improve_frontier(
                     proposal = rebuild_resources(proposal, evaluator)
             if target_trips is not None and len(proposal) != target_trips:
                 raise ValueError("Fixed-count neighborhood changed trip count")
+            if completion and len(proposal) > params["q2_trip_cap"]:
+                raise ValueError("Completion search trip cap exceeded")
             signature = fingerprint(proposal)
             if signature in visited:
                 status = "duplicate"

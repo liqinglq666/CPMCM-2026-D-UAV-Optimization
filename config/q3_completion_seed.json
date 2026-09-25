@@ -1,0 +1,407 @@
+{
+  "jobs": [
+    {
+      "id": "column-000",
+      "type": "A",
+      "drone": "U01",
+      "battery": "A-BAT-01",
+      "boxes": [
+        "S002-FOD-01",
+        "S002-WAT-01"
+      ],
+      "route": [
+        "S002"
+      ],
+      "relay": "fast-relay-0"
+    },
+    {
+      "id": "column-001",
+      "type": "A",
+      "drone": "U02",
+      "battery": "A-BAT-02",
+      "boxes": [
+        "S006-MED-01",
+        "S006-WAT-01"
+      ],
+      "route": [
+        "S006"
+      ],
+      "relay": null
+    },
+    {
+      "id": "column-002",
+      "type": "A",
+      "drone": "U03",
+      "battery": "A-BAT-03",
+      "boxes": [
+        "S010-FOD-01",
+        "S010-WAT-01"
+      ],
+      "route": [
+        "S010"
+      ],
+      "relay": "fast-relay-0"
+    },
+    {
+      "id": "column-003",
+      "type": "B",
+      "drone": "U05",
+      "battery": "B-BAT-01",
+      "boxes": [
+        "S012-FOD-01",
+        "S012-MED-01",
+        "S012-WAT-01"
+      ],
+      "route": [
+        "S012"
+      ],
+      "relay": "fast-relay-0"
+    },
+    {
+      "id": "column-004",
+      "type": "C",
+      "drone": "U07",
+      "battery": "C-BAT-01",
+      "boxes": [
+        "S001-FOD-01",
+        "S001-FOD-02",
+        "S001-FOD-03",
+        "S001-HYG-01",
+        "S001-MED-01",
+        "S001-MED-02",
+        "S001-WAT-01",
+        "S001-WAT-02",
+        "S001-WAT-03"
+      ],
+      "route": [
+        "S001"
+      ],
+      "relay": null
+    },
+    {
+      "id": "column-005",
+      "type": "B",
+      "drone": "U06",
+      "battery": "B-BAT-02",
+      "boxes": [
+        "S006-WAT-02",
+        "S006-WAT-03"
+      ],
+      "route": [
+        "S006"
+      ],
+      "relay": null
+    },
+    {
+      "id": "column-006",
+      "type": "C",
+      "drone": "U08",
+      "battery": "C-BAT-02",
+      "boxes": [
+        "S002-FOD-02",
+        "S002-HYG-01",
+        "S002-MED-01",
+        "S002-WAT-02",
+        "S002-WAT-03",
+        "S002-WAT-04",
+        "S009-FOD-01",
+        "S009-MED-01"
+      ],
+      "route": [
+        "S009",
+        "S002"
+      ],
+      "relay": "fast-relay-0"
+    },
+    {
+      "id": "column-007",
+      "type": "A",
+      "drone": "U04",
+      "battery": "A-BAT-04",
+      "boxes": [
+        "S010-MED-01",
+        "S013-MED-01",
+        "S013-WAT-01"
+      ],
+      "route": [
+        "S013",
+        "S010"
+      ],
+      "relay": "fast-relay-0"
+    },
+    {
+      "id": "column-008",
+      "type": "A",
+      "drone": "U02",
+      "battery": "A-BAT-05",
+      "boxes": [
+        "S007-MED-01",
+        "S007-WAT-01"
+      ],
+      "route": [
+        "S007"
+      ],
+      "relay": "fast-relay-1"
+    },
+    {
+      "id": "column-009",
+      "type": "B",
+      "drone": "U06",
+      "battery": "B-BAT-03",
+      "boxes": [
+        "S014-FOD-01",
+        "S014-MED-01",
+        "S014-WAT-01"
+      ],
+      "route": [
+        "S014"
+      ],
+      "relay": "fast-relay-0"
+    },
+    {
+      "id": "column-010",
+      "type": "A",
+      "drone": "U03",
+      "battery": "A-BAT-06",
+      "boxes": [
+        "S007-FOD-01",
+        "S007-WAT-02"
+      ],
+      "route": [
+        "S007"
+      ],
+      "relay": "fast-relay-1"
+    },
+    {
+      "id": "column-011",
+      "type": "B",
+      "drone": "U05",
+      "battery": "B-BAT-04",
+      "boxes": [
+        "S008-FOD-01",
+        "S008-MED-01",
+        "S008-WAT-01"
+      ],
+      "route": [
+        "S008"
+      ],
+      "relay": "fast-relay-1"
+    },
+    {
+      "id": "column-012",
+      "type": "C",
+      "drone": "U07",
+      "battery": "C-BAT-03",
+      "boxes": [
+        "S001-HYG-02",
+        "S001-WAT-04",
+        "S001-WAT-05",
+        "S001-WAT-06",
+        "S001-WAT-07",
+        "S001-WAT-08"
+      ],
+      "route": [
+        "S001"
+      ],
+      "relay": null
+    },
+    {
+      "id": "column-013",
+      "type": "A",
+      "drone": "U01",
+      "battery": "A-BAT-02",
+      "boxes": [
+        "S015-FOD-01",
+        "S015-WAT-01"
+      ],
+      "route": [
+        "S015"
+      ],
+      "relay": "fast-relay-1"
+    },
+    {
+      "id": "column-014",
+      "type": "A",
+      "drone": "U04",
+      "battery": "A-BAT-03",
+      "boxes": [
+        "S005-MED-01",
+        "S005-WAT-01",
+        "S011-MED-01"
+      ],
+      "route": [
+        "S011",
+        "S005"
+      ],
+      "relay": "fast-relay-1"
+    },
+    {
+      "id": "column-015",
+      "type": "C",
+      "drone": "U08",
+      "battery": "C-BAT-04",
+      "boxes": [
+        "S003-FOD-01",
+        "S003-FOD-02",
+        "S003-HYG-01",
+        "S003-WAT-01",
+        "S003-WAT-02",
+        "S003-WAT-03",
+        "S007-HYG-01"
+      ],
+      "route": [
+        "S007",
+        "S003"
+      ],
+      "relay": "fast-relay-1"
+    },
+    {
+      "id": "column-016",
+      "type": "B",
+      "drone": "U06",
+      "battery": "B-BAT-02",
+      "boxes": [
+        "S005-HYG-01",
+        "S005-WAT-02"
+      ],
+      "route": [
+        "S005"
+      ],
+      "relay": "fast-relay-1"
+    },
+    {
+      "id": "column-017",
+      "type": "A",
+      "drone": "U02",
+      "battery": "A-BAT-01",
+      "boxes": [
+        "S003-MED-01",
+        "S003-WAT-04",
+        "S015-MED-01"
+      ],
+      "route": [
+        "S003",
+        "S015"
+      ],
+      "relay": "fast-relay-1"
+    },
+    {
+      "id": "column-018",
+      "type": "C",
+      "drone": "U07",
+      "battery": "C-BAT-01",
+      "boxes": [
+        "S004-FOD-01",
+        "S004-HYG-01",
+        "S004-MED-01",
+        "S004-WAT-01",
+        "S004-WAT-02",
+        "S004-WAT-03"
+      ],
+      "route": [
+        "S004"
+      ],
+      "relay": "fast-relay-2"
+    },
+    {
+      "id": "column-019",
+      "type": "A",
+      "drone": "U03",
+      "battery": "A-BAT-04",
+      "boxes": [
+        "S009-WAT-01",
+        "S013-FOD-01"
+      ],
+      "route": [
+        "S013",
+        "S009"
+      ],
+      "relay": "fast-relay-2"
+    },
+    {
+      "id": "column-020",
+      "type": "B",
+      "drone": "U05",
+      "battery": "B-BAT-01",
+      "boxes": [
+        "S008-HYG-01",
+        "S008-WAT-02"
+      ],
+      "route": [
+        "S008"
+      ],
+      "relay": "fast-relay-1"
+    },
+    {
+      "id": "column-021",
+      "type": "A",
+      "drone": "U01",
+      "battery": "A-BAT-05",
+      "boxes": [
+        "S005-FOD-01",
+        "S005-WAT-03"
+      ],
+      "route": [
+        "S005"
+      ],
+      "relay": "fast-relay-1"
+    },
+    {
+      "id": "column-022",
+      "type": "B",
+      "drone": "U06",
+      "battery": "B-BAT-03",
+      "boxes": [
+        "S006-FOD-01",
+        "S006-HYG-01"
+      ],
+      "route": [
+        "S006"
+      ],
+      "relay": null
+    },
+    {
+      "id": "column-023",
+      "type": "A",
+      "drone": "U04",
+      "battery": "A-BAT-06",
+      "boxes": [
+        "S011-FOD-01",
+        "S011-WAT-01"
+      ],
+      "route": [
+        "S011"
+      ],
+      "relay": null
+    }
+  ],
+  "relays": [
+    {
+      "id": "fast-relay-0",
+      "drone": "R01",
+      "component": "R-BAT-01",
+      "candidate": "generated",
+      "lon": 109.28115766662071,
+      "lat": 23.02250528211603,
+      "agl_m": 300
+    },
+    {
+      "id": "fast-relay-1",
+      "drone": "R02",
+      "component": "R-BAT-02",
+      "candidate": "generated",
+      "lon": 109.20393107337273,
+      "lat": 23.04084976266661,
+      "agl_m": 300.0
+    },
+    {
+      "id": "fast-relay-2",
+      "drone": "R01",
+      "component": "R-BAT-03",
+      "candidate": "generated",
+      "lon": 109.23400557114375,
+      "lat": 23.061007091658887,
+      "agl_m": 225.0
+    }
+  ]
+}

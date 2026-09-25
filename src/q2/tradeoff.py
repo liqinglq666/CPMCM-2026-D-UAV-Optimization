@@ -538,6 +538,9 @@ def solve_q2(
     parameters = (
         load_search_parameters() if search_parameters is None else search_parameters
     )
+    parameters = dict(parameters)
+    if target_trips is not None:
+        parameters["q2_selection_mode"] = "count"
     baseline_target = BALANCED_TRIPS if target_trips is None else target_trips
     initial = build_initial_solution(
         root,
@@ -589,7 +592,7 @@ def solve_q2(
         batteries,
         parameters,
         out_dir,
-        baseline_target,
+        None if parameters.get("q2_selection_mode") == "completion" else baseline_target,
     )
 
     export_solution(

@@ -21,3 +21,5 @@ Dorling 等用于说明载荷能量与多架次耦合的研究背景，Zhang 等
 本轮新增 SciPy `milp` 官方API文档作为整数求解器接口与间隙定义来源。WJ数模条目明确标注为用户提供的截图摘要，只用于说明参考方法和外部汇总目标；未视为已复核的最优性证明，未获得对方逐架次表或证明附件。
 
 2026-09-25 本轮终稿共9条书目、10次引用。首次引用顺序：赛题、Karney、Dorling、Zhang、SciPy milp、WJ数模截图、Zeng、ITU、HiGHS。上面的七条书目表与结构重构说明属于此前版本记录。
+
+2026-09-25 完工时间优化版：增加用户提供的25架次汇总截图（无逐架次数据和证明）及Google OR-Tools官方调度文档，共11条书目；当前编号以references.tex首次引用顺序为准。截图原件SHA256见docs/audit/completion/verification.json。

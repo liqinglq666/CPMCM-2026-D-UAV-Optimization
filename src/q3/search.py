@@ -25,6 +25,7 @@ from src.core.discrete import (
 )
 from src.core.constraints import validate_transport, validate_relays, RESULT_TOLERANCE
 from src.core.io import write_json
+from src.core.resource_rebuild import reorder_and_rebuild
 from .preparation import PlanPreparer
 from .solver import optimize_timing, solution_rows
 
@@ -125,6 +126,9 @@ def evaluate(plan, preparer, drones, batteries):
 def target_score(candidate, params):
     """Condition the heuristic search on declared Pareto aspiration counts."""
     value = candidate["objective"]
+    if params.get("q3_selection_mode") == "completion":
+        return (value[2], value[3], value[4], len(candidate["jobs"]),
+                len(candidate["relays"]), value[6])
     return (
         abs(len(candidate["jobs"]) - params["q3_target_transport_trips"]),
         abs(len(candidate["relays"]) - params["q3_target_relay_sorties"]),
@@ -197,7 +201,7 @@ def relay_neighbor(plan, operator, rng, preparer, points, params, iteration):
         relay.update(lon=lon, lat=lat, candidate="generated")
         if iteration % 5 == 0:
             relay["agl_m"] = preparer.relay_inputs.spec.max_hover_agl_m * rng.choice(
-                (0.75, 1.0)
+                tuple(params.get("q3_hover_height_fractions", (0.75, 1.0)))
             )
         preparer.relay(relay)
     elif operator == "relay_match":
@@ -271,6 +275,8 @@ def search_plan(
     if step_s > 1.0:
         raise ValueError("Q3 final communication audit must use a step <= 1 s")
     started = perf_counter()
+    completion = params.get("q3_selection_mode") == "completion"
+    tolerances = (1e-5, 1e-5, 1e-9, 0, 0, 1e-6) if completion else TARGET_TOLERANCES
     rng = random.Random(params["seed"])
     preparer = PlanPreparer(
         physics, boxes, drones, batteries, relay_inputs, communication, step_s
@@ -287,10 +293,19 @@ def search_plan(
         initial, baseline = improve_with_columns(
             initial, baseline, preparer, drones, batteries, params, out_dir,
         )
+    if completion and params.get("q3_resource_iterations", 0):
+        from .resource_master import improve_resources
+
+        initial, baseline, resource_audit = improve_resources(
+            initial, baseline, preparer, drones, batteries, params,
+        )
+        write_json(out_dir / "Q3_cumulative_audit.json", resource_audit)
     best_plan, best = initial, baseline
     current_plan, current = best_plan, best
     points = candidate_points(initial, physics, params)
     moves = TRANSPORT_MOVES + RELAY_MOVES
+    if completion:
+        moves += ("resource_rebuild",)
     visited = {fingerprint(initial)}
     trace, incumbents = (
         [],
@@ -304,7 +319,10 @@ def search_plan(
         operator_attempts[operator] += 1
         status, signature, accepted, value = "infeasible", "", False, None
         try:
-            if operator in TRANSPORT_MOVES:
+            if operator == "resource_rebuild":
+                proposal = build_plan(current_plan)
+                proposal["jobs"] = reorder_and_rebuild(proposal["jobs"], preparer, rng)
+            elif operator in TRANSPORT_MOVES:
                 proposal = build_plan(current_plan)
                 proposal["jobs"] = transport_neighbor(
                     proposal["jobs"], operator, rng, preparer, iteration
@@ -314,6 +332,9 @@ def search_plan(
                     current_plan, operator, rng, preparer, points, params, iteration
                 )
             proposal = repair_matching(proposal, preparer, rng)
+            if completion and (len(proposal["jobs"]) > params["q3_trip_cap"]
+                               or len(proposal["relays"]) > params["q3_relay_cap"]):
+                raise ValueError("Completion search trip cap exceeded")
             signature = fingerprint(proposal)
             if signature in visited:
                 status = "duplicate"
@@ -325,7 +346,7 @@ def search_plan(
                     improves(
                         target_score(candidate, params),
                         target_score(current, params),
-                        TARGET_TOLERANCES,
+                        tolerances,
                     )
                     or iteration % 97 == 0
                 ):
@@ -334,7 +355,7 @@ def search_plan(
                 if improves(
                     target_score(candidate, params),
                     target_score(best, params),
-                    TARGET_TOLERANCES,
+                    tolerances,
                 ):
                     best_plan, best = proposal, candidate
                     status = "improved"
@@ -366,6 +387,15 @@ def search_plan(
                 target_score(best, params),
                 best["objective"],
             )
+    if completion and params.get("q3_location_rounds", 0):
+        from .location_search import refine_locations
+
+        best_plan, best, location_audit = refine_locations(
+            best_plan, best, preparer, drones, batteries, params,
+        )
+        write_json(out_dir / "Q3_location_audit.json", location_audit)
+        incumbents.append(dict(iteration=params["q3_iterations"],
+                               phase="height_grid", plan=best_plan, objective=best["objective"]))
     write_json(out_dir / "Q3_search_trace.json", trace)
     write_json(out_dir / "Q3_incumbents.json", incumbents)
     write_json(out_dir / "Q3_selected_plan.json", best_plan)
