@@ -12,16 +12,19 @@
 \longresulttable{relay_positions}{中继悬停位置与返航 SOC}{relayposition}
 \subsection{计算入口与证据文件}
 将官方附件原样解压至程序的数据目录后，依次运行以下命令可生成正式结果、诊断和图表。所有路径在项目根目录下解析，Windows 与 Linux 使用同一 Python 入口；论文需要含中文支持的 XeLaTeX。
+\begingroup\small
 \begin{verbatim}
 python run_all.py
 python scripts/optimize_preferences.py --seconds 10
 python scripts/validate_results.py
 python -m pytest -q
 python scripts/certify_communication.py
+python scripts/replay_communication.py --out results/communication_replay.json
 python scripts/analyze_paper.py
 python scripts/setup_paper_fonts.py
 python scripts/build_paper.py --compatible
 \end{verbatim}
+\endgroup
 正式结果验证文件记录官方输入的 SHA256 摘要。图形契约记录每图的核心主张、数据路径、脚本、单位与不确定性口径；所有主图同时提供 PDF、SVG 和 300 dpi PNG。新增采样诊断不覆盖正式结果。默认诊断命令会在加密失败时拒绝通过。修复前反例与修复后独立回放分别保存在版本化审计记录中，不用历史结论代替当前复算。每次数字更新均应重新生成图表。
 
 \section{人工智能辅助与第三方来源说明}

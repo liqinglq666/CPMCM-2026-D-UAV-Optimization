@@ -37,6 +37,7 @@ def main():
     parser.add_argument("--q3-dir", type=Path, default=PROJECT_ROOT / "results/q3")
     parser.add_argument("--out", type=Path, default=PROJECT_ROOT / "results/continuous_communication.json")
     args = parser.parse_args()
+    args.out.unlink(missing_ok=True)
     result = certify(args.data, args.q3_dir)
     write_json(args.out, result)
     if result["status"] != "PASS":

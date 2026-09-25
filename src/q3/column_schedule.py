@@ -15,7 +15,7 @@ from src.core.io import write_json
 from src.core.routes import evaluate_route
 from src.q2.columns import cargo_classes, enumerate_columns, reconstruct
 from src.q2.interval_master import IntervalMaster
-from .search import build_plan, evaluate, target_score
+from .search import build_plan, evaluate, target_score, validate_completion_caps
 
 
 def screen_windows(columns, classes, preparer, relays, horizon):
@@ -96,15 +96,22 @@ def improve_with_columns(baseline_plan, baseline, preparer, drones, batteries, p
     audit = dict(screen_step_s=5.0, acceptance_steps_s=list(preparer.audit_steps),
                  relocation="return to O01, turnaround, new outbound and link setup",
                  global_continuous_bound=False)
-    candidates = [(baseline_plan, baseline)]
+    candidates = []
+    try:
+        validate_completion_caps(baseline_plan, params)
+        candidates.append((baseline_plan, baseline))
+    except ValueError as error:
+        audit["baseline_rejection"] = str(error)
     completion = params.get("q3_selection_mode") == "completion"
     seed_path = PROJECT_ROOT / "config/q3_column_seed.json"
     if completion and (PROJECT_ROOT / "config/q3_completion_seed.json").is_file():
         seed_path = PROJECT_ROOT / "config/q3_completion_seed.json"
     if not seed_path.is_file():
+        validate_completion_caps(baseline_plan, params)
         return baseline_plan, baseline
     seed = build_plan(json.loads(seed_path.read_text(encoding="utf-8")))
     try:
+        validate_completion_caps(seed, params)
         recomputed = evaluate(seed, preparer, drones, batteries)
         candidates.append((seed, recomputed))
         audit["seed_recomputed_objective"] = recomputed["objective"]
@@ -114,6 +121,10 @@ def improve_with_columns(baseline_plan, baseline, preparer, drones, batteries, p
     columns = enumerate_columns(preparer.physics, classes)
     try:
         if completion:
+            # Cargo columns may reduce the transport count, but they retain
+            # the seed's relays and therefore cannot repair a relay-cap breach.
+            if len(seed["relays"]) > params["q3_relay_cap"]:
+                raise ValueError("Column seed relay cap exceeded")
             from .window_search import column_geometry, service_windows, start_windows
 
             horizon = params["q3_column_horizon_s"]
@@ -149,11 +160,15 @@ def improve_with_columns(baseline_plan, baseline, preparer, drones, batteries, p
                 job["relay"] = next(rid for lo, hi, rid in modes[column] if lo <= start <= hi)
                 job.pop("start", None)
             plan = build_plan(dict(jobs=jobs, relays=seed["relays"]))
+            validate_completion_caps(plan, params)
             candidate = evaluate(plan, preparer, drones, batteries)
             candidates.append((plan, candidate))
             audit["integer_candidate_recomputed_objective"] = candidate["objective"]
     except (ValueError, RuntimeError) as error:
         audit["candidate_rejection"] = str(error)
+    if not candidates:
+        write_json(Path(out_dir) / "Q3_column_audit.json", audit)
+        raise ValueError("Completion caps have no feasible column-search incumbent")
     selected_plan, selected = min(candidates, key=lambda pair: target_score(pair[1], params))
     audit["selected_recomputed_objective"] = selected["objective"]
     write_json(Path(out_dir) / "Q3_column_audit.json", audit)

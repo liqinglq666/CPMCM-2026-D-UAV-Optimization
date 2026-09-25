@@ -21,6 +21,7 @@ def main():
     parser.add_argument("--q2-dir", type=Path, default=PROJECT_ROOT / "results/q2")
     parser.add_argument("--out", type=Path, default=PROJECT_ROOT / "results/q2")
     args = parser.parse_args()
+    (args.out.parent / "validation.json").unlink(missing_ok=True)
     nodes, types, drones, batteries, boxes, dem = load_inputs(args.data)
     if args.plan:
         plan = json.loads(args.plan.read_text(encoding="utf-8"))

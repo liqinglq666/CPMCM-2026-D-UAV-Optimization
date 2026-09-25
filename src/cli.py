@@ -49,6 +49,9 @@ def run_question(question, argv=None):
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
     (args.out.parent / "validation.json").unlink(missing_ok=True)
+    if question == "q3":
+        for name in ("continuous_communication.json", "communication_replay.json"):
+            (args.out.parent / name).unlink(missing_ok=True)
     if question == "q1":
         from src.q1.physics_engine import solve_q1
 

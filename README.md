@@ -2,6 +2,11 @@
 
 赛题、原始 Excel、DEM 是输入事实来源；`src/core/` 统一距离、地形、时间、载荷、能耗、充电和资源检查。仓库保持私有。
 
+**冻结版本：`freeze/2026-09-25-final`。** 算法、论文与代码的终审、修复和证据范围见
+[冻结说明](docs/FROZEN_RELEASE.md)、[代码复查](docs/post_merge_code_audit.md)及
+[依据对应表](docs/audit/post_merge/EVIDENCE.md)。该版本保留已接受的 Q1–Q4 结果；
+后续改动另开分支，复核冻结结果时无需重新运行优化。
+
 本轮研读用户提供的完整 D 题论文，冻结 Q1 和官方 DEM，新增 Q2 限时节能偏好、Q3 连续区间数值核验、Q4 均衡分区；保留已合并的最快正式方案。方法异同、输入口径、实际取舍及复算入口见 [完整论文对比](docs/reference_paper_comparison.md)。浮点数值证书与受限模型下界均明确说明范围，不宣称原问题全局最优。
 
 ## 安装与数据
@@ -103,12 +108,13 @@ python scripts/validate_results.py
 
 ```bash
 python -m pip install -r requirements-paper.txt
+python scripts/replay_communication.py --out results/communication_replay.json
 python scripts/analyze_paper.py
 python scripts/setup_paper_fonts.py
 python scripts/build_paper.py
 ```
 
-新论文在 [paper/](paper/README.md)：同步最新算法结果的匿名论文（含自动目录和附录）、12 张主图、16 张表。主图均输出 PDF/SVG/300 dpi PNG，数字由结果文件生成。构建另需 XeLaTeX、ctex、xeCJK、Fandol，完整命令和 Excel 导出见论文 README。
+新论文在 [paper/](paper/README.md)：同步最新算法结果的匿名论文（含自动目录和附录）、12 张主图及自动生成的结果表。主图均输出 PDF/SVG/300 dpi PNG，数字由结果文件生成。构建另需 XeLaTeX、ctex、xeCJK、Fandol，完整命令和 Excel 导出见论文 README。
 
 原 `scripts/make_figures.py` 的六幅图已由统一图形流水线替代并删除。`docs/paper/` 中旧稿仅作历史资料。当前证据及适用边界见 [论文终审](paper/reports/FINAL_AUDIT.md)，AI 记录见 `docs/AI_USAGE.md`。
 
