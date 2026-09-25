@@ -25,6 +25,17 @@ from src.core.discrete import service_components
 from src.core.provenance import save_provenance, check_question_provenance
 
 
+def normalized_gini(values):
+    """Normalized pairwise Gini, zero for no work or a single group."""
+    values = list(values)
+    if any(value < 0 for value in values):
+        raise ValueError("Negative workload")
+    total = sum(values)
+    if len(values) < 2 or total == 0:
+        return 0.0
+    return sum(abs(a - b) for a in values for b in values) / (2 * (len(values) - 1) * total)
+
+
 def atomic_components(transport_rows):
     return service_components(
         row["访问服务区顺序"].split("->") for row in transport_rows
@@ -62,6 +73,16 @@ def solve_partitions(
 ):
     check_question_provenance(root, q3_dir)
     _nodes, types, drones, batteries, _boxes, _dem = load_inputs(root)
+    from src.core.physics import Physics
+
+    physics = Physics(_nodes, types, _dem)
+    service_weights = defaultdict(int)
+    for box in _boxes:
+        service_weights[box.service] += 1
+
+    @lru_cache(maxsize=None)
+    def impedance(a, b):
+        return (physics.flight_time("B", a, b) + physics.flight_time("B", b, a)) / 120
     relay_inputs = load_relay_inputs(root)
     inventory = {f"{code}_uav": sum(d.type == code for d in drones) for code in types}
     inventory.update(
@@ -171,6 +192,9 @@ def solve_partitions(
         energy = sum(float(row["架次能耗_kWh"]) for row in trows) + sum(
             float(row["架次能耗_kWh"]) for row in rrows
         )
+        medoid, spatial = min(
+            ((center, sum(service_weights[s] * impedance(center, s) for s in service_list))
+             for center in service_list), key=lambda item: (item[1], item[0]))
 
         return {
             "atoms": tuple(sorted(atom_indices)),
@@ -182,6 +206,11 @@ def solve_partitions(
             "relay_sorties": len(relay_ids),
             "boxes": sum(box_count_by_trip[t] for t in trip_ids),
             "work": transport_busy + relay_busy,
+            "transport_work_s": transport_busy,
+            "relay_work_s": sum(float(row["返回O01时刻_s"]) - float(row["开始时刻_s"]) for row in rrows),
+            "relay_service_s": relay_busy,
+            "spatial_box_min": spatial,
+            "medoid": medoid,
             "energy": energy,
         }
 
@@ -241,6 +270,8 @@ def solve_partitions(
 
     best = {}
     enumerated = {}
+    balanced, balance_counts, strict_counts = {}, {}, {}
+    tradeoffs, frontier = [], []
 
     for k in (2, 3):
         if k > len(atoms):
@@ -248,14 +279,58 @@ def solve_partitions(
                 f"Cannot divide {len(atoms)} indivisible service atoms into {k} groups"
             )
         incumbent = None
+        fair_incumbent = None
         enumerated[k] = 0
+        balance_counts[k] = strict_counts[k] = 0
+        # Explicit planning preferences taken from the reference comparison,
+        # not additional official constraints. Original minimum-resource result
+        # remains the primary output and is reported beside this alternative.
+        min_size, max_size, max_gini = (6, 9, .33) if k == 2 else (4, 6, .34)
+        candidates = []
         for labels in canonical_partitions(len(atoms), k):
             enumerated[k] += 1
             result = evaluate(labels, k)
             candidate = (result[0], labels, *result[1:])
             if incumbent is None or candidate[0] < incumbent[0]:
                 incumbent = candidate
+            groups = result[1]
+            sizes = [len(g["services"]) for g in groups]
+            gini = normalized_gini(g["transport_work_s"] for g in groups)
+            spatial = sum(g["spatial_box_min"] for g in groups)
+            metrics = (result[0][0], gini, spatial)
+            candidates.append((metrics, labels, sum(g["energy"] for g in groups), sizes))
+            relay_ids = [rid for g in groups for rid in g["relay_sortie_ids"]]
+            if min(sizes) >= 2 and len(relay_ids) == len(set(relay_ids)):
+                strict_counts[k] += 1
+            if min(sizes) >= min_size and max(sizes) <= max_size and gini <= max_gini:
+                balance_counts[k] += 1
+                score = (result[0][0], result[0][1], gini, spatial)
+                if fair_incumbent is None or score < fair_incumbent[0]:
+                    fair_incumbent = (score, labels, *result[1:])
         best[k] = incumbent
+        balanced[k] = fair_incumbent
+        for policy, choice in (("minimum_resources", incumbent), ("balanced", fair_incumbent)):
+            if choice is None:
+                continue
+            score, labels, groups, totals, gaps, redundancy = choice
+            tradeoffs.append(dict(K=k, policy=policy, shortage=sum(gaps.values()),
+                service_counts="/".join(str(len(g["services"])) for g in groups),
+                box_counts="/".join(str(g["boxes"]) for g in groups),
+                transport_gini=normalized_gini(g["transport_work_s"] for g in groups),
+                spatial_box_min=sum(g["spatial_box_min"] for g in groups),
+                energy_kwh=sum(g["energy"] for g in groups),
+                extra_relay_sorties=sum(g["relay_sorties"] for g in groups) - len(relay)))
+        # Keep only the discovered finite-input frontier in (gap,Gini,dispersion).
+        nondominated = []
+        for item in sorted(candidates):
+            score = item[0]
+            if any(all(a <= b for a, b in zip(old[0], score)) for old in nondominated):
+                continue
+            nondominated = [old for old in nondominated if not all(a <= b for a, b in zip(score, old[0]))]
+            nondominated.append(item)
+        frontier.extend(dict(K=k, shortage=s[0], transport_gini=s[1], spatial_box_min=s[2],
+                             energy_kwh=energy, labels=list(labels), service_counts=sizes)
+                        for s, labels, energy, sizes in nondominated)
 
     out_dir.mkdir(
         parents=True,
@@ -327,6 +402,37 @@ def solve_partitions(
         write_csv(out_dir / filename, rows)
 
     write_csv(out_dir / "Q4_gap_decomposition.csv", decomposition_rows)
+    fair_groups, fair_resources = [], []
+    for k, choice in balanced.items():
+        if choice is None:
+            continue
+        _score, _labels, groups, totals, gaps, _redundancy = choice
+        for i, group in enumerate(groups, 1):
+            fair_groups.append(dict(K=k, group=f"G{i}", services=",".join(group["services"]),
+                boxes=group["boxes"], transport_trips=group["transport_trips"],
+                relay_sorties=group["relay_sorties"], transport_work_s=group["transport_work_s"],
+                relay_work_s=group["relay_work_s"], medoid=group["medoid"],
+                spatial_box_min=group["spatial_box_min"], energy_kwh=group["energy"], **group["req"]))
+        fair_resources.extend(dict(K=k, resource=key, inventory=inventory[key],
+                                   required=totals[key], shortage=gaps[key]) for key in inventory)
+    write_csv(out_dir / "Q4_preference_comparison.csv", tradeoffs)
+    for name in ("Q4_balanced_groups.csv", "Q4_balanced_resources.csv"):
+        (out_dir / name).unlink(missing_ok=True)
+    if fair_groups:
+        write_csv(out_dir / "Q4_balanced_groups.csv", fair_groups)
+        write_csv(out_dir / "Q4_balanced_resources.csv", fair_resources)
+    write_json(out_dir / "Q4_preference_frontier.json", frontier)
+    write_json(out_dir / "Q4_policy_audit.json", dict(
+        primary="minimum_resources", balanced_constraints={
+            2: dict(min_services=6, max_services=9, maximum_transport_gini=.33),
+            3: dict(min_services=4, max_services=6, maximum_transport_gini=.34)},
+        balanced_feasible_partitions=balance_counts,
+        strict_no_relay_copy_min_two_services_feasible_partitions=strict_counts,
+        workload="transport preparation through return, excluding relay time from Gini",
+        spatial="box-weighted medoid; bidirectional B-type flight time on unchanged official DEM",
+        group_energy="unchanged transport plus full original relay copy for every dependent group",
+        scope="exhaustive fixed-Q3 partitions; balance limits are declared preferences",
+        source_fingerprints=q3_fingerprints(q3_dir)))
     write_json(out_dir / "Q4_enumeration_certificate.json", dict(
         atomic_components=atoms, atomic_component_count=len(atoms),
         enumerated_partitions=enumerated, total_partitions=sum(enumerated.values()),

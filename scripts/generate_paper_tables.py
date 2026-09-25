@@ -127,6 +127,23 @@ macros = {
     "MergeEnergyScale": f"{ENERGY_SCALE:g}",
     "RelayGuard": f"{RELAY_GUARD_S:g}",
 }
+preferences = pd.read_csv(RESULTS / "q2/Q2_preference_frontier.csv")
+policies = pd.read_csv(RESULTS / "q4/Q4_preference_comparison.csv")
+continuous = json.loads((RESULTS / "continuous_communication.json").read_text())
+assert continuous["status"] == "PASS"
+energy_choice = preferences.loc[preferences.epsilon.idxmax()]
+macros.update({
+    "EnergyChoiceTrips": str(int(energy_choice.trips)),
+    "EnergyChoiceTime": f"{energy_choice.makespan_s:.3f}",
+    "EnergyChoiceEnergy": f"{energy_choice.energy_kwh:.3f}",
+    "EnergyChoiceSaving": f"{100*(1-energy_choice.energy_kwh/m['q2']['energy']):.2f}",
+    "ContinuousPhases": str(continuous["summary"]["phases"]),
+    "ContinuousCells": str(continuous["summary"]["certified_intervals"]),
+    "ContinuousEvents": str(continuous["summary"]["boundary_checks"]),
+    "ContinuousMargin": f"{continuous['minimum_margin_bound_db']:.6f}",
+    "BalancedGapTwo": str(int(policies[(policies.K==2)&(policies.policy=='balanced')].iloc[0].shortage)),
+    "BalancedGapThree": str(int(policies[(policies.K==3)&(policies.policy=='balanced')].iloc[0].shortage)),
+})
 (TABLES / "numbers.tex").write_text(
     "% Auto-generated; never edit numbers here.\n"
     + "".join("\\newcommand{\\" + k + "}{" + v + "}\n" for k, v in macros.items()),
@@ -494,3 +511,11 @@ print(
     len(macros),
     "number macros, tables, workbook payload and figure manifest",
 )
+
+table("energy_preferences", ["完工上限放宽", "架次", "返航完工/s", "能耗/kWh", "加权延误"],
+      [[f"{100*r.epsilon:.0f}" + chr(92) + "%", str(int(r.trips)), f"{r.makespan_s:.3f}",
+        f"{r.energy_kwh:.3f}", f"{r.weighted_tardiness:.0f}"] for r in preferences.itertuples()])
+table("balanced_preferences", ["组数", "偏好", "服务区数", "运输Gini", "资源缺口", "能耗/kWh"],
+      [[str(r.K), "资源优先" if r.policy=="minimum_resources" else "均衡约束", r.service_counts,
+        f"{r.transport_gini:.4f}", str(r.shortage), f"{r.energy_kwh:.3f}"]
+       for r in policies.itertuples()], align="rllrrr")

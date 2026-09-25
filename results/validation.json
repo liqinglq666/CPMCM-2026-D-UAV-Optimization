@@ -15,6 +15,7 @@
     "boxes": 80,
     "energy_kwh": 65.56619536868014,
     "makespan_s": 5903.03815462762,
+    "energy_preferences": 4,
     "pareto_points": 42
   },
   "q3": {
@@ -23,6 +24,15 @@
     "energy_kwh": 66.48161784679007,
     "makespan_s": 5931.734693561892,
     "checked_states": 83497,
+    "continuous_coverage": {
+      "status": "PASS",
+      "phases": 192,
+      "geometric_intervals": 352,
+      "certified_intervals": 360,
+      "boundary_checks": 544,
+      "minimum_margin_bound_db": 0.009866305631277328,
+      "formal_exact_arithmetic_proof": false
+    },
     "relay_energy_kwh": 2.6592740459755895,
     "joint_makespan_s": 5931.734693561892
   },

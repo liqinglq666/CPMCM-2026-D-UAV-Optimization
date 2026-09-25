@@ -108,6 +108,24 @@ def verify(workbook: Path, template: Path, rebuild_figures: bool = False):
         MarginQuarter=f"{quarter['minimum_margin_db']:.3f}",
         ViolationsQuarter=str(quarter["violations"]),
     )
+    continuous = json.loads((ROOT / "results/continuous_communication.json").read_text())
+    assert continuous["status"] == "PASS"
+    assert continuous["source_sha256"] == replay["source_sha256"]
+    expected_numbers.update(
+        ContinuousPhases=str(sum(r["phases"] for r in continuous["trips"].values())),
+        ContinuousCells=str(sum(r["certified_intervals"] for r in continuous["trips"].values())),
+        ContinuousEvents=str(sum(r["boundary_checks"] for r in continuous["trips"].values())),
+        ContinuousMargin=f"{min(r['minimum_margin_bound_db'] for r in continuous['trips'].values()):.6f}",
+    )
+    choices = json.loads((ROOT / "results/q2/Q2_preference_plans.json").read_text())["epsilon_0.2"]["trips"]
+    expected_numbers.update(
+        EnergyChoiceTrips=str(len(choices)),
+        EnergyChoiceTime=f"{max(float(r['返回O01时刻（s）']) for r in choices):.3f}",
+        EnergyChoiceEnergy=f"{sum(float(r['架次能耗（kWh）']) for r in choices):.3f}",
+    )
+    fair = records("results/q4/Q4_balanced_resources.csv")
+    expected_numbers.update(BalancedGapTwo=str(sum(int(r['shortage']) for r in fair if r['K']=='2')),
+                            BalancedGapThree=str(sum(int(r['shortage']) for r in fair if r['K']=='3')))
     for diagnostic in analysis["sampling_validation"]:
         extra = next(
             r for r in replay["sampling"] if r["step_s"] == diagnostic["step_s"]

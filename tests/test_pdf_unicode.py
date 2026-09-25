@@ -90,3 +90,17 @@ def test_unknown_collection_is_not_guessed_or_overwritten(tmp_path):
     with pytest.raises(ValueError, match="Unknown missing Unicode mapping"):
         embed_cjk_unicode(pdf, CMAP)
     assert pdf.read_bytes() == frozen
+
+
+def test_lazy_resources_are_not_skipped_when_resolved_objects_are_temporary():
+    from scripts.pdf_quality import resource_fonts
+
+    class LazyResource:
+        def __init__(self, number):
+            self.font = DictionaryObject({NameObject('/BaseFont'): NameObject('/font' + str(number))})
+
+        def get_object(self):
+            return DictionaryObject({NameObject('/Font'): DictionaryObject({NameObject('/F'): self.font})})
+
+    pages = [{'/Resources': LazyResource(i)} for i in range(100)]
+    assert len(list(resource_fonts(pages))) == 100

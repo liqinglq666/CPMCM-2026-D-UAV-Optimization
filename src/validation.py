@@ -42,7 +42,7 @@ def compare_records(actual, expected, label):
         for key, value in right.items():
             if isinstance(value, (int, float)):
                 close(left[key], value, label + " " + key)
-            elif str(left[key]) != ("" if value is None else str(value)):
+            elif ("" if left[key] is None else str(left[key])) != ("" if value is None else str(value)):
                 raise ValueError(label + ": field mismatch: " + key)
 
 
@@ -293,9 +293,49 @@ def validate_q3_metrics(metrics, summary, trips, relay_rows, deliveries, boxes, 
         raise ValueError("Q3 metrics omit a required communication sampling grid")
 
 
+def validate_preferences(directory, physics, boxes, drones, batteries, fastest):
+    """Replay every exported alternative, not just its reported summary."""
+    path = directory / "Q2_preference_plans.json"
+    # Legacy archived generations predate this optional report.
+    if not path.exists():
+        if (directory / "Q2_preference_frontier.csv").exists():
+            raise ValueError("Missing preference plans")
+        return 0
+    plans = json.loads(path.read_text(encoding="utf-8"))
+    rows = read_csv(directory / "Q2_preference_frontier.csv")
+    if len(rows) != len(plans) or {r["preference"] for r in rows} != set(plans):
+        raise ValueError("Preference report/plan IDs mismatch")
+    from src.core.discrete import TransportEvaluator
+    from src.q2.search import exportable
+    from src.q2.tradeoff import solution_rows
+
+    box_map = {b.id: b for b in boxes}
+    evaluator = TransportEvaluator(physics, box_map, drones, batteries)
+    for row in rows:
+        plan = plans[row["preference"]]
+        checked = evaluator.schedule(plan["discrete_plan"])
+        trips, deliveries = solution_rows(exportable(checked, box_map), box_map)
+        compare_records(plan["trips"], trips, "preference trips")
+        compare_records(plan["deliveries"], deliveries, "preference deliveries")
+        validate_transport(trips, deliveries, "q2", physics, boxes, drones, batteries)
+        for key, value in (("trips", checked["trips"]), ("makespan_s", checked["makespan"]),
+                           ("energy_kwh", checked["energy"]), ("weighted_tardiness", checked["weighted_tardiness"]),
+                           ("last_delivery_s", max(t for j in checked["jobs"] for t in j["delivery"].values()))):
+            close(row[key], value, "preference " + key)
+        epsilon = float(row["epsilon"])
+        if not 0 <= epsilon < float("inf"):
+            raise ValueError("Invalid preference epsilon")
+        cap = fastest * (1 + epsilon)
+        close(row["horizon_s"], cap, "preference horizon")
+        if checked["makespan"] > cap + 1e-6 or checked["weighted_tardiness"] > 1e-5:
+            raise ValueError("Preference time/deadline violation")
+    return len(rows)
+
+
 def validate_results(root: Path, results: Path, step_s=COMMUNICATION_STEP_S):
     # A failed revalidation must never leave an earlier success certificate.
     (results / "validation.json").unlink(missing_ok=True)
+    (results / "continuous_communication.json").unlink(missing_ok=True)
     fingerprints = check_provenance(root, results)
     nodes, types, drones, batteries, boxes, dem = load_inputs(root)
     physics = Physics(nodes, types, dem)
@@ -333,6 +373,9 @@ def validate_results(root: Path, results: Path, step_s=COMMUNICATION_STEP_S):
             )
         )
         if question == "q2":
+            summary[question]["energy_preferences"] = validate_preferences(
+                results / question, physics, boxes, drones, batteries,
+                summary[question]["makespan_s"])
             validate_frontier(
                 results / question, physics, boxes, drones, batteries, trips, deliveries
             )
@@ -352,6 +395,9 @@ def validate_results(root: Path, results: Path, step_s=COMMUNICATION_STEP_S):
             ):
                 close(metrics[key], expected, "Q2 metric " + key)
         if question == "q3":
+            from src.core.continuous_radio import certify_profiles
+            import hashlib
+
             relay_inputs = load_relay_inputs(root)
             communication = Communication(physics, load_communication_inputs(root))
             relay_rows = read_csv(results / question / "Q3_relay_sorties.csv")
@@ -364,6 +410,16 @@ def validate_results(root: Path, results: Path, step_s=COMMUNICATION_STEP_S):
                 communication,
                 step_s,
             )
+            certificate = certify_profiles(profiles,
+                read_csv(results / question / "Q3_communication.csv"), relays, physics, communication)
+            certificate["source_sha256"] = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                for p in sorted((results / question).glob("Q3_*.csv"))}
+            write_json(results / "continuous_communication.json", certificate)
+            if certificate["status"] != "PASS":
+                raise ValueError("Continuous coverage is not certified; inspect report")
+            summary[question]["continuous_coverage"] = dict(status=certificate["status"],
+                **certificate["summary"], minimum_margin_bound_db=certificate["minimum_margin_bound_db"],
+                formal_exact_arithmetic_proof=False)
             summary[question]["relay_energy_kwh"] = sum(
                 float(r["架次能耗_kWh"]) for r in relay_rows
             )
@@ -384,7 +440,13 @@ def validate_results(root: Path, results: Path, step_s=COMMUNICATION_STEP_S):
             raise ValueError("Q4 does not inherit the finalized Q3 generation")
     with tempfile.TemporaryDirectory(prefix="uav-q4-validation-") as directory:
         expected = solve_partitions(results / "q3", Path(directory), root)
-        for filename in ("Q4_partition_config.csv", "Q4_resource_summary.csv"):
+        for filename in ("Q4_partition_config.csv", "Q4_resource_summary.csv",
+                         "Q4_preference_comparison.csv", "Q4_balanced_groups.csv",
+                         "Q4_balanced_resources.csv"):
+            if not (Path(directory) / filename).exists():
+                if (results / "q4" / filename).exists():
+                    raise ValueError("Stale Q4 preference file: " + filename)
+                continue
             calculated, actual = (
                 read_csv(Path(directory) / filename),
                 read_csv(results / "q4" / filename),
@@ -404,6 +466,9 @@ def validate_results(root: Path, results: Path, step_s=COMMUNICATION_STEP_S):
                             f"Q4 result mismatch: {filename}/{key}"
                         ) from None
                     close(right[key], target, "Q4 " + key)
+        for name in ("Q4_preference_frontier.json", "Q4_policy_audit.json"):
+            if json.loads((Path(directory) / name).read_text()) != json.loads((results / "q4" / name).read_text()):
+                raise ValueError("Q4 preference audit mismatch: " + name)
         summary["q4"] = {
             "atomic_groups": len(expected["atoms"]),
             "shortages": {
