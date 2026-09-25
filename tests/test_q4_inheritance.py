@@ -36,7 +36,8 @@ def test_broken_task_relations_are_not_silently_dropped(bad):
 
 
 @pytest.mark.integration
-def test_resource_demands_against_independent_interval_sweep(official_root):
+@pytest.mark.parametrize("balanced", [False, True])
+def test_resource_demands_against_independent_interval_sweep(official_root, balanced):
     root = Path(__file__).resolve().parents[1] / "results"
     transport = read_csv(root / "q3/Q3_transport_trips.csv")
     relay = {r["中继架次编号"]: r for r in read_csv(root / "q3/Q3_relay_sorties.csv")}
@@ -48,6 +49,14 @@ def test_resource_demands_against_independent_interval_sweep(official_root):
     _nodes, types, _drones, _batteries, boxes, _dem = load_inputs(official_root)
     relay_inputs = load_relay_inputs(official_root)
     configurations = read_csv(root / "q4/Q4_partition_config.csv")
+    if balanced:
+        configurations = []
+        for row in read_csv(root / "q4/Q4_balanced_groups.csv"):
+            configurations.append({"K": row["K"], "服务区列表": row["services"],
+                "货箱数": row["boxes"], "中继架次": row["relay_sorties"],
+                "中继无人机数": row["relay_uav"], "中继能源组件数": row["relay_comp"],
+                **{f"{code}型运输无人机数": row[f"{code}_uav"] for code in types},
+                **{f"{code}型电池组数": row[f"{code}_bat"] for code in types}})
 
     def count(intervals):
         # Count directly at every interval start, independently of the heap

@@ -69,5 +69,15 @@
   "MergeLateScale": "200000",
   "MergeTimeScale": "10000",
   "MergeEnergyScale": "100",
-  "RelayGuard": "5"
+  "RelayGuard": "5",
+  "EnergyChoiceTrips": "22",
+  "EnergyChoiceTime": "7070.178",
+  "EnergyChoiceEnergy": "63.370",
+  "EnergyChoiceSaving": "3.35",
+  "ContinuousPhases": "192",
+  "ContinuousCells": "360",
+  "ContinuousEvents": "544",
+  "ContinuousMargin": "0.009866",
+  "BalancedGapTwo": "5",
+  "BalancedGapThree": "9"
 }

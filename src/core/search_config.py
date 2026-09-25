@@ -67,6 +67,9 @@ def load_search_parameters():
                 or not math.isfinite(value) or value < 0):
             raise ValueError("Invalid relay location radius")
 
+    positive(params.get("q2_preference_seconds", 10), "preference time budget")
+    for epsilon in params.get("q2_energy_epsilons", [.05, .10, .20]):
+        positive(epsilon, "energy preference epsilon")
     positive(params["relay_local_step_m"], "relay local step")
     factors = params["q3_repair_radius_factors"]
     if not isinstance(factors, list) or not factors:

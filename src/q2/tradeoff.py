@@ -603,6 +603,12 @@ def solve_q2(
         solutions,
     )
 
+    from .preferences import export_preferences
+    from .search import discrete_plan
+
+    export_preferences(discrete_plan(result), physics, box_map, drones, batteries,
+                       out_dir, parameters.get("q2_energy_epsilons", [.05, .10, .20]),
+                       parameters.get("q2_preference_seconds", 10))
     from src.core.io import read_csv, write_json
     from src.core.constraints import validate_transport, export_resource_check
 

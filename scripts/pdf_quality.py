@@ -12,18 +12,20 @@ from pypdf.generic import DecodedStreamObject, NameObject
 
 def resource_fonts(pages):
     """Include fonts in nested figure forms, not only page text."""
-    seen_resources = set()
-    seen_fonts = set()
+    # Keep strong references: PyPDF may yield temporary resolved dictionaries.
+    # Remembering only id() can confuse later objects with collected objects.
+    seen_resources = {}
+    seen_fonts = {}
 
     def visit(resources):
         resources = resources.get_object()
         if id(resources) in seen_resources:
             return
-        seen_resources.add(id(resources))
+        seen_resources[id(resources)] = resources
         for reference in resources.get("/Font", {}).values():
             font = reference.get_object()
             if id(font) not in seen_fonts:
-                seen_fonts.add(id(font))
+                seen_fonts[id(font)] = font
                 yield font
         for reference in resources.get("/XObject", {}).values():
             form = reference.get_object()

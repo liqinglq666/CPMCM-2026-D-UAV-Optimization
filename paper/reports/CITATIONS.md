@@ -23,3 +23,5 @@ Dorling 等用于说明载荷能量与多架次耦合的研究背景，Zhang 等
 2026-09-25 本轮终稿共9条书目、10次引用。首次引用顺序：赛题、Karney、Dorling、Zhang、SciPy milp、WJ数模截图、Zeng、ITU、HiGHS。上面的七条书目表与结构重构说明属于此前版本记录。
 
 2026-09-25 完工时间优化版：增加用户提供的25架次汇总截图（无逐架次数据和证明）及Google OR-Tools官方调度文档，共11条书目；当前编号以references.tex首次引用顺序为准。截图原件SHA256见docs/audit/completion/verification.json。
+
+2026-09-25 完整参考论文补强版：新增《华为杯论文.pdf》（用户上传，62页，作者与公开出处未核实）为第8条，共12条书目、13次引用。本文借鉴其限时节能、连续覆盖和分区公平性思路，复算附表A3/A6的离散安排；对应SHA256及PDF页码见docs/reference_paper_comparison.md与config/q2_reference_seed.provenance.json。其调整DEM、统计实验和全局性声明不作为我们的已复核结果。本文已修正“未借用任何算法/数据”的旧说明，明确标注离散热启动来源。
