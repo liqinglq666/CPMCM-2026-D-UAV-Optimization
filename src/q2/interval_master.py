@@ -18,7 +18,7 @@ from scipy.sparse import coo_matrix, eye, hstack
 
 class IntervalMaster:
     def __init__(self, columns, classes, drones, batteries, horizon, step, trip_cap,
-                 windows=None):
+                 windows=None, trip_penalty=100.0):
         if horizon <= 0 or step <= 0 or trip_cap < 1:
             raise ValueError("Invalid interval-master horizon, step or trip cap")
         if any(r.available != 0 for r in [*drones, *batteries]):
@@ -44,7 +44,10 @@ class IntervalMaster:
         self.latest = np.array([
             math.floor(min(c.latest, horizon - c.duration) / step) for c in columns
         ])
-        self.cost = np.array([100.0 + c.energy for c in columns])
+        if not math.isfinite(trip_penalty) or trip_penalty < 0:
+            raise ValueError("Invalid trip penalty")
+        self.trip_penalty = trip_penalty
+        self.cost = np.array([trip_penalty + c.energy for c in columns])
         self.counts = coo_matrix((
             [number for c in columns for _, number in c.counts],
             ([i for c in columns for i, _ in c.counts],
@@ -125,7 +128,8 @@ class IntervalMaster:
         offers.sort()
         return float(minimum), offers[:batch_size]
 
-    def solve(self, iterations=45, batch_size=1500, time_limit=120, mip_gap=0.005):
+    def solve(self, iterations=45, batch_size=1500, time_limit=120, mip_gap=0.005,
+              integer_reduced_cost_limit=None):
         started = perf_counter()
         trace, certificate = [], None
         nc, nr = self.class_count, self.resource_rows
@@ -168,7 +172,7 @@ class IntervalMaster:
         audit = dict(
             catalogue_sorties=len(self.columns), generated_start_columns=len(self.active),
             horizon_s=self.horizon, grid_step_s=self.step, trip_cap=self.trip_cap,
-            objective="100 * trips + energy_kwh; all deliveries on time",
+            objective=f"{self.trip_penalty:g} * trips + energy_kwh; all deliveries on time",
             finite_catalogue_lp_lower_bound=certificate, pricing_trace=trace,
             bound_scope="enumerated sortie catalogue and allowed grid starts only",
             global_continuous_bound=False,
@@ -177,9 +181,22 @@ class IntervalMaster:
             audit.update(status="no_columns", runtime_s=perf_counter() - started)
             return [], audit
         matrix = self.matrix()
+        selected = np.arange(len(self.active))
+        if integer_reduced_cost_limit is not None:
+            if integer_reduced_cost_limit < 0:
+                raise ValueError("Negative integer reduced-cost limit")
+            selected = np.flatnonzero(result.lower.marginals[:len(self.active)]
+                                      <= integer_reduced_cost_limit + 1e-7)
+            matrix = matrix[:, selected]
+        active = [self.active[i] for i in selected]
+        audit.update(integer_start_columns=len(active),
+                     integer_reduced_cost_limit=integer_reduced_cost_limit)
+        logging.getLogger(__name__).info("Restricted integer master: %d start columns", len(active))
+        if not active:
+            return [], dict(audit, status="empty_integer_pool", runtime_s=perf_counter() - started)
         integer = milp(
-            np.array([self.cost[c] for c, _ in self.active]),
-            integrality=np.ones(len(self.active)), bounds=Bounds(0, np.inf),
+            np.array([self.cost[c] for c, _ in active]),
+            integrality=np.ones(len(active)), bounds=Bounds(0, np.inf),
             constraints=LinearConstraint(
                 matrix, np.r_[self.demand, np.repeat(-np.inf, nr)],
                 np.r_[self.demand, self.capacities],
@@ -201,5 +218,5 @@ class IntervalMaster:
                 or np.max(occupied[nc:] - self.capacities) > 1e-6):
             raise ValueError("Integer master solution fails rounded feasibility")
         choices = [(c, slot * self.step, int(rounded[i]))
-                   for i, (c, slot) in enumerate(self.active) if rounded[i] > 0]
+                   for i, (c, slot) in enumerate(active) if rounded[i] > 0]
         return choices, audit

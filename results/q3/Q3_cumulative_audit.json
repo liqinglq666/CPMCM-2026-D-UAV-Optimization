@@ -1,0 +1,412 @@
+{
+  "iterations": 40,
+  "initial_objective": [
+    0,
+    0,
+    0.0,
+    6004.239947229243,
+    69.19704356064,
+    3,
+    6105.363898788459
+  ],
+  "selected_objective": [
+    0,
+    0,
+    0.0,
+    5954.768033636777,
+    69.19489007309656,
+    3,
+    6098.3161213736
+  ],
+  "trials": [
+    {
+      "iteration": 0,
+      "accepted": true,
+      "status": "OPTIMAL",
+      "variants": 70,
+      "horizon_s": 6015,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 4.752439347999825,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 5958.0,
+      "integer_makespan_s": 5958.0,
+      "recomputed_objective": [
+        0,
+        0,
+        0.0,
+        5954.768033636777,
+        69.19489007309656,
+        3,
+        6098.3161213736
+      ]
+    },
+    {
+      "iteration": 1,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 66,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 0.16351688200029457,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 2,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 3,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 4,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 5,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 6,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 69,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 0.5466185719997156,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 7,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 8,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 9,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 66,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 0.009882680999908189,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 10,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 68,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 0.24754917599966575,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 11,
+      "accepted": false,
+      "status": "no_feasible_job_variant",
+      "job": "column-016"
+    },
+    {
+      "iteration": 12,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 70,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 0.3718512859995826,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 13,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 14,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 15,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 66,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 1.5445779120000225,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 16,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 69,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 0.7086549830000877,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 17,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 18,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 69,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 0.1861416760002612,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 19,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 20,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 75,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 1.4383843169998727,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 21,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 22,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 23,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 24,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 68,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 0.5954712330003531,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 25,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 26,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 69,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 0.5412961210004141,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 27,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 28,
+      "accepted": false,
+      "status": "UNKNOWN",
+      "variants": 67,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 2.4962133010003527,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 5181.0
+    },
+    {
+      "iteration": 29,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 65,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 0.015845373000047402,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 30,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 31,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 67,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 0.4254325060001065,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 32,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 69,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 0.4925804300000891,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 33,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 66,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 0.013764825999714958,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 34,
+      "accepted": false,
+      "status": "no_feasible_job_variant",
+      "job": "column-002"
+    },
+    {
+      "iteration": 35,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 36,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 37,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 66,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 0.47550282799966226,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    },
+    {
+      "iteration": 38,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 39,
+      "status": "rejected",
+      "reason": "No feasible type for cargo/route"
+    },
+    {
+      "iteration": 40,
+      "accepted": false,
+      "status": "INFEASIBLE",
+      "variants": 70,
+      "horizon_s": 5965,
+      "integer_time_unit_s": 1,
+      "workers": 4,
+      "seed": 20260925,
+      "runtime_s": 0.032106917000419344,
+      "global_continuous_bound": false,
+      "scope": "fixed cargo groups, routes, relay locations/order; outward integer seconds",
+      "restricted_integer_makespan_bound_s": 0.0
+    }
+  ],
+  "exactness": "heuristic regrouping; conditional integer-second resource optimization"
+}

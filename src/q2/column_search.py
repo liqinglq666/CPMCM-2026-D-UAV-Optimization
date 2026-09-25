@@ -15,6 +15,17 @@ def improve_with_columns(result, physics, box_map, drones, batteries, params, ou
     evaluator = TransportEvaluator(physics, box_map, drones, batteries)
     plans = [discrete_plan(result)]
     audit = {"seed_recomputed": False, "all_on_time_subproblem": True}
+    completion = params.get("q2_selection_mode") == "completion"
+    fast_seed = PROJECT_ROOT / "config/q2_completion_seed.json"
+    if completion and fast_seed.is_file():
+        candidate = json.loads(fast_seed.read_text(encoding="utf-8"))
+        try:
+            checked = evaluator.schedule(candidate)
+            if len(candidate) <= params["q2_trip_cap"]:
+                plans.append(candidate)
+                audit["completion_seed_recomputed"] = True
+        except ValueError as error:
+            audit["completion_seed_rejection"] = str(error)
     seed = PROJECT_ROOT / "config/q2_column_seed.json"
     if seed.is_file():
         # A disclosed discrete warm start, not reported times or energies. It is
@@ -31,10 +42,12 @@ def improve_with_columns(result, physics, box_map, drones, batteries, params, ou
     columns = enumerate_columns(physics, classes)
     master = IntervalMaster(
         columns, classes, drones, batteries, params["q2_column_horizon_s"],
-        params["column_grid_s"], result["trips"],
+        params["column_grid_s"], params["q2_trip_cap"] if completion else result["trips"],
+        trip_penalty=params.get("column_trip_penalty", 100.0),
     )
     choices, master_audit = master.solve(
         iterations=params["column_iterations"], time_limit=params["column_mip_seconds"],
+        integer_reduced_cost_limit=params.get("column_integer_reduced_cost_limit"),
     )
     audit["master"] = master_audit
     if choices:
@@ -42,7 +55,7 @@ def improve_with_columns(result, physics, box_map, drones, batteries, params, ou
         checked = evaluator.schedule(candidate)
         if checked["weighted_tardiness"] > 1e-5:
             raise ValueError("Column incumbent is not all on time after reconstruction")
-        if len(candidate) == result["trips"]:
+        if completion or len(candidate) == result["trips"]:
             plans.append(candidate)
     candidates = [(plan, evaluator.schedule(plan)) for plan in plans]
     plan, best = min(candidates, key=lambda item: (

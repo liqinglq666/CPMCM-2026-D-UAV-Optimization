@@ -53,16 +53,17 @@ ax.scatter(
     zorder=6,
 )
 for r in d.itertuples():
-    if 17 <= r.trips <= 24:
+    if 17 <= r.trips <= 25:
         dx, dy = {
             17: (5, 3),
             18: (5, 3),
             19: (5, 3),
-            20: (5, 3),
+            20: (0, 20),
             21: (-14, 7),
-            22: (-14, 7),
-            23: (4, -13),
-            24: (4, -13),
+            22: (28, 26),
+            23: (-20, -11),
+            24: (6, -11),
+            25: (20, 10),
         }[r.trips]
         ax.annotate(
             str(r.trips),
@@ -70,6 +71,7 @@ for r in d.itertuples():
             xytext=(dx, dy),
             textcoords="offset points",
             fontsize=8,
+            arrowprops=dict(arrowstyle="-", color=GRAY, lw=0.5) if r.trips >= 20 else None,
             zorder=7,
         )
 ax.set(xlabel="运输总能耗 (kWh)", ylabel="加权延误 ($10^3$ 系数·s)")

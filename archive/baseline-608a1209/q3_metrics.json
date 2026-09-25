@@ -1,0 +1,17 @@
+{
+  "transport_trips": 19,
+  "relay_sorties": 3,
+  "transport_energy_kwh": 65.37131291825875,
+  "relay_energy_kwh": 2.6330387880050408,
+  "transport_makespan_s": 7861.591843368824,
+  "joint_makespan_s": 7861.591843368824,
+  "weighted_tardiness": 0.0,
+  "minimum_hard_slack_s": 0.0,
+  "communication_step_s": 1.0,
+  "communication_sampling_steps_s": [
+    1.0,
+    0.5
+  ],
+  "checked_states": 76285,
+  "continuous_time_proof": false
+}

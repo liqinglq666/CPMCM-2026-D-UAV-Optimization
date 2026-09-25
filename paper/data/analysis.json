@@ -1161,27 +1161,27 @@
       "operation_time_s": 32776.015748915874
     },
     "q2": {
-      "trips": 20,
-      "makespan": 6344.894557678117,
-      "energy": 65.24216116536583,
+      "trips": 24,
+      "makespan": 5903.03815462762,
+      "energy": 65.56619536868014,
       "weighted_tardiness": 0.0,
       "hard_violations": 0
     },
     "q3": {
-      "transport_trips": 19,
+      "transport_trips": 24,
       "relay_sorties": 3,
-      "transport_energy_kwh": 65.37131291825875,
-      "relay_energy_kwh": 2.6330387880050408,
-      "transport_makespan_s": 7861.591843368824,
-      "joint_makespan_s": 7861.591843368824,
+      "transport_energy_kwh": 66.48161784679007,
+      "relay_energy_kwh": 2.6592740459755895,
+      "transport_makespan_s": 5931.734693561892,
+      "joint_makespan_s": 5931.734693561892,
       "weighted_tardiness": 0.0,
-      "minimum_hard_slack_s": 0.0,
+      "minimum_hard_slack_s": 266.28191547722645,
       "communication_step_s": 1.0,
       "communication_sampling_steps_s": [
         1.0,
         0.5
       ],
-      "checked_states": 76285,
+      "checked_states": 83497,
       "continuous_time_proof": false
     }
   },
@@ -1191,26 +1191,26 @@
     "fleet_bounds": [
       {
         "type": "A",
-        "workload_s": 16270.883301157257,
+        "workload_s": 20254.220075172067,
         "drones": 4,
-        "lower_bound_s": 4067.7208252893142
+        "lower_bound_s": 5063.555018793017
       },
       {
         "type": "B",
-        "workload_s": 12029.139412891156,
+        "workload_s": 10722.011529379633,
         "drones": 2,
-        "lower_bound_s": 6014.569706445578
+        "lower_bound_s": 5361.005764689817
       },
       {
         "type": "C",
-        "workload_s": 12646.967369427111,
+        "workload_s": 11777.873896719653,
         "drones": 2,
-        "lower_bound_s": 6323.483684713556
+        "lower_bound_s": 5888.936948359827
       }
     ],
-    "lower_bound_s": 6323.483684713556,
-    "makespan_s": 6344.894557678117,
-    "maximum_rescheduling_gain_s": 21.41087296456135
+    "lower_bound_s": 5888.936948359827,
+    "makespan_s": 5903.03815462762,
+    "maximum_rescheduling_gain_s": 14.101206267793714
   },
   "terrain_example": {
     "service": "S014",
@@ -1228,12 +1228,12 @@
       "maximum_energy_multiplier": 1.0401647263955731
     },
     "q2": {
-      "maximum_common_reserve": 0.20950490572743352,
-      "maximum_energy_multiplier": 1.0120239907828652
+      "maximum_common_reserve": 0.23089105052408665,
+      "maximum_energy_multiplier": 1.0401647263955731
     },
     "q3": {
-      "maximum_common_reserve": 0.20158442060884418,
-      "maximum_energy_multiplier": 1.0019844560273392
+      "maximum_common_reserve": 0.2009863804666121,
+      "maximum_energy_multiplier": 1.001234497688773
     }
   },
   "reserve_partition_limits": {
@@ -1348,35 +1348,35 @@
   "sampling_validation": [
     {
       "step_s": 1.0,
-      "checked_states": 31385,
+      "checked_states": 35061,
       "violations": 0,
-      "minimum_margin_db": 0.1555084329841918,
+      "minimum_margin_db": 0.09090564660230882,
       "critical_state": {
-        "trip": "column-004",
-        "time_s": 801.1160325814246,
-        "longitude": 109.24670503361345,
-        "latitude": 23.040357747058824,
-        "altitude_m": 293.2289123535156,
-        "direct_margin_db": 0.1555084329841918,
-        "available_margin_db": 0.1555084329841918,
-        "best_mode": "direct",
+        "trip": "column-019",
+        "time_s": 4684.445902030309,
+        "longitude": 109.2541424,
+        "latitude": 23.0552989,
+        "altitude_m": 230.0,
+        "direct_margin_db": -3.1804621730415192,
+        "available_margin_db": 0.09090564660230882,
+        "best_mode": "relay",
         "direct_obstructed": true
       }
     },
     {
       "step_s": 0.5,
-      "checked_states": 62530,
+      "checked_states": 69843,
       "violations": 0,
-      "minimum_margin_db": 0.1330179152051585,
+      "minimum_margin_db": 0.09090564660230882,
       "critical_state": {
-        "trip": "column-004",
-        "time_s": 801.9562427924477,
-        "longitude": 109.24674619453208,
-        "latitude": 23.040440436487906,
-        "altitude_m": 293.2289123535156,
-        "direct_margin_db": 0.1330179152051585,
-        "available_margin_db": 0.1330179152051585,
-        "best_mode": "direct",
+        "trip": "column-019",
+        "time_s": 4684.445902030309,
+        "longitude": 109.2541424,
+        "latitude": 23.0552989,
+        "altitude_m": 230.0,
+        "direct_margin_db": -3.1804621730415192,
+        "available_margin_db": 0.09090564660230882,
+        "best_mode": "relay",
         "direct_obstructed": true
       }
     }
@@ -1385,63 +1385,65 @@
   "diagnostic_failures_exported": false,
   "hard_deadline_count": 31,
   "hashes": {
-    "algorithm_comparison.csv": "8355819700ebbcd06de865b55cf4ef45362733a0a53711475b1acb11ac6dd117",
-    "communication_repair_comparison.csv": "60d1ca4b77be1355d8c7a0ff650ee3074624f5a1d7bdbe4aef5f6f1fc23b1515",
-    "communication_replay.json": "134f71d356c5668a51d6755efabc418956fe0b15e320a777169771beeea3f66c",
+    "algorithm_comparison.csv": "502599fb4bffe83236ce124f6554eaabd165ac1a253022384cd1363a3cd5c098",
+    "communication_repair_comparison.csv": "5e1a876d8cbf1e8be5efa869a9f71daf609b8f942a42531a9d2bdefed7add45d",
+    "communication_replay.json": "29d807d95c9fc82434ab4efa1e8e24841e4c9126fe7a9ade39c5311d72962d39",
     "q1/Q1_batch_solution.csv": "a28c5e3eb7660ec0789969d122025445c61b67140d6bbb91f3a740423dece05c",
     "q1/Q1_leg_physics.csv": "1957936788eca03a6dd4d168053f023a7a212bf124b22bfe8f967a799e99f314",
     "q1/Q1_max_safe_payload.csv": "2c3decbfea44e95c1e77d84ce9db8c4f13581189774f930fd4e66ed7a8c1e023",
     "q1/Q1_metrics.json": "3df457b62741f0236f9cf2fd1d20918d9383fa2b645bf3a0c42fbe807145b7eb",
     "q1/Q1_sensitivity_summary.csv": "608793bfdea2401f95a0f0d1dca3fb62142e6324be0307f3b923a400f40e3d77",
     "q1/input_manifest.json": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
-    "q2/Q2_box_delivery_balanced.csv": "b3a9269c41198f1f8fc9eed3c7ec22fec0c6fd7144b4209b79dc1ddc3c3d4f22",
-    "q2/Q2_column_audit.json": "fd4395d2bfce53e68b2fc70baa7f01d6444ad3cb92ea6dd9a56b0ae3034cdaf4",
-    "q2/Q2_frontier_plans.json": "919b88f4e02f6c47869ce03dcc4deabdc79670e59b2647a3a88abf783e5bdad1",
-    "q2/Q2_metrics.json": "90880ffcaa37a519c10488426e73270c32b3269bea2d0ae8ad2cb13623f7ac11",
-    "q2/Q2_pareto_frontier.csv": "3ec960a249961f49c71441647449d5f6093f3a7ab672c46609c32a35c757e9fc",
-    "q2/Q2_pareto_plans.json": "ee933d680b14a1204c54b1524aa47571c5d855fc2f020e9813a6f1c16cee5b88",
-    "q2/Q2_resource_check.csv": "8c5d44739830ed87a853e99c228932dc57c7a385211aebb3ce12f98f3d75595d",
-    "q2/Q2_search_summary.json": "5ee87bea5e4bdab749b2cf22eb3b29c8c36c33c78d72336e217393ea10b1347c",
-    "q2/Q2_search_trace.json": "9be16e1f18f031d77113b3c59601d20b70b5bb52514ce0bdf5016740313c5ca0",
-    "q2/Q2_tradeoff_frontier.csv": "79e4eee92fb0f80a7f2f52865953f3b86c9dbb9c1446fb25b9db0173d405bfea",
-    "q2/Q2_transport_trips_balanced.csv": "8c109815e0981161c772df029139bc495d7c4e31fe4cffab96121b2d4bc78ff0",
+    "q2/Q2_box_delivery_balanced.csv": "84e8622c273f65f6709a600b73a82e4fe0dc1ef62099159c64818a9716f1cb34",
+    "q2/Q2_column_audit.json": "d8188d387ab51c05595ec5fd215cda3c33cc3d79bde3e17f874baf7d1d78bc4f",
+    "q2/Q2_frontier_plans.json": "687723c3f33d8c8caf88850722a49690c2b83be3c680dafd079d49d2debb0aa9",
+    "q2/Q2_metrics.json": "79242d7e5035f5aab51ac3bf3c00a76e0a1a1d41d2bdd7a1889d3b95ec5db1d2",
+    "q2/Q2_pareto_frontier.csv": "5f5b6ff503c8616d7448031df8a56d14f57fac57f539bb7714b72c4c34260a8a",
+    "q2/Q2_pareto_plans.json": "89c2e0b0f814cf135996bd77c37c4552917f4e2be46f774db38649d8ce503959",
+    "q2/Q2_resource_check.csv": "7bff8da7130b2f8378c7f988852071079a7085c21c56a91521e7d5a053d61198",
+    "q2/Q2_search_summary.json": "f9c2c606d55aa4199a42eb6ac0c420a460f976f86cb205dd9f2736452a1335bf",
+    "q2/Q2_search_trace.json": "058e8ef29de743a969e77238803a0649596bd38834956fc7e60c9cf8cf49735d",
+    "q2/Q2_tradeoff_frontier.csv": "f4a569c7d5d898285db78352a0db7678398abc286e1ce39d85750ccdd14853bc",
+    "q2/Q2_transport_trips_balanced.csv": "0098c6633916379afee2f8960505062e388ee3c580829de56bde35a1ce148099",
     "q2/input_manifest.json": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
-    "q2/runtime.json": "60101e99ba4486a3d6a778ac75c1ed256bca4db6ebbd24e9626cb322cee3d865",
-    "q2_workload_bound.json": "42f71562630baab34a1e3c43e89a86c0785fd57bf70c2b0532465ca0640b82dc",
-    "q3/Q3_box_delivery.csv": "7b398f4d665612f3e7f13153a36dd5ca4067ff23a7a3ba7ec14f1f74051e8983",
-    "q3/Q3_column_audit.json": "68bf73e6ed029cc6f303ae452071a6fd54a0f523acb87933a8a2e26d54b4647b",
-    "q3/Q3_communication.csv": "939f588a075c1b961d43244e5a0c20a4536c11e8a8c9733f4673ba1ffd697b83",
-    "q3/Q3_incumbents.json": "dc1f1481fd446c47e42902e8af0e9d298889f36e9dc217a92527380e7215ad8c",
-    "q3/Q3_metrics.json": "ce2c3b381f858654f415cea7f5795895cc26c8126ce5414c4b1673126cf937c8",
-    "q3/Q3_relay_sorties.csv": "3d021f55e84a0ce138a32c0e480c4e7b705607389798cc26e0f66f4fdd8b87ec",
-    "q3/Q3_resource_check.csv": "bbfb1542565103f0d31d70f1d9b628180eddc1d0c701260351ffa1a6571479e8",
-    "q3/Q3_search_summary.json": "b6c124a9a15722fe57e70052e60278918d4522a1910db64de81f64aa12dd4a5e",
-    "q3/Q3_search_trace.json": "265e5ca139d4e20104bf932921adae589e968f9b20fd21363b5c506c28108ba9",
-    "q3/Q3_seed_repair.json": "47b37b0cb1957a66f94a97076fe66728a21bd5ecd0ef6d7001ee5fc8fd67355f",
-    "q3/Q3_selected_plan.json": "48e9861cbc54e898d5aff0f5e59be33682c81fdf87fa4d9cbabcf9866fc03021",
-    "q3/Q3_transport_trips.csv": "755402126a45a56594a23e97a47a90ce8ac452a885a1261f9fcb4dd22aba73dd",
+    "q2/runtime.json": "28b927b938b3c55dd10056c8d1517ac79df4ed91ffde2b2bfbaa1b4d9f726039",
+    "q2_workload_bound.json": "fad175c3a8bf694215eff4baf537dc3d08cf5d4bd9d695d86f6bc4e24d3a4a4b",
+    "q3/Q3_box_delivery.csv": "9f54eb298fba65ac05971d2cf31ee010b1b2eafa71ec97cadc642f817131e317",
+    "q3/Q3_column_audit.json": "bb5ab3c69e19cbe76b5f67a2d7762d155b91e61cba75c51cc09b6cdc684c5105",
+    "q3/Q3_communication.csv": "d5a9f7dc4e47ea7aa671966ff989e523d39cf11c3cfd7f33ac1a5e323a6b9942",
+    "q3/Q3_cumulative_audit.json": "d3cff8dae437f8506c7effe393c9e5b122caab24f9fdac2fc71fc9e7acd7396d",
+    "q3/Q3_incumbents.json": "7ae8b20f9ce79907235e929866caeb545be2668e804ef10570b62a7e66cfd6b5",
+    "q3/Q3_location_audit.json": "1ac10257733ca487b4d24ceeeca689561cb70b8bee88e9326871c6ef465a4611",
+    "q3/Q3_metrics.json": "b7418dbec4bb31ae4780e08bcfb28b1c40d05d00090d6f14a06042dd7a7e17c9",
+    "q3/Q3_relay_sorties.csv": "cd3fde3f17e26bfc30979ed47a9c7fcf671a5eda89549be53417ab7e266e64c8",
+    "q3/Q3_resource_check.csv": "09c7e1f8fb214b6514e47091bf8530822c263c226c5371789bb2536536ae955f",
+    "q3/Q3_search_summary.json": "bab4acf1bb224137e644d801643b8d63718f823b80fbfbecd0cc9f98312f022b",
+    "q3/Q3_search_trace.json": "cd64015d9353795a3c0346072136c1ebff70485475d134af590a19ef46cec0e4",
+    "q3/Q3_seed_repair.json": "866e52b4c1bfed1d8b11ff0dad525589b4bf206a15def4785a804f3e74cf4d17",
+    "q3/Q3_selected_plan.json": "699e87e008510743a962f676708683445a55f045f40d61de15ff97a0cab59b32",
+    "q3/Q3_transport_trips.csv": "2214d1607f4f88fd0986e9640768bc680ede06f719544095d315ffd636b68e49",
     "q3/input_manifest.json": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
-    "q3/runtime.json": "f9ecb51764801fd5703e9ab2e05799eddcf554adfb899f6f7ede99ff28294116",
-    "q4/Q4_enumeration_certificate.json": "b330c016ccfcd11dd9b408cbe9148fe818f41a5253796ded4331a665966e69d4",
-    "q4/Q4_gap_decomposition.csv": "84b579d3985244ad44f2c35366567b36378797f29afd9197d8d2c419216645d3",
-    "q4/Q4_partition_config.csv": "0a6b371bad220591d7c0cba8f3f79346ffc2952e0d1d05db71f298138a05b5c2",
-    "q4/Q4_resource_summary.csv": "03bf5d7ecd23a1e2b33e378e832e261a8cbe55dc64edd44548a1722c8c4319d4",
-    "q4/Q4_source_manifest.json": "798db09266fb22ebdc002980e237032bb1d7cadad162bb5ad456a9101a0660e5",
+    "q3/runtime.json": "18981626a58dc37fda364334de86589f1a99bb1fa2817ae6a8ca28bd583ea14b",
+    "q4/Q4_enumeration_certificate.json": "09e4117323c69138049feaaecb5836eb5150254d7b9788d5eb7c4c6dcc6d0df7",
+    "q4/Q4_gap_decomposition.csv": "95b92cd962de8be938d6e62ff7139306d1aae3ef21e17971bbe90adeaaf5fdff",
+    "q4/Q4_partition_config.csv": "e7a6a47cf0c19ad4afb2b39fc8adb8dab2313e527f92377f725bea44a17a0535",
+    "q4/Q4_resource_summary.csv": "0c6b0225488c3ac5270a4a4dea9e0ee3488b752c30f6ce57ca633616c7f36055",
+    "q4/Q4_source_manifest.json": "a85ef5178a652971a7b1dfe93954055aa7aa98457aefd087c8cb724113661112",
     "q4/input_manifest.json": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
-    "relay_cover.json": "85a8edb834ec13147460a5fc81d1a9abf9765282a533e92f6512a918a0c58166",
-    "run_metadata.json": "9c1b3e128b25b14055b2b1a9549f2bde8b6e80989b36733315114ddbd97b7555",
-    "validation.json": "6765742b40ef66e748aa0953d71340edb8f53ff0bac61d704a411c854b77d730"
+    "relay_cover.json": "36896eb1890eec9ff7ddeafe2f602cd44ab786ce2e8cb5d1bc7a227e0210526f",
+    "run_metadata.json": "b0335177a51e69d758ac5ba6cb632d2ae540b783bfba4f23877f67d4cf0b5b26",
+    "validation.json": "c99bf59109945675c1d32f30e8f43eb1e3e916d1ce4f3c98c196c635faa61da3"
   },
   "diagnostic_hashes": {
     "terrain_profile.csv": "c34c4ee5ac5a9c43634942281add1b27bddf57857ac82f52fda619f1ab335f00",
     "energy_components.csv": "3e4f6543642dde4a4c5269f2926ab4d480f8c40f45ce3c9e23fb09b499e61888",
-    "constraint_slacks.csv": "1d7c9b7bc54d8327781492f8c70244dfd60304f59f800bb7d252b56af6c3c973",
+    "constraint_slacks.csv": "862dca1daff93c6a2df5ea553d3e0de86bc53d0da0ae54f54c1be31618b79e9e",
     "payload_reserve.csv": "c149305739ec9e2a5e9fe96d8c7d06ec0190c10c07160713791f742063d2df18",
     "terrain_map.json": "f608b5ca850b4f7e5f5ad66fa6fcea211ff50a1c3dc2ca090d2c85301a63d5b5",
-    "communication_states.csv": "759995d28ace74ae7c0568f0912c54c042c79d65c4f0e7f219e430437f980c19",
-    "communication_states_05s.csv": "4711d8faf332db31b716889079c985119431fad5aa44b92f8338e573b8881c32",
-    "hard_deadline_slacks.csv": "f54ddc483580adf6d48f82234950536942ab931d36b6b44d82c54ff59771e85d",
+    "communication_states.csv": "40ecf5c5e3abd37a4bc2d27ba8939aa4a4aab628c8e2bb94860e2e5e37abb729",
+    "communication_states_05s.csv": "c608268aabd2a118e90f96c396bac1ab58d93e384a17344e1eb5189cbaab8529",
+    "hard_deadline_slacks.csv": "3a96414d751613ca59ebfaa82db8616d73746fc6a389192ee7f23d9dce5f4579",
     "reserve_staircase.csv": "97a32081aedb14d72b819bb70782a805c94de2b6dd95978dde2455f94b149035",
-    "communication_critical_state.json": "a3ed3cf5dd7871d51c89fc2359e9ac70bbffbb2d1ddc964c135f23d7eaa0ca8b"
+    "communication_critical_state.json": "c2e1af4a3ea853bb99d2a80144a15a1b178bc2af90124e81d438f3bfe101004f"
   }
 }
