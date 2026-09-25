@@ -78,7 +78,7 @@
   "toc_links": 56,
   "pdf_font_audit": {
     "status": "PASS",
-    "embedded_fonts_with_unicode": 21,
+    "embedded_fonts_with_unicode": 22,
     "pages": 35,
     "chinese_characters_per_page": [
       741,
@@ -120,21 +120,8 @@
   },
   "reference_entries": 12,
   "citation_occurrences": 13,
-  "reproduced_png_sha256": {
-    "fig01_framework": "6192ed79370170d474d59c5e7f3cc60b21014a5e6f64c75d763d29f45171fb16",
-    "fig02_task_map": "4ddcf250f4a5eb93d52f7b920acf54d76157df7907d37590f1fd605057c4fc49",
-    "fig03_physics": "c3ac35d658f80c64762f7558126156fe9d9a5eb1e746246ec71969063b594ec4",
-    "fig04_payload_boundary": "7aa892ce3fd9df6a31f54ae9c0d8b2c1c1ba093102c0753be0b086fc98377d3c",
-    "fig05_batching": "8939c022e92ef77666f14e62a863eea25be2fe97e29bfd6b850c3d8508fddce0",
-    "fig06_tradeoff": "4c73bde580e0dcd32501a272d91f23a23115045c3db72931c85ebdd8871d51f4",
-    "fig07_resources": "e84200331a24c344742e5efb8feafc236fa530b98b9039eeef7b70a79d4dfd46",
-    "fig08_communication_map": "f8bac3eaadaf8331f44dea15433896864e1eec61aec4ba26ac0a602869a3ee9f",
-    "fig09_communication_time": "b9ba4c7ac132d6a3d45c8c3da90763453ec449da5a4675741aa3080529cbdf1a",
-    "fig10_partition": "6ead1d604fb5c1f590f8855f9e99adfcedaa51654608b257a73e8688eb949033",
-    "fig11_sensitivity": "1e052d0b773fea69958e6bee8a7892f02cc720644b00e64c036ec1d8d23d0b2c",
-    "fig12_validation": "5dff02bbe26868d9a161f6fd08b469ae243bee444e2ccc9ead72b6391918b0d7"
-  },
-  "pdf_sha256": "5f6f836583fe669f15817df35a8733eba99b0f3659927bb0d7ae003f3e670b55",
+  "reproduced_png_sha256": null,
+  "pdf_sha256": "9fc562d0a473c25875854e1da8541ce45ff2028c31f5a963fc4cead50923f87d",
   "workbook_sha256": "95361a748d91f1c651b18e194dd96d0e13f238e271b306acaa9be813dcbfc0ae",
   "interpretation": "Deterministic official model; sampled communication is not a continuous certificate."
 }

@@ -105,8 +105,12 @@ def export_preferences(primary_jobs, physics, boxes, drones, batteries, out_dir,
     from .search import exportable
     from .tradeoff import solution_rows
 
+    epsilons = tuple(epsilons)
     if any(not math.isfinite(e) or e <= 0 for e in epsilons):
         raise ValueError("Preference epsilons must be finite and positive")
+    keys = [f"epsilon_{e:g}" for e in epsilons]
+    if len(set(keys)) != len(keys):
+        raise ValueError("Preference epsilons must produce unique exported IDs")
     evaluator = TransportEvaluator(physics, boxes, drones, batteries)
     primary = evaluator.schedule(primary_jobs)
     # An explicitly selected low-count slice may allow soft tardiness. The

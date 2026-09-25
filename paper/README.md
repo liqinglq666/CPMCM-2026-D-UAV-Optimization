@@ -1,5 +1,9 @@
 # 论文与科研图重构
 
+当前冻结版本见 [冻结说明](../docs/FROZEN_RELEASE.md)。2026-09-25 终审保留
+已接受结果，修复代码边界问题并补齐论文附录的通信回放步骤；成稿 35 页，
+最新文件摘要及检查记录在 `../docs/audit/post_merge/`。
+
 本轮在已合并最快方案基础上研读用户提供的62页论文，冻结Q1及官方DEM，新增Q2限时节能偏好、Q3连续区间数值核验与Q4均衡分区。正式方案与证明边界见 `reports/FINAL_AUDIT.md` 及 `../docs/external_benchmark_algorithm_audit.md`。
 
 

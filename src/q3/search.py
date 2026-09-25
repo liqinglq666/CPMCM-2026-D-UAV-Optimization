@@ -123,6 +123,15 @@ def evaluate(plan, preparer, drones, batteries):
     return dict(jobs=jobs, relays=relays, times=times, objective=objective(rows))
 
 
+def validate_completion_caps(plan, params):
+    """Apply hard completion limits to seeds as well as generated candidates."""
+    if params.get("q3_selection_mode") == "completion":
+        if len(plan["jobs"]) > params["q3_trip_cap"]:
+            raise ValueError("Completion search transport trip cap exceeded")
+        if len(plan["relays"]) > params["q3_relay_cap"]:
+            raise ValueError("Completion search relay cap exceeded")
+
+
 def target_score(candidate, params):
     """Condition the heuristic search on declared Pareto aspiration counts."""
     value = candidate["objective"]
@@ -300,6 +309,7 @@ def search_plan(
             initial, baseline, preparer, drones, batteries, params,
         )
         write_json(out_dir / "Q3_cumulative_audit.json", resource_audit)
+    validate_completion_caps(initial, params)
     best_plan, best = initial, baseline
     current_plan, current = best_plan, best
     points = candidate_points(initial, physics, params)
@@ -332,9 +342,7 @@ def search_plan(
                     current_plan, operator, rng, preparer, points, params, iteration
                 )
             proposal = repair_matching(proposal, preparer, rng)
-            if completion and (len(proposal["jobs"]) > params["q3_trip_cap"]
-                               or len(proposal["relays"]) > params["q3_relay_cap"]):
-                raise ValueError("Completion search trip cap exceeded")
+            validate_completion_caps(proposal, params)
             signature = fingerprint(proposal)
             if signature in visited:
                 status = "duplicate"

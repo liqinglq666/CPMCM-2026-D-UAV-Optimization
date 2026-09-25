@@ -122,10 +122,12 @@ def improve_frontier(
         recomputed = evaluator.schedule(plan)
         seeds.append((plan, recomputed))
         retain(plan, recomputed)
-    allowed = [s for s in seeds if target_trips is None or len(s[0]) == target_trips]
-    if not allowed:
-        raise ValueError("Requested trip count has no feasible seed")
     completion = params.get("q2_selection_mode") == "completion"
+    allowed = [s for s in seeds
+               if (target_trips is None or len(s[0]) == target_trips)
+               and (not completion or len(s[0]) <= params["q2_trip_cap"])]
+    if not allowed:
+        raise ValueError("Requested trip count/cap has no feasible seed")
     selection_score = (lambda item: (
         item["weighted_tardiness"], item["makespan"], item["energy"], item["trips"],
     )) if completion else (target_score if target_trips is not None else q2_objective)
@@ -144,6 +146,8 @@ def improve_frontier(
                 current_plan, current = best_plan, best
             else:
                 choices = seeds + [(p, r) for _o, p, r in archive]
+                if completion:
+                    choices = [s for s in choices if len(s[0]) <= params["q2_trip_cap"]]
                 current_plan, current = rng.choice(choices)
         moves = FIXED_COUNT_MOVES if target_trips is not None else TRANSPORT_MOVES
         operator = moves[(iteration - 1) % len(moves)]

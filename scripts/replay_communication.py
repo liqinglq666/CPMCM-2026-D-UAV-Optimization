@@ -103,6 +103,7 @@ def main():
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--allow-violations", action="store_true")
     args = parser.parse_args()
+    args.out.unlink(missing_ok=True)
     result = replay(args.data, args.q3_dir, args.steps)
     write_json(args.out, result)
     if any(r["violations"] for r in result["sampling"]) and not args.allow_violations:
