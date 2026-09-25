@@ -2,62 +2,62 @@
   "sampling": [
     {
       "step_s": 1.0,
-      "checked_states": 38978,
+      "checked_states": 31385,
       "violations": 0,
-      "minimum_margin_db": 0.13243465417858147,
+      "minimum_margin_db": 0.1555084329841918,
       "critical_state": {
-        "trip": "Q3-007",
-        "time_s": 1714.3769702242867,
+        "trip": "column-004",
+        "time_s": 801.1160325814246,
         "point": [
-          109.25835172597402,
-          23.03268037337662,
-          413.3009948730469
+          109.24670503361345,
+          23.040357747058824,
+          293.2289123535156
         ],
-        "available_margin_db": 0.13243465417858147
+        "available_margin_db": 0.1555084329841918
       },
       "uncovered_states": []
     },
     {
       "step_s": 0.5,
-      "checked_states": 77643,
+      "checked_states": 62530,
       "violations": 0,
-      "minimum_margin_db": 0.13207340801035627,
+      "minimum_margin_db": 0.1330179152051585,
       "critical_state": {
-        "trip": "Q3-001",
-        "time_s": 3736.228213918873,
+        "trip": "column-004",
+        "time_s": 801.9562427924477,
         "point": [
-          109.23685446470589,
-          23.0432202286445,
-          316.13800048828125
+          109.24674619453208,
+          23.040440436487906,
+          293.2289123535156
         ],
-        "available_margin_db": 0.13207340801035627
+        "available_margin_db": 0.1330179152051585
       },
       "uncovered_states": []
     },
     {
       "step_s": 0.25,
-      "checked_states": 154962,
+      "checked_states": 124822,
       "violations": 0,
-      "minimum_margin_db": 0.12558979235534196,
+      "minimum_margin_db": 0.1330179152051585,
       "critical_state": {
-        "trip": "Q3-017",
-        "time_s": 4568.599958091167,
+        "trip": "column-004",
+        "time_s": 801.9562427924477,
         "point": [
-          109.24541364245245,
-          23.04100689473897,
-          308.9542541503906
+          109.24674619453208,
+          23.040440436487906,
+          293.2289123535156
         ],
-        "available_margin_db": 0.12558979235534196
+        "available_margin_db": 0.1330179152051585
       },
       "uncovered_states": []
     }
   ],
   "continuous_time_proof": false,
   "source_sha256": {
-    "Q3_box_delivery.csv": "78918d2b249e5b6d76a67da4f277267f4580df74684a48fdae928191c07c26c3",
-    "Q3_communication.csv": "f710db135735b217ebc4897f9abf5654c73b41c1f9a28145089309740aaed4dc",
-    "Q3_relay_sorties.csv": "6937cec9137a359e8ee7dbab10a96eda85487a498d598bdb37b1579c5d3302a0",
-    "Q3_resource_check.csv": "872097ffbc103ebf47d1605ba048ddf5c5fe729f50ccf86dcb3bfb523bca8e76",
-    "Q3_transport_trips.csv": "10601793610b519d4db60b9609cef5e5b3c9ba049bcec544efff41ba43fe6281"
+    "Q3_box_delivery.csv": "7b398f4d665612f3e7f13153a36dd5ca4067ff23a7a3ba7ec14f1f74051e8983",
+    "Q3_communication.csv": "939f588a075c1b961d43244e5a0c20a4536c11e8a8c9733f4673ba1ffd697b83",
+    "Q3_relay_sorties.csv": "3d021f55e84a0ce138a32c0e480c4e7b705607389798cc26e0f66f4fdd8b87ec",
+    "Q3_resource_check.csv": "bbfb1542565103f0d31d70f1d9b628180eddc1d0c701260351ffa1a6571479e8",
+    "Q3_transport_trips.csv": "755402126a45a56594a23e97a47a90ce8ac452a885a1261f9fcb4dd22aba73dd"
   }
 }

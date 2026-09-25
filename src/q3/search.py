@@ -281,6 +281,12 @@ def search_plan(
     initial, baseline = repair_seed(
         initial, preparer, drones, batteries, params, out_dir
     )
+    if params.get("column_iterations", 0):
+        from .column_schedule import improve_with_columns
+
+        initial, baseline = improve_with_columns(
+            initial, baseline, preparer, drones, batteries, params, out_dir,
+        )
     best_plan, best = initial, baseline
     current_plan, current = best_plan, best
     points = candidate_points(initial, physics, params)

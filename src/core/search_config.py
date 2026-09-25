@@ -28,6 +28,11 @@ def load_search_parameters():
             or value < (0 if name in ("seed", "q2_iterations", "q2_resource_iterations", "q3_iterations") else 1)
         ):
             raise ValueError(f"Invalid search parameter: {name}")
+    for name in ("column_iterations", "column_grid_s", "column_mip_seconds",
+                 "q2_column_horizon_s", "q3_column_horizon_s"):
+        value = params[name]
+        if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+            raise ValueError(f"Invalid search parameter: {name}")
     from .numeric import positive
 
     positive(params["relay_local_step_m"], "relay local step")

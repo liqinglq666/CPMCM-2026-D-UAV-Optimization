@@ -189,7 +189,7 @@
   {
     "figure_id": "fig06_tradeoff",
     "section": "5",
-    "core_claim": "在21架次目标切片内按完工、能耗、软延误顺序选点；各架次数的搜索预算不同",
+    "core_claim": "在20架次目标切片内按及时性、完工、能耗顺序选点；各架次数的搜索预算不同",
     "source_data": [
       "results/q2/Q2_tradeoff_frontier.csv",
       "results/q2/Q2_transport_trips_balanced.csv",

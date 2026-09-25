@@ -32,15 +32,15 @@ def target_score(result):
     """Search score inside a fixed trip-count Pareto slice.
 
     Hard deadlines are enforced by ``TransportEvaluator``.  At an explicitly
-    selected trip count, makespan is optimized first, followed by energy and
-    weighted tardiness.  The global archive still uses the full nondominance
+    selected trip count, weighted tardiness is optimized first, followed by makespan and
+    energy.  The global archive still uses the full nondominance
     relation and therefore does not turn this search preference into a claim
     of global optimality.
     """
     return (
+        result["weighted_tardiness"],
         result["makespan"],
         result["energy"],
-        result["weighted_tardiness"],
     )
 
 

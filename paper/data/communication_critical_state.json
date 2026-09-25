@@ -1,20 +1,20 @@
 {
   "state": {
-    "trip": "Q3-001",
-    "time_s": 3736.228213918873,
-    "longitude": 109.23685446470589,
-    "latitude": 23.0432202286445,
-    "altitude_m": 316.13800048828125,
-    "direct_margin_db": 0.13207340801035627,
-    "available_margin_db": 0.13207340801035627,
+    "trip": "column-004",
+    "time_s": 801.9562427924477,
+    "longitude": 109.24674619453208,
+    "latitude": 23.040440436487906,
+    "altitude_m": 293.2289123535156,
+    "direct_margin_db": 0.1330179152051585,
+    "available_margin_db": 0.1330179152051585,
     "best_mode": "direct",
     "direct_obstructed": true
   },
-  "assigned_relay": "R01-03",
-  "direct_margin_db": 0.13207340801035627,
+  "assigned_relay": "column-relay-1",
+  "direct_margin_db": 0.1330179152051585,
   "refined_check_passed": true,
   "relay_active": false,
-  "access_margin_db": 3.6961333571153716,
+  "access_margin_db": 3.7596086952061114,
   "access_obstructed": false,
-  "backhaul_margin_db": 13.664634848290262
+  "backhaul_margin_db": 1.2785776633587886
 }

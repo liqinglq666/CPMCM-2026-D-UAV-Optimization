@@ -553,7 +553,11 @@ def solve_q2(
         for trip in initial["trips"]
     ]
 
-    types, drones, batteries = initial["types"], initial["drones"], initial["batteries"]
+    # The constructive scheduler mutates Resource.available in its working
+    # fleet. Every subsequent optimizer starts from the official initial state.
+    from src.core.inputs import load_inputs
+
+    _nodes, types, drones, batteries, _boxes, _dem = load_inputs(root)
     physics = initial["physics"]
 
     groups, result, frontier, solutions = merge_tradeoff_search(
@@ -566,6 +570,14 @@ def solve_q2(
         target_trips=baseline_target,
         min_trips=min(frontier_min, baseline_target),
     )
+
+    if parameters.get("column_iterations", 0):
+        from .column_search import improve_with_columns
+
+        groups, result = improve_with_columns(
+            result, physics, box_map, drones, batteries, parameters, out_dir,
+        )
+        solutions[result["trips"]] = (groups, result)
 
     from .search import improve_frontier
 
