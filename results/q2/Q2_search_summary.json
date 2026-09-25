@@ -1,11 +1,11 @@
 {
   "seed": 20260924,
-  "iterations": 600000,
-  "resource_polish_iterations": 100000,
+  "iterations": 110000,
+  "resource_polish_iterations": 10000,
   "stop_reason": "iteration_budget",
-  "search_runtime_s": 107.3971211600001,
-  "pareto_points": 28,
-  "unique_candidates": 186722,
+  "search_runtime_s": 15.044931740005268,
+  "pareto_points": 6,
+  "unique_candidates": 16210,
   "baseline_objectives": [
     [
       956243.9130299015,
@@ -26,10 +26,10 @@
       78.14208459812424
     ],
     [
-      466181.2381589591,
+      0.0,
       20,
-      13598.67112093347,
-      78.97009907932807
+      6368.072811748995,
+      65.24216116536583
     ],
     [
       337336.68154084473,
@@ -57,25 +57,25 @@
     ]
   ],
   "best_objective": [
-    158955.74343045225,
-    21,
-    8025.75489074723,
-    65.70258445897791
+    0.0,
+    20,
+    6344.894557678117,
+    65.24216116536583
   ],
   "best_selection_score": [
-    8025.75489074723,
-    65.70258445897791,
-    158955.74343045225
+    0.0,
+    6344.894557678117,
+    65.24216116536583
   ],
-  "target_trips": 21,
+  "target_trips": 20,
   "exactness": "heuristic discrete search; exact conditional earliest starts",
   "parameters": {
     "seed": 20260924,
-    "q2_iterations": 500000,
+    "q2_iterations": 100000,
     "q2_restart_interval": 1000,
-    "q3_iterations": 20000,
+    "q3_iterations": 5000,
     "q3_restart_interval": 500,
-    "q3_target_transport_trips": 23,
+    "q3_target_transport_trips": 19,
     "q3_target_relay_sorties": 3,
     "relay_grid_rows": 4,
     "relay_grid_columns": 5,
@@ -88,7 +88,12 @@
       2.0
     ],
     "q3_repair_combination_limit": 256,
-    "description": "Search parameters only. q3_plan.json is an initial incumbent, never a certified optimum. Fixed iteration counts are used for reproducibility; physical constants come only from the official inputs and src/core.",
-    "q2_resource_iterations": 100000
+    "description": "Search budgets and aspirations only. Explicit discrete column seeds are freshly reconstructed from official inputs; no historical times, SOC or energy are accepted. Finite catalogue/grid bounds are not global continuous-time certificates.",
+    "q2_resource_iterations": 10000,
+    "column_iterations": 32,
+    "column_grid_s": 120,
+    "column_mip_seconds": 75,
+    "q2_column_horizon_s": 6600,
+    "q3_column_horizon_s": 8000
   }
 }

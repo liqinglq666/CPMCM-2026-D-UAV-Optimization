@@ -1,0 +1,17 @@
+﻿K,resource,pooled_peak,inventory,independent_total,inventory_headroom,transport_peak_separation,relay_independent_replication,deficit
+2,A_uav,3,4,3,1,0,0,0
+2,B_uav,2,2,3,0,1,0,1
+2,C_uav,2,2,2,0,0,0,0
+2,A_bat,6,6,6,0,0,0,0
+2,B_bat,4,4,4,0,0,0,0
+2,C_bat,4,4,4,0,0,0,0
+2,relay_uav,2,2,3,0,0,1,1
+2,relay_comp,2,6,3,4,0,1,0
+3,A_uav,3,4,3,1,0,0,0
+3,B_uav,2,2,4,0,2,0,2
+3,C_uav,2,2,2,0,0,0,0
+3,A_bat,6,6,6,0,0,0,0
+3,B_bat,4,4,5,0,1,0,1
+3,C_bat,4,4,4,0,0,0,0
+3,relay_uav,2,2,4,0,0,2,2
+3,relay_comp,2,6,4,4,0,2,0

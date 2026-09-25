@@ -240,6 +240,7 @@ def solve_partitions(
         )
 
     best = {}
+    enumerated = {}
 
     for k in (2, 3):
         if k > len(atoms):
@@ -247,7 +248,9 @@ def solve_partitions(
                 f"Cannot divide {len(atoms)} indivisible service atoms into {k} groups"
             )
         incumbent = None
+        enumerated[k] = 0
         for labels in canonical_partitions(len(atoms), k):
+            enumerated[k] += 1
             result = evaluate(labels, k)
             candidate = (result[0], labels, *result[1:])
             if incumbent is None or candidate[0] < incumbent[0]:
@@ -261,6 +264,8 @@ def solve_partitions(
 
     config_rows = []
     resource_rows = []
+    decomposition_rows = []
+    pooled = group_stats(frozenset(range(len(atoms))))["req"]
 
     for k in (2, 3):
         (
@@ -295,6 +300,15 @@ def solve_partitions(
             )
 
         for key in inventory:
+            extra = totals[key] - pooled[key]
+            headroom = inventory[key] - pooled[key]
+            decomposition_rows.append(dict(
+                K=k, resource=key, pooled_peak=pooled[key], inventory=inventory[key],
+                independent_total=totals[key], inventory_headroom=headroom,
+                transport_peak_separation=extra if not key.startswith("relay_") else 0,
+                relay_independent_replication=extra if key.startswith("relay_") else 0,
+                deficit=max(0, extra - headroom),
+            ))
             resource_rows.append(
                 {
                     "K": k,
@@ -312,6 +326,14 @@ def solve_partitions(
     ):
         write_csv(out_dir / filename, rows)
 
+    write_csv(out_dir / "Q4_gap_decomposition.csv", decomposition_rows)
+    write_json(out_dir / "Q4_enumeration_certificate.json", dict(
+        atomic_components=atoms, atomic_component_count=len(atoms),
+        enumerated_partitions=enumerated, total_partitions=sum(enumerated.values()),
+        exactness="exhaustive unlabeled partitions conditional on frozen Q3 tasks",
+        interval_convention="half-open; batteries include full recharge; relay UAVs include turnaround",
+        source_fingerprints=q3_fingerprints(q3_dir),
+    ))
     write_json(out_dir / "Q4_source_manifest.json", q3_fingerprints(q3_dir))
     save_provenance(root, out_dir)
     return {

@@ -17,3 +17,7 @@ Dorling 等用于说明载荷能量与多架次耦合的研究背景，Zhang 等
 图形方法学习来源：TAO-QKV/Icarus-Figures，MIT，commit `0bcaa40c07ef0dc6ea1506ab147ce0a4f5a542fd`。已学习 README、CLAUDE、cookbook、framework、caption/critique、复杂面板、TikZ hero 与 paperfig 样式；本仓库图形为原创 Matplotlib，不复制外部图像。机械 critique 不会代替人工科学判断，尤其不能把检查脚本对“confidence interval”文字的识别当作实际不确定性证据。
 
 2026-09-24 结构重构：原有七条书目未增删，按新正文首次引用顺序调整编号；机器检查区分七条参考文献与八次引用。用户参考论文只提供结构启发，不作为本题模型或数值来源，也未复制其内容。
+
+本轮新增 SciPy `milp` 官方API文档作为整数求解器接口与间隙定义来源。WJ数模条目明确标注为用户提供的截图摘要，只用于说明参考方法和外部汇总目标；未视为已复核的最优性证明，未获得对方逐架次表或证明附件。
+
+2026-09-25 本轮终稿共9条书目、10次引用。首次引用顺序：赛题、Karney、Dorling、Zhang、SciPy milp、WJ数模截图、Zeng、ITU、HiGHS。上面的七条书目表与结构重构说明属于此前版本记录。
