@@ -7,7 +7,9 @@
 [依据对应表](docs/audit/post_merge/EVIDENCE.md)。该版本保留已接受的 Q1–Q4 结果；
 后续改动另开分支，复核冻结结果时无需重新运行优化。
 
-**当前论文：[65 页科研图终稿 PDF](paper/final_v2/manuscript.pdf)**，含自动目录、27 幅重构科研图及完整附录。[可编辑 Word](paper/final_v2/manuscript.docx)、[图表与复现说明](paper/final_v2/README.md)同步保留。此次按最新指导手册重新组织每图主张、面板、真实阶段、原始 DEM 与约束证据；模型、参数、箱号、路线、任务时序和分区保持冻结结果。
+**正式提交文件：[66页PDF](submission/D26105580028.pdf)、[官方结果Excel](submission/结果提交模板.xlsx)、[RAR附件](submission/D26105580028.rar)**。最终检查、当届官方规则、校验值和上传顺序见[提交检查报告](submission/FINAL_SUBMISSION_CHECK.md)。最终PDF MD5为`32d637d1f2383b57854e3c5dbe3f0a79`；旧MD5 `990d4a516f058ac87a1aa5fdee999120`已废弃。
+
+65页[科研图正文原件](paper/final_v2/manuscript.pdf)、[可编辑Word基准](paper/final_v2/manuscript.docx)和[图表复现说明](paper/final_v2/README.md)保留不覆盖。正式PDF只在该原件前补官方封皮，并核实修正原第65页B.3的AI型号与发布日期；正文前64页内容流和像素完全不变，末页其他区域不变。模型、参数、箱号、路线、任务时序和分区保持冻结结果。
 
 Q1、Q2 正式及节能备选、Q3 联合方案、Q4 资源优先与均衡偏好的数值及适用范围见论文和 [版本清单](paper/final_v2/manifest.json)。浮点数值证书与受限模型下界保留各自适用范围。
 
@@ -108,7 +110,7 @@ python scripts/validate_results.py
 
 ## 当前论文与科研图
 
-阅读正文使用 [paper/final_v2/manuscript.pdf](paper/final_v2/manuscript.pdf)。本目录包括 65 页 PDF、Word、27 幅 SVG/PDF/600 dpi PNG 和完整来源与核对记录。新的数据视图在 `paper/figure_data_v2/`，逐图字段、连接键、派生公式和来源摘要见 [清单](paper/figure_manifest_v2.csv)。上一版 `paper/final/` 保留为编辑基准和历史成品。
+正式提交使用 [submission/D26105580028.pdf](submission/D26105580028.pdf)。科研图正文基准位于 [paper/final_v2/manuscript.pdf](paper/final_v2/manuscript.pdf)，该目录包括原65页PDF、Word、27幅SVG/PDF/600 dpi PNG和来源核对记录。数据视图在 `paper/figure_data_v2/`，逐图字段、连接键、派生公式和来源摘要见 [清单](paper/figure_manifest_v2.csv)。`paper/final/`和`paper/final_v2/`保留为编辑来源，不与提交文件混用。
 
 ```bash
 python scripts/figures_v2/verify_bundle.py

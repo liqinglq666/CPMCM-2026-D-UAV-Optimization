@@ -6,3 +6,6 @@
 /paper/figure_data_v2/** -text -whitespace
 /paper/figure_manifest_v2.csv -text -whitespace
 /scripts/figures_v2/** -text whitespace=cr-at-eol
+# Frozen result fingerprints must survive Windows checkout without newline conversion.
+/results/** -text -whitespace
+/submission/** -text -whitespace
