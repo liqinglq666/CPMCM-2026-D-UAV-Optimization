@@ -1,0 +1,596 @@
+[
+  {
+    "batch": "Q1-S001-01",
+    "service": "S001",
+    "type": "C",
+    "components_kwh": [
+      1.8740717899833972,
+      0.08023719843148207,
+      0.9396857980056922,
+      0.023552066236553013
+    ],
+    "total_kwh": 2.9175468526571247,
+    "return_share_pct": 33.01533489907751,
+    "raw": [
+      {
+        "trip": "Q1-S001-01",
+        "service": "S001",
+        "type": "C",
+        "direction": "outbound",
+        "payload_kg": "76.0",
+        "horizontal_kwh": "1.8740717899833972",
+        "climb_kwh": "0.08023719843148207"
+      },
+      {
+        "trip": "Q1-S001-01",
+        "service": "S001",
+        "type": "C",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "0.9396857980056922",
+        "climb_kwh": "0.023552066236553013"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S001-02",
+    "service": "S001",
+    "type": "C",
+    "components_kwh": [
+      1.9511584763395735,
+      0.0813370914874311,
+      0.9396857980056922,
+      0.023552066236553013
+    ],
+    "total_kwh": 2.9957334320692497,
+    "return_share_pct": 32.153657395908745,
+    "raw": [
+      {
+        "trip": "Q1-S001-02",
+        "service": "S001",
+        "type": "C",
+        "direction": "outbound",
+        "payload_kg": "78.0",
+        "horizontal_kwh": "1.9511584763395735",
+        "climb_kwh": "0.0813370914874311"
+      },
+      {
+        "trip": "Q1-S001-02",
+        "service": "S001",
+        "type": "C",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "0.9396857980056922",
+        "climb_kwh": "0.023552066236553013"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S002-01",
+    "service": "S002",
+    "type": "B",
+    "components_kwh": [
+      1.5709175529462338,
+      0.06171864692583084,
+      1.0587586364405979,
+      0.02199885281448894
+    ],
+    "total_kwh": 2.7133936891271513,
+    "return_share_pct": 39.830471102877326,
+    "raw": [
+      {
+        "trip": "Q1-S002-01",
+        "service": "S002",
+        "type": "B",
+        "direction": "outbound",
+        "payload_kg": "25.0",
+        "horizontal_kwh": "1.5709175529462338",
+        "climb_kwh": "0.06171864692583084"
+      },
+      {
+        "trip": "Q1-S002-01",
+        "service": "S002",
+        "type": "B",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "1.0587586364405979",
+        "climb_kwh": "0.02199885281448894"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S002-02",
+    "service": "S002",
+    "type": "C",
+    "components_kwh": [
+      3.330789121862612,
+      0.08633752942180115,
+      2.28040321694898,
+      0.023657227872811954
+    ],
+    "total_kwh": 5.721187096106204,
+    "return_share_pct": 40.272419099699036,
+    "raw": [
+      {
+        "trip": "Q1-S002-02",
+        "service": "S002",
+        "type": "C",
+        "direction": "outbound",
+        "payload_kg": "56.0",
+        "horizontal_kwh": "3.330789121862612",
+        "climb_kwh": "0.08633752942180115"
+      },
+      {
+        "trip": "Q1-S002-02",
+        "service": "S002",
+        "type": "C",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "2.28040321694898",
+        "climb_kwh": "0.023657227872811954"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S003-01",
+    "service": "S003",
+    "type": "B",
+    "components_kwh": [
+      1.5395193405359613,
+      0.14781622731660207,
+      1.0375970366508283,
+      0.05491560927341013
+    ],
+    "total_kwh": 2.779848213776802,
+    "return_share_pct": 39.30116185875888,
+    "raw": [
+      {
+        "trip": "Q1-S003-01",
+        "service": "S003",
+        "type": "B",
+        "direction": "outbound",
+        "payload_kg": "25.0",
+        "horizontal_kwh": "1.5395193405359613",
+        "climb_kwh": "0.14781622731660207"
+      },
+      {
+        "trip": "Q1-S003-01",
+        "service": "S003",
+        "type": "B",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "1.0375970366508283",
+        "climb_kwh": "0.05491560927341013"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S003-02",
+    "service": "S003",
+    "type": "C",
+    "components_kwh": [
+      3.264216039051278,
+      0.2067784779906689,
+      2.234824386632553,
+      0.05905540135709797
+    ],
+    "total_kwh": 5.764874305031598,
+    "return_share_pct": 39.79062971047862,
+    "raw": [
+      {
+        "trip": "Q1-S003-02",
+        "service": "S003",
+        "type": "C",
+        "direction": "outbound",
+        "payload_kg": "56.0",
+        "horizontal_kwh": "3.264216039051278",
+        "climb_kwh": "0.2067784779906689"
+      },
+      {
+        "trip": "Q1-S003-02",
+        "service": "S003",
+        "type": "C",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "2.234824386632553",
+        "climb_kwh": "0.05905540135709797"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S004-01",
+    "service": "S004",
+    "type": "C",
+    "components_kwh": [
+      3.602238784724497,
+      0.13193764958251986,
+      2.3737527535745127,
+      0.04494240792577662
+    ],
+    "total_kwh": 6.152871595807306,
+    "return_share_pct": 39.310021732753825,
+    "raw": [
+      {
+        "trip": "Q1-S004-01",
+        "service": "S004",
+        "type": "C",
+        "direction": "outbound",
+        "payload_kg": "59.0",
+        "horizontal_kwh": "3.602238784724497",
+        "climb_kwh": "0.13193764958251986"
+      },
+      {
+        "trip": "Q1-S004-01",
+        "service": "S004",
+        "type": "C",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "2.3737527535745127",
+        "climb_kwh": "0.04494240792577662"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S005-01",
+    "service": "S005",
+    "type": "C",
+    "components_kwh": [
+      2.4656844556814796,
+      0.09690814073348461,
+      1.624802134422475,
+      0.03475315252254769
+    ],
+    "total_kwh": 4.222147883359987,
+    "return_share_pct": 39.30594883910954,
+    "raw": [
+      {
+        "trip": "Q1-S005-01",
+        "service": "S005",
+        "type": "C",
+        "direction": "outbound",
+        "payload_kg": "59.0",
+        "horizontal_kwh": "2.4656844556814796",
+        "climb_kwh": "0.09690814073348461"
+      },
+      {
+        "trip": "Q1-S005-01",
+        "service": "S005",
+        "type": "C",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "1.624802134422475",
+        "climb_kwh": "0.03475315252254769"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S006-01",
+    "service": "S006",
+    "type": "C",
+    "components_kwh": [
+      1.4877426159524147,
+      0.1162628355256725,
+      0.9803717472042289,
+      0.013566315951558638
+    ],
+    "total_kwh": 2.597943514633875,
+    "return_share_pct": 38.25864794815841,
+    "raw": [
+      {
+        "trip": "Q1-S006-01",
+        "service": "S006",
+        "type": "C",
+        "direction": "outbound",
+        "payload_kg": "59.0",
+        "horizontal_kwh": "1.4877426159524147",
+        "climb_kwh": "0.1162628355256725"
+      },
+      {
+        "trip": "Q1-S006-01",
+        "service": "S006",
+        "type": "C",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "0.9803717472042289",
+        "climb_kwh": "0.013566315951558638"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S007-01",
+    "service": "S007",
+    "type": "C",
+    "components_kwh": [
+      1.8053217808781394,
+      0.16704972914253033,
+      1.3952186359430814,
+      0.04323240062703398
+    ],
+    "total_kwh": 3.410822546590785,
+    "return_share_pct": 42.17314201842275,
+    "raw": [
+      {
+        "trip": "Q1-S007-01",
+        "service": "S007",
+        "type": "C",
+        "direction": "outbound",
+        "payload_kg": "45.0",
+        "horizontal_kwh": "1.8053217808781394",
+        "climb_kwh": "0.16704972914253033"
+      },
+      {
+        "trip": "Q1-S007-01",
+        "service": "S007",
+        "type": "C",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "1.3952186359430814",
+        "climb_kwh": "0.04323240062703398"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S008-01",
+    "service": "S008",
+    "type": "C",
+    "components_kwh": [
+      3.2165357337174743,
+      0.10659644023973265,
+      2.4858563422840576,
+      0.026977565703416796
+    ],
+    "total_kwh": 5.835966081944681,
+    "return_share_pct": 43.05771953955803,
+    "raw": [
+      {
+        "trip": "Q1-S008-01",
+        "service": "S008",
+        "type": "C",
+        "direction": "outbound",
+        "payload_kg": "45.0",
+        "horizontal_kwh": "3.2165357337174743",
+        "climb_kwh": "0.10659644023973265"
+      },
+      {
+        "trip": "Q1-S008-01",
+        "service": "S008",
+        "type": "C",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "2.4858563422840576",
+        "climb_kwh": "0.026977565703416796"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S009-01",
+    "service": "S009",
+    "type": "B",
+    "components_kwh": [
+      1.2092749882304006,
+      0.0563640315392918,
+      0.8150207088967192,
+      0.015549439763331119
+    ],
+    "total_kwh": 2.0962091684297426,
+    "return_share_pct": 39.622484300181995,
+    "raw": [
+      {
+        "trip": "Q1-S009-01",
+        "service": "S009",
+        "type": "B",
+        "direction": "outbound",
+        "payload_kg": "25.0",
+        "horizontal_kwh": "1.2092749882304006",
+        "climb_kwh": "0.0563640315392918"
+      },
+      {
+        "trip": "Q1-S009-01",
+        "service": "S009",
+        "type": "B",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "0.8150207088967192",
+        "climb_kwh": "0.015549439763331119"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S010-01",
+    "service": "S010",
+    "type": "B",
+    "components_kwh": [
+      1.0141319797597177,
+      0.10485506344716815,
+      0.6834992645205689,
+      0.020666511573340565
+    ],
+    "total_kwh": 1.8231528193007953,
+    "return_share_pct": 38.62351902919289,
+    "raw": [
+      {
+        "trip": "Q1-S010-01",
+        "service": "S010",
+        "type": "B",
+        "direction": "outbound",
+        "payload_kg": "25.0",
+        "horizontal_kwh": "1.0141319797597177",
+        "climb_kwh": "0.10485506344716815"
+      },
+      {
+        "trip": "Q1-S010-01",
+        "service": "S010",
+        "type": "B",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "0.6834992645205689",
+        "climb_kwh": "0.020666511573340565"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S011-01",
+    "service": "S011",
+    "type": "B",
+    "components_kwh": [
+      0.5952055481725894,
+      0.05709028310103947,
+      0.4011534618116637,
+      0.020475975333775414
+    ],
+    "total_kwh": 1.073925268419068,
+    "return_share_pct": 39.26059378099208,
+    "raw": [
+      {
+        "trip": "Q1-S011-01",
+        "service": "S011",
+        "type": "B",
+        "direction": "outbound",
+        "payload_kg": "25.0",
+        "horizontal_kwh": "0.5952055481725894",
+        "climb_kwh": "0.05709028310103947"
+      },
+      {
+        "trip": "Q1-S011-01",
+        "service": "S011",
+        "type": "B",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "0.4011534618116637",
+        "climb_kwh": "0.020475975333775414"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S012-01",
+    "service": "S012",
+    "type": "B",
+    "components_kwh": [
+      1.5665047613828214,
+      0.09724961792957518,
+      1.0557845267110244,
+      0.03283095661233207
+    ],
+    "total_kwh": 2.752369862635753,
+    "return_share_pct": 39.55193297607413,
+    "raw": [
+      {
+        "trip": "Q1-S012-01",
+        "service": "S012",
+        "type": "B",
+        "direction": "outbound",
+        "payload_kg": "25.0",
+        "horizontal_kwh": "1.5665047613828214",
+        "climb_kwh": "0.09724961792957518"
+      },
+      {
+        "trip": "Q1-S012-01",
+        "service": "S012",
+        "type": "B",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "1.0557845267110244",
+        "climb_kwh": "0.03283095661233207"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S013-01",
+    "service": "S013",
+    "type": "B",
+    "components_kwh": [
+      1.0278560067142137,
+      0.09244191759327783,
+      0.6927489110329301,
+      0.011676869496379666
+    ],
+    "total_kwh": 1.8247237048368015,
+    "return_share_pct": 38.604517421573796,
+    "raw": [
+      {
+        "trip": "Q1-S013-01",
+        "service": "S013",
+        "type": "B",
+        "direction": "outbound",
+        "payload_kg": "25.0",
+        "horizontal_kwh": "1.0278560067142137",
+        "climb_kwh": "0.09244191759327783"
+      },
+      {
+        "trip": "Q1-S013-01",
+        "service": "S013",
+        "type": "B",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "0.6927489110329301",
+        "climb_kwh": "0.011676869496379666"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S014-01",
+    "service": "S014",
+    "type": "B",
+    "components_kwh": [
+      1.1487506481674126,
+      0.1580802654354943,
+      0.7742288368876671,
+      0.059254488993150216
+    ],
+    "total_kwh": 2.140314239483724,
+    "return_share_pct": 38.94210067405177,
+    "raw": [
+      {
+        "trip": "Q1-S014-01",
+        "service": "S014",
+        "type": "B",
+        "direction": "outbound",
+        "payload_kg": "25.0",
+        "horizontal_kwh": "1.1487506481674126",
+        "climb_kwh": "0.1580802654354943"
+      },
+      {
+        "trip": "Q1-S014-01",
+        "service": "S014",
+        "type": "B",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "0.7742288368876671",
+        "climb_kwh": "0.059254488993150216"
+      }
+    ]
+  },
+  {
+    "batch": "Q1-S015-01",
+    "service": "S015",
+    "type": "B",
+    "components_kwh": [
+      1.2737619412527068,
+      0.15121965148211583,
+      0.8584832816600414,
+      0.023928118547268853
+    ],
+    "total_kwh": 2.307392992942133,
+    "return_share_pct": 38.24278754882395,
+    "raw": [
+      {
+        "trip": "Q1-S015-01",
+        "service": "S015",
+        "type": "B",
+        "direction": "outbound",
+        "payload_kg": "25.0",
+        "horizontal_kwh": "1.2737619412527068",
+        "climb_kwh": "0.15121965148211583"
+      },
+      {
+        "trip": "Q1-S015-01",
+        "service": "S015",
+        "type": "B",
+        "direction": "return",
+        "payload_kg": "0",
+        "horizontal_kwh": "0.8584832816600414",
+        "climb_kwh": "0.023928118547268853"
+      }
+    ]
+  }
+]

@@ -1,0 +1,259 @@
+{
+  "records": [
+    {
+      "sortie_id": "Q2-001",
+      "resource_id": "A-BAT-01",
+      "aircraft_type": "A",
+      "task_start_s": 0.0,
+      "return_s": 1250.8995020773023,
+      "charge_start_s": 1250.8995020773023,
+      "full_charge_s": 2121.347706614002
+    },
+    {
+      "sortie_id": "Q2-015",
+      "resource_id": "A-BAT-01",
+      "aircraft_type": "A",
+      "task_start_s": 2121.347706614002,
+      "return_s": 3432.2472086913044,
+      "charge_start_s": 3432.2472086913044,
+      "full_charge_s": 4297.49541426741
+    },
+    {
+      "sortie_id": "Q2-024",
+      "resource_id": "A-BAT-01",
+      "aircraft_type": "A",
+      "task_start_s": 4297.49541426741,
+      "return_s": 5519.518360925288,
+      "charge_start_s": 5519.518360925288,
+      "full_charge_s": 6352.315792342094
+    },
+    {
+      "sortie_id": "Q2-002",
+      "resource_id": "A-BAT-02",
+      "aircraft_type": "A",
+      "task_start_s": 0.0,
+      "return_s": 1250.8995020773023,
+      "charge_start_s": 1250.8995020773023,
+      "full_charge_s": 2121.347706614002
+    },
+    {
+      "sortie_id": "Q2-016",
+      "resource_id": "A-BAT-02",
+      "aircraft_type": "A",
+      "task_start_s": 2121.347706614002,
+      "return_s": 3848.771791154786,
+      "charge_start_s": 3848.771791154786,
+      "full_charge_s": 4876.689599921709
+    },
+    {
+      "sortie_id": "Q2-003",
+      "resource_id": "A-BAT-03",
+      "aircraft_type": "A",
+      "task_start_s": 0.0,
+      "return_s": 1977.40114824824,
+      "charge_start_s": 1977.40114824824,
+      "full_charge_s": 3099.154125369644
+    },
+    {
+      "sortie_id": "Q2-018",
+      "resource_id": "A-BAT-03",
+      "aircraft_type": "A",
+      "task_start_s": 3099.154125369644,
+      "return_s": 5702.486542212493,
+      "charge_start_s": 5702.486542212493,
+      "full_charge_s": 7154.995232412875
+    },
+    {
+      "sortie_id": "Q2-004",
+      "resource_id": "A-BAT-04",
+      "aircraft_type": "A",
+      "task_start_s": 0.0,
+      "return_s": 1727.4240845407837,
+      "charge_start_s": 1727.4240845407837,
+      "full_charge_s": 2796.7841929072965
+    },
+    {
+      "sortie_id": "Q2-019",
+      "resource_id": "A-BAT-04",
+      "aircraft_type": "A",
+      "task_start_s": 3432.2472086913044,
+      "return_s": 5400.836611838957,
+      "charge_start_s": 5400.836611838957,
+      "full_charge_s": 6639.708328534315
+    },
+    {
+      "sortie_id": "Q2-009",
+      "resource_id": "A-BAT-05",
+      "aircraft_type": "A",
+      "task_start_s": 1250.8995020773023,
+      "return_s": 2501.7990041546045,
+      "charge_start_s": 2501.7990041546045,
+      "full_charge_s": 3372.2472086913044
+    },
+    {
+      "sortie_id": "Q2-022",
+      "resource_id": "A-BAT-05",
+      "aircraft_type": "A",
+      "task_start_s": 3848.771791154786,
+      "return_s": 5537.385022986115,
+      "charge_start_s": 5537.385022986115,
+      "full_charge_s": 6710.869091035882
+    },
+    {
+      "sortie_id": "Q2-010",
+      "resource_id": "A-BAT-06",
+      "aircraft_type": "A",
+      "task_start_s": 1250.8995020773023,
+      "return_s": 3526.7142531306417,
+      "charge_start_s": 3526.7142531306417,
+      "full_charge_s": 4891.793004554381
+    },
+    {
+      "sortie_id": "Q2-005",
+      "resource_id": "B-BAT-01",
+      "aircraft_type": "B",
+      "task_start_s": 0.0,
+      "return_s": 1510.4723251020891,
+      "charge_start_s": 1510.4723251020891,
+      "full_charge_s": 2967.8525971980366
+    },
+    {
+      "sortie_id": "Q2-017",
+      "resource_id": "B-BAT-01",
+      "aircraft_type": "B",
+      "task_start_s": 3065.851890933266,
+      "return_s": 4967.6833265935975,
+      "charge_start_s": 4967.6833265935975,
+      "full_charge_s": 6831.82581721667
+    },
+    {
+      "sortie_id": "Q2-006",
+      "resource_id": "B-BAT-02",
+      "aircraft_type": "B",
+      "task_start_s": 0.0,
+      "return_s": 1869.7564163816144,
+      "charge_start_s": 1869.7564163816144,
+      "full_charge_s": 3463.8925868245615
+    },
+    {
+      "sortie_id": "Q2-021",
+      "resource_id": "B-BAT-02",
+      "aircraft_type": "B",
+      "task_start_s": 3792.496767125706,
+      "return_s": 5754.328202786037,
+      "charge_start_s": 5754.328202786037,
+      "full_charge_s": 7710.239290898261
+    },
+    {
+      "sortie_id": "Q2-012",
+      "resource_id": "B-BAT-03",
+      "aircraft_type": "B",
+      "task_start_s": 1510.4723251020891,
+      "return_s": 3065.851890933266,
+      "charge_start_s": 3065.851890933266,
+      "full_charge_s": 4522.551445963611
+    },
+    {
+      "sortie_id": "Q2-014",
+      "resource_id": "B-BAT-04",
+      "aircraft_type": "B",
+      "task_start_s": 1869.7564163816144,
+      "return_s": 3792.496767125706,
+      "charge_start_s": 3792.496767125706,
+      "full_charge_s": 5651.857040934532
+    },
+    {
+      "sortie_id": "Q2-007",
+      "resource_id": "C-BAT-01",
+      "aircraft_type": "C",
+      "task_start_s": 0.0,
+      "return_s": 1494.1690773291593,
+      "charge_start_s": 1494.1690773291593,
+      "full_charge_s": 3049.205316028892
+    },
+    {
+      "sortie_id": "Q2-020",
+      "resource_id": "C-BAT-01",
+      "aircraft_type": "C",
+      "task_start_s": 3601.98146214442,
+      "return_s": 5903.03815462762,
+      "charge_start_s": 5903.03815462762,
+      "full_charge_s": 8402.774211825432
+    },
+    {
+      "sortie_id": "Q2-008",
+      "resource_id": "C-BAT-02",
+      "aircraft_type": "C",
+      "task_start_s": 0.0,
+      "return_s": 1561.5538679616766,
+      "charge_start_s": 1561.5538679616766,
+      "full_charge_s": 3098.496903175018
+    },
+    {
+      "sortie_id": "Q2-023",
+      "resource_id": "C-BAT-02",
+      "aircraft_type": "C",
+      "task_start_s": 3997.6452175662516,
+      "return_s": 5874.835742092033,
+      "charge_start_s": 5874.835742092033,
+      "full_charge_s": 7851.66746050203
+    },
+    {
+      "sortie_id": "Q2-011",
+      "resource_id": "C-BAT-03",
+      "aircraft_type": "C",
+      "task_start_s": 1494.1690773291593,
+      "return_s": 3601.98146214442,
+      "charge_start_s": 3601.98146214442,
+      "full_charge_s": 6088.919243807817
+    },
+    {
+      "sortie_id": "Q2-013",
+      "resource_id": "C-BAT-04",
+      "aircraft_type": "C",
+      "task_start_s": 1561.5538679616766,
+      "return_s": 3997.6452175662516,
+      "charge_start_s": 3997.6452175662516,
+      "full_charge_s": 6496.436377719923
+    }
+  ],
+  "resource_order": [
+    "A-BAT-01",
+    "A-BAT-02",
+    "A-BAT-03",
+    "A-BAT-04",
+    "A-BAT-05",
+    "A-BAT-06",
+    "B-BAT-01",
+    "B-BAT-02",
+    "B-BAT-03",
+    "B-BAT-04",
+    "C-BAT-01",
+    "C-BAT-02",
+    "C-BAT-03",
+    "C-BAT-04"
+  ],
+  "row_coordinates": {
+    "A-BAT-01": 0,
+    "A-BAT-02": 1,
+    "A-BAT-03": 2,
+    "A-BAT-04": 3,
+    "A-BAT-05": 4,
+    "A-BAT-06": 5,
+    "B-BAT-01": 6.35,
+    "B-BAT-02": 7.35,
+    "B-BAT-03": 8.35,
+    "B-BAT-04": 9.35,
+    "C-BAT-01": 10.7,
+    "C-BAT-02": 11.7,
+    "C-BAT-03": 12.7,
+    "C-BAT-04": 13.7
+  },
+  "time_xlim_min": [
+    0,
+    150
+  ],
+  "transport_return_s": 5903.03815462762,
+  "max_battery_full_charge_s": 8402.774211825432,
+  "task_join_equal": true
+}

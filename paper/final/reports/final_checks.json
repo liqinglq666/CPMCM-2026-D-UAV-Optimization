@@ -1,0 +1,4214 @@
+{
+  "checks": [
+    {
+      "item": "基准Word不变",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "全部结果表与编号公式表逐行逐单元格文字保持",
+      "passed": true,
+      "evidence": {
+        "row_count": 495,
+        "note": "Word可能合并相邻公式表，按有序行核对以免将表容器合并误报为数据变化。"
+      }
+    },
+    {
+      "item": "全部行内与行间数学表达保持",
+      "passed": true,
+      "evidence": {
+        "math_object_count": 170,
+        "normalization": "仅识别Word原生保存的减号/撇号编码，以及l加script属性对应原花体ℓ；其余数学字符逐项比较。"
+      }
+    },
+    {
+      "item": "数学上下标分式根式与运算层级结构保持",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图片27幅",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          2881
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图1SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1来源摘要 src/core/physics.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1来源摘要 src/core/routes.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1来源摘要 src/core/constraints.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1来源摘要 src/q1/physics_engine.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1来源摘要 src/q2/columns.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1来源摘要 src/q2/interval_master.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1来源摘要 src/core/discrete.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1来源摘要 src/q3/preparation.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1来源摘要 src/q3/solver.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1来源摘要 src/core/continuous_radio.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1来源摘要 src/q4/partition.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1制图检查 four_questions",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1制图检查 method_members_exist",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图1制图检查 only_Q3_Q4_fixed_inheritance",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图2嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图2嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图2Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图2PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          2952
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图2SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图2PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图2PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图2PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图2真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图2来源摘要 paper/data/analysis.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图2来源摘要 results/q3/Q3_relay_sorties.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图2来源摘要 paper/data/communication_critical_state.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图2来源摘要 work/raw_input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图2制图检查 15services",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图2制图检查 one_origin",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图2制图检查 80boxes",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图3嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图3嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图3Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图3PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          3023
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图3SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图3PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图3PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图3PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图3真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图3来源摘要 paper/data/analysis.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图3来源摘要 src/core/inputs.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图3制图检查 80_unique_boxes",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图3制图检查 758_kg",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图3制图检查 31_hard",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          2244
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图4SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4来源摘要 paper/data/terrain_profile.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4来源摘要 paper/data/analysis.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4来源摘要 scripts/analyze_paper.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4来源摘要 src/core/terrain.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4来源摘要 src/core/physics.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4来源摘要 src/config.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4来源摘要 work/raw_input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4制图检查 max_dem_matches",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4制图检查 distance_matches",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4制图检查 50m_clearance",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图4制图检查 operation_altitudes_match",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图5嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图5嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图5Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图5PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          3165
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图5SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图5PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图5PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图5PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图5真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图5来源摘要 paper/data/energy_components.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图5来源摘要 results/q1/Q1_batch_solution.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图5来源摘要 scripts/analyze_paper.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图5制图检查 18_batches",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图5制图检查 four_parts_close_to_formal_abs1e-8",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图5制图检查 all_return_payload_zero",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图5制图检查 total_display_59.130",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图6嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图6嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图6Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图6PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          1771
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图6SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图6PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图6PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图6PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图6真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图6来源摘要 results/q2/Q2_resource_check.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图6制图检查 ordered_times",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图6制图检查 same_task_interval",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图6制图检查 return_display_1250.9",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图6制图检查 charge_display_2121.3",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          3118
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图7SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7来源摘要 results/q1/Q1_max_safe_payload.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7来源摘要 paper/data/analysis.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7来源摘要 src/q1/physics_engine.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7来源摘要 scripts/generate_paper_tables.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7制图检查 45_combinations",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7制图检查 C_restricted5",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7制图检查 A_all25",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7制图检查 B_min28.80",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图7制图检查 C_min58.91",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图8嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图8嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图8Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图8PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          3259
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图8SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图8PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图8PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图8PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图8真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图8来源摘要 results/q1/Q1_batch_solution.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图8来源摘要 paper/data/analysis.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图8制图检查 18_batches",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图8制图检查 80_unique_boxes_once",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图8制图检查 total758",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图8制图检查 batch_mass_volume_match",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          3118
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图9SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9来源摘要 results/q1/Q1_batch_solution.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9来源摘要 paper/data/constraint_slacks.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9来源摘要 paper/data/analysis.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9来源摘要 src/core/energy.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9来源摘要 src/q1/physics_engine.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9来源摘要 src/config.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9来源摘要 scripts/verify_paper.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9制图检查 54_rates_match",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9制图检查 within_budget",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9制图检查 highest_counts5_9_4",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图9制图检查 minSOC23.09",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图10嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图10嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图10Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图10PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          4204
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图10SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图10PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图10PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图10PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图10真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图10来源摘要 results/q2/Q2_pareto_frontier.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图10来源摘要 results/q2/Q2_preference_frontier.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图10来源摘要 results/q2/Q2_metrics.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图10来源摘要 src/core/constraints.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图11嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图11嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图11Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图11PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          3188
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图11SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图11PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图11PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图11PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图11真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图11来源摘要 results/q2/Q2_transport_trips_balanced.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图11来源摘要 results/q2/Q2_box_delivery_balanced.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图11来源摘要 paper/data/analysis.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图11来源摘要 results/q3/Q3_relay_sorties.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图11来源摘要 paper/data/communication_critical_state.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图11来源摘要 work/raw_input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图12嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图12嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图12Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图12PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          3188
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图12SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图12PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图12PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图12PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图12真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图12来源摘要 results/q2/Q2_transport_trips_balanced.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图12来源摘要 results/q2/Q2_box_delivery_balanced.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图12来源摘要 paper/data/analysis.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图12来源摘要 results/q3/Q3_relay_sorties.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图12来源摘要 paper/data/communication_critical_state.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图12来源摘要 work/raw_input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图13嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图13嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图13Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图13PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          3188
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图13SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图13PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图13PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图13PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图13真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图13来源摘要 results/q2/Q2_transport_trips_balanced.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图13来源摘要 results/q2/Q2_box_delivery_balanced.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图13来源摘要 paper/data/analysis.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图13来源摘要 results/q3/Q3_relay_sorties.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图13来源摘要 paper/data/communication_critical_state.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图13来源摘要 work/raw_input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图14嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图14嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图14Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图14PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          3543
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图14SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图14PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图14PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图14PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图14真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图14来源摘要 results/q2/Q2_box_delivery_balanced.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图14来源摘要 results/q2/Q2_metrics.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图14来源摘要 results/q2/Q2_preference_frontier.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图14来源摘要 results/q2/Q2_transport_trips_balanced.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图14来源摘要 src/core/constraints.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图15嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图15嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图15Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图15PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          2244
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图15SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图15PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图15PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图15PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图15真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图15来源摘要 results/q2/Q2_resource_check.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图15来源摘要 results/q2/Q2_transport_trips_balanced.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图15来源摘要 results/q2/Q2_metrics.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图15来源摘要 src/core/constraints.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图16嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图16嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图16Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图16PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          3448
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图16SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图16PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图16PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图16PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图16真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图16来源摘要 results/q2/Q2_resource_check.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图16来源摘要 results/q2/Q2_transport_trips_balanced.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图16来源摘要 results/q2/Q2_metrics.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图16来源摘要 src/core/constraints.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          3803
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图17SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17来源摘要 paper/data/analysis.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17来源摘要 results/q3/Q3_relay_sorties.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17来源摘要 results/q3/Q3_selected_plan.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17来源摘要 paper/data/communication_critical_state.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17来源摘要 work/raw_input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17制图检查 3 relay sorties, 2 physical UAVs",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17制图检查 R01 R02 R01 identity",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17制图检查 critical assigned relay and active",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17制图检查 critical margin display",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图17制图检查 frozen plotted task data unchanged from final figure set",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          4110
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图18SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18来源摘要 results/q3/Q3_transport_trips.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18来源摘要 results/q3/Q3_communication.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18来源摘要 results/q3/Q3_relay_sorties.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18来源摘要 src/q3/preparation.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18来源摘要 src/q3/solver.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18来源摘要 src/core/sampling.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18来源摘要 src/config.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18来源摘要 src/core/constraints.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18制图检查 service guard column-000",
+      "passed": true,
+      "evidence": {
+        "left_s": 5.0,
+        "right_s": 1007.5687581016698
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-002",
+      "passed": true,
+      "evidence": {
+        "left_s": 1243.7625361807611,
+        "right_s": 209.51673664215468
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-003",
+      "passed": true,
+      "evidence": {
+        "left_s": 5.0,
+        "right_s": 1062.1834047322943
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-006",
+      "passed": true,
+      "evidence": {
+        "left_s": 99.937927355145,
+        "right_s": 493.0328347947652
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-007",
+      "passed": true,
+      "evidence": {
+        "left_s": 135.0257508667354,
+        "right_s": 920.7303840257375
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-008",
+      "passed": true,
+      "evidence": {
+        "left_s": 799.7812359373374,
+        "right_s": 1991.4669242248724
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-009",
+      "passed": true,
+      "evidence": {
+        "left_s": 1244.215381268142,
+        "right_s": 5.0
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-010",
+      "passed": true,
+      "evidence": {
+        "left_s": 5.0,
+        "right_s": 2786.2481601622103
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-011",
+      "passed": true,
+      "evidence": {
+        "left_s": 2404.6541037896322,
+        "right_s": 5.0
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-013",
+      "passed": true,
+      "evidence": {
+        "left_s": 2587.892716494146,
+        "right_s": 5.000000099999852
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-014",
+      "passed": true,
+      "evidence": {
+        "left_s": 908.7376378974086,
+        "right_s": 1765.8736824858001
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-015",
+      "passed": true,
+      "evidence": {
+        "left_s": 1927.4315766042282,
+        "right_s": 5.0
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-016",
+      "passed": true,
+      "evidence": {
+        "left_s": 1689.1216310849059,
+        "right_s": 1047.8360201906034
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-017",
+      "passed": true,
+      "evidence": {
+        "left_s": 1979.8334425179055,
+        "right_s": 5.0
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-018",
+      "passed": true,
+      "evidence": {
+        "left_s": 5.0,
+        "right_s": 117.57134262639283
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-019",
+      "passed": true,
+      "evidence": {
+        "left_s": 5.0,
+        "right_s": 5.0
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-020",
+      "passed": true,
+      "evidence": {
+        "left_s": 472.8226681293013,
+        "right_s": 1966.8314356603314
+      }
+    },
+    {
+      "item": "图18制图检查 service guard column-021",
+      "passed": true,
+      "evidence": {
+        "left_s": 422.9952861778829,
+        "right_s": 5.0
+      }
+    },
+    {
+      "item": "图18制图检查 24 unique transport rows",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18制图检查 all-direct classifications are explicit",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图18制图检查 frozen plotted task data unchanged from final figure set",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图19嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图19嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图19Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图19PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          2787
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图19SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图19PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图19PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图19PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图19真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图19来源摘要 results/q3/Q3_relay_sorties.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图19来源摘要 paper/data/analysis.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图19来源摘要 src/core/constraints.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图19制图检查 R01 reuse timing",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图19制图检查 joint return excludes turnaround",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图19制图检查 nonnegative stages",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图19制图检查 frozen plotted task data unchanged from final figure set",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          4842
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图20SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20来源摘要 results/q3/Q3_resource_check.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20来源摘要 results/q3/Q3_transport_trips.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20来源摘要 results/q3/Q3_relay_sorties.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20来源摘要 paper/data/analysis.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20来源摘要 src/core/constraints.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 无人机 no overlap U01",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 无人机 no overlap U02",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 无人机 no overlap U03",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 无人机 no overlap U04",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 无人机 no overlap U05",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 无人机 no overlap U06",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 无人机 no overlap U07",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 无人机 no overlap U08",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 电池 no overlap A-BAT-01",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 电池 no overlap A-BAT-02",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 电池 no overlap A-BAT-03",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 电池 no overlap A-BAT-04",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 电池 no overlap A-BAT-05",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 电池 no overlap A-BAT-06",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 电池 no overlap B-BAT-01",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 电池 no overlap B-BAT-02",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 电池 no overlap B-BAT-03",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 电池 no overlap B-BAT-04",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 电池 no overlap C-BAT-01",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 电池 no overlap C-BAT-02",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 电池 no overlap C-BAT-03",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 电池 no overlap C-BAT-04",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 24 tasks on both transport layers",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 8 UAV 14 battery entities",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 3 relays on 2 UAVs and 3 components",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图20制图检查 frozen plotted task data unchanged from final figure set",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          4251
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图21SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21来源摘要 paper/data/communication_critical_state.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21来源摘要 results/continuous_communication.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21制图检查 all 24 lower bounds positive and resolved",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21制图检查 global lower bound equals min trip bound",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21制图检查 sample relay bottleneck",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21制图检查 critical state relay active",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21制图检查 certificate counts",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图21制图检查 frozen plotted task data unchanged from final figure set",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图22嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图22嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图22Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图22PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          2267
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图22SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图22PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图22PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图22PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图22真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图22来源摘要 results/q4/Q4_enumeration_certificate.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图22来源摘要 results/q3/Q3_selected_plan.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图22制图检查 one component for each 15 services",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图22制图检查 9 prescribed component sizes",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图22制图检查 frozen route co-visits reproduce components",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图22制图检查 no base in components",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图22制图检查 frozen plotted task data unchanged from final figure set",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          4677
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图23SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23来源摘要 results/q4/Q4_partition_config.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23来源摘要 results/q4/Q4_balanced_groups.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23来源摘要 results/q4/Q4_gap_decomposition.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23来源摘要 results/q4/Q4_balanced_resources.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23来源摘要 results/q4/Q4_enumeration_certificate.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23来源摘要 results/q3/Q3_selected_plan.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23来源摘要 paper/data/analysis.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23来源摘要 work/raw_input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23制图检查 资源优先 unique 15 service assignment",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23制图检查 资源优先 80 boxes / 24 transport tasks",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23制图检查 资源优先 components intact",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23制图检查 资源优先 gap anchor",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23制图检查 均衡偏好 unique 15 service assignment",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23制图检查 均衡偏好 80 boxes / 24 transport tasks",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23制图检查 均衡偏好 components intact",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23制图检查 均衡偏好 gap anchor",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图23制图检查 frozen plotted task data unchanged from final figure set",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          4677
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图24SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24来源摘要 results/q4/Q4_partition_config.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24来源摘要 results/q4/Q4_balanced_groups.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24来源摘要 results/q4/Q4_gap_decomposition.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24来源摘要 results/q4/Q4_balanced_resources.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24来源摘要 results/q4/Q4_enumeration_certificate.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24来源摘要 results/q3/Q3_selected_plan.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24来源摘要 paper/data/analysis.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24来源摘要 work/raw_input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24制图检查 资源优先 unique 15 service assignment",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24制图检查 资源优先 80 boxes / 24 transport tasks",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24制图检查 资源优先 components intact",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24制图检查 资源优先 gap anchor",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24制图检查 均衡偏好 unique 15 service assignment",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24制图检查 均衡偏好 80 boxes / 24 transport tasks",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24制图检查 均衡偏好 components intact",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24制图检查 均衡偏好 gap anchor",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图24制图检查 frozen plotted task data unchanged from final figure set",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          2952
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图25SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25来源摘要 results/q4/Q4_gap_decomposition.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25来源摘要 results/q4/Q4_balanced_resources.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K2 A_uav gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K2 B_uav gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K2 C_uav gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K2 A_bat gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K2 B_bat gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K2 C_bat gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K2 relay_uav gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K2 relay_comp gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K2 total gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K3 A_uav gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K3 B_uav gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K3 C_uav gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K3 A_bat gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K3 B_bat gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K3 C_bat gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K3 relay_uav gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K3 relay_comp gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 K3 total gaps",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图25制图检查 frozen plotted task data unchanged from final figure set",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          3897
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图26SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26来源摘要 paper/data/payload_reserve.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26来源摘要 paper/data/reserve_staircase.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26来源摘要 results/q1/Q1_sensitivity_summary.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26来源摘要 paper/data/analysis.json",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26来源摘要 scripts/paper_sensitivity.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26来源摘要 paper/sections/08_sensitivity.tex",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26来源摘要 src/config.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26制图检查 2745 unique grid rows",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26制图检查 61 reserve points",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26制图检查 45 service type combinations",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26制图检查 rated denominators match types",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26制图检查 five verification scenarios",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26制图检查 last feasible trip step is 25",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图26制图检查 frozen plotted task data unchanged from final figure set",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27嵌入宽度16.3cm",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27嵌入比例",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27Word嵌图与最终PNG字节一致",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27PNG宽度与分辨率",
+      "passed": true,
+      "evidence": {
+        "size": [
+          3850,
+          4771
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ]
+      }
+    },
+    {
+      "item": "图27SVG保留文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27PDF实际物理宽度",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27PDF包含中文文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27PDF使用已修正的TrueType字体",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27真实数据视图存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27来源摘要 paper/data/constraint_slacks.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27来源摘要 paper/data/hard_deadline_slacks.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27来源摘要 results/q3/Q3_box_delivery.csv",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27来源摘要 src/core/constraints.py",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27制图检查 SOC counts 18/24/24",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27制图检查 31 unique hard deadline boxes",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27制图检查 all hard margins match saved values",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27制图检查 hard margins nonnegative",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27制图检查 Q3 minimum SOC display",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27制图检查 minimum hard slack display",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图27制图检查 minimum hard-row pitch 3.4 mm",
+      "passed": true,
+      "evidence": {
+        "actual_mm": 3.4357771260997074
+      }
+    },
+    {
+      "item": "图27制图检查 frozen plotted task data unchanged from final figure set",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "模板页面设置 page_width",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "模板页面设置 page_height",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "模板页面设置 top_margin",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "模板页面设置 bottom_margin",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "模板页面设置 left_margin",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "模板页面设置 right_margin",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "模板页面设置 header_distance",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "模板页面设置 footer_distance",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "无可见页眉",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "全部一级标题居中",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "目录域存在",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "目录无占位与域错误",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "图注编号1至27",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "目录覆盖全部一级二级标题",
+      "passed": true,
+      "evidence": {
+        "entries": 71,
+        "headings": 71,
+        "toc_titles": [
+          "1 问题分析与求解思路",
+          "1.1 山区投送的核心矛盾",
+          "1.2 四问的递进关系与继承边界",
+          "1.3 总体技术路线",
+          "2 模型假设与数据说明",
+          "2.1 题设规则与适用假设",
+          "2.2 数据校验与结果溯源",
+          "2.3 任务空间与地形背景",
+          "2.4 统一符号与时间口径",
+          "3 地形载荷与能量统一计算",
+          "3.1 DEM 航高与飞行阶段",
+          "3.2 动态载荷与等效航程",
+          "3.3 分阶段能量与返航储备",
+          "3.4 由逐段物理量形成上层决策参数",
+          "3.5 无人机与能源资源的独立占用",
+          "4 安全运输能力与单点精确组批",
+          "4.1 为什么额定载荷不足以判断安全",
+          "4.2 不可拆货箱的集合划分模型",
+          "4.3 锚定子集动态规划与精确性",
+          "4.4 算法实施步骤",
+          "4.5 组批结果、约束余量与小结",
+          "5 运输资源与时限下的可执行调度",
+          "5.1 硬截止、软延误与资源冲突",
+          "5.2 架次列、时间索引与区间资源模型",
+          "5.3 初始构造与多邻域搜索",
+          "5.4 算法实施与候选核验",
+          "5.5 选点依据与运输结果",
+          "5.6 机型分工与箱级交付进度",
+          "5.7 离散方案来源与限时节能选项",
+          "5.8 资源验证与向通信层的传递",
+          "6 通信保障与运输中继联合时序",
+          "6.1 外层离散搜索与内层时序优化",
+          "6.2 联合资源邻域与悬停高度细化",
+          "6.3 联合候选的计算顺序",
+          "6.4 双向预算、地形遮挡与单跳判定",
+          "6.5 服务窗口与中继能量",
+          "6.6 固定方案下的词典序线性规划",
+          "6.7 正式联合方案与约束余量",
+          "6.8 服务窗口与四类资源的对应",
+          "6.9 固定轨迹的连续区间核验",
+          "7 固定任务下的独立资源配置",
+          "7.1 从 Q3 继承任务与不可拆连通分量",
+          "7.2 区间峰值资源需求与精确枚举",
+          "7.3 峰值错位与中继独立配置的缺口分解",
+          "7.4 配置缺口、方案比较与小结",
+          "7.5 均衡分区与最低资源偏好的区别",
+          "7.6 空间归属与分类资源缺口",
+          "8 储备敏感性与固定方案余量",
+          "8.1 储备变化与离散组批跳变",
+          "8.2 固定运输计划的能耗容忍度",
+          "8.3 通信余量与可解释范围",
+          "9 结果核验与模型评价",
+          "9.1 从数据版本到逐箱逐资源回放",
+          "9.2 加密通信回放与最紧约束",
+          "9.3 四类结论的精确性范围",
+          "9.4 模型优势、局限与改进顺序",
+          "10 结论",
+          "参考文献",
+          "附录A 完整方案与逐箱记录",
+          "A.1 运输机型与节点需求参数",
+          "A.2 安全载荷与Q1批次",
+          "A.3 Q2和Q3运输架次安排",
+          "A.4 中继位置、窗口与保障关系",
+          "A.5 逐箱分配与交付时刻",
+          "A.6 Q4完整分区归属与需求",
+          "A.7 补充候选记录",
+          "附录B 数据来源与计算说明",
+          "B.1 输入版本与可复核记录",
+          "B.2 方法借鉴与来源归属",
+          "B.3 人工智能辅助说明",
+          "B.4 结果重放的计算入口"
+        ]
+      }
+    },
+    {
+      "item": "第1页连续页码",
+      "passed": true,
+      "evidence": [
+        "1"
+      ]
+    },
+    {
+      "item": "第1页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第2页连续页码",
+      "passed": true,
+      "evidence": [
+        "2"
+      ]
+    },
+    {
+      "item": "第2页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第3页连续页码",
+      "passed": true,
+      "evidence": [
+        "3"
+      ]
+    },
+    {
+      "item": "第3页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第4页连续页码",
+      "passed": true,
+      "evidence": [
+        "4"
+      ]
+    },
+    {
+      "item": "第4页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第5页连续页码",
+      "passed": true,
+      "evidence": [
+        "5",
+        "扩展 5 s。前者处理离散地形边界，后者提供时序保护；二者都不能替代连续时间通信证"
+      ]
+    },
+    {
+      "item": "第5页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "1"
+        ]
+      }
+    },
+    {
+      "item": "第5页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第6页连续页码",
+      "passed": true,
+      "evidence": [
+        "6"
+      ]
+    },
+    {
+      "item": "第6页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第7页连续页码",
+      "passed": true,
+      "evidence": [
+        "7"
+      ]
+    },
+    {
+      "item": "第7页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "2"
+        ]
+      }
+    },
+    {
+      "item": "第7页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第8页连续页码",
+      "passed": true,
+      "evidence": [
+        "8",
+        "𝑞𝑝,𝑖𝑗, 𝐸𝑝",
+        "航段剩余载荷、运输架次总能耗",
+        "kg，kWh"
+      ]
+    },
+    {
+      "item": "第8页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "3"
+        ]
+      }
+    },
+    {
+      "item": "第8页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第9页连续页码",
+      "passed": true,
+      "evidence": [
+        "9"
+      ]
+    },
+    {
+      "item": "第9页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第10页连续页码",
+      "passed": true,
+      "evidence": [
+        "10",
+        "𝑔𝑖𝑗(𝑞)",
+        "𝑔𝐿𝑔(𝑞)",
+        "𝜂𝑔 3.6 × 106"
+      ]
+    },
+    {
+      "item": "第10页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "4"
+        ]
+      }
+    },
+    {
+      "item": "第10页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第11页连续页码",
+      "passed": true,
+      "evidence": [
+        "11"
+      ]
+    },
+    {
+      "item": "第11页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第12页连续页码",
+      "passed": true,
+      "evidence": [
+        "12"
+      ]
+    },
+    {
+      "item": "第12页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "5"
+        ]
+      }
+    },
+    {
+      "item": "第12页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第13页连续页码",
+      "passed": true,
+      "evidence": [
+        "13"
+      ]
+    },
+    {
+      "item": "第13页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "6"
+        ]
+      }
+    },
+    {
+      "item": "第13页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第14页连续页码",
+      "passed": true,
+      "evidence": [
+        "14",
+        "者限制起飞载荷，后者还受 DEM 和返程影响；体积更不能由质量替代。"
+      ]
+    },
+    {
+      "item": "第14页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "7"
+        ]
+      }
+    },
+    {
+      "item": "第14页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第15页连续页码",
+      "passed": true,
+      "evidence": [
+        "15"
+      ]
+    },
+    {
+      "item": "第15页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第16页连续页码",
+      "passed": true,
+      "evidence": [
+        "16"
+      ]
+    },
+    {
+      "item": "第16页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "8"
+        ]
+      }
+    },
+    {
+      "item": "第16页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第17页连续页码",
+      "passed": true,
+      "evidence": [
+        "17",
+        "制同时占用多少实体无人机和电池。Q",
+        "允许",
+        "架次访问多个服务区，同时决定货箱分组、"
+      ]
+    },
+    {
+      "item": "第17页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "9"
+        ]
+      }
+    },
+    {
+      "item": "第17页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第18页连续页码",
+      "passed": true,
+      "evidence": [
+        "18",
+        "开始列。资源占用向网格外侧取整，保证连续时间可执行。相同型号内无人机、电池分别"
+      ]
+    },
+    {
+      "item": "第18页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第19页连续页码",
+      "passed": true,
+      "evidence": [
+        "19"
+      ]
+    },
+    {
+      "item": "第19页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第20页连续页码",
+      "passed": true,
+      "evidence": [
+        "20"
+      ]
+    },
+    {
+      "item": "第20页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第21页连续页码",
+      "passed": true,
+      "evidence": [
+        "21",
+        "诊断后续还能从资源重排获得多少改善，不是原题全局下界。"
+      ]
+    },
+    {
+      "item": "第21页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "10"
+        ]
+      }
+    },
+    {
+      "item": "第21页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第22页连续页码",
+      "passed": true,
+      "evidence": [
+        "22"
+      ]
+    },
+    {
+      "item": "第22页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "11"
+        ]
+      }
+    },
+    {
+      "item": "第22页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第23页连续页码",
+      "passed": true,
+      "evidence": [
+        "23"
+      ]
+    },
+    {
+      "item": "第23页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "12"
+        ]
+      }
+    },
+    {
+      "item": "第23页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第24页连续页码",
+      "passed": true,
+      "evidence": [
+        "24"
+      ]
+    },
+    {
+      "item": "第24页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "13"
+        ]
+      }
+    },
+    {
+      "item": "第24页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第25页连续页码",
+      "passed": true,
+      "evidence": [
+        "25",
+        "可行机型，用可选区间共同安排无人机和包含完整充电的电池；资源编号经区间着色恢复。"
+      ]
+    },
+    {
+      "item": "第25页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "14"
+        ]
+      }
+    },
+    {
+      "item": "第25页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第26页连续页码",
+      "passed": true,
+      "evidence": [
+        "26"
+      ]
+    },
+    {
+      "item": "第26页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "15"
+        ]
+      }
+    },
+    {
+      "item": "第26页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第27页连续页码",
+      "passed": true,
+      "evidence": [
+        "27"
+      ]
+    },
+    {
+      "item": "第27页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "16"
+        ]
+      }
+    },
+    {
+      "item": "第27页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第28页连续页码",
+      "passed": true,
+      "evidence": [
+        "28"
+      ]
+    },
+    {
+      "item": "第28页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第29页连续页码",
+      "passed": true,
+      "evidence": [
+        "29"
+      ]
+    },
+    {
+      "item": "第29页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第30页连续页码",
+      "passed": true,
+      "evidence": [
+        "30"
+      ]
+    },
+    {
+      "item": "第30页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第31页连续页码",
+      "passed": true,
+      "evidence": [
+        "31"
+      ]
+    },
+    {
+      "item": "第31页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第32页连续页码",
+      "passed": true,
+      "evidence": [
+        "32"
+      ]
+    },
+    {
+      "item": "第32页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "17"
+        ]
+      }
+    },
+    {
+      "item": "第32页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第33页连续页码",
+      "passed": true,
+      "evidence": [
+        "33"
+      ]
+    },
+    {
+      "item": "第33页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "18"
+        ]
+      }
+    },
+    {
+      "item": "第33页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第34页连续页码",
+      "passed": true,
+      "evidence": [
+        "34"
+      ]
+    },
+    {
+      "item": "第34页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "19"
+        ]
+      }
+    },
+    {
+      "item": "第34页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第35页连续页码",
+      "passed": true,
+      "evidence": [
+        "35"
+      ]
+    },
+    {
+      "item": "第35页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "20"
+        ]
+      }
+    },
+    {
+      "item": "第35页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第36页连续页码",
+      "passed": true,
+      "evidence": [
+        "36"
+      ]
+    },
+    {
+      "item": "第36页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "21"
+        ]
+      }
+    },
+    {
+      "item": "第36页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第37页连续页码",
+      "passed": true,
+      "evidence": [
+        "37"
+      ]
+    },
+    {
+      "item": "第37页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第38页连续页码",
+      "passed": true,
+      "evidence": [
+        "38"
+      ]
+    },
+    {
+      "item": "第38页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "22"
+        ]
+      }
+    },
+    {
+      "item": "第38页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第39页连续页码",
+      "passed": true,
+      "evidence": [
+        "39"
+      ]
+    },
+    {
+      "item": "第39页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第40页连续页码",
+      "passed": true,
+      "evidence": [
+        "40"
+      ]
+    },
+    {
+      "item": "第40页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "23"
+        ]
+      }
+    },
+    {
+      "item": "第40页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第41页连续页码",
+      "passed": true,
+      "evidence": [
+        "41"
+      ]
+    },
+    {
+      "item": "第41页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第42页连续页码",
+      "passed": true,
+      "evidence": [
+        "42"
+      ]
+    },
+    {
+      "item": "第42页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "24"
+        ]
+      }
+    },
+    {
+      "item": "第42页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第43页连续页码",
+      "passed": true,
+      "evidence": [
+        "43",
+        "使用已计算的确定性场景，不构造未经观测的概率分布。"
+      ]
+    },
+    {
+      "item": "第43页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "25"
+        ]
+      }
+    },
+    {
+      "item": "第43页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第44页连续页码",
+      "passed": true,
+      "evidence": [
+        "44"
+      ]
+    },
+    {
+      "item": "第44页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "26"
+        ]
+      }
+    },
+    {
+      "item": "第44页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第45页连续页码",
+      "passed": true,
+      "evidence": [
+        "45"
+      ]
+    },
+    {
+      "item": "第45页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第46页连续页码",
+      "passed": true,
+      "evidence": [
+        "46"
+      ]
+    },
+    {
+      "item": "第46页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第47页连续页码",
+      "passed": true,
+      "evidence": [
+        "47",
+        "保"
+      ]
+    },
+    {
+      "item": "第47页大图有图注",
+      "passed": true,
+      "evidence": {
+        "images": 1,
+        "captions": [
+          "27"
+        ]
+      }
+    },
+    {
+      "item": "第47页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第48页连续页码",
+      "passed": true,
+      "evidence": [
+        "48"
+      ]
+    },
+    {
+      "item": "第48页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第49页连续页码",
+      "passed": true,
+      "evidence": [
+        "49"
+      ]
+    },
+    {
+      "item": "第49页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第50页连续页码",
+      "passed": true,
+      "evidence": [
+        "50"
+      ]
+    },
+    {
+      "item": "第50页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第51页连续页码",
+      "passed": true,
+      "evidence": [
+        "51"
+      ]
+    },
+    {
+      "item": "第51页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第52页连续页码",
+      "passed": true,
+      "evidence": [
+        "52"
+      ]
+    },
+    {
+      "item": "第52页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第53页连续页码",
+      "passed": true,
+      "evidence": [
+        "53",
+        "013",
+        "U08",
+        "C-04",
+        "1561.6",
+        "3997.6",
+        "6.149",
+        "23.13"
+      ]
+    },
+    {
+      "item": "第53页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第54页连续页码",
+      "passed": true,
+      "evidence": [
+        "54",
+        "019",
+        "A",
+        "O01 → S015 → O01",
+        "2"
+      ]
+    },
+    {
+      "item": "第54页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第55页连续页码",
+      "passed": true,
+      "evidence": [
+        "55"
+      ]
+    },
+    {
+      "item": "第55页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第56页连续页码",
+      "passed": true,
+      "evidence": [
+        "56"
+      ]
+    },
+    {
+      "item": "第56页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第57页连续页码",
+      "passed": true,
+      "evidence": [
+        "57"
+      ]
+    },
+    {
+      "item": "第57页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第58页连续页码",
+      "passed": true,
+      "evidence": [
+        "58",
+        "S003 WAT 03",
+        "S003 02",
+        "013",
+        "015"
+      ]
+    },
+    {
+      "item": "第58页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第59页连续页码",
+      "passed": true,
+      "evidence": [
+        "59"
+      ]
+    },
+    {
+      "item": "第59页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第60页连续页码",
+      "passed": true,
+      "evidence": [
+        "60",
+        "S001-WAT-05",
+        "908.6",
+        "2874.4",
+        "3600",
+        "无"
+      ]
+    },
+    {
+      "item": "第60页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第61页连续页码",
+      "passed": true,
+      "evidence": [
+        "61",
+        "无"
+      ]
+    },
+    {
+      "item": "第61页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第62页连续页码",
+      "passed": true,
+      "evidence": [
+        "62"
+      ]
+    },
+    {
+      "item": "第62页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第63页连续页码",
+      "passed": true,
+      "evidence": [
+        "63",
+        "2",
+        "中继无人机",
+        "2",
+        "4",
+        "2"
+      ]
+    },
+    {
+      "item": "第63页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第64页连续页码",
+      "passed": true,
+      "evidence": [
+        "64"
+      ]
+    },
+    {
+      "item": "第64页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "第65页连续页码",
+      "passed": true,
+      "evidence": [
+        "65"
+      ]
+    },
+    {
+      "item": "第65页无错误域文本",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "item": "最终正文全部27图均入页",
+      "passed": true,
+      "evidence": {
+        "images": 27,
+        "pages": 65
+      }
+    }
+  ],
+  "passed": 703,
+  "failed": 0,
+  "final_sha256": "9b4ced7a81957fd9fc3a097aa91f2636757b0b9a9fbdebaf5f1ae625c9b1f19c",
+  "scope": "编辑与数据保持核对；含原始输入与局部剖面的独立核对；不等同于重新优化或全模型完整复算"
+}

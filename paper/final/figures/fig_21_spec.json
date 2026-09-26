@@ -1,0 +1,178 @@
+{
+  "figure": 21,
+  "number": 21,
+  "caption": "最紧采样状态的直连、指定中继接入和回传链路余量，以及逐架次保守连续区间下界。正余量放大使用同一状态记录。0.090906 dB为该采样状态的中继瓶颈余量，0.009866 dB为连续区间数值核验的全局下界，两者含义不同。证书覆盖192相位、360通过区间与544事件检查，并采用声明的浮点保护条件。",
+  "width_cm": 16.3,
+  "height_cm": 18.0,
+  "dpi": 600,
+  "source_commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "sources": [
+    {
+      "path": "work/team_repo/paper/data/communication_critical_state.json",
+      "repo_path": "paper/data/communication_critical_state.json",
+      "sha256": "fd11e423e412ed2f5aff24fee9adfaf14d4183014a176a1dd52192ad239bb66a"
+    },
+    {
+      "path": "work/team_repo/results/continuous_communication.json",
+      "repo_path": "results/continuous_communication.json",
+      "sha256": "25bf011c2f96c3aae78658ca82cb52cdcdb38a4795d1b5210f5f4e9bbed2cfd3"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "work/team_repo/paper/data/communication_critical_state.json",
+      "repo_path": "paper/data/communication_critical_state.json",
+      "sha256": "fd11e423e412ed2f5aff24fee9adfaf14d4183014a176a1dd52192ad239bb66a"
+    },
+    {
+      "path": "work/team_repo/results/continuous_communication.json",
+      "repo_path": "results/continuous_communication.json",
+      "sha256": "25bf011c2f96c3aae78658ca82cb52cdcdb38a4795d1b5210f5f4e9bbed2cfd3"
+    }
+  ],
+  "font": {
+    "cn": "Noto Sans SC Publication",
+    "cn_path": "C:\\Users\\11346\\Documents\\Codex\\2026-09-26\\d-uav-paper-updated-pdf-pdf\\work\\raw_rebuild\\fonts\\NotoSansSC-Publication-Regular.ttf",
+    "latin": "DejaVu Sans"
+  },
+  "map_spec": null,
+  "field_mapping": {
+    "direct/access/backhaul_margin_db": "top endpoints",
+    "trips.<id>.minimum_margin_bound_db": "per-trip recorded conservative lower bound",
+    "trips.<id>.unresolved_intervals": "log-axis admissibility"
+  },
+  "join_keys": [
+    "scenario + trip id; critical event retained at full precision"
+  ],
+  "derivations": [
+    "available margin=min(access,backhaul)",
+    "global displayed lower=min(recorded per-trip lower)",
+    "No sampled lower bounds substituted for certificates"
+  ],
+  "precision": "No recovery from rounded manuscript values; original float values retained in data view. Display precision only affects labels.",
+  "plot_parameters": {
+    "size_cm": [
+      16.3,
+      18.0
+    ],
+    "png_dpi": 600,
+    "svg_editable_text": true,
+    "pdf_fonttype": 42,
+    "layout": {
+      "log_axis": true,
+      "minimum_value_point": "column-019"
+    },
+    "model_colors": {
+      "A": "#0072B2",
+      "B": "#E69F00",
+      "C": "#009E73"
+    },
+    "relay_sortie_colors": [
+      "#6A51A3",
+      "#CC79A7",
+      "#8C6D31"
+    ],
+    "group_colors": [
+      "#4477AA",
+      "#EEAA33",
+      "#AA3377"
+    ],
+    "font_reference": "visual_system.json"
+  },
+  "checks": [
+    {
+      "name": "all 24 lower bounds positive and resolved",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "global lower bound equals min trip bound",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "sample relay bottleneck",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "critical state relay active",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "certificate counts",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "frozen plotted task data unchanged from final figure set",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "missing_or_limited_evidence": [
+    "Per-trip recorded certificate aggregates are used directly; no absent interval numeric values reconstructed."
+  ],
+  "visual_review": {
+    "status": "reviewed",
+    "color_pdf": {
+      "path": "work/raw_rebuild/fig_21_pdfqa.png",
+      "dpi": 180,
+      "observed": "Chinese and numeric labels visible; no clipping or label/legend collision observed"
+    },
+    "grayscale_pdf": {
+      "path": "work/raw_rebuild/fig_21_gray_120dpi.png",
+      "dpi": 120,
+      "observed": "Labels, shapes, hatches and critical values remain identifiable at the 16.3 cm publication width"
+    },
+    "map_qa": null,
+    "scope": "standalone publication-sized figure; new Word placement is reviewed separately"
+  },
+  "authoritative_tolerance": {
+    "value": 1e-05,
+    "unit": "seconds/kWh when applicable",
+    "source": "src/core/constraints.py:RESULT_TOLERANCE"
+  },
+  "no_optimization_rerun": true,
+  "file_hashes": {
+    "pdf": "136cea47ab0a989b79a4e2964e199842504afceb15ed41db5a8468dbd6f7c45a",
+    "svg": "8727bcc5fae86cf40b2ce1682beec6c73cd6e6a19747a865bad60fef3ddb1dd3",
+    "png": "dfd438a181be1df09129e5450d3c38f2a124cf0c9ce712eb3d1f4ed5be438805",
+    "data.json": "4e34cb448f1ca681a4a8c9bda4d324714de01e8069dce56ec77ac33f71b9557a",
+    "caption.txt": "ac3a04b9d2ae939ee6767fe4d56675007736a3d690e8cba4129e77f9a0476df8"
+  },
+  "raw_input_crosscheck": {
+    "audit": "work/raw_rebuild/input_audit.json",
+    "audit_sha256": "7279d52ceb0bce5c0e20498c328224441d2d4025147688f39d93d4dcb86f1aed",
+    "workbook_sources": [
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/中继无人机数据.xlsx",
+        "scope": "workspace",
+        "sha256": "be52643ff29419233e6a141dca03a04160a8af551cab36d8c49b51bb836bea04"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/物资需求与配送时限.xlsx",
+        "scope": "workspace",
+        "sha256": "5a3346159ceddcf585859d270b8f62114b388a1f737fbe64ffde0ee1fdc8170a"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/调度中心与服务区.xlsx",
+        "scope": "workspace",
+        "sha256": "541a7af1ded08c9a3ff448480332cb5f6a54902f0afa6e9bcd50c1d2b2b34e38"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/运输无人机数据.xlsx",
+        "scope": "workspace",
+        "sha256": "9296a657c07e042afba6aeea7999665d9cd24e00b592fd6c269de6e338480dcb"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/通信链路参数.xlsx",
+        "scope": "workspace",
+        "sha256": "1860d153199e7ae460ba36e83b673374e640e19de91ea167f2877271001f5f81"
+      }
+    ],
+    "result": "五份原始输入表与冻结四问清单逐字节一致，研究字段与实际读取器核对一致。",
+    "plotting_scope": "保留正式结果数据；原始输入交叉核对不构成新优化。"
+  }
+}

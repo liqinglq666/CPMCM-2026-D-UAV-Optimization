@@ -1,0 +1,482 @@
+{
+  "candidates": [
+    {
+      "candidate_id": "P0000",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 0.0,
+      "sortie_count": 21,
+      "transport_return_s": 7802.438262910709,
+      "energy_kwh": 63.613830789487,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0001",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 0.0,
+      "sortie_count": 22,
+      "transport_return_s": 7670.438262910709,
+      "energy_kwh": 66.34956202797329,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0002",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 0.0,
+      "sortie_count": 22,
+      "transport_return_s": 7714.228679153401,
+      "energy_kwh": 64.53712526231357,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0003",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 0.0,
+      "sortie_count": 22,
+      "transport_return_s": 7780.228679153401,
+      "energy_kwh": 64.2438842377918,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0004",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 0.0,
+      "sortie_count": 23,
+      "transport_return_s": 6421.094258945617,
+      "energy_kwh": 65.26951674263859,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0005",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 0.0,
+      "sortie_count": 23,
+      "transport_return_s": 6484.382881623942,
+      "energy_kwh": 65.10393962238466,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0006",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 0.0,
+      "sortie_count": 23,
+      "transport_return_s": 6929.514762253929,
+      "energy_kwh": 64.7141940548431,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0007",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 0.0,
+      "sortie_count": 23,
+      "transport_return_s": 7366.200257951992,
+      "energy_kwh": 64.43394131017689,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0008",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 0.0,
+      "sortie_count": 23,
+      "transport_return_s": 7656.159638446368,
+      "energy_kwh": 64.38310867518018,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0009",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 0.0,
+      "sortie_count": 24,
+      "transport_return_s": 5903.03815462762,
+      "energy_kwh": 65.56619536868014,
+      "hard_violations": 0,
+      "is_formal": true
+    },
+    {
+      "candidate_id": "P0010",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 0.0,
+      "sortie_count": 24,
+      "transport_return_s": 6096.103798828754,
+      "energy_kwh": 65.37874677003522,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0011",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 0.0,
+      "sortie_count": 24,
+      "transport_return_s": 6466.125059682358,
+      "energy_kwh": 65.23510998901722,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0012",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 43190.265389668755,
+      "sortie_count": 20,
+      "transport_return_s": 8706.189255638361,
+      "energy_kwh": 65.61939250001427,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0013",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 44434.04835270952,
+      "sortie_count": 20,
+      "transport_return_s": 8763.093580107306,
+      "energy_kwh": 65.31434290040269,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0014",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 45886.04835270952,
+      "sortie_count": 20,
+      "transport_return_s": 8829.093580107306,
+      "energy_kwh": 65.28561014477317,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0015",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 90551.16563600562,
+      "sortie_count": 20,
+      "transport_return_s": 8829.093580107306,
+      "energy_kwh": 64.78611179451735,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0016",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 230347.57630316872,
+      "sortie_count": 19,
+      "transport_return_s": 13100.445986402687,
+      "energy_kwh": 77.4677294089514,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0017",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 284252.77348761645,
+      "sortie_count": 19,
+      "transport_return_s": 13034.445986402687,
+      "energy_kwh": 77.30714400916574,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0018",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 312548.1591100483,
+      "sortie_count": 19,
+      "transport_return_s": 13183.609688537472,
+      "energy_kwh": 77.26130741318264,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0019",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 315229.09355685976,
+      "sortie_count": 19,
+      "transport_return_s": 13178.41757855695,
+      "energy_kwh": 77.26130741318264,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0020",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 315624.24853414006,
+      "sortie_count": 19,
+      "transport_return_s": 13183.609688537472,
+      "energy_kwh": 76.92574688086054,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0021",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 319159.6429603699,
+      "sortie_count": 19,
+      "transport_return_s": 13034.445986402687,
+      "energy_kwh": 76.96790584385936,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0022",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 321799.451714415,
+      "sortie_count": 19,
+      "transport_return_s": 13134.17270281724,
+      "energy_kwh": 76.81781366859134,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0023",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 324594.80065461586,
+      "sortie_count": 19,
+      "transport_return_s": 12581.451013168467,
+      "energy_kwh": 77.4677294089514,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0024",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 332016.9709817093,
+      "sortie_count": 19,
+      "transport_return_s": 12813.752791760973,
+      "energy_kwh": 77.26130741318264,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0025",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 334839.2715126908,
+      "sortie_count": 19,
+      "transport_return_s": 12910.088714808393,
+      "energy_kwh": 76.93756347365094,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0026",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 335753.060405801,
+      "sortie_count": 19,
+      "transport_return_s": 12813.752791760973,
+      "energy_kwh": 76.93401579056712,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0027",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 337902.1142282968,
+      "sortie_count": 19,
+      "transport_return_s": 12910.088714808393,
+      "energy_kwh": 76.86820930347066,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0028",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 349788.05040032946,
+      "sortie_count": 19,
+      "transport_return_s": 12502.278792255831,
+      "energy_kwh": 77.30714400916574,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0029",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 373214.6806609528,
+      "sortie_count": 19,
+      "transport_return_s": 12419.115090121046,
+      "energy_kwh": 77.30714400916574,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0030",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 377486.80076623533,
+      "sortie_count": 19,
+      "transport_return_s": 12598.614715303253,
+      "energy_kwh": 76.96790584385936,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0031",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 399020.6201938526,
+      "sortie_count": 19,
+      "transport_return_s": 12563.086682275309,
+      "energy_kwh": 77.26130741318264,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0032",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 400931.20624252607,
+      "sortie_count": 19,
+      "transport_return_s": 12518.8418065356,
+      "energy_kwh": 76.96790584385936,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0033",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 401968.2411708898,
+      "sortie_count": 19,
+      "transport_return_s": 12419.115090121046,
+      "energy_kwh": 77.11345090327374,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0034",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 451886.7567843747,
+      "sortie_count": 19,
+      "transport_return_s": 12050.741853951302,
+      "energy_kwh": 77.4677294089514,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0035",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 517353.5714460862,
+      "sortie_count": 19,
+      "transport_return_s": 12147.077776998722,
+      "energy_kwh": 77.30714400916574,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0036",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 522951.1490064171,
+      "sortie_count": 18,
+      "transport_return_s": 13791.78461072754,
+      "energy_kwh": 78.40577794155654,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0037",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 536343.1682628791,
+      "sortie_count": 19,
+      "transport_return_s": 12081.077776998722,
+      "energy_kwh": 76.96790584385936,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0038",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 680955.5839303115,
+      "sortie_count": 19,
+      "transport_return_s": 13071.136132387672,
+      "energy_kwh": 76.64416190432766,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0039",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 743755.2430002165,
+      "sortie_count": 17,
+      "transport_return_s": 14460.265183613716,
+      "energy_kwh": 75.74192200780779,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0040",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 756125.488174863,
+      "sortie_count": 17,
+      "transport_return_s": 14460.265183613716,
+      "energy_kwh": 75.57385312010955,
+      "hard_violations": 0,
+      "is_formal": false
+    },
+    {
+      "candidate_id": "P0041",
+      "source_stage": "基础搜索保存档案",
+      "weighted_delay_s": 809776.9229279323,
+      "sortie_count": 17,
+      "transport_return_s": 14197.439642769337,
+      "energy_kwh": 76.89786899241209,
+      "hard_violations": 0,
+      "is_formal": false
+    }
+  ],
+  "ontime_candidate_ids": [
+    "P0000",
+    "P0001",
+    "P0002",
+    "P0003",
+    "P0004",
+    "P0005",
+    "P0006",
+    "P0007",
+    "P0008",
+    "P0009",
+    "P0010",
+    "P0011"
+  ],
+  "preferences": [
+    {
+      "option_id": "epsilon_0",
+      "relaxation_ratio": 0.0,
+      "allowed_return_s": 5903.03815462762,
+      "actual_return_s": 5903.03815462762,
+      "energy_kwh": 65.56619536868014,
+      "sortie_count": 24,
+      "weighted_delay_s": 0.0,
+      "source": "current_fastest"
+    },
+    {
+      "option_id": "epsilon_0.05",
+      "relaxation_ratio": 0.05,
+      "allowed_return_s": 6198.190062359002,
+      "actual_return_s": 6156.103798828754,
+      "energy_kwh": 65.37874677003522,
+      "sortie_count": 24,
+      "weighted_delay_s": 0.0,
+      "source": "current_fastest+joint_resources"
+    },
+    {
+      "option_id": "epsilon_0.1",
+      "relaxation_ratio": 0.1,
+      "allowed_return_s": 6493.341970090383,
+      "actual_return_s": 6471.940691004438,
+      "energy_kwh": 65.23510998901722,
+      "sortie_count": 24,
+      "weighted_delay_s": 0.0,
+      "source": "current_fastest+joint_resources"
+    },
+    {
+      "option_id": "epsilon_0.2",
+      "relaxation_ratio": 0.2,
+      "allowed_return_s": 7083.645785553144,
+      "actual_return_s": 7070.178298183004,
+      "energy_kwh": 63.370158275152974,
+      "sortie_count": 22,
+      "weighted_delay_s": 0.0,
+      "source": "reference_paper_recomputed+joint_resources"
+    }
+  ],
+  "formal_candidate_id": "P0009",
+  "overlapping_display_coordinates": []
+}

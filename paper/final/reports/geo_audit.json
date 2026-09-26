@@ -1,0 +1,504 @@
+{
+  "source_files": [
+    {
+      "path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\数字高程模型数据（DEM）\\镇龙乡及周边30米DEM.tif",
+      "sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03"
+    },
+    {
+      "path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\数字高程模型数据（DEM）\\镇龙乡及周边30米DEM.mat",
+      "sha256": "c68703e0cc8f94f4bd52ff6e9974b66a2dae33865f0723ad71c04b6694bf4fbf"
+    },
+    {
+      "path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡地理空间数据说明.pdf",
+      "sha256": "6d1522c6832a5d91a108dae0d07954845025c0dabd44af8ee78c7860d7c405e4"
+    }
+  ],
+  "geotiff": {
+    "crs": "EPSG:4326",
+    "shape": [
+      1309,
+      1486
+    ],
+    "dtype": "float32",
+    "nodata_tag": null,
+    "units_metadata": [
+      null
+    ],
+    "tags": {
+      "TIFFTAG_SOFTWARE": "MATLAB 9.14, Mapping Toolbox 5.5",
+      "AREA_OR_POINT": "Point"
+    },
+    "bounds": [
+      109.0326388888889,
+      22.86125,
+      109.44541666666667,
+      23.22486111111111
+    ],
+    "transform": [
+      0.00027777777777777393,
+      0.0,
+      109.0326388888889,
+      0.0,
+      -0.0002777777777777777,
+      23.22486111111111
+    ],
+    "global_min_m": 41.68907928466797,
+    "global_max_m": 1132.8560791015625,
+    "sentinel_count": 0,
+    "nonfinite_count": 0
+  },
+  "mat_comparison": {
+    "dem_arrays_exact_equal": true,
+    "dem_max_abs_difference_m": 0.0,
+    "epsg_code": 4326,
+    "nodata": -32767.0,
+    "longitude_max_abs_difference_deg": 1.4210854715202004e-14,
+    "latitude_max_abs_difference_deg": 3.552713678800501e-15,
+    "affine_max_abs_difference": 3.848917712323541e-18,
+    "mat_row_latitude_decreases": true,
+    "mat_column_longitude_increases": true
+  },
+  "frozen_manifest_comparison": {
+    "q1": {
+      "path": "work\\team_repo\\results\\q1\\input_manifest.json",
+      "expected_sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03",
+      "matches": true
+    },
+    "q2": {
+      "path": "work\\team_repo\\results\\q2\\input_manifest.json",
+      "expected_sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03",
+      "matches": true
+    },
+    "q3": {
+      "path": "work\\team_repo\\results\\q3\\input_manifest.json",
+      "expected_sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03",
+      "matches": true
+    }
+  },
+  "profile_replay": {
+    "service": "S014",
+    "source_rows": 609,
+    "recomputed_rows": 609,
+    "closed_pixel_method_source": "work/team_repo/src/core/terrain.py:Terrain.cell_intervals",
+    "source_method_sha256": "06aefba985eb10b54fe02a7a2bec0692c757854c7dae1e98c8ce99b3562a92d7",
+    "saved_csv_sha256": "c34c4ee5ac5a9c43634942281add1b27bddf57857ac82f52fda619f1ab335f00",
+    "saved_distance_m": 5419.601858213669,
+    "recomputed_wgs84_distance_m": 5419.60185821314,
+    "max_abs_differences": {
+      "begin_m": 5.293259164318442e-10,
+      "end_m": 5.293259164318442e-10,
+      "elevation_m": 0.0
+    },
+    "elevations_exactly_equal": true,
+    "within_repository_result_tolerance": true,
+    "repository_result_tolerance": 1e-05,
+    "tolerance_source": "src/core/constraints.py:RESULT_TOLERANCE",
+    "saved_max_dem_m": 541.9473876953125,
+    "recomputed_max_dem_m": 541.9473876953125
+  },
+  "geo_csv_views": [
+    {
+      "path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\村镇点位\\镇龙乡及周边村镇点位.csv",
+      "sha256": "b6e2ffc0b728fb33c532e471b6f27dcb54ff70a9a2025546539eea97e5232d6f",
+      "encoding": "UTF-8 BOM compatible",
+      "row_count": 166,
+      "fields": [
+        "点位编号",
+        "名称",
+        "类别",
+        "OSM编号",
+        "位置",
+        "经度",
+        "纬度"
+      ],
+      "coordinate_fields": {
+        "经度": "WGS84 longitude degrees",
+        "纬度": "WGS84 latitude degrees"
+      },
+      "types": {
+        "类别": [
+          "乡镇",
+          "村庄"
+        ]
+      },
+      "bounds_lon_lat": [
+        109.036,
+        22.8624,
+        109.445,
+        23.2242
+      ]
+    },
+    {
+      "path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\水体（面）\\镇龙乡及周边水体.csv",
+      "sha256": "4d72a2b46d893701da635ac1b083539568ad3a8b9ffb1b28b09c06bf8af74324",
+      "encoding": "UTF-8 BOM compatible",
+      "row_count": 4229,
+      "fields": [
+        "水体要素编号",
+        "多边形编号",
+        "环编号",
+        "点序号",
+        "名称",
+        "水体类型",
+        "OSM编号",
+        "经度",
+        "纬度"
+      ],
+      "coordinate_fields": {
+        "经度": "WGS84 longitude degrees",
+        "纬度": "WGS84 latitude degrees"
+      },
+      "types": {
+        "水体类型": [
+          "一般水体",
+          "水库",
+          "池塘",
+          "蓄水池"
+        ]
+      },
+      "bounds_lon_lat": [
+        109.0328115,
+        22.8615453,
+        109.4415618,
+        23.2231813
+      ]
+    },
+    {
+      "path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\水系（线）\\镇龙乡及周边水系.csv",
+      "sha256": "3502b997e000e8043e36b7159202bafb12a0c21d23a8b5ad4ec6877bad580a65",
+      "encoding": "UTF-8 BOM compatible",
+      "row_count": 4570,
+      "fields": [
+        "水系要素编号",
+        "点序号",
+        "名称",
+        "水系类型",
+        "OSM编号",
+        "长度_km",
+        "经度",
+        "纬度"
+      ],
+      "coordinate_fields": {
+        "经度": "WGS84 longitude degrees",
+        "纬度": "WGS84 latitude degrees"
+      },
+      "types": {
+        "水系类型": [
+          "排水沟",
+          "河流",
+          "渠道",
+          "溪流"
+        ]
+      },
+      "bounds_lon_lat": [
+        109.0328115,
+        22.8615453,
+        109.4450943,
+        23.2247021
+      ]
+    },
+    {
+      "path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\道路\\镇龙乡及周边道路.csv",
+      "sha256": "adcd23b4ae2c28475412fc2c8a3c0504b2a293ac2ec25faa1da2fe3c3d063ebe",
+      "encoding": "UTF-8 BOM compatible",
+      "row_count": 21015,
+      "fields": [
+        "道路要素编号",
+        "点序号",
+        "名称",
+        "道路类型",
+        "OSM编号",
+        "经度",
+        "纬度"
+      ],
+      "coordinate_fields": {
+        "经度": "WGS84 longitude degrees",
+        "纬度": "WGS84 latitude degrees"
+      },
+      "types": {
+        "道路类型": [
+          "一般道路",
+          "主要道路",
+          "主要道路连接线",
+          "人行步道",
+          "公路服务区",
+          "农林作业道路",
+          "在建道路",
+          "小径",
+          "居住区道路",
+          "干线公路",
+          "干线公路连接线",
+          "普通道路",
+          "服务通道",
+          "次要道路",
+          "次要道路连接线",
+          "步行街",
+          "生活街道",
+          "高速公路",
+          "高速公路匝道"
+        ]
+      },
+      "bounds_lon_lat": [
+        109.0328115,
+        22.8615453,
+        109.4450943,
+        23.2247021
+      ]
+    }
+  ],
+  "official_node_vs_dem_samples": [
+    {
+      "node": "O01",
+      "longitude": 109.2308517,
+      "latitude": 23.0085095,
+      "official_node_elevation_m": 127.7,
+      "raw_dem_pixel_m": 128.7255401611328,
+      "dem_minus_official_node_m": 1.0255401611328097,
+      "action": "retain both definitions; no overwrite"
+    },
+    {
+      "node": "S001",
+      "longitude": 109.2432319,
+      "latitude": 23.0335927,
+      "official_node_elevation_m": 154.0,
+      "raw_dem_pixel_m": 153.96136474609375,
+      "dem_minus_official_node_m": -0.03863525390625,
+      "action": "retain both definitions; no overwrite"
+    },
+    {
+      "node": "S002",
+      "longitude": 109.2585519,
+      "latitude": 23.0703271,
+      "official_node_elevation_m": 189.5,
+      "raw_dem_pixel_m": 188.7942352294922,
+      "dem_minus_official_node_m": -0.7057647705078125,
+      "action": "retain both definitions; no overwrite"
+    },
+    {
+      "node": "S003",
+      "longitude": 109.1688578,
+      "latitude": 23.0402714,
+      "official_node_elevation_m": 308.5,
+      "raw_dem_pixel_m": 308.51068115234375,
+      "dem_minus_official_node_m": 0.01068115234375,
+      "action": "retain both definitions; no overwrite"
+    },
+    {
+      "node": "S004",
+      "longitude": 109.2381714,
+      "latitude": 23.0778414,
+      "official_node_elevation_m": 198.3,
+      "raw_dem_pixel_m": 195.11575317382812,
+      "dem_minus_official_node_m": -3.1842468261718864,
+      "action": "retain both definitions; no overwrite"
+    },
+    {
+      "node": "S005",
+      "longitude": 109.2283003,
+      "latitude": 23.0561338,
+      "official_node_elevation_m": 165.0,
+      "raw_dem_pixel_m": 169.03955078125,
+      "dem_minus_official_node_m": 4.03955078125,
+      "action": "retain both definitions; no overwrite"
+    },
+    {
+      "node": "S006",
+      "longitude": 109.1997836,
+      "latitude": 23.007714,
+      "official_node_elevation_m": 284.8,
+      "raw_dem_pixel_m": 275.1272277832031,
+      "dem_minus_official_node_m": -9.672772216796886,
+      "action": "retain both definitions; no overwrite"
+    },
+    {
+      "node": "S007",
+      "longitude": 109.1928191,
+      "latitude": 23.0294186,
+      "official_node_elevation_m": 318.5,
+      "raw_dem_pixel_m": 314.2220458984375,
+      "dem_minus_official_node_m": -4.2779541015625,
+      "action": "retain both definitions; no overwrite"
+    },
+    {
+      "node": "S008",
+      "longitude": 109.2127472,
+      "latitude": 23.0795113,
+      "official_node_elevation_m": 240.9,
+      "raw_dem_pixel_m": 248.2891845703125,
+      "dem_minus_official_node_m": 7.389184570312494,
+      "action": "retain both definitions; no overwrite"
+    },
+    {
+      "node": "S009",
+      "longitude": 109.2541424,
+      "latitude": 23.0552989,
+      "official_node_elevation_m": 200.0,
+      "raw_dem_pixel_m": 189.4370880126953,
+      "dem_minus_official_node_m": -10.562911987304688,
+      "action": "retain both definitions; no overwrite"
+    },
+    {
+      "node": "S010",
+      "longitude": 109.2760168,
+      "latitude": 23.0194009,
+      "official_node_elevation_m": 321.6,
+      "raw_dem_pixel_m": 321.5816650390625,
+      "dem_minus_official_node_m": -0.018334960937522737,
+      "action": "retain both definitions; no overwrite"
+    },
+    {
+      "node": "S011",
+      "longitude": 109.2203356,
+      "latitude": 23.0319231,
+      "official_node_elevation_m": 182.1,
+      "raw_dem_pixel_m": 178.04286193847656,
+      "dem_minus_official_node_m": -4.057138061523432,
+      "action": "retain both definitions; no overwrite"
+    },
+    {
+      "node": "S012",
+      "longitude": 109.2831357,
+      "latitude": 23.054464,
+      "official_node_elevation_m": 249.8,
+      "raw_dem_pixel_m": 253.31507873535156,
+      "dem_minus_official_node_m": 3.515078735351551,
+      "action": "retain both definitions; no overwrite"
+    },
+    {
+      "node": "S013",
+      "longitude": 109.2713839,
+      "latitude": 23.0310882,
+      "official_node_elevation_m": 321.7,
+      "raw_dem_pixel_m": 321.70806884765625,
+      "dem_minus_official_node_m": 0.008068847656261369,
+      "action": "retain both definitions; no overwrite"
+    },
+    {
+      "node": "S014",
+      "longitude": 109.2835966,
+      "latitude": 23.0052097,
+      "official_node_elevation_m": 321.0,
+      "raw_dem_pixel_m": 320.9825134277344,
+      "dem_minus_official_node_m": -0.017486572265625,
+      "action": "retain both definitions; no overwrite"
+    },
+    {
+      "node": "S015",
+      "longitude": 109.1923786,
+      "latitude": 23.0494548,
+      "official_node_elevation_m": 444.5,
+      "raw_dem_pixel_m": 436.229248046875,
+      "dem_minus_official_node_m": -8.270751953125,
+      "action": "retain both definitions; no overwrite"
+    }
+  ],
+  "description_pdf_pages": [
+    {
+      "page": 1,
+      "text": "镇龙乡地理空间数据说明\n本资料包提供镇龙乡及周边区域的30 米数字高程模型（DEM）、道路、\n村镇点位、水体（面）、水系（线）以及交互式HTML 地图。DEM 在对应文\n件夹内提供GeoTIFF 和MAT 两种格式；道路、村镇点位、水体（面）和水系\n（线）均在各自文件夹内提供CSV 和MAT 两种格式，两种格式的数据内容一\n致，便于在不同软件环境中读取使用。\n一、实际文件与数据内容\n数据类别\n目录或文件\n数字高程模型\n数字高程模型数据（DEM ）/ 镇龙乡及周边30 米\nDEM.tif、.mat\n道路\n道路/镇龙乡及周边道路.csv、.mat\n村镇点位\n村镇点位/镇龙乡及周边村镇点位.csv、.mat\n水体（面）\n水体（面）/镇龙乡及周边水体.csv、.mat\n水系（线）\n水系（线）/镇龙乡及周边水系.csv、.mat\n交互地图\n镇龙乡地理空间详情地图.html\n二、坐标与高程口径\nDEM 来源于Copernicus DEM GLO-30，为数字表面模型（DSM）。坐标参\n考系为WGS 84（EPSG:4326），经纬度方向像元大小均为1/3600°，名义地面\n分辨率为30 米。栅格中心坐标范围为东经109.0328°—109.4453° 、北纬\n22.8614°—23.2247°；有效高程约为41.7—1132.9 米，NoData 值为−32767。\nGeoTIFF 与MAT 中的栅格数值、坐标和NoData 口径一致。\n"
+    }
+  ],
+  "display_spec": {
+    "source_path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\数字高程模型数据（DEM）\\镇龙乡及周边30米DEM.tif",
+    "source_sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03",
+    "mat_path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\数字高程模型数据（DEM）\\镇龙乡及周边30米DEM.mat",
+    "mat_sha256": "c68703e0cc8f94f4bd52ff6e9974b66a2dae33865f0723ad71c04b6694bf4fbf",
+    "description_path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡地理空间数据说明.pdf",
+    "description_sha256": "6d1522c6832a5d91a108dae0d07954845025c0dabd44af8ee78c7860d7c405e4",
+    "frozen_input_manifest_match": true,
+    "source_crs": "EPSG:4326",
+    "source_vertical_unit": "m",
+    "source_kind": "Copernicus DEM GLO-30 digital surface model (DSM), named DEM in official package",
+    "source_affine": [
+      0.00027777777777777393,
+      0.0,
+      109.0326388888889,
+      0.0,
+      -0.0002777777777777777,
+      23.22486111111111
+    ],
+    "source_shape": [
+      1309,
+      1486
+    ],
+    "source_row_direction": "north to south",
+    "source_column_direction": "west to east",
+    "tif_nodata_tag": null,
+    "document_and_mat_nodata": -32767.0,
+    "invalid_pixels": 0,
+    "norm": {
+      "vmin": 120.41609191894531,
+      "vmax": 746.0787353515625,
+      "unit": "m",
+      "rule": "min/max of valid original pixels whose centres lie inside the single unchanged shared ENU map extent",
+      "valid_pixel_count": 138600
+    },
+    "map_extent_km": [
+      -7.059556520154224,
+      6.113005558677602,
+      -0.858119006130119,
+      8.35683868407148
+    ],
+    "display_projection": "WGS84 geodetic h=0 → ECEF → O01 local east/north orthographic plane (km), same as common.project",
+    "reprojection_method": "Project each original pixel footprint corner; flat-shaded original cell values, no interpolation. Rasterize only the display mesh for PDF/SVG. Equivalent piecewise-constant nearest-cell display, no resampled data written.",
+    "cmap_colors": [
+      "#F2F4EF",
+      "#DCE3CE",
+      "#BECBA7",
+      "#A6AF8C",
+      "#B6A387",
+      "#927F6A"
+    ],
+    "cmap_normalized_stops": [
+      0,
+      0.2,
+      0.4,
+      0.6,
+      0.8,
+      1
+    ],
+    "terrain_rgb_fraction": 0.4,
+    "white_rgb_fraction": 0.6,
+    "hillshade_strength": 0.12,
+    "hillshade_azimuth_deg": 315,
+    "hillshade_altitude_deg": 45,
+    "hillshade_spacing": "WGS84 Geod metric adjacent-pixel dx/dy; array row derivative reversed to north",
+    "metric_pixel_width_range_m": [
+      28.460736210057167,
+      28.478423903467874
+    ],
+    "metric_pixel_height_range_m": [
+      30.762225276836425,
+      30.762552494204833
+    ],
+    "physics_input_unchanged": true,
+    "display_may_not_be_used_for_physics": true,
+    "water_semantics": "optional ordinary mapped rivers/water polygons; not flood inundation extent",
+    "dependencies": {
+      "rasterio": "1.5.1",
+      "pyproj": "3.8.0",
+      "numpy": "2.3.5",
+      "scipy": "1.18.1",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "scope": "Read and deterministic geographic/profile checks only; no optimizer, route replacement, input raster writes, DEM translation, calibration or parameter changes.",
+  "metadata_discrepancy": {
+    "issue": "PDF/MAT specify NoData=-32767, but original GeoTIFF has no NoData tag.",
+    "impact": "No sentinel or nonfinite pixel exists; values and required profile unchanged. Display honours declared sentinel without adding values.",
+    "resolution": "Preserve original files; record discrepancy, do not rewrite NoData metadata."
+  },
+  "display_geometry_crosscheck": {
+    "map_extent_max_absolute_difference_km": 1.1102230246251565e-16,
+    "node_projection_max_absolute_difference_km": 8.881784197001252e-16,
+    "interpretation": "Same WGS84 ECEF to O01 ENU formula; only last-bit operation ordering differs."
+  },
+  "preview_review": {
+    "source": "terrain_preview.pdf rendered by PyMuPDF at 160 dpi",
+    "color_reviewed": true,
+    "grayscale_reviewed": true,
+    "chinese_glyphs_visible": true,
+    "note": "Illustrative module QA; final figure titles, legends and colourbar placement are checked in their own layouts."
+  },
+  "unchanged_source_sha_after_preview": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03"
+}

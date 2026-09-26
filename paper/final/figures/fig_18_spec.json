@@ -1,0 +1,374 @@
+{
+  "figure": 18,
+  "number": 18,
+  "caption": "Q3的24个运输架次与指定中继服务窗。灰条为完整任务区间，开括号仅表示设计用1 s与0.5 s联合采样中直连不足点的首末时刻包络，括号内部不表示每一时刻均直连不足。上方为三个完整服务窗，右侧列出正式指派。连续区间可用性另见图21。",
+  "width_cm": 16.3,
+  "height_cm": 17.4,
+  "dpi": 600,
+  "source_commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "sources": [
+    {
+      "path": "work/team_repo/results/q3/Q3_transport_trips.csv",
+      "repo_path": "results/q3/Q3_transport_trips.csv",
+      "sha256": "2214d1607f4f88fd0986e9640768bc680ede06f719544095d315ffd636b68e49"
+    },
+    {
+      "path": "work/team_repo/results/q3/Q3_communication.csv",
+      "repo_path": "results/q3/Q3_communication.csv",
+      "sha256": "d5a9f7dc4e47ea7aa671966ff989e523d39cf11c3cfd7f33ac1a5e323a6b9942"
+    },
+    {
+      "path": "work/team_repo/results/q3/Q3_relay_sorties.csv",
+      "repo_path": "results/q3/Q3_relay_sorties.csv",
+      "sha256": "cd3fde3f17e26bfc30979ed47a9c7fcf671a5eda89549be53417ab7e266e64c8"
+    },
+    {
+      "path": "work/team_repo/src/q3/preparation.py",
+      "repo_path": "src/q3/preparation.py",
+      "sha256": "ecbf82585074de0de19fa2c4cc7412585f82a56394eb2104b7bbc6575bd60753"
+    },
+    {
+      "path": "work/team_repo/src/q3/solver.py",
+      "repo_path": "src/q3/solver.py",
+      "sha256": "8e6b7b70b202709b08dd3ef8a620a3e49822e8c78d2a5775ad4344547c6eeb57"
+    },
+    {
+      "path": "work/team_repo/src/core/sampling.py",
+      "repo_path": "src/core/sampling.py",
+      "sha256": "58a9e960006051af209990d84480137db3c5956555070c4d758b5f29a1102a6f"
+    },
+    {
+      "path": "work/team_repo/src/config.py",
+      "repo_path": "src/config.py",
+      "sha256": "908b75387bc9e1dcd9fac99b60e632b6db0d15a3f3576c38c9ce2a48ca4996de"
+    },
+    {
+      "path": "work/team_repo/src/core/constraints.py",
+      "repo_path": "src/core/constraints.py",
+      "sha256": "e9cb7954711c20ca8380cd704934a61219bfeb47deb0fd18675fa9d22af21ceb"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "work/team_repo/results/q3/Q3_transport_trips.csv",
+      "repo_path": "results/q3/Q3_transport_trips.csv",
+      "sha256": "2214d1607f4f88fd0986e9640768bc680ede06f719544095d315ffd636b68e49"
+    },
+    {
+      "path": "work/team_repo/results/q3/Q3_communication.csv",
+      "repo_path": "results/q3/Q3_communication.csv",
+      "sha256": "d5a9f7dc4e47ea7aa671966ff989e523d39cf11c3cfd7f33ac1a5e323a6b9942"
+    },
+    {
+      "path": "work/team_repo/results/q3/Q3_relay_sorties.csv",
+      "repo_path": "results/q3/Q3_relay_sorties.csv",
+      "sha256": "cd3fde3f17e26bfc30979ed47a9c7fcf671a5eda89549be53417ab7e266e64c8"
+    },
+    {
+      "path": "work/team_repo/src/q3/preparation.py",
+      "repo_path": "src/q3/preparation.py",
+      "sha256": "ecbf82585074de0de19fa2c4cc7412585f82a56394eb2104b7bbc6575bd60753"
+    },
+    {
+      "path": "work/team_repo/src/q3/solver.py",
+      "repo_path": "src/q3/solver.py",
+      "sha256": "8e6b7b70b202709b08dd3ef8a620a3e49822e8c78d2a5775ad4344547c6eeb57"
+    },
+    {
+      "path": "work/team_repo/src/core/sampling.py",
+      "repo_path": "src/core/sampling.py",
+      "sha256": "58a9e960006051af209990d84480137db3c5956555070c4d758b5f29a1102a6f"
+    },
+    {
+      "path": "work/team_repo/src/config.py",
+      "repo_path": "src/config.py",
+      "sha256": "908b75387bc9e1dcd9fac99b60e632b6db0d15a3f3576c38c9ce2a48ca4996de"
+    },
+    {
+      "path": "work/team_repo/src/core/constraints.py",
+      "repo_path": "src/core/constraints.py",
+      "sha256": "e9cb7954711c20ca8380cd704934a61219bfeb47deb0fd18675fa9d22af21ceb"
+    }
+  ],
+  "font": {
+    "cn": "Noto Sans SC Publication",
+    "cn_path": "C:\\Users\\11346\\Documents\\Codex\\2026-09-26\\d-uav-paper-updated-pdf-pdf\\work\\raw_rebuild\\fonts\\NotoSansSC-Publication-Regular.ttf",
+    "latin": "DejaVu Sans"
+  },
+  "map_spec": null,
+  "field_mapping": {
+    "运输架次编号": "sortie_id",
+    "任务开始/返回O01": "task base bar",
+    "communication.开始/结束": "absolute first/last outage sample envelope",
+    "保障方式": "explicit sampled-direct classification",
+    "建链完成/服务结束": "complete relay service window"
+  },
+  "join_keys": [
+    "运输架次编号=架次编号",
+    "中继架次编号"
+  ],
+  "derivations": [
+    "display_min=source_s/60",
+    "envelope exported by solver as start+first,last of PlanPreparer union-grid outage",
+    "guard_left=envelope_start-service_start; guard_right=service_end-envelope_end"
+  ],
+  "precision": "No recovery from rounded manuscript values; original float values retained in data view. Display precision only affects labels.",
+  "plot_parameters": {
+    "size_cm": [
+      16.3,
+      17.4
+    ],
+    "png_dpi": 600,
+    "svg_editable_text": true,
+    "pdf_fonttype": 42,
+    "layout": {
+      "row_count": 24,
+      "common_xlim_min": [
+        0,
+        105
+      ],
+      "right_annotation_column": true
+    },
+    "model_colors": {
+      "A": "#0072B2",
+      "B": "#E69F00",
+      "C": "#009E73"
+    },
+    "relay_sortie_colors": [
+      "#6A51A3",
+      "#CC79A7",
+      "#8C6D31"
+    ],
+    "group_colors": [
+      "#4477AA",
+      "#EEAA33",
+      "#AA3377"
+    ],
+    "font_reference": "visual_system.json"
+  },
+  "checks": [
+    {
+      "name": "service guard column-000",
+      "passed": true,
+      "details": {
+        "left_s": 5.0,
+        "right_s": 1007.5687581016698
+      }
+    },
+    {
+      "name": "service guard column-002",
+      "passed": true,
+      "details": {
+        "left_s": 1243.7625361807611,
+        "right_s": 209.51673664215468
+      }
+    },
+    {
+      "name": "service guard column-003",
+      "passed": true,
+      "details": {
+        "left_s": 5.0,
+        "right_s": 1062.1834047322943
+      }
+    },
+    {
+      "name": "service guard column-006",
+      "passed": true,
+      "details": {
+        "left_s": 99.937927355145,
+        "right_s": 493.0328347947652
+      }
+    },
+    {
+      "name": "service guard column-007",
+      "passed": true,
+      "details": {
+        "left_s": 135.0257508667354,
+        "right_s": 920.7303840257375
+      }
+    },
+    {
+      "name": "service guard column-008",
+      "passed": true,
+      "details": {
+        "left_s": 799.7812359373374,
+        "right_s": 1991.4669242248724
+      }
+    },
+    {
+      "name": "service guard column-009",
+      "passed": true,
+      "details": {
+        "left_s": 1244.215381268142,
+        "right_s": 5.0
+      }
+    },
+    {
+      "name": "service guard column-010",
+      "passed": true,
+      "details": {
+        "left_s": 5.0,
+        "right_s": 2786.2481601622103
+      }
+    },
+    {
+      "name": "service guard column-011",
+      "passed": true,
+      "details": {
+        "left_s": 2404.6541037896322,
+        "right_s": 5.0
+      }
+    },
+    {
+      "name": "service guard column-013",
+      "passed": true,
+      "details": {
+        "left_s": 2587.892716494146,
+        "right_s": 5.000000099999852
+      }
+    },
+    {
+      "name": "service guard column-014",
+      "passed": true,
+      "details": {
+        "left_s": 908.7376378974086,
+        "right_s": 1765.8736824858001
+      }
+    },
+    {
+      "name": "service guard column-015",
+      "passed": true,
+      "details": {
+        "left_s": 1927.4315766042282,
+        "right_s": 5.0
+      }
+    },
+    {
+      "name": "service guard column-016",
+      "passed": true,
+      "details": {
+        "left_s": 1689.1216310849059,
+        "right_s": 1047.8360201906034
+      }
+    },
+    {
+      "name": "service guard column-017",
+      "passed": true,
+      "details": {
+        "left_s": 1979.8334425179055,
+        "right_s": 5.0
+      }
+    },
+    {
+      "name": "service guard column-018",
+      "passed": true,
+      "details": {
+        "left_s": 5.0,
+        "right_s": 117.57134262639283
+      }
+    },
+    {
+      "name": "service guard column-019",
+      "passed": true,
+      "details": {
+        "left_s": 5.0,
+        "right_s": 5.0
+      }
+    },
+    {
+      "name": "service guard column-020",
+      "passed": true,
+      "details": {
+        "left_s": 472.8226681293013,
+        "right_s": 1966.8314356603314
+      }
+    },
+    {
+      "name": "service guard column-021",
+      "passed": true,
+      "details": {
+        "left_s": 422.9952861778829,
+        "right_s": 5.0
+      }
+    },
+    {
+      "name": "24 unique transport rows",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "all-direct classifications are explicit",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "frozen plotted task data unchanged from final figure set",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "missing_or_limited_evidence": [
+    "Dense 1 s and 0.5 s state streams unavailable; envelopes retained, internal samples omitted."
+  ],
+  "visual_review": {
+    "status": "reviewed",
+    "color_pdf": {
+      "path": "work/raw_rebuild/fig_18_pdfqa.png",
+      "dpi": 180,
+      "observed": "Chinese and numeric labels visible; no clipping or label/legend collision observed"
+    },
+    "grayscale_pdf": {
+      "path": "work/raw_rebuild/fig_18_gray_120dpi.png",
+      "dpi": 120,
+      "observed": "Labels, shapes, hatches and critical values remain identifiable at the 16.3 cm publication width"
+    },
+    "map_qa": null,
+    "scope": "standalone publication-sized figure; new Word placement is reviewed separately"
+  },
+  "authoritative_tolerance": {
+    "value": 1e-05,
+    "unit": "seconds/kWh when applicable",
+    "source": "src/core/constraints.py:RESULT_TOLERANCE"
+  },
+  "no_optimization_rerun": true,
+  "file_hashes": {
+    "pdf": "7c4dba844006a6059a7f26e0a332b3308a368c5c57ce8f710fe477ca73198561",
+    "svg": "2481cb064906f955fd36db2963886eb609701f419599c5975041a1a2dd474861",
+    "png": "6f5a8c48bf6ff0f9f924c3082f8ba2758ad82442a060aedaaa0233af76aff718",
+    "data.json": "ba0c72888fc30d158e99021ae956d862a09f5d1b7f4e736e0c0c319ba37ae080",
+    "caption.txt": "12d4a16edcae30302ad68828ef2de67799ba842eceed22dd28638cc9493d8a70"
+  },
+  "raw_input_crosscheck": {
+    "audit": "work/raw_rebuild/input_audit.json",
+    "audit_sha256": "7279d52ceb0bce5c0e20498c328224441d2d4025147688f39d93d4dcb86f1aed",
+    "workbook_sources": [
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/中继无人机数据.xlsx",
+        "scope": "workspace",
+        "sha256": "be52643ff29419233e6a141dca03a04160a8af551cab36d8c49b51bb836bea04"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/物资需求与配送时限.xlsx",
+        "scope": "workspace",
+        "sha256": "5a3346159ceddcf585859d270b8f62114b388a1f737fbe64ffde0ee1fdc8170a"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/调度中心与服务区.xlsx",
+        "scope": "workspace",
+        "sha256": "541a7af1ded08c9a3ff448480332cb5f6a54902f0afa6e9bcd50c1d2b2b34e38"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/运输无人机数据.xlsx",
+        "scope": "workspace",
+        "sha256": "9296a657c07e042afba6aeea7999665d9cd24e00b592fd6c269de6e338480dcb"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/通信链路参数.xlsx",
+        "scope": "workspace",
+        "sha256": "1860d153199e7ae460ba36e83b673374e640e19de91ea167f2877271001f5f81"
+      }
+    ],
+    "result": "五份原始输入表与冻结四问清单逐字节一致，研究字段与实际读取器核对一致。",
+    "plotting_scope": "保留正式结果数据；原始输入交叉核对不构成新优化。"
+  }
+}

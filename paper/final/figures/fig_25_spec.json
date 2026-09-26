@@ -1,0 +1,250 @@
+{
+  "figure": 25,
+  "number": 25,
+  "caption": "冻结Q3共享峰值、现有库存与不同分区偏好的独立资源需求。标记仅在类别方向错位，横坐标始终为真实数量。红色数值为逐类正缺口；库存冗余不能跨类别抵消，资源数量指标不表示经济成本。",
+  "width_cm": 16.3,
+  "height_cm": 12.5,
+  "dpi": 600,
+  "source_commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "sources": [
+    {
+      "path": "work/team_repo/results/q4/Q4_gap_decomposition.csv",
+      "repo_path": "results/q4/Q4_gap_decomposition.csv",
+      "sha256": "95b92cd962de8be938d6e62ff7139306d1aae3ef21e17971bbe90adeaaf5fdff"
+    },
+    {
+      "path": "work/team_repo/results/q4/Q4_balanced_resources.csv",
+      "repo_path": "results/q4/Q4_balanced_resources.csv",
+      "sha256": "0f419eb48762ec4d592a2cb3e3ceb9b081c3227da6ae859fc283a998e62cbc52"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "work/team_repo/results/q4/Q4_gap_decomposition.csv",
+      "repo_path": "results/q4/Q4_gap_decomposition.csv",
+      "sha256": "95b92cd962de8be938d6e62ff7139306d1aae3ef21e17971bbe90adeaaf5fdff"
+    },
+    {
+      "path": "work/team_repo/results/q4/Q4_balanced_resources.csv",
+      "repo_path": "results/q4/Q4_balanced_resources.csv",
+      "sha256": "0f419eb48762ec4d592a2cb3e3ceb9b081c3227da6ae859fc283a998e62cbc52"
+    }
+  ],
+  "font": {
+    "cn": "Noto Sans SC Publication",
+    "cn_path": "C:\\Users\\11346\\Documents\\Codex\\2026-09-26\\d-uav-paper-updated-pdf-pdf\\work\\raw_rebuild\\fonts\\NotoSansSC-Publication-Regular.ttf",
+    "latin": "DejaVu Sans"
+  },
+  "map_spec": null,
+  "field_mapping": {
+    "pooled_peak": "shared peak",
+    "inventory": "stock",
+    "independent_total": "resource priority demand",
+    "required": "balanced demand",
+    "deficit/shortage": "independently checked class gap"
+  },
+  "join_keys": [
+    "K + resource",
+    "policy determined by source table"
+  ],
+  "derivations": [
+    "gap=max(0, demand-stock) by resource",
+    "total_gap=sum(class gaps)"
+  ],
+  "precision": "No recovery from rounded manuscript values; original float values retained in data view. Display precision only affects labels.",
+  "plot_parameters": {
+    "size_cm": [
+      16.3,
+      12.5
+    ],
+    "png_dpi": 600,
+    "svg_editable_text": true,
+    "pdf_fonttype": 42,
+    "layout": {
+      "offset_y": [
+        -0.23,
+        0,
+        0.23
+      ],
+      "xlim_both": [
+        0,
+        10.5
+      ]
+    },
+    "model_colors": {
+      "A": "#0072B2",
+      "B": "#E69F00",
+      "C": "#009E73"
+    },
+    "relay_sortie_colors": [
+      "#6A51A3",
+      "#CC79A7",
+      "#8C6D31"
+    ],
+    "group_colors": [
+      "#4477AA",
+      "#EEAA33",
+      "#AA3377"
+    ],
+    "font_reference": "visual_system.json"
+  },
+  "checks": [
+    {
+      "name": "K2 A_uav gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K2 B_uav gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K2 C_uav gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K2 A_bat gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K2 B_bat gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K2 C_bat gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K2 relay_uav gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K2 relay_comp gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K2 total gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K3 A_uav gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K3 B_uav gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K3 C_uav gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K3 A_bat gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K3 B_bat gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K3 C_bat gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K3 relay_uav gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K3 relay_comp gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "K3 total gaps",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "frozen plotted task data unchanged from final figure set",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "missing_or_limited_evidence": [],
+  "visual_review": {
+    "status": "reviewed",
+    "color_pdf": {
+      "path": "work/raw_rebuild/fig_25_pdfqa.png",
+      "dpi": 180,
+      "observed": "Chinese and numeric labels visible; no clipping or label/legend collision observed"
+    },
+    "grayscale_pdf": {
+      "path": "work/raw_rebuild/fig_25_gray_120dpi.png",
+      "dpi": 120,
+      "observed": "Labels, shapes, hatches and critical values remain identifiable at the 16.3 cm publication width"
+    },
+    "map_qa": null,
+    "scope": "standalone publication-sized figure; new Word placement is reviewed separately"
+  },
+  "authoritative_tolerance": {
+    "value": 1e-05,
+    "unit": "seconds/kWh when applicable",
+    "source": "src/core/constraints.py:RESULT_TOLERANCE"
+  },
+  "no_optimization_rerun": true,
+  "file_hashes": {
+    "pdf": "f83f569b7682140fe9c31d473674ff067861d35a2ce3aa4b5abc38a424e7b951",
+    "svg": "8921c82bbaabd22b85fbfb6e29fdd5fb0c4efa25c4a54ca33c0afec07706244b",
+    "png": "048f696e45432ee734af92e11741f85cf38805239236ebb9548d0b7e14deafa2",
+    "data.json": "ef90d03a342750444ba5fd68949bd0211a4d6b352a5f0f82dc8cd50c5b4e5b1b",
+    "caption.txt": "1dd3ec5341be18cbed7e37b92edf0f51ee445ad150554aa4dafe238a5ca5feee"
+  },
+  "raw_input_crosscheck": {
+    "audit": "work/raw_rebuild/input_audit.json",
+    "audit_sha256": "7279d52ceb0bce5c0e20498c328224441d2d4025147688f39d93d4dcb86f1aed",
+    "workbook_sources": [
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/中继无人机数据.xlsx",
+        "scope": "workspace",
+        "sha256": "be52643ff29419233e6a141dca03a04160a8af551cab36d8c49b51bb836bea04"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/物资需求与配送时限.xlsx",
+        "scope": "workspace",
+        "sha256": "5a3346159ceddcf585859d270b8f62114b388a1f737fbe64ffde0ee1fdc8170a"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/调度中心与服务区.xlsx",
+        "scope": "workspace",
+        "sha256": "541a7af1ded08c9a3ff448480332cb5f6a54902f0afa6e9bcd50c1d2b2b34e38"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/运输无人机数据.xlsx",
+        "scope": "workspace",
+        "sha256": "9296a657c07e042afba6aeea7999665d9cd24e00b592fd6c269de6e338480dcb"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/通信链路参数.xlsx",
+        "scope": "workspace",
+        "sha256": "1860d153199e7ae460ba36e83b673374e640e19de91ea167f2877271001f5f81"
+      }
+    ],
+    "result": "五份原始输入表与冻结四问清单逐字节一致，研究字段与实际读取器核对一致。",
+    "plotting_scope": "保留正式结果数据；原始输入交叉核对不构成新优化。"
+  }
+}

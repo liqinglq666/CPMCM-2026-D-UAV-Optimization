@@ -1,0 +1,463 @@
+{
+  "figure": 24,
+  "scenario_id": "frozen-2026-09-25-final",
+  "commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "time_origin": "official task origin; seconds in source, minutes by /60 when plotted",
+  "data": {
+    "partitions": [
+      {
+        "K": 3,
+        "policy": "资源优先",
+        "groups": [
+          {
+            "group": "G1",
+            "services": [
+              "S002",
+              "S003",
+              "S005",
+              "S006",
+              "S007",
+              "S008",
+              "S009",
+              "S010",
+              "S011",
+              "S012",
+              "S013",
+              "S014",
+              "S015"
+            ],
+            "boxes": 59,
+            "transport_trips": 21
+          },
+          {
+            "group": "G2",
+            "services": [
+              "S001"
+            ],
+            "boxes": 15,
+            "transport_trips": 2
+          },
+          {
+            "group": "G3",
+            "services": [
+              "S004"
+            ],
+            "boxes": 6,
+            "transport_trips": 1
+          }
+        ],
+        "resource_gap_total": 3
+      },
+      {
+        "K": 3,
+        "policy": "均衡偏好",
+        "groups": [
+          {
+            "group": "G1",
+            "services": [
+              "S002",
+              "S004",
+              "S009",
+              "S010",
+              "S013"
+            ],
+            "boxes": 23,
+            "transport_trips": 6
+          },
+          {
+            "group": "G2",
+            "services": [
+              "S001",
+              "S003",
+              "S007",
+              "S015"
+            ],
+            "boxes": 31,
+            "transport_trips": 7
+          },
+          {
+            "group": "G3",
+            "services": [
+              "S005",
+              "S006",
+              "S008",
+              "S011",
+              "S012",
+              "S014"
+            ],
+            "boxes": 26,
+            "transport_trips": 11
+          }
+        ],
+        "resource_gap_total": 9
+      }
+    ],
+    "frozen_unique_undirected_transport_edges": [
+      [
+        "O01",
+        "S001"
+      ],
+      [
+        "O01",
+        "S002"
+      ],
+      [
+        "O01",
+        "S003"
+      ],
+      [
+        "O01",
+        "S004"
+      ],
+      [
+        "O01",
+        "S005"
+      ],
+      [
+        "O01",
+        "S006"
+      ],
+      [
+        "O01",
+        "S007"
+      ],
+      [
+        "O01",
+        "S008"
+      ],
+      [
+        "O01",
+        "S009"
+      ],
+      [
+        "O01",
+        "S010"
+      ],
+      [
+        "O01",
+        "S011"
+      ],
+      [
+        "O01",
+        "S012"
+      ],
+      [
+        "O01",
+        "S013"
+      ],
+      [
+        "O01",
+        "S014"
+      ],
+      [
+        "O01",
+        "S015"
+      ],
+      [
+        "S002",
+        "S009"
+      ],
+      [
+        "S003",
+        "S007"
+      ],
+      [
+        "S003",
+        "S015"
+      ],
+      [
+        "S005",
+        "S011"
+      ],
+      [
+        "S009",
+        "S013"
+      ],
+      [
+        "S010",
+        "S013"
+      ]
+    ],
+    "nodes": {
+      "O01": {
+        "code": "O01",
+        "lon": 109.2308517,
+        "lat": 23.0085095,
+        "elev": 127.7
+      },
+      "S001": {
+        "code": "S001",
+        "lon": 109.2432319,
+        "lat": 23.0335927,
+        "elev": 154.0
+      },
+      "S002": {
+        "code": "S002",
+        "lon": 109.2585519,
+        "lat": 23.0703271,
+        "elev": 189.5
+      },
+      "S003": {
+        "code": "S003",
+        "lon": 109.1688578,
+        "lat": 23.0402714,
+        "elev": 308.5
+      },
+      "S004": {
+        "code": "S004",
+        "lon": 109.2381714,
+        "lat": 23.0778414,
+        "elev": 198.3
+      },
+      "S005": {
+        "code": "S005",
+        "lon": 109.2283003,
+        "lat": 23.0561338,
+        "elev": 165.0
+      },
+      "S006": {
+        "code": "S006",
+        "lon": 109.1997836,
+        "lat": 23.007714,
+        "elev": 284.8
+      },
+      "S007": {
+        "code": "S007",
+        "lon": 109.1928191,
+        "lat": 23.0294186,
+        "elev": 318.5
+      },
+      "S008": {
+        "code": "S008",
+        "lon": 109.2127472,
+        "lat": 23.0795113,
+        "elev": 240.9
+      },
+      "S009": {
+        "code": "S009",
+        "lon": 109.2541424,
+        "lat": 23.0552989,
+        "elev": 200.0
+      },
+      "S010": {
+        "code": "S010",
+        "lon": 109.2760168,
+        "lat": 23.0194009,
+        "elev": 321.6
+      },
+      "S011": {
+        "code": "S011",
+        "lon": 109.2203356,
+        "lat": 23.0319231,
+        "elev": 182.1
+      },
+      "S012": {
+        "code": "S012",
+        "lon": 109.2831357,
+        "lat": 23.054464,
+        "elev": 249.8
+      },
+      "S013": {
+        "code": "S013",
+        "lon": 109.2713839,
+        "lat": 23.0310882,
+        "elev": 321.7
+      },
+      "S014": {
+        "code": "S014",
+        "lon": 109.2835966,
+        "lat": 23.0052097,
+        "elev": 321.0
+      },
+      "S015": {
+        "code": "S015",
+        "lon": 109.1923786,
+        "lat": 23.0494548,
+        "elev": 444.5
+      }
+    },
+    "terrain": {
+      "source": {
+        "path": "work/raw_input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+        "scope": "workspace",
+        "sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03",
+        "kind": "original official DEM raster"
+      },
+      "display_map_spec": {
+        "projection": "WGS84椭球地表坐标到O01局部东—北切平面的正射显示投影（ECEF→ENU，节点高程不用于平面投影）",
+        "ellipsoid": {
+          "a_m": 6378137.0,
+          "inverse_flattening": 298.257223563
+        },
+        "origin": {
+          "longitude": 109.2308517,
+          "latitude": 23.0085095
+        },
+        "units": "km",
+        "xlim": [
+          -7.059556520154224,
+          6.113005558677602
+        ],
+        "ylim": [
+          -0.8581190061301189,
+          8.35683868407148
+        ],
+        "padding_fraction": 0.06,
+        "label_offsets": {
+          "O01": [
+            4,
+            -11
+          ],
+          "S001": [
+            3,
+            4
+          ],
+          "S002": [
+            3,
+            4
+          ],
+          "S003": [
+            3,
+            4
+          ],
+          "S004": [
+            3,
+            -10
+          ],
+          "S005": [
+            3,
+            4
+          ],
+          "S006": [
+            3,
+            4
+          ],
+          "S007": [
+            3,
+            4
+          ],
+          "S008": [
+            -26,
+            5
+          ],
+          "S009": [
+            4,
+            -11
+          ],
+          "S010": [
+            4,
+            -10
+          ],
+          "S011": [
+            3,
+            4
+          ],
+          "S012": [
+            -29,
+            5
+          ],
+          "S013": [
+            -29,
+            5
+          ],
+          "S014": [
+            -30,
+            6
+          ],
+          "S015": [
+            3,
+            4
+          ]
+        },
+        "dem_background": "original official 30 m GeoTIFF; displayed without terrain correction or smoothing",
+        "scale_bar_km": 2.0,
+        "research_geometry_unchanged": true,
+        "terrain": {
+          "source_path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\数字高程模型数据（DEM）\\镇龙乡及周边30米DEM.tif",
+          "source_sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03",
+          "mat_path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\数字高程模型数据（DEM）\\镇龙乡及周边30米DEM.mat",
+          "mat_sha256": "c68703e0cc8f94f4bd52ff6e9974b66a2dae33865f0723ad71c04b6694bf4fbf",
+          "description_path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡地理空间数据说明.pdf",
+          "description_sha256": "6d1522c6832a5d91a108dae0d07954845025c0dabd44af8ee78c7860d7c405e4",
+          "frozen_input_manifest_match": true,
+          "source_crs": "EPSG:4326",
+          "source_vertical_unit": "m",
+          "source_kind": "Copernicus DEM GLO-30 digital surface model (DSM), named DEM in official package",
+          "source_affine": [
+            0.00027777777777777393,
+            0.0,
+            109.0326388888889,
+            0.0,
+            -0.0002777777777777777,
+            23.22486111111111
+          ],
+          "source_shape": [
+            1309,
+            1486
+          ],
+          "source_row_direction": "north to south",
+          "source_column_direction": "west to east",
+          "tif_nodata_tag": null,
+          "document_and_mat_nodata": -32767.0,
+          "invalid_pixels": 0,
+          "norm": {
+            "vmin": 120.41609191894531,
+            "vmax": 746.0787353515625,
+            "unit": "m",
+            "rule": "min/max of valid original pixels whose centres lie inside the single unchanged shared ENU map extent",
+            "valid_pixel_count": 138600
+          },
+          "map_extent_km": [
+            -7.059556520154224,
+            6.113005558677602,
+            -0.858119006130119,
+            8.35683868407148
+          ],
+          "display_projection": "WGS84 geodetic h=0 → ECEF → O01 local east/north orthographic plane (km), same as common.project",
+          "reprojection_method": "Project each original pixel footprint corner; flat-shaded original cell values, no interpolation. Rasterize only the display mesh for PDF/SVG. Equivalent piecewise-constant nearest-cell display, no resampled data written.",
+          "cmap_colors": [
+            "#F2F4EF",
+            "#DCE3CE",
+            "#BECBA7",
+            "#A6AF8C",
+            "#B6A387",
+            "#927F6A"
+          ],
+          "cmap_normalized_stops": [
+            0,
+            0.2,
+            0.4,
+            0.6,
+            0.8,
+            1
+          ],
+          "terrain_rgb_fraction": 0.4,
+          "white_rgb_fraction": 0.6,
+          "hillshade_strength": 0.12,
+          "hillshade_azimuth_deg": 315,
+          "hillshade_altitude_deg": 45,
+          "hillshade_spacing": "WGS84 Geod metric adjacent-pixel dx/dy; array row derivative reversed to north",
+          "metric_pixel_width_range_m": [
+            28.460736210057167,
+            28.478423903467874
+          ],
+          "metric_pixel_height_range_m": [
+            30.762225276836425,
+            30.762552494204833
+          ],
+          "physics_input_unchanged": true,
+          "display_may_not_be_used_for_physics": true,
+          "water_semantics": "optional ordinary mapped rivers/water polygons; not flood inundation extent",
+          "dependencies": {
+            "rasterio": "1.5.1",
+            "pyproj": "3.8.0",
+            "numpy": "2.3.5",
+            "scipy": "1.18.1",
+            "matplotlib": "3.11.2"
+          }
+        }
+      },
+      "scope": "display only; unchanged frozen task geometry and results"
+    }
+  }
+}

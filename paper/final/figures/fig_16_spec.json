@@ -1,0 +1,157 @@
+{
+  "number": 16,
+  "figure": 16,
+  "name": "fig_16",
+  "caption": "Q2同型电池的任务占用与充电安排。实色条对应图15的运输架次，灰色斜纹仅表示正式记录中的充电区间；电池标签省略BAT，同型电池可以跨实体无人机复用。返航后电池须满足完整充电条件才再次使用，最后返航后的充电不计入5903.038 s的运输完工。",
+  "purpose": "对照实体机体与电池不同释放终点，忠实展示资源复用。",
+  "width_cm": 16.3,
+  "height_cm": 14.6,
+  "dpi": 600,
+  "font": {
+    "cn": "Noto Sans SC Publication",
+    "cn_path": "C:\\Users\\11346\\Documents\\Codex\\2026-09-26\\d-uav-paper-updated-pdf-pdf\\work\\raw_rebuild\\fonts\\NotoSansSC-Publication-Regular.ttf",
+    "latin": "DejaVu Sans"
+  },
+  "scenario": "Q2 formal frozen result; saved alternatives only when explicitly labelled",
+  "repository": "https://github.com/liqinglq666/CPMCM-2026-D-UAV-Optimization",
+  "commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "sources": [
+    {
+      "path": "results/q2/Q2_resource_check.csv",
+      "sha256": "7bff8da7130b2f8378c7f988852071079a7085c21c56a91521e7d5a053d61198"
+    },
+    {
+      "path": "results/q2/Q2_transport_trips_balanced.csv",
+      "sha256": "cc0bd1190dfe2a4eda3f2b20b9a679b2c040d611f43cad63a9ffa6a942d20d4c"
+    },
+    {
+      "path": "results/q2/Q2_metrics.json",
+      "sha256": "af6e393de5f7c7a10f38f79889e14a35374d53d32946ba961b7b333386a6191c"
+    },
+    {
+      "path": "src/core/constraints.py",
+      "sha256": "e9cb7954711c20ca8380cd704934a61219bfeb47deb0fd18675fa9d22af21ceb"
+    }
+  ],
+  "field_mapping": {
+    "架次编号": "sortie_id",
+    "资源编号": "resource_id",
+    "机型": "aircraft_type",
+    "任务占用开始（s）": "task_start_s",
+    "任务占用结束（s）": "return_s",
+    "充电开始（s）": "charge_start_s",
+    "充电结束（s）": "full_charge_s"
+  },
+  "join_keys": [
+    "sortie_id",
+    "resource_id"
+  ],
+  "derivations": [
+    "minutes=seconds/60",
+    "xmax_min=ceil(max(full_charge_s)/600)*10",
+    "resource occupancy intervals half-open; overlap tolerance from src/core/constraints.py=1e-5 s",
+    "charge intervals read directly; no charging values reconstructed"
+  ],
+  "units": {
+    "time": "min"
+  },
+  "time_origin": "正式任务全局时间起点 t=0",
+  "precision": "CSV/JSON完整精度用于坐标；图中文字单独按论文显示精度格式化。",
+  "parameters": {
+    "width_cm": 16.3,
+    "height_cm": 14.6,
+    "png_dpi": 600,
+    "editable_svg_text": true,
+    "pdf_fonttype": 42,
+    "units": {
+      "time": "min"
+    },
+    "axes_left": 0.14,
+    "axes_right": 0.98,
+    "physical_axes_width_cm": 13.692,
+    "time_xlim_min": [
+      0,
+      150
+    ],
+    "major_tick_min": 20,
+    "minor_tick_min": 10,
+    "group_gap_rows": 0.35,
+    "row_height": 0.56,
+    "waiting_charge_intervals": 0,
+    "task_text_color": {
+      "A": "white",
+      "B": "#222222",
+      "C": "#222222"
+    }
+  },
+  "data_checks": [
+    {
+      "check": "exact_24_tasks",
+      "passed": true
+    },
+    {
+      "check": "resource_count",
+      "passed": true
+    },
+    {
+      "check": "type_sortie_counts",
+      "passed": true
+    },
+    {
+      "check": "half_open_intervals_no_overlap",
+      "passed": true
+    },
+    {
+      "check": "uav_battery_task_endpoints_exactly_equal",
+      "passed": true
+    },
+    {
+      "check": "all_trips_match_formal_plan",
+      "passed": true
+    },
+    {
+      "check": "max_return_matches_formal_metric",
+      "passed": true
+    }
+  ],
+  "missing_materials": [],
+  "verification_scope": "对冻结输出做记录、键、数值和区间一致性核对；未重跑优化或原始DEM物理评价。",
+  "visual_review": {
+    "status": "passed",
+    "scope": "实际PDF彩色与灰度，16.3cm出版尺寸",
+    "report": "work/raw_rebuild/figures_01_16_qa.json"
+  },
+  "raw_input_crosscheck": {
+    "audit": "work/raw_rebuild/input_audit.json",
+    "audit_sha256": "7279d52ceb0bce5c0e20498c328224441d2d4025147688f39d93d4dcb86f1aed",
+    "workbook_sources": [
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/中继无人机数据.xlsx",
+        "scope": "workspace",
+        "sha256": "be52643ff29419233e6a141dca03a04160a8af551cab36d8c49b51bb836bea04"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/物资需求与配送时限.xlsx",
+        "scope": "workspace",
+        "sha256": "5a3346159ceddcf585859d270b8f62114b388a1f737fbe64ffde0ee1fdc8170a"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/调度中心与服务区.xlsx",
+        "scope": "workspace",
+        "sha256": "541a7af1ded08c9a3ff448480332cb5f6a54902f0afa6e9bcd50c1d2b2b34e38"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/运输无人机数据.xlsx",
+        "scope": "workspace",
+        "sha256": "9296a657c07e042afba6aeea7999665d9cd24e00b592fd6c269de6e338480dcb"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/通信链路参数.xlsx",
+        "scope": "workspace",
+        "sha256": "1860d153199e7ae460ba36e83b673374e640e19de91ea167f2877271001f5f81"
+      }
+    ],
+    "result": "五份原始输入表与冻结四问清单逐字节一致，研究字段与实际读取器核对一致。",
+    "plotting_scope": "保留正式结果数据；原始输入交叉核对不构成新优化。"
+  }
+}
