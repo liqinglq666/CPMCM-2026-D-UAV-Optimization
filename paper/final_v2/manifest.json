@@ -351,7 +351,7 @@
     "scripts/figures_v2/qa_figures.py": "3a5326ba4cfe1c3099995308d462e98c1e5f59150d22935648561cd5916139db",
     "scripts/figures_v2/replay_q2.py": "993e216a48e9e113ca9174a0fcfb7688954325ed3c688f67ac5d45b7263e8426",
     "scripts/figures_v2/replay_q3.py": "a709761c32c87a1c5f603c7c6140d7ff6f6248480593a96cf06f845bd48a8f89",
-    "scripts/figures_v2/verify_bundle.py": "472ea7d73d8dfc92d1f10385eb829d56e6d1321a7604e1b474aeb2281ed4dc13",
+    "scripts/figures_v2/verify_bundle.py": "45f169d20f2fba3636145a6b967d1d1fba2de4f539474f0a8238374aff581c60",
     "paper/figure_data_v2/fig_01_data.json": "4bc7bc135a056cc21b97fbddcbf1b840b0066db4a665734e130b7bb5c52bb7e0",
     "paper/figure_data_v2/fig_01_spec.json": "8ff772f9112a802d813eacad578167bdfa42bd9cd553d0633e4983e587712b89",
     "paper/figure_data_v2/fig_02_data.json": "01b1fad8c37679fac881784eca15b37d6eefea872d3e56b31a3421c344646a99",

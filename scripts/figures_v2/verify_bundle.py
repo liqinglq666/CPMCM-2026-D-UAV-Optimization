@@ -47,7 +47,7 @@ def main():
         checked.append((stem + ' data matches provenance', sha(RELEASE / 'figures' / (stem + '_data.json')) == spec['data_sha256']))
     failed = [name for name, ok in checked if not ok]
     print(json.dumps({'passed': len(checked) - len(failed), 'failed': failed, 'raw_inputs_unavailable': skipped,
-                      'scope': 'File/source integrity only; does not replace scientific validation or visual review.'}, ensure_ascii=False, indent=2))
+                      'scope': 'File/source integrity only; does not replace scientific validation or visual review.'}, ensure_ascii=True, indent=2))
     return bool(failed)
 
 
