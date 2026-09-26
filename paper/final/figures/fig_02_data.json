@@ -1,0 +1,414 @@
+{
+  "nodes": [
+    {
+      "service": "S001",
+      "lon": 109.2432319,
+      "lat": 23.0335927,
+      "elevation_m": 154.0,
+      "box_count": 15,
+      "marker_area_pt2": 135,
+      "box_ids": [
+        "S001-MED-01",
+        "S001-MED-02",
+        "S001-WAT-01",
+        "S001-WAT-02",
+        "S001-WAT-03",
+        "S001-WAT-04",
+        "S001-WAT-05",
+        "S001-WAT-06",
+        "S001-WAT-07",
+        "S001-WAT-08",
+        "S001-FOD-01",
+        "S001-FOD-02",
+        "S001-FOD-03",
+        "S001-HYG-01",
+        "S001-HYG-02"
+      ]
+    },
+    {
+      "service": "S002",
+      "lon": 109.2585519,
+      "lat": 23.0703271,
+      "elevation_m": 189.5,
+      "box_count": 8,
+      "marker_area_pt2": 72,
+      "box_ids": [
+        "S002-MED-01",
+        "S002-WAT-01",
+        "S002-WAT-02",
+        "S002-WAT-03",
+        "S002-WAT-04",
+        "S002-FOD-01",
+        "S002-FOD-02",
+        "S002-HYG-01"
+      ]
+    },
+    {
+      "service": "S003",
+      "lon": 109.1688578,
+      "lat": 23.0402714,
+      "elevation_m": 308.5,
+      "box_count": 8,
+      "marker_area_pt2": 72,
+      "box_ids": [
+        "S003-MED-01",
+        "S003-WAT-01",
+        "S003-WAT-02",
+        "S003-WAT-03",
+        "S003-WAT-04",
+        "S003-FOD-01",
+        "S003-FOD-02",
+        "S003-HYG-01"
+      ]
+    },
+    {
+      "service": "S004",
+      "lon": 109.2381714,
+      "lat": 23.0778414,
+      "elevation_m": 198.3,
+      "box_count": 6,
+      "marker_area_pt2": 54,
+      "box_ids": [
+        "S004-MED-01",
+        "S004-WAT-01",
+        "S004-WAT-02",
+        "S004-WAT-03",
+        "S004-FOD-01",
+        "S004-HYG-01"
+      ]
+    },
+    {
+      "service": "S005",
+      "lon": 109.2283003,
+      "lat": 23.0561338,
+      "elevation_m": 165.0,
+      "box_count": 6,
+      "marker_area_pt2": 54,
+      "box_ids": [
+        "S005-MED-01",
+        "S005-WAT-01",
+        "S005-WAT-02",
+        "S005-WAT-03",
+        "S005-FOD-01",
+        "S005-HYG-01"
+      ]
+    },
+    {
+      "service": "S006",
+      "lon": 109.1997836,
+      "lat": 23.007714,
+      "elevation_m": 284.8,
+      "box_count": 6,
+      "marker_area_pt2": 54,
+      "box_ids": [
+        "S006-MED-01",
+        "S006-WAT-01",
+        "S006-WAT-02",
+        "S006-WAT-03",
+        "S006-FOD-01",
+        "S006-HYG-01"
+      ]
+    },
+    {
+      "service": "S007",
+      "lon": 109.1928191,
+      "lat": 23.0294186,
+      "elevation_m": 318.5,
+      "box_count": 5,
+      "marker_area_pt2": 45,
+      "box_ids": [
+        "S007-MED-01",
+        "S007-WAT-01",
+        "S007-WAT-02",
+        "S007-FOD-01",
+        "S007-HYG-01"
+      ]
+    },
+    {
+      "service": "S008",
+      "lon": 109.2127472,
+      "lat": 23.0795113,
+      "elevation_m": 240.9,
+      "box_count": 5,
+      "marker_area_pt2": 45,
+      "box_ids": [
+        "S008-MED-01",
+        "S008-WAT-01",
+        "S008-WAT-02",
+        "S008-FOD-01",
+        "S008-HYG-01"
+      ]
+    },
+    {
+      "service": "S009",
+      "lon": 109.2541424,
+      "lat": 23.0552989,
+      "elevation_m": 200.0,
+      "box_count": 3,
+      "marker_area_pt2": 27,
+      "box_ids": [
+        "S009-MED-01",
+        "S009-WAT-01",
+        "S009-FOD-01"
+      ]
+    },
+    {
+      "service": "S010",
+      "lon": 109.2760168,
+      "lat": 23.0194009,
+      "elevation_m": 321.6,
+      "box_count": 3,
+      "marker_area_pt2": 27,
+      "box_ids": [
+        "S010-MED-01",
+        "S010-WAT-01",
+        "S010-FOD-01"
+      ]
+    },
+    {
+      "service": "S011",
+      "lon": 109.2203356,
+      "lat": 23.0319231,
+      "elevation_m": 182.1,
+      "box_count": 3,
+      "marker_area_pt2": 27,
+      "box_ids": [
+        "S011-MED-01",
+        "S011-WAT-01",
+        "S011-FOD-01"
+      ]
+    },
+    {
+      "service": "S012",
+      "lon": 109.2831357,
+      "lat": 23.054464,
+      "elevation_m": 249.8,
+      "box_count": 3,
+      "marker_area_pt2": 27,
+      "box_ids": [
+        "S012-MED-01",
+        "S012-WAT-01",
+        "S012-FOD-01"
+      ]
+    },
+    {
+      "service": "S013",
+      "lon": 109.2713839,
+      "lat": 23.0310882,
+      "elevation_m": 321.7,
+      "box_count": 3,
+      "marker_area_pt2": 27,
+      "box_ids": [
+        "S013-MED-01",
+        "S013-WAT-01",
+        "S013-FOD-01"
+      ]
+    },
+    {
+      "service": "S014",
+      "lon": 109.2835966,
+      "lat": 23.0052097,
+      "elevation_m": 321.0,
+      "box_count": 3,
+      "marker_area_pt2": 27,
+      "box_ids": [
+        "S014-MED-01",
+        "S014-WAT-01",
+        "S014-FOD-01"
+      ]
+    },
+    {
+      "service": "S015",
+      "lon": 109.1923786,
+      "lat": 23.0494548,
+      "elevation_m": 444.5,
+      "box_count": 3,
+      "marker_area_pt2": 27,
+      "box_ids": [
+        "S015-MED-01",
+        "S015-WAT-01",
+        "S015-FOD-01"
+      ]
+    }
+  ],
+  "origin": {
+    "code": "O01",
+    "lon": 109.2308517,
+    "lat": 23.0085095,
+    "elev": 127.7
+  },
+  "map_spec": {
+    "projection": "WGS84椭球地表坐标到O01局部东—北切平面的正射显示投影（ECEF→ENU，节点高程不用于平面投影）",
+    "ellipsoid": {
+      "a_m": 6378137.0,
+      "inverse_flattening": 298.257223563
+    },
+    "origin": {
+      "longitude": 109.2308517,
+      "latitude": 23.0085095
+    },
+    "units": "km",
+    "xlim": [
+      -7.059556520154224,
+      6.113005558677602
+    ],
+    "ylim": [
+      -0.8581190061301189,
+      8.35683868407148
+    ],
+    "padding_fraction": 0.06,
+    "label_offsets": {
+      "O01": [
+        4,
+        -11
+      ],
+      "S001": [
+        3,
+        4
+      ],
+      "S002": [
+        3,
+        4
+      ],
+      "S003": [
+        3,
+        4
+      ],
+      "S004": [
+        3,
+        -10
+      ],
+      "S005": [
+        3,
+        4
+      ],
+      "S006": [
+        3,
+        4
+      ],
+      "S007": [
+        3,
+        4
+      ],
+      "S008": [
+        -26,
+        5
+      ],
+      "S009": [
+        4,
+        -11
+      ],
+      "S010": [
+        4,
+        -10
+      ],
+      "S011": [
+        3,
+        4
+      ],
+      "S012": [
+        -29,
+        5
+      ],
+      "S013": [
+        -29,
+        5
+      ],
+      "S014": [
+        -30,
+        6
+      ],
+      "S015": [
+        3,
+        4
+      ]
+    },
+    "dem_background": "original official 30 m GeoTIFF; displayed without terrain correction or smoothing",
+    "scale_bar_km": 2.0,
+    "research_geometry_unchanged": true,
+    "terrain": {
+      "source_path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\数字高程模型数据（DEM）\\镇龙乡及周边30米DEM.tif",
+      "source_sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03",
+      "mat_path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\数字高程模型数据（DEM）\\镇龙乡及周边30米DEM.mat",
+      "mat_sha256": "c68703e0cc8f94f4bd52ff6e9974b66a2dae33865f0723ad71c04b6694bf4fbf",
+      "description_path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡地理空间数据说明.pdf",
+      "description_sha256": "6d1522c6832a5d91a108dae0d07954845025c0dabd44af8ee78c7860d7c405e4",
+      "frozen_input_manifest_match": true,
+      "source_crs": "EPSG:4326",
+      "source_vertical_unit": "m",
+      "source_kind": "Copernicus DEM GLO-30 digital surface model (DSM), named DEM in official package",
+      "source_affine": [
+        0.00027777777777777393,
+        0.0,
+        109.0326388888889,
+        0.0,
+        -0.0002777777777777777,
+        23.22486111111111
+      ],
+      "source_shape": [
+        1309,
+        1486
+      ],
+      "source_row_direction": "north to south",
+      "source_column_direction": "west to east",
+      "tif_nodata_tag": null,
+      "document_and_mat_nodata": -32767.0,
+      "invalid_pixels": 0,
+      "norm": {
+        "vmin": 120.41609191894531,
+        "vmax": 746.0787353515625,
+        "unit": "m",
+        "rule": "min/max of valid original pixels whose centres lie inside the single unchanged shared ENU map extent",
+        "valid_pixel_count": 138600
+      },
+      "map_extent_km": [
+        -7.059556520154224,
+        6.113005558677602,
+        -0.858119006130119,
+        8.35683868407148
+      ],
+      "display_projection": "WGS84 geodetic h=0 → ECEF → O01 local east/north orthographic plane (km), same as common.project",
+      "reprojection_method": "Project each original pixel footprint corner; flat-shaded original cell values, no interpolation. Rasterize only the display mesh for PDF/SVG. Equivalent piecewise-constant nearest-cell display, no resampled data written.",
+      "cmap_colors": [
+        "#F2F4EF",
+        "#DCE3CE",
+        "#BECBA7",
+        "#A6AF8C",
+        "#B6A387",
+        "#927F6A"
+      ],
+      "cmap_normalized_stops": [
+        0,
+        0.2,
+        0.4,
+        0.6,
+        0.8,
+        1
+      ],
+      "terrain_rgb_fraction": 0.4,
+      "white_rgb_fraction": 0.6,
+      "hillshade_strength": 0.12,
+      "hillshade_azimuth_deg": 315,
+      "hillshade_altitude_deg": 45,
+      "hillshade_spacing": "WGS84 Geod metric adjacent-pixel dx/dy; array row derivative reversed to north",
+      "metric_pixel_width_range_m": [
+        28.460736210057167,
+        28.478423903467874
+      ],
+      "metric_pixel_height_range_m": [
+        30.762225276836425,
+        30.762552494204833
+      ],
+      "physics_input_unchanged": true,
+      "display_may_not_be_used_for_physics": true,
+      "water_semantics": "optional ordinary mapped rivers/water polygons; not flood inundation extent",
+      "dependencies": {
+        "rasterio": "1.5.1",
+        "pyproj": "3.8.0",
+        "numpy": "2.3.5",
+        "scipy": "1.18.1",
+        "matplotlib": "3.11.2"
+      }
+    }
+  }
+}

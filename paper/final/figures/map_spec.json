@@ -1,0 +1,174 @@
+{
+  "projection": "WGS84椭球地表坐标到O01局部东—北切平面的正射显示投影（ECEF→ENU，节点高程不用于平面投影）",
+  "ellipsoid": {
+    "a_m": 6378137.0,
+    "inverse_flattening": 298.257223563
+  },
+  "origin": {
+    "longitude": 109.2308517,
+    "latitude": 23.0085095
+  },
+  "units": "km",
+  "xlim": [
+    -7.059556520154224,
+    6.113005558677602
+  ],
+  "ylim": [
+    -0.8581190061301189,
+    8.35683868407148
+  ],
+  "padding_fraction": 0.06,
+  "label_offsets": {
+    "O01": [
+      4,
+      -11
+    ],
+    "S001": [
+      3,
+      4
+    ],
+    "S002": [
+      3,
+      4
+    ],
+    "S003": [
+      3,
+      4
+    ],
+    "S004": [
+      3,
+      -10
+    ],
+    "S005": [
+      3,
+      4
+    ],
+    "S006": [
+      3,
+      4
+    ],
+    "S007": [
+      3,
+      4
+    ],
+    "S008": [
+      -26,
+      5
+    ],
+    "S009": [
+      4,
+      -11
+    ],
+    "S010": [
+      4,
+      -10
+    ],
+    "S011": [
+      3,
+      4
+    ],
+    "S012": [
+      -29,
+      5
+    ],
+    "S013": [
+      -29,
+      5
+    ],
+    "S014": [
+      -30,
+      6
+    ],
+    "S015": [
+      3,
+      4
+    ]
+  },
+  "dem_background": "original official 30 m GeoTIFF; displayed without terrain correction or smoothing",
+  "scale_bar_km": 2.0,
+  "research_geometry_unchanged": true,
+  "terrain": {
+    "source_path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\数字高程模型数据（DEM）\\镇龙乡及周边30米DEM.tif",
+    "source_sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03",
+    "mat_path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\数字高程模型数据（DEM）\\镇龙乡及周边30米DEM.mat",
+    "mat_sha256": "c68703e0cc8f94f4bd52ff6e9974b66a2dae33865f0723ad71c04b6694bf4fbf",
+    "description_path": "work\\raw_input\\数据\\镇龙乡地理空间数据\\镇龙乡地理空间数据说明.pdf",
+    "description_sha256": "6d1522c6832a5d91a108dae0d07954845025c0dabd44af8ee78c7860d7c405e4",
+    "frozen_input_manifest_match": true,
+    "source_crs": "EPSG:4326",
+    "source_vertical_unit": "m",
+    "source_kind": "Copernicus DEM GLO-30 digital surface model (DSM), named DEM in official package",
+    "source_affine": [
+      0.00027777777777777393,
+      0.0,
+      109.0326388888889,
+      0.0,
+      -0.0002777777777777777,
+      23.22486111111111
+    ],
+    "source_shape": [
+      1309,
+      1486
+    ],
+    "source_row_direction": "north to south",
+    "source_column_direction": "west to east",
+    "tif_nodata_tag": null,
+    "document_and_mat_nodata": -32767.0,
+    "invalid_pixels": 0,
+    "norm": {
+      "vmin": 120.41609191894531,
+      "vmax": 746.0787353515625,
+      "unit": "m",
+      "rule": "min/max of valid original pixels whose centres lie inside the single unchanged shared ENU map extent",
+      "valid_pixel_count": 138600
+    },
+    "map_extent_km": [
+      -7.059556520154224,
+      6.113005558677602,
+      -0.858119006130119,
+      8.35683868407148
+    ],
+    "display_projection": "WGS84 geodetic h=0 → ECEF → O01 local east/north orthographic plane (km), same as common.project",
+    "reprojection_method": "Project each original pixel footprint corner; flat-shaded original cell values, no interpolation. Rasterize only the display mesh for PDF/SVG. Equivalent piecewise-constant nearest-cell display, no resampled data written.",
+    "cmap_colors": [
+      "#F2F4EF",
+      "#DCE3CE",
+      "#BECBA7",
+      "#A6AF8C",
+      "#B6A387",
+      "#927F6A"
+    ],
+    "cmap_normalized_stops": [
+      0,
+      0.2,
+      0.4,
+      0.6,
+      0.8,
+      1
+    ],
+    "terrain_rgb_fraction": 0.4,
+    "white_rgb_fraction": 0.6,
+    "hillshade_strength": 0.12,
+    "hillshade_azimuth_deg": 315,
+    "hillshade_altitude_deg": 45,
+    "hillshade_spacing": "WGS84 Geod metric adjacent-pixel dx/dy; array row derivative reversed to north",
+    "metric_pixel_width_range_m": [
+      28.460736210057167,
+      28.478423903467874
+    ],
+    "metric_pixel_height_range_m": [
+      30.762225276836425,
+      30.762552494204833
+    ],
+    "physics_input_unchanged": true,
+    "display_may_not_be_used_for_physics": true,
+    "water_semantics": "optional ordinary mapped rivers/water polygons; not flood inundation extent",
+    "dependencies": {
+      "rasterio": "1.5.1",
+      "pyproj": "3.8.0",
+      "numpy": "2.3.5",
+      "scipy": "1.18.1",
+      "matplotlib": "3.11.2"
+    }
+  }
+}

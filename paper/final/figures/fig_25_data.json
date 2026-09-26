@@ -1,0 +1,168 @@
+{
+  "figure": 25,
+  "scenario_id": "frozen-2026-09-25-final",
+  "commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "time_origin": "official task origin; seconds in source, minutes by /60 when plotted",
+  "data": [
+    {
+      "K": 2,
+      "resource": "A_uav",
+      "stock": 4,
+      "shared_peak": 4,
+      "resource_priority_demand": 4,
+      "balanced_demand": 6,
+      "resource_priority_gap": 0,
+      "balanced_gap": 2
+    },
+    {
+      "K": 2,
+      "resource": "B_uav",
+      "stock": 2,
+      "shared_peak": 2,
+      "resource_priority_demand": 2,
+      "balanced_demand": 2,
+      "resource_priority_gap": 0,
+      "balanced_gap": 0
+    },
+    {
+      "K": 2,
+      "resource": "C_uav",
+      "stock": 2,
+      "shared_peak": 2,
+      "resource_priority_demand": 2,
+      "balanced_demand": 2,
+      "resource_priority_gap": 0,
+      "balanced_gap": 0
+    },
+    {
+      "K": 2,
+      "resource": "A_bat",
+      "stock": 6,
+      "shared_peak": 6,
+      "resource_priority_demand": 6,
+      "balanced_demand": 7,
+      "resource_priority_gap": 0,
+      "balanced_gap": 1
+    },
+    {
+      "K": 2,
+      "resource": "B_bat",
+      "stock": 4,
+      "shared_peak": 4,
+      "resource_priority_demand": 4,
+      "balanced_demand": 4,
+      "resource_priority_gap": 0,
+      "balanced_gap": 0
+    },
+    {
+      "K": 2,
+      "resource": "C_bat",
+      "stock": 4,
+      "shared_peak": 4,
+      "resource_priority_demand": 4,
+      "balanced_demand": 4,
+      "resource_priority_gap": 0,
+      "balanced_gap": 0
+    },
+    {
+      "K": 2,
+      "resource": "relay_uav",
+      "stock": 2,
+      "shared_peak": 2,
+      "resource_priority_demand": 3,
+      "balanced_demand": 4,
+      "resource_priority_gap": 1,
+      "balanced_gap": 2
+    },
+    {
+      "K": 2,
+      "resource": "relay_comp",
+      "stock": 6,
+      "shared_peak": 3,
+      "resource_priority_demand": 4,
+      "balanced_demand": 6,
+      "resource_priority_gap": 0,
+      "balanced_gap": 0
+    },
+    {
+      "K": 3,
+      "resource": "A_uav",
+      "stock": 4,
+      "shared_peak": 4,
+      "resource_priority_demand": 4,
+      "balanced_demand": 7,
+      "resource_priority_gap": 0,
+      "balanced_gap": 3
+    },
+    {
+      "K": 3,
+      "resource": "B_uav",
+      "stock": 2,
+      "shared_peak": 2,
+      "resource_priority_demand": 2,
+      "balanced_demand": 2,
+      "resource_priority_gap": 0,
+      "balanced_gap": 0
+    },
+    {
+      "K": 3,
+      "resource": "C_uav",
+      "stock": 2,
+      "shared_peak": 2,
+      "resource_priority_demand": 3,
+      "balanced_demand": 2,
+      "resource_priority_gap": 1,
+      "balanced_gap": 0
+    },
+    {
+      "K": 3,
+      "resource": "A_bat",
+      "stock": 6,
+      "shared_peak": 6,
+      "resource_priority_demand": 6,
+      "balanced_demand": 9,
+      "resource_priority_gap": 0,
+      "balanced_gap": 3
+    },
+    {
+      "K": 3,
+      "resource": "B_bat",
+      "stock": 4,
+      "shared_peak": 4,
+      "resource_priority_demand": 4,
+      "balanced_demand": 4,
+      "resource_priority_gap": 0,
+      "balanced_gap": 0
+    },
+    {
+      "K": 3,
+      "resource": "C_bat",
+      "stock": 4,
+      "shared_peak": 4,
+      "resource_priority_demand": 5,
+      "balanced_demand": 5,
+      "resource_priority_gap": 1,
+      "balanced_gap": 1
+    },
+    {
+      "K": 3,
+      "resource": "relay_uav",
+      "stock": 2,
+      "shared_peak": 2,
+      "resource_priority_demand": 3,
+      "balanced_demand": 4,
+      "resource_priority_gap": 1,
+      "balanced_gap": 2
+    },
+    {
+      "K": 3,
+      "resource": "relay_comp",
+      "stock": 6,
+      "shared_peak": 3,
+      "resource_priority_demand": 4,
+      "balanced_demand": 6,
+      "resource_priority_gap": 0,
+      "balanced_gap": 0
+    }
+  ]
+}

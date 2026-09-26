@@ -1,0 +1,142 @@
+{
+  "checks": [
+    {
+      "figure": 1,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 2,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 3,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 4,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 5,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 6,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 7,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 8,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 9,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 10,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 11,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 12,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 13,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 14,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 15,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 16,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 17,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 18,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 19,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 20,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 21,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 22,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 23,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 24,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 25,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 26,
+      "data_equal": true,
+      "png_pixels_equal": true
+    },
+    {
+      "figure": 27,
+      "data_equal": true,
+      "png_pixels_equal": true
+    }
+  ],
+  "all_data_equal": true,
+  "all_png_pixels_equal": true,
+  "scope": "Only provenance path prefixes are normalized for data comparison. Different library versions may change glyph rasterization; no automated claim of new visual approval."
+}

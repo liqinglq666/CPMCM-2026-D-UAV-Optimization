@@ -1,0 +1,157 @@
+{
+  "number": 14,
+  "figure": 14,
+  "name": "fig_14",
+  "caption": "Q2逐箱交付进度与期望时限余量。累计曲线按箱级交接完成时刻构造，全部80箱按期；下图按期望时限余量排序，菱形仅标识具有硬截止的货箱。末箱交付为5370.875 s，运输最后返航为5903.038 s，相差532.163 s；逐箱匹配核验是时限可行性的依据。",
+  "purpose": "通过事件累计与箱级余量验证按期交付，区分末箱交付与返航。",
+  "width_cm": 16.3,
+  "height_cm": 15.0,
+  "dpi": 600,
+  "font": {
+    "cn": "Noto Sans SC Publication",
+    "cn_path": "C:\\Users\\11346\\Documents\\Codex\\2026-09-26\\d-uav-paper-updated-pdf-pdf\\work\\raw_rebuild\\fonts\\NotoSansSC-Publication-Regular.ttf",
+    "latin": "DejaVu Sans"
+  },
+  "scenario": "Q2 formal frozen result; saved alternatives only when explicitly labelled",
+  "repository": "https://github.com/liqinglq666/CPMCM-2026-D-UAV-Optimization",
+  "commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "sources": [
+    {
+      "path": "results/q2/Q2_box_delivery_balanced.csv",
+      "sha256": "8ba5c9062f7ec4a485fe1dd6ec55285ffbd672fbdda12989d2e1616b8b214b88"
+    },
+    {
+      "path": "results/q2/Q2_metrics.json",
+      "sha256": "af6e393de5f7c7a10f38f79889e14a35374d53d32946ba961b7b333386a6191c"
+    },
+    {
+      "path": "results/q2/Q2_preference_frontier.csv",
+      "sha256": "994031606fac459726fa382e7886d38290715c1e8079c2487522516e4263db00"
+    },
+    {
+      "path": "results/q2/Q2_transport_trips_balanced.csv",
+      "sha256": "cc0bd1190dfe2a4eda3f2b20b9a679b2c040d611f43cad63a9ffa6a942d20d4c"
+    },
+    {
+      "path": "src/core/constraints.py",
+      "sha256": "e9cb7954711c20ca8380cd704934a61219bfeb47deb0fd18675fa9d22af21ceb"
+    }
+  ],
+  "field_mapping": {
+    "货箱编号": "box_id",
+    "架次编号": "sortie_id",
+    "服务区编号": "service_id",
+    "交付完成时刻（s）": "actual_delivery_s",
+    "期望送达时间（s）": "expected_s",
+    "硬截止时间（s）": "hard_deadline_s; blank remains null"
+  },
+  "join_keys": [
+    "box_id one-to-one",
+    "sortie_id"
+  ],
+  "derivations": [
+    "slack=expected_s-actual_delivery_s",
+    "hard_slack=hard_deadline_s-actual_delivery_s, only where non-null",
+    "rank=sort(expected_slack_s,box_id)",
+    "cumulative=sum(box events at t<=time)",
+    "minutes=seconds/60"
+  ],
+  "units": {
+    "time_and_slack": "min",
+    "count": "箱"
+  },
+  "time_origin": "正式任务全局时间起点 t=0",
+  "precision": "CSV/JSON完整精度用于坐标；图中文字单独按论文显示精度格式化。",
+  "parameters": {
+    "width_cm": 16.3,
+    "height_cm": 15.0,
+    "png_dpi": 600,
+    "editable_svg_text": true,
+    "pdf_fonttype": 42,
+    "units": {
+      "time_and_slack": "min",
+      "count": "箱"
+    },
+    "layout": "two cumulative panels above one ranked slack scatter",
+    "local_xlim_min": [
+      0,
+      110
+    ],
+    "global_xlim_min": [
+      0,
+      300
+    ],
+    "step_where": "post",
+    "no_sloping_interpolation": true
+  },
+  "data_checks": [
+    {
+      "check": "unique_box_count",
+      "passed": true
+    },
+    {
+      "check": "hard_deadline_count",
+      "passed": true
+    },
+    {
+      "check": "expected_slacks_nonnegative",
+      "passed": true
+    },
+    {
+      "check": "hard_slacks_nonnegative",
+      "passed": true
+    },
+    {
+      "check": "step_endpoint_80",
+      "passed": true
+    },
+    {
+      "check": "last_delivery_matches_preference_record",
+      "passed": true
+    },
+    {
+      "check": "trip_join_exact",
+      "passed": true
+    }
+  ],
+  "missing_materials": [],
+  "verification_scope": "对冻结输出做记录、键、数值和区间一致性核对；未重跑优化或原始DEM物理评价。",
+  "visual_review": {
+    "status": "passed",
+    "scope": "实际PDF彩色与灰度，16.3cm出版尺寸",
+    "report": "work/raw_rebuild/figures_01_16_qa.json"
+  },
+  "raw_input_crosscheck": {
+    "audit": "work/raw_rebuild/input_audit.json",
+    "audit_sha256": "7279d52ceb0bce5c0e20498c328224441d2d4025147688f39d93d4dcb86f1aed",
+    "workbook_sources": [
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/中继无人机数据.xlsx",
+        "scope": "workspace",
+        "sha256": "be52643ff29419233e6a141dca03a04160a8af551cab36d8c49b51bb836bea04"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/物资需求与配送时限.xlsx",
+        "scope": "workspace",
+        "sha256": "5a3346159ceddcf585859d270b8f62114b388a1f737fbe64ffde0ee1fdc8170a"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/调度中心与服务区.xlsx",
+        "scope": "workspace",
+        "sha256": "541a7af1ded08c9a3ff448480332cb5f6a54902f0afa6e9bcd50c1d2b2b34e38"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/运输无人机数据.xlsx",
+        "scope": "workspace",
+        "sha256": "9296a657c07e042afba6aeea7999665d9cd24e00b592fd6c269de6e338480dcb"
+      },
+      {
+        "path": "work/raw_input/数据/无人机应急物资运输基础数据/通信链路参数.xlsx",
+        "scope": "workspace",
+        "sha256": "1860d153199e7ae460ba36e83b673374e640e19de91ea167f2877271001f5f81"
+      }
+    ],
+    "result": "五份原始输入表与冻结四问清单逐字节一致，研究字段与实际读取器核对一致。",
+    "plotting_scope": "保留正式结果数据；原始输入交叉核对不构成新优化。"
+  }
+}

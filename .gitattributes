@@ -1,0 +1,3 @@
+# Verified paper artifacts and provenance records must retain their exact bytes.
+/paper/final/** -text -whitespace
+/paper/final/figures/*.svg -diff

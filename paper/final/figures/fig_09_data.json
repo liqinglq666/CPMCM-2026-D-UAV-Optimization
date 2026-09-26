@@ -1,0 +1,351 @@
+{
+  "batches": [
+    {
+      "batch": "Q1-S001-01",
+      "mass_kg": 76.0,
+      "volume_m3": 0.159,
+      "energy_kwh": 2.917546852657124,
+      "rated_mass_kg": 80.0,
+      "rated_volume_m3": 0.25,
+      "capacity_kwh": 8.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        95.0,
+        63.6,
+        45.58666957276756
+      ],
+      "highest_indices": [
+        0
+      ],
+      "soc_pct": 63.53066434178595
+    },
+    {
+      "batch": "Q1-S001-02",
+      "mass_kg": 78.0,
+      "volume_m3": 0.23500000000000001,
+      "energy_kwh": 2.9957334320692497,
+      "rated_mass_kg": 80.0,
+      "rated_volume_m3": 0.25,
+      "capacity_kwh": 8.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        97.5,
+        94.0,
+        46.80833487608202
+      ],
+      "highest_indices": [
+        0
+      ],
+      "soc_pct": 62.55333209913439
+    },
+    {
+      "batch": "Q1-S002-01",
+      "mass_kg": 25.0,
+      "volume_m3": 0.067,
+      "energy_kwh": 2.7133936891271517,
+      "rated_mass_kg": 30.0,
+      "rated_volume_m3": 0.073,
+      "capacity_kwh": 4.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        83.33333333333333,
+        91.78082191780823,
+        84.79355278522348
+      ],
+      "highest_indices": [
+        1
+      ],
+      "soc_pct": 32.16515777182121
+    },
+    {
+      "batch": "Q1-S002-02",
+      "mass_kg": 56.0,
+      "volume_m3": 0.14400000000000002,
+      "energy_kwh": 5.721187096106204,
+      "rated_mass_kg": 80.0,
+      "rated_volume_m3": 0.25,
+      "capacity_kwh": 8.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        70.0,
+        57.60000000000001,
+        89.39354837665942
+      ],
+      "highest_indices": [
+        2
+      ],
+      "soc_pct": 28.485161298672445
+    },
+    {
+      "batch": "Q1-S003-01",
+      "mass_kg": 25.0,
+      "volume_m3": 0.067,
+      "energy_kwh": 2.779848213776802,
+      "rated_mass_kg": 30.0,
+      "rated_volume_m3": 0.073,
+      "capacity_kwh": 4.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        83.33333333333333,
+        91.78082191780823,
+        86.87025668052506
+      ],
+      "highest_indices": [
+        1
+      ],
+      "soc_pct": 30.503794655579952
+    },
+    {
+      "batch": "Q1-S003-02",
+      "mass_kg": 56.0,
+      "volume_m3": 0.14400000000000002,
+      "energy_kwh": 5.764874305031597,
+      "rated_mass_kg": 80.0,
+      "rated_volume_m3": 0.25,
+      "capacity_kwh": 8.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        70.0,
+        57.60000000000001,
+        90.07616101611869
+      ],
+      "highest_indices": [
+        2
+      ],
+      "soc_pct": 27.939071187105036
+    },
+    {
+      "batch": "Q1-S004-01",
+      "mass_kg": 59.0,
+      "volume_m3": 0.156,
+      "energy_kwh": 6.152871595807307,
+      "rated_mass_kg": 80.0,
+      "rated_volume_m3": 0.25,
+      "capacity_kwh": 8.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        73.75,
+        62.4,
+        96.13861868448916
+      ],
+      "highest_indices": [
+        2
+      ],
+      "soc_pct": 23.089105052408666
+    },
+    {
+      "batch": "Q1-S005-01",
+      "mass_kg": 59.0,
+      "volume_m3": 0.156,
+      "energy_kwh": 4.222147883359987,
+      "rated_mass_kg": 80.0,
+      "rated_volume_m3": 0.25,
+      "capacity_kwh": 8.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        73.75,
+        62.4,
+        65.97106067749979
+      ],
+      "highest_indices": [
+        0
+      ],
+      "soc_pct": 47.22315145800017
+    },
+    {
+      "batch": "Q1-S006-01",
+      "mass_kg": 59.0,
+      "volume_m3": 0.156,
+      "energy_kwh": 2.597943514633875,
+      "rated_mass_kg": 80.0,
+      "rated_volume_m3": 0.25,
+      "capacity_kwh": 8.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        73.75,
+        62.4,
+        40.59286741615429
+      ],
+      "highest_indices": [
+        0
+      ],
+      "soc_pct": 67.52570606707657
+    },
+    {
+      "batch": "Q1-S007-01",
+      "mass_kg": 45.0,
+      "volume_m3": 0.129,
+      "energy_kwh": 3.410822546590785,
+      "rated_mass_kg": 80.0,
+      "rated_volume_m3": 0.25,
+      "capacity_kwh": 8.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        56.25,
+        51.6,
+        53.294102290481014
+      ],
+      "highest_indices": [
+        0
+      ],
+      "soc_pct": 57.364718167615194
+    },
+    {
+      "batch": "Q1-S008-01",
+      "mass_kg": 45.0,
+      "volume_m3": 0.129,
+      "energy_kwh": 5.835966081944681,
+      "rated_mass_kg": 80.0,
+      "rated_volume_m3": 0.25,
+      "capacity_kwh": 8.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        56.25,
+        51.6,
+        91.18697003038564
+      ],
+      "highest_indices": [
+        2
+      ],
+      "soc_pct": 27.050423975691483
+    },
+    {
+      "batch": "Q1-S009-01",
+      "mass_kg": 25.0,
+      "volume_m3": 0.067,
+      "energy_kwh": 2.0962091684297426,
+      "rated_mass_kg": 30.0,
+      "rated_volume_m3": 0.073,
+      "capacity_kwh": 4.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        83.33333333333333,
+        91.78082191780823,
+        65.50653651342945
+      ],
+      "highest_indices": [
+        1
+      ],
+      "soc_pct": 47.59477078925644
+    },
+    {
+      "batch": "Q1-S010-01",
+      "mass_kg": 25.0,
+      "volume_m3": 0.067,
+      "energy_kwh": 1.823152819300795,
+      "rated_mass_kg": 30.0,
+      "rated_volume_m3": 0.073,
+      "capacity_kwh": 4.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        83.33333333333333,
+        91.78082191780823,
+        56.973525603149845
+      ],
+      "highest_indices": [
+        1
+      ],
+      "soc_pct": 54.42117951748012
+    },
+    {
+      "batch": "Q1-S011-01",
+      "mass_kg": 25.0,
+      "volume_m3": 0.067,
+      "energy_kwh": 1.073925268419068,
+      "rated_mass_kg": 30.0,
+      "rated_volume_m3": 0.073,
+      "capacity_kwh": 4.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        83.33333333333333,
+        91.78082191780823,
+        33.56016463809588
+      ],
+      "highest_indices": [
+        1
+      ],
+      "soc_pct": 73.15186828952329
+    },
+    {
+      "batch": "Q1-S012-01",
+      "mass_kg": 25.0,
+      "volume_m3": 0.067,
+      "energy_kwh": 2.752369862635753,
+      "rated_mass_kg": 30.0,
+      "rated_volume_m3": 0.073,
+      "capacity_kwh": 4.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        83.33333333333333,
+        91.78082191780823,
+        86.01155820736729
+      ],
+      "highest_indices": [
+        1
+      ],
+      "soc_pct": 31.190753434106178
+    },
+    {
+      "batch": "Q1-S013-01",
+      "mass_kg": 25.0,
+      "volume_m3": 0.067,
+      "energy_kwh": 1.8247237048368015,
+      "rated_mass_kg": 30.0,
+      "rated_volume_m3": 0.073,
+      "capacity_kwh": 4.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        83.33333333333333,
+        91.78082191780823,
+        57.02261577615005
+      ],
+      "highest_indices": [
+        1
+      ],
+      "soc_pct": 54.38190737907996
+    },
+    {
+      "batch": "Q1-S014-01",
+      "mass_kg": 25.0,
+      "volume_m3": 0.067,
+      "energy_kwh": 2.140314239483724,
+      "rated_mass_kg": 30.0,
+      "rated_volume_m3": 0.073,
+      "capacity_kwh": 4.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        83.33333333333333,
+        91.78082191780823,
+        66.88481998386638
+      ],
+      "highest_indices": [
+        1
+      ],
+      "soc_pct": 46.4921440129069
+    },
+    {
+      "batch": "Q1-S015-01",
+      "mass_kg": 25.0,
+      "volume_m3": 0.067,
+      "energy_kwh": 2.307392992942133,
+      "rated_mass_kg": 30.0,
+      "rated_volume_m3": 0.073,
+      "capacity_kwh": 4.0,
+      "reserve_ratio": 0.2,
+      "rates_pct": [
+        83.33333333333333,
+        91.78082191780823,
+        72.10603102944165
+      ],
+      "highest_indices": [
+        1
+      ],
+      "soc_pct": 42.31517517644667
+    }
+  ],
+  "highest_counts": {
+    "质量": 5,
+    "体积": 9,
+    "能量": 4
+  }
+}

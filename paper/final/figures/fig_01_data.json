@@ -1,0 +1,55 @@
+[
+  {
+    "question": "Q1",
+    "functions": [
+      "src/q1/physics_engine.py:max_safe_payload",
+      "src/q1/physics_engine.py:_optimize_service"
+    ],
+    "input": [
+      "analysis.nodes",
+      "analysis.boxes",
+      "analysis.types"
+    ],
+    "output": "results/q1/Q1_batch_solution.csv",
+    "verification": "src/validation.py:validate_q1"
+  },
+  {
+    "question": "Q2",
+    "functions": [
+      "src/q2/columns.py:enumerate_columns",
+      "src/q2/interval_master.py:IntervalMaster",
+      "src/core/discrete.py:TransportEvaluator"
+    ],
+    "input": [
+      "official inputs",
+      "Q2 candidate plan"
+    ],
+    "output": "results/q2/Q2_transport_trips_balanced.csv",
+    "verification": "src/core/constraints.py:validate_transport"
+  },
+  {
+    "question": "Q3",
+    "functions": [
+      "src/q3/preparation.py:PlanPreparer",
+      "src/q3/solver.py:optimize_timing"
+    ],
+    "input": [
+      "transport jobs",
+      "specified relays/windows"
+    ],
+    "output": "results/q3/Q3_transport_trips.csv",
+    "verification": "src/core/continuous_radio.py:certify_profiles"
+  },
+  {
+    "question": "Q4",
+    "functions": [
+      "src/q4/partition.py:solve_partitions",
+      "src/q4/partition.py:canonical_partitions"
+    ],
+    "input": [
+      "frozen Q3 schedule/relations"
+    ],
+    "output": "results/q4/Q4_partition_config.csv",
+    "verification": "results/q4/Q4_enumeration_certificate.json"
+  }
+]

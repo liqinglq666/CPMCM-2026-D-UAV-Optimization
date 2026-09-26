@@ -1,0 +1,201 @@
+{
+  "figure": 17,
+  "scenario_id": "frozen-2026-09-25-final",
+  "commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "time_origin": "official task origin; seconds in source, minutes by /60 when plotted",
+  "data": {
+    "nodes": {
+      "O01": {
+        "code": "O01",
+        "lon": 109.2308517,
+        "lat": 23.0085095,
+        "elev": 127.7
+      },
+      "S001": {
+        "code": "S001",
+        "lon": 109.2432319,
+        "lat": 23.0335927,
+        "elev": 154.0
+      },
+      "S002": {
+        "code": "S002",
+        "lon": 109.2585519,
+        "lat": 23.0703271,
+        "elev": 189.5
+      },
+      "S003": {
+        "code": "S003",
+        "lon": 109.1688578,
+        "lat": 23.0402714,
+        "elev": 308.5
+      },
+      "S004": {
+        "code": "S004",
+        "lon": 109.2381714,
+        "lat": 23.0778414,
+        "elev": 198.3
+      },
+      "S005": {
+        "code": "S005",
+        "lon": 109.2283003,
+        "lat": 23.0561338,
+        "elev": 165.0
+      },
+      "S006": {
+        "code": "S006",
+        "lon": 109.1997836,
+        "lat": 23.007714,
+        "elev": 284.8
+      },
+      "S007": {
+        "code": "S007",
+        "lon": 109.1928191,
+        "lat": 23.0294186,
+        "elev": 318.5
+      },
+      "S008": {
+        "code": "S008",
+        "lon": 109.2127472,
+        "lat": 23.0795113,
+        "elev": 240.9
+      },
+      "S009": {
+        "code": "S009",
+        "lon": 109.2541424,
+        "lat": 23.0552989,
+        "elev": 200.0
+      },
+      "S010": {
+        "code": "S010",
+        "lon": 109.2760168,
+        "lat": 23.0194009,
+        "elev": 321.6
+      },
+      "S011": {
+        "code": "S011",
+        "lon": 109.2203356,
+        "lat": 23.0319231,
+        "elev": 182.1
+      },
+      "S012": {
+        "code": "S012",
+        "lon": 109.2831357,
+        "lat": 23.054464,
+        "elev": 249.8
+      },
+      "S013": {
+        "code": "S013",
+        "lon": 109.2713839,
+        "lat": 23.0310882,
+        "elev": 321.7
+      },
+      "S014": {
+        "code": "S014",
+        "lon": 109.2835966,
+        "lat": 23.0052097,
+        "elev": 321.0
+      },
+      "S015": {
+        "code": "S015",
+        "lon": 109.1923786,
+        "lat": 23.0494548,
+        "elev": 444.5
+      }
+    },
+    "relay_assignment": [
+      {
+        "relay_sortie_id": "fast-relay-0",
+        "point_label": "R0",
+        "physical_uav": "R01",
+        "component": "R-BAT-01",
+        "hover_agl_m": 300.0,
+        "lon": 109.27895019960528,
+        "lat": 23.024548478809407,
+        "transport_sorties": [
+          "column-000",
+          "column-002",
+          "column-003",
+          "column-006",
+          "column-007",
+          "column-009"
+        ],
+        "services": [
+          "S002",
+          "S009",
+          "S010",
+          "S012",
+          "S013",
+          "S014"
+        ]
+      },
+      {
+        "relay_sortie_id": "fast-relay-1",
+        "point_label": "R1",
+        "physical_uav": "R02",
+        "component": "R-BAT-02",
+        "hover_agl_m": 225.0,
+        "lon": 109.20126032684945,
+        "lat": 23.038806501766718,
+        "transport_sorties": [
+          "column-008",
+          "column-010",
+          "column-011",
+          "column-013",
+          "column-014",
+          "column-015",
+          "column-016",
+          "column-017",
+          "column-020"
+        ],
+        "services": [
+          "S003",
+          "S005",
+          "S007",
+          "S008",
+          "S011",
+          "S015"
+        ]
+      },
+      {
+        "relay_sortie_id": "fast-relay-2",
+        "point_label": "R2",
+        "physical_uav": "R01",
+        "component": "R-BAT-03",
+        "hover_agl_m": 75.0,
+        "lon": 109.23589314392837,
+        "lat": 23.060496233599867,
+        "transport_sorties": [
+          "column-018",
+          "column-019",
+          "column-021"
+        ],
+        "services": [
+          "S004",
+          "S005",
+          "S009",
+          "S013"
+        ]
+      }
+    ],
+    "critical_state": {
+      "state": {
+        "trip": "column-019",
+        "time_s": 4684.445902030309,
+        "longitude": 109.2541424,
+        "latitude": 23.0552989,
+        "altitude_m": 230.0,
+        "direct_margin_db": -3.1804621730415192,
+        "available_margin_db": 0.09090564660230882,
+        "best_mode": "relay",
+        "direct_obstructed": true
+      },
+      "assigned_relay": "fast-relay-2",
+      "direct_margin_db": -3.1804621730415192,
+      "refined_check_passed": true,
+      "relay_active": true,
+      "access_margin_db": 0.09090564660230882,
+      "access_obstructed": true,
+      "backhaul_margin_db": 0.6998424915864945
+    }
+  }
+}

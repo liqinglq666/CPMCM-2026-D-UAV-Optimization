@@ -1,13 +1,17 @@
-# 论文与科研图重构
+# 论文入口与历史构建
 
-当前冻结版本见 [冻结说明](../docs/FROZEN_RELEASE.md)。2026-09-25 终审保留
+**当前交付版本位于 [final/](final/README.md)：[65 页 PDF](final/manuscript.pdf)、[可编辑 Word](final/manuscript.docx)、27 幅科研图及其数据和源文件。** 当前版本的校验与重绘使用 `paper/final/src/`，不运行优化器。以下 LaTeX 文档、35 页说明和 12 图构建流程属于 2026-09-25 历史版本，保留用于追溯，不能生成当前 Word 排版版本。
+
+## 2026-09-25 历史版本
+
+研究冻结版本见 [冻结说明](../docs/FROZEN_RELEASE.md)。2026-09-25 终审保留
 已接受结果，修复代码边界问题并补齐论文附录的通信回放步骤；成稿 35 页，
 最新文件摘要及检查记录在 `../docs/audit/post_merge/`。
 
 本轮在已合并最快方案基础上研读用户提供的62页论文，冻结Q1及官方DEM，新增Q2限时节能偏好、Q3连续区间数值核验与Q4均衡分区。正式方案与证明边界见 `reports/FINAL_AUDIT.md` 及 `../docs/external_benchmark_algorithm_audit.md`。
 
 
-## 重建
+## 历史 LaTeX 重建
 
 先按仓库README放置官方数据，再执行：
 

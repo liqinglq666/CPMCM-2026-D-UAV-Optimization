@@ -1,0 +1,356 @@
+{
+  "scope": "Raw-input/DEM rebuild Word final native render only; no reliance on prior final_rebuild Word review",
+  "render_dpi": 120,
+  "reviewed_pages": [
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49
+  ],
+  "all_24_pages_actually_viewed": true,
+  "review_method": "Each full-page PNG opened with view_image; checked figure text, captions, clipping, overlap, table/formula rendering and pagination",
+  "focus_pages": [
+    32,
+    40,
+    42
+  ],
+  "result": "pass",
+  "issues": [],
+  "limitations": [
+    "本记录仅覆盖第26—49页的实际版面检查，不替代全书数据与来源核验。"
+  ],
+  "page_records": [
+    {
+      "page": 26,
+      "file": "work/raw_rebuild/render_final/page-26.png",
+      "sha256": "e5599d379f37c78c0aa2228a875d8954156b5bf943c54f3eb117fbfa2de66e73",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "表5与正文取舍说明完整；图15实体无人机时序、末次返航标线和图注同页，文字清晰。",
+      "issues": []
+    },
+    {
+      "page": 27,
+      "file": "work/raw_rebuild/render_final/page-27.png",
+      "sha256": "08c38bc40bda958db93ea756f2d4e02171d2ca038a66cb38f117dd5181c28c02",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "图16运输电池时序与充电斜线清晰；图注、解释与本问小结完整，章6标题后留有正文。",
+      "issues": []
+    },
+    {
+      "page": 28,
+      "file": "work/raw_rebuild/render_final/page-28.png",
+      "sha256": "3875c25dc15bca47b4a2984339e3267866bf05b183bc91f5f70adb70f5f7ea51",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "第6.1—6.2节正文与小标题正常排版，无截字、行间重叠或页脚侵入。",
+      "issues": []
+    },
+    {
+      "page": 29,
+      "file": "work/raw_rebuild/render_final/page-29.png",
+      "sha256": "11cd7e8c4019810d8da430487602566c4c6b53b2736f4086616adae04e85f50b",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "第6.3步骤及第6.4节公式(17)—(20)清晰，条件分支与公式编号未被裁切。",
+      "issues": []
+    },
+    {
+      "page": 30,
+      "file": "work/raw_rebuild/render_final/page-30.png",
+      "sha256": "1b83d4eb73d392a011fbaf5f2b8d62ec357f38b7606bacb8d2e2db3546c5a2f2",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "第6.5—6.6节公式(21)—(25)及说明可读，公式与编号无碰撞。",
+      "issues": []
+    },
+    {
+      "page": 31,
+      "file": "work/raw_rebuild/render_final/page-31.png",
+      "sha256": "5e3b67e5a6fb6fe264da7d2e73a206a1d90751236a0913611c4ef3b1b29e99bd",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "公式(26)—(27)、第6.7节正式结果与实体中继说明完整；页末留白用于随后整幅图17保持同页，无图注分离。",
+      "issues": []
+    },
+    {
+      "page": 32,
+      "file": "work/raw_rebuild/render_final/page-32.png",
+      "sha256": "2cd0b8837a7cfb176eb627d7d4cb440a39bd5267fe62036703bff29e8ca3f45e",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "重点检查图17：DEM底图、三个中继符号、最紧状态、比例尺、方向、独立高程色条及三列索引可读；色条与轴标题分离，图注与图17同页，后续正文完整。",
+      "issues": []
+    },
+    {
+      "page": 33,
+      "file": "work/raw_rebuild/render_final/page-33.png",
+      "sha256": "e4c772b34da3f30685361af1a70b4551e7ada045170d6d9fae5b87aebc105b14",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "图18的三服务窗及24任务行可读；右侧指派、图注与下方限定正文正常，未发生图注孤置。",
+      "issues": []
+    },
+    {
+      "page": 34,
+      "file": "work/raw_rebuild/render_final/page-34.png",
+      "sha256": "f01092134d57b20c4736d207bc6eaf6a77fff60df50a774641734b24d5dbcdd0",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "图19阶段、实体复用、384.830 s标注可读；图注与对图20的说明正常。",
+      "issues": []
+    },
+    {
+      "page": 35,
+      "file": "work/raw_rebuild/render_final/page-35.png",
+      "sha256": "421364153ea1bd67c3fba7cff15f8be9771af6cdb6281fb10e4f5035a304741a",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "图20四类资源各层完整；行标、条内任务编号、充电/周转纹理和联合完工线可读，图注同页且未碰页脚。",
+      "issues": []
+    },
+    {
+      "page": 36,
+      "file": "work/raw_rebuild/render_final/page-36.png",
+      "sha256": "2b844fda78611b065b6e4077c15211e0ee249846d635ae727563afc012b2e067",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "图21采样最紧状态、正余量放大、逐架次保守下界均完整可读；图注说明同页，采样与连续含义区分清楚。",
+      "issues": []
+    },
+    {
+      "page": 37,
+      "file": "work/raw_rebuild/render_final/page-37.png",
+      "sha256": "8afd644538b5527aa57a1566ce0009d137d0edb69406ca7d09b36b60b2498f8a",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "第6.9节引导与公式(28)保持同页；连续核验说明、本问小结、章7及第7.1节均无裁切。",
+      "issues": []
+    },
+    {
+      "page": 38,
+      "file": "work/raw_rebuild/render_final/page-38.png",
+      "sha256": "c6546b038e00129376869e7c48eb5e217f5ab6eb04eb1bd27a85c9f1b26a6624",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "图22成员矩阵、分量括号与规模柱完整可读；图注与公式(29)—(30)无冲突。",
+      "issues": []
+    },
+    {
+      "page": 39,
+      "file": "work/raw_rebuild/render_final/page-39.png",
+      "sha256": "dfe9ffc6fd3913ddfa110800f32610ea765877b221ff4ec6df13b658d0ea0036",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "第7.3—7.4节、公式(31)和表6完整；表头、8类资源与缺口数均可读。",
+      "issues": []
+    },
+    {
+      "page": 40,
+      "file": "work/raw_rebuild/render_final/page-40.png",
+      "sha256": "59dffeef63d427ca18d214db4359ab16cfed35998dd250c38aad3c24d5bbf9e0",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "重点检查图23：两个分区地图等比例，节点、组符号及右侧规模/缺口说明清晰；共同DEM色条与下轴分离，四行图注同页。页末正文两行正常续至41页两行。",
+      "issues": []
+    },
+    {
+      "page": 41,
+      "file": "work/raw_rebuild/render_final/page-41.png",
+      "sha256": "8e6f8cbe7bd9b1656a1ab35468276f620154b250880e5b5de8f9c512bb947672",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "第7.5节、公式(32)、表7及第7.6节完整可读；表格无拆行或裁切。",
+      "issues": []
+    },
+    {
+      "page": 42,
+      "file": "work/raw_rebuild/render_final/page-42.png",
+      "sha256": "f74569579f5d3d4e0aae81bb65e18017dd99580f44832f288decaae3034d56a9",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "重点检查图24：两个分区地图、三个组符号及右侧指标清晰；共同DEM色条无遮挡、图注同页。页末正文两行正常续至43页两行。",
+      "issues": []
+    },
+    {
+      "page": 43,
+      "file": "work/raw_rebuild/render_final/page-43.png",
+      "sha256": "94a974771bcd759ebf0ceb431ce785c8a1850ac26a6e502489b5f94fca0735cd",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "图25的库存/峰值/两偏好形状编码与+缺口标注可读，图注、本问小结与章8引导均完整，正文未侵入页码。",
+      "issues": []
+    },
+    {
+      "page": 44,
+      "file": "work/raw_rebuild/render_final/page-44.png",
+      "sha256": "8000a6ecfa9035816e30266bf315108001c71cdff6ed6b38da67feadd04be02c",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "图26三类容量曲线和阶梯局部放大可读；开闭端点与不可行斜线区域可分辨，图注同页完整。",
+      "issues": []
+    },
+    {
+      "page": 45,
+      "file": "work/raw_rebuild/render_final/page-45.png",
+      "sha256": "147376107b8457cc18067555030cb4e961767467c9b7260dca5d1bc8acd01e6d",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "表8、公式(33)、第8.2—8.3节正文正常；表头与数值未裁切。",
+      "issues": []
+    },
+    {
+      "page": 46,
+      "file": "work/raw_rebuild/render_final/page-46.png",
+      "sha256": "e9e831e2e69a283266e7ec680824aa36ca81c4161bb47130ef621ce11eeb4b28",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "章9、表9总结果及第9.1节核验说明完整可读，无表格拆行或异常覆盖。",
+      "issues": []
+    },
+    {
+      "page": 47,
+      "file": "work/raw_rebuild/render_final/page-47.png",
+      "sha256": "b36867e756102ca9013a6e944d4f82cb26a464a3f94dab14030fb7216bc17732",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "图27的SOC排序与最小值放大可读；31个硬截止货箱标签保持完整行距，图注同页，底部未裁切或侵入页码。",
+      "issues": []
+    },
+    {
+      "page": 48,
+      "file": "work/raw_rebuild/render_final/page-48.png",
+      "sha256": "9f8195d8f57e13b9c6797d1c4053b02c5e0d807e7880b30619d7ba7af5a375b3",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "表10与表11完整，单元格文字无溢出；第9.3—9.4节衔接正常。",
+      "issues": []
+    },
+    {
+      "page": 49,
+      "file": "work/raw_rebuild/render_final/page-49.png",
+      "sha256": "afec4e33b9382628e26994b432b3d148117326ec4be81d38ea037e000720165a",
+      "dimensions_px": [
+        993,
+        1404
+      ],
+      "actual_visual_review": true,
+      "status": "pass",
+      "observation": "结论独立起页，Q1—Q4结果段全部完整留在本页，关键数字和条件可读，无段落跨页。",
+      "issues": []
+    }
+  ]
+}
