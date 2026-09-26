@@ -1,0 +1,129 @@
+{
+  "number": 10,
+  "caption": "有限搜索候选与返航完工上限偏好。主图为12个全准时候选，下方分别为42条已保存档案与4种上限偏好；正式方案优先满足及时性与返航完工，20%放宽选项为22架次、63.370 kWh。逐箱时限保持不变，各点不构成原问题的完整Pareto前沿。",
+  "width_cm": 16.3,
+  "height_cm": 13.7,
+  "dpi": 600,
+  "sources": [
+    {
+      "path": "results/q2/Q2_pareto_frontier.csv",
+      "sha256": "5f5b6ff503c8616d7448031df8a56d14f57fac57f539bb7714b72c4c34260a8a"
+    },
+    {
+      "path": "results/q2/Q2_preference_frontier.csv",
+      "sha256": "994031606fac459726fa382e7886d38290715c1e8079c2487522516e4263db00"
+    },
+    {
+      "path": "results/q2/Q2_metrics.json",
+      "sha256": "79242d7e5035f5aab51ac3bf3c00a76e0a1a1d41d2bdd7a1889d3b95ec5db1d2"
+    }
+  ],
+  "font": {
+    "cn": "Noto Sans SC Publication",
+    "cn_path": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+    "latin": "DejaVu Sans"
+  },
+  "map_spec": null,
+  "core_claim": "正式方案、完整档案和已有节能偏好分别提供不同集合证据。",
+  "derivations": [
+    "time_min=time_s/60",
+    "weighted_delay_display=weighted_tardiness/1000",
+    "ontime=weighted_tardiness<=1e-5 and hard_violations=0; no jitter or connecting line"
+  ],
+  "join_keys": [
+    "trip_id / 架次编号",
+    "box_id / 货箱编号",
+    "phase_id"
+  ],
+  "data_checks": [
+    {
+      "check": "candidate_counts",
+      "passed": true
+    },
+    {
+      "check": "hard_violations_zero",
+      "passed": true
+    },
+    {
+      "check": "preference_caps",
+      "passed": true
+    }
+  ],
+  "parameters": {},
+  "minimum_necessary_font_pt": 8,
+  "source_fields": {
+    "Q2_pareto_frontier.csv": [
+      "plan_id",
+      "weighted_tardiness",
+      "trips",
+      "makespan",
+      "energy",
+      "hard_violations"
+    ],
+    "Q2_preference_frontier.csv": [
+      "preference",
+      "epsilon",
+      "horizon_s",
+      "makespan_s",
+      "energy_kwh",
+      "trips",
+      "source"
+    ],
+    "Q2_metrics.json": [
+      "trips",
+      "makespan",
+      "energy"
+    ]
+  },
+  "field_mapping": {
+    "a": "x=makespan/60; y=energy; star=formal metrics match",
+    "b": "x=energy; y=weighted_tardiness/1000",
+    "c": "x=makespan_s/60; y=energy_kwh; label=epsilon"
+  },
+  "filters": {
+    "a": "weighted_tardiness<=1e-5 and hard_violations==0",
+    "b": "all 42 archived rows",
+    "c": "all 4 preference rows"
+  },
+  "panel_purposes": [
+    "(a) 正式选择在全准时候选中的位置",
+    "(b) 全档案的能耗与延误取舍",
+    "(c) 已存返航完工上限偏好的节能效果"
+  ],
+  "replay_audit": "paper/figure_data_v2/q2_replay_audit.json",
+  "verification_scope": "Frozen-output and deterministic physical replay comparisons; no optimization.",
+  "visual_review": {
+    "status": "pending"
+  },
+  "shared_visual_sources": [
+    {
+      "path": "scripts/figures_v2/common.py",
+      "sha256": "baaaa4cbc137c79e69b92b7defd2dd134b7f795f57295887083ad9a43bfb2fdf"
+    },
+    {
+      "path": "scripts/figures_v2/paths.py",
+      "sha256": "c3852a429ec7e35bada4289121b5a8da0212f760f1cf33aa3c9428e134679549"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+      "sha256": "c8c2ba68889b16e99b6ee4e802df5882bbe9d7310bbbaab325c48416dfb19763"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+      "sha256": "2bdcce3e875183a6adb5ac0f2f739c42269506563ee3af57b8735e5766bb91ef"
+    }
+  ],
+  "script": "scripts/figures_v2/figures_10_16.py",
+  "script_sha256": "ca8af92e3e71618ecb1ca7eb7adeb15b2d017971b9255a64d146ea8ae0225306",
+  "base_word_caption": "图 10  基础搜索档案、其中全准时候选及限时节能选项。正式方案为24架次、65.566 kWh、5903.038 s；20%返航完工上限选项为22架次、63.370 kWh、7070.178 s，逐箱时限保持不变。各点为已保存并核验的有限候选，不构成原问题的完整Pareto前沿。",
+  "base_word_sha256": "9b4ced7a81957fd9fc3a097aa91f2636757b0b9a9fbdebaf5f1ae625c9b1f19c",
+  "repository_input_commit": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "research_commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "data_file": "fig_10_data.json",
+  "data_sha256": "458ad02b8c3be51d7f4bdc86721eea45857c38ef5793474c5dcb69e0cb309abc",
+  "output_sha256": {
+    "pdf": "c72d389e027495c12b7bc2cd96cbd98c55a4e39e29538e1264be4251d257d5ad",
+    "svg": "f36ec00de2cb02458c331099143521acc6d98872fb526f34a6198f9a81c6ce3b",
+    "png": "355cea614b776b7df8dbd2c45f970e1195097695f7f399f490857c42aa85d27b"
+  }
+}

@@ -1,0 +1,4 @@
+SHA256  29f85a678a9d2354266375e36347f357ca6c110a81c31cf046acf1d45d59beb8  manuscript.pdf
+MD5  990d4a516f058ac87a1aa5fdee999120  manuscript.pdf
+SHA256  8cc4c19f879e6c1028a358ab380c9a62377fc3384aa05da2d47caffecc777064  manuscript.docx
+MD5  0c9eb87e1abdbbde8f86617885c0dbe4  manuscript.docx

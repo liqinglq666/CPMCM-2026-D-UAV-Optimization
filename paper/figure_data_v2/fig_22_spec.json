@@ -1,0 +1,127 @@
+{
+  "figure": 22,
+  "number": 22,
+  "caption": "共同运输任务诱导不可拆服务区分量。上排仅绘正式访问序列中相邻服务区的关系，边旁列出对应架次后缀；规则布局不表示实际航路。下排按证书顺序列出9个分量的全部成员。固定任务分组须保持每个分量完整，15区不再作为相互独立的分配单元。",
+  "core_claim": "多个服务区由同一运输任务连接，独立分组必须以完整连通分量为单位。",
+  "panels": {
+    "a-c": "actual adjacent-route relations behind the three multi-service components",
+    "d": "all nine archived component membership sets"
+  },
+  "width_cm": 16.3,
+  "height_cm": 10.8,
+  "dpi": 600,
+  "source_commit": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "runtime_git_head": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "sources": [
+    {
+      "path": "results/q4/Q4_enumeration_certificate.json",
+      "sha256": "09e4117323c69138049feaaecb5836eb5150254d7b9788d5eb7c4c6dcc6d0df7"
+    },
+    {
+      "path": "results/q3/Q3_transport_trips.csv",
+      "sha256": "2214d1607f4f88fd0986e9640768bc680ede06f719544095d315ffd636b68e49"
+    }
+  ],
+  "field_mapping": {
+    "访问服务区顺序": "adjacent edges only",
+    "atomic_components": "certificate member sets"
+  },
+  "join_keys": [
+    "service id",
+    "edge set to real trip IDs"
+  ],
+  "derived_formula": [
+    "edge=(adjacent route services), merge repeated edge while retaining all trip IDs",
+    "connected components independently recovered from edges"
+  ],
+  "checks": [
+    {
+      "name": "15 unique services",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "edge-derived components equal certificate",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "9 components",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "necessary text at least 8 pt",
+      "passed": true,
+      "details": {
+        "minimum_pt": 8.5
+      }
+    },
+    {
+      "name": "publication width 16.3 cm",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "missing_or_limited_evidence": [],
+  "plot_parameters": {
+    "minimum_font_pt": 8.5,
+    "font_cn": "Noto Sans SC Publication",
+    "font_latin": "DejaVu Sans",
+    "font_math": "STIX Sans",
+    "svg_text": true,
+    "pdf_fonttype": 42,
+    "graph_layout": "nongeographical regular arrangement; no unobserved clique edges"
+  },
+  "visual_review": {
+    "scope": "Actual stand-alone PDF color and grayscale renders at 160 dpi; final Word/A4 placement to be reviewed by root.",
+    "pdf_sha256": "39864ee422ccd002631df271594161f5c1436b3015f673508605a6be28b9f4c8",
+    "viewed_previews": [
+      {
+        "path": "C:\\Users\\11346\\Documents\\Codex\\2026-09-26\\d-uav-paper-updated-pdf-pdf\\work\\fig_v2\\fig_22_pdf_color.png",
+        "sha256": "d393f32d0ef74a594213e873df1f771d7a906e02fbebedc2aca52683e3c12ee7"
+      },
+      {
+        "path": "C:\\Users\\11346\\Documents\\Codex\\2026-09-26\\d-uav-paper-updated-pdf-pdf\\work\\fig_v2\\fig_22_pdf_gray.png",
+        "sha256": "0ac02708739d31c950e25c19dbe4e8ceb75497ef497e7ddea693756b86641e7c"
+      }
+    ],
+    "inspection_completed": true,
+    "fixed": "采用实际相邻访问边及真实column后缀，完整列九分量而不补成完全图。",
+    "conclusion": "15区完整ID、六条真实关系和九分量，在彩色与灰度均可直接读出。",
+    "word_page_review": "not performed in this subtask"
+  },
+  "no_optimization_rerun": true,
+  "authoritative_tolerance": 1e-05,
+  "shared_visual_sources": [
+    {
+      "path": "scripts/figures_v2/common.py",
+      "sha256": "baaaa4cbc137c79e69b92b7defd2dd134b7f795f57295887083ad9a43bfb2fdf"
+    },
+    {
+      "path": "scripts/figures_v2/paths.py",
+      "sha256": "c3852a429ec7e35bada4289121b5a8da0212f760f1cf33aa3c9428e134679549"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+      "sha256": "c8c2ba68889b16e99b6ee4e802df5882bbe9d7310bbbaab325c48416dfb19763"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+      "sha256": "2bdcce3e875183a6adb5ac0f2f739c42269506563ee3af57b8735e5766bb91ef"
+    }
+  ],
+  "script": "scripts/figures_v2/figures_17_27.py",
+  "script_sha256": "c34e1a00c09a39be40893b5cff567ac9fa1c19883dc57a88b51128e6e2756b9e",
+  "base_word_caption": "图 22  冻结Q3运输任务诱导的不可拆服务区分量。实心方块表示成员归属，右侧给出分量规模。15个服务区分别属于9个分量，独立任务组须由完整分量合并构成；矩阵不表示地理距离或飞行路径。",
+  "base_word_sha256": "9b4ced7a81957fd9fc3a097aa91f2636757b0b9a9fbdebaf5f1ae625c9b1f19c",
+  "repository_input_commit": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "research_commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "data_file": "fig_22_data.json",
+  "data_sha256": "6b6c93171ebff0eb073dbce2c8fe139d4994d90a0868695d839a2150527ad1c9",
+  "output_sha256": {
+    "pdf": "39864ee422ccd002631df271594161f5c1436b3015f673508605a6be28b9f4c8",
+    "svg": "308bc7bfca8eeea1554f2f6f140c55d692b88f6fce9ffc515a08c53f8e7c5aed",
+    "png": "3e23de2ffb08c766b806cbd271c4f025b175cf207da44f0d2cabbcbabc0291ce"
+  }
+}

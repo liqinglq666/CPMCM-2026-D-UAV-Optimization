@@ -1,0 +1,347 @@
+{
+  "operation": "Deterministic replay of the frozen 24 Q2 routes; no route selection, timing optimization or parameter changes.",
+  "result_tolerance": 1e-05,
+  "trajectory_sampling_step_s": 1.0,
+  "phase_count": 204,
+  "trajectory_rows": 33463,
+  "trip_count": 24,
+  "box_count": 80,
+  "hard_deadline_boxes": 31,
+  "resource_rows": 48,
+  "sources": [
+    {
+      "path": "results/q2/Q2_transport_trips_balanced.csv",
+      "sha256": "0098c6633916379afee2f8960505062e388ee3c580829de56bde35a1ce148099"
+    },
+    {
+      "path": "results/q2/Q2_box_delivery_balanced.csv",
+      "sha256": "84e8622c273f65f6709a600b73a82e4fe0dc1ef62099159c64818a9716f1cb34"
+    },
+    {
+      "path": "results/q2/Q2_resource_check.csv",
+      "sha256": "7bff8da7130b2f8378c7f988852071079a7085c21c56a91521e7d5a053d61198"
+    },
+    {
+      "path": "src/core/routes.py",
+      "sha256": "716aedafd42b4769390c292bececb09a00674d9aa716786b09e85aa52b2dded7"
+    },
+    {
+      "path": "src/core/physics.py",
+      "sha256": "36b58299dbdf77d62b1408a6fb26366860fdee938e8d650bed28f877712d362d"
+    },
+    {
+      "path": "src/core/communication.py",
+      "sha256": "7b2cdaa54eead3c8d8d0a300b09e71d298c5c8ee17c9047312932c6f55bb3a65"
+    },
+    {
+      "path": "src/core/sampling.py",
+      "sha256": "188983ef81c12306bc997ca3b08e6dc150c93ca3cc15ab4a0dea99dcfc33153d"
+    },
+    {
+      "path": "src/core/energy.py",
+      "sha256": "3e4ca3ae2b137917c10d9a7c7ba72b12b4aa876899255799b7d8a9cffe1ad4e1"
+    },
+    {
+      "path": "src/core/constraints.py",
+      "sha256": "16a5d95bcaa05b7abf2e995f2a38dbac69e4b328124faa2fa25ef805565a9b27"
+    },
+    {
+      "path": "src/core/terrain.py",
+      "sha256": "e6c89a7c35ef3600284bed34bcbbf30267d0ad285a298433b34ddd593f2ad164"
+    },
+    {
+      "path": "src/core/inputs.py",
+      "sha256": "124ba94199a2aa8b54abc5a806ec523d53eeaa049dd89d00420e0125dede908c"
+    },
+    {
+      "path": "src/config.py",
+      "sha256": "c054e7959d0be56c305db4ca8c447ad18597e47a8f37deab6eb50c65762ddeac"
+    },
+    {
+      "path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03"
+    },
+    {
+      "path": "raw-input/数据/无人机应急物资运输基础数据/调度中心与服务区.xlsx",
+      "sha256": "541a7af1ded08c9a3ff448480332cb5f6a54902f0afa6e9bcd50c1d2b2b34e38"
+    },
+    {
+      "path": "raw-input/数据/无人机应急物资运输基础数据/运输无人机数据.xlsx",
+      "sha256": "9296a657c07e042afba6aeea7999665d9cd24e00b592fd6c269de6e338480dcb"
+    },
+    {
+      "path": "raw-input/数据/无人机应急物资运输基础数据/物资需求与配送时限.xlsx",
+      "sha256": "5a3346159ceddcf585859d270b8f62114b388a1f737fbe64ffde0ee1fdc8170a"
+    }
+  ],
+  "checks": [
+    {
+      "trip_id": "Q2-001",
+      "return_difference_s": 0.0,
+      "energy_difference_kwh": 0.0,
+      "soc_difference_pp": 0.0,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 0.0
+    },
+    {
+      "trip_id": "Q2-002",
+      "return_difference_s": 0.0,
+      "energy_difference_kwh": 0.0,
+      "soc_difference_pp": 0.0,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 0.0
+    },
+    {
+      "trip_id": "Q2-003",
+      "return_difference_s": 1.0300027497578412e-10,
+      "energy_difference_kwh": 2.2515322939398175e-13,
+      "soc_difference_pp": -5.009326287108706e-12,
+      "phase_energy_difference_kwh": 4.440892098500626e-16,
+      "delivery_max_difference_s": 1.4779288903810084e-11
+    },
+    {
+      "trip_id": "Q2-004",
+      "return_difference_s": 1.7644197214394808e-10,
+      "energy_difference_kwh": 4.1877612488860905e-13,
+      "soc_difference_pp": -9.315215265814913e-12,
+      "phase_energy_difference_kwh": 2.220446049250313e-16,
+      "delivery_max_difference_s": 8.822098607197404e-11
+    },
+    {
+      "trip_id": "Q2-005",
+      "return_difference_s": 0.0,
+      "energy_difference_kwh": 0.0,
+      "soc_difference_pp": 0.0,
+      "phase_energy_difference_kwh": -2.220446049250313e-16,
+      "delivery_max_difference_s": 0.0
+    },
+    {
+      "trip_id": "Q2-006",
+      "return_difference_s": -7.048583938740194e-11,
+      "energy_difference_kwh": -1.8784973576657649e-13,
+      "soc_difference_pp": 4.696687483374262e-12,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 3.524291969370097e-11
+    },
+    {
+      "trip_id": "Q2-007",
+      "return_difference_s": 0.0,
+      "energy_difference_kwh": 0.0,
+      "soc_difference_pp": 0.0,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 0.0
+    },
+    {
+      "trip_id": "Q2-008",
+      "return_difference_s": -1.1823431123048067e-11,
+      "energy_difference_kwh": -6.838973831690964e-14,
+      "soc_difference_pp": 8.526512829121202e-13,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 5.9117155615240335e-12
+    },
+    {
+      "trip_id": "Q2-009",
+      "return_difference_s": 0.0,
+      "energy_difference_kwh": 0.0,
+      "soc_difference_pp": 0.0,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 0.0
+    },
+    {
+      "trip_id": "Q2-010",
+      "return_difference_s": 0.0,
+      "energy_difference_kwh": 4.440892098500626e-16,
+      "soc_difference_pp": -7.105427357601002e-15,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 4.547473508864641e-13
+    },
+    {
+      "trip_id": "Q2-011",
+      "return_difference_s": 0.0,
+      "energy_difference_kwh": -8.881784197001252e-16,
+      "soc_difference_pp": 1.0658141036401503e-14,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 0.0
+    },
+    {
+      "trip_id": "Q2-012",
+      "return_difference_s": -4.729372449219227e-11,
+      "energy_difference_kwh": -1.247890679678676e-13,
+      "soc_difference_pp": 3.11928260998684e-12,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 2.3646862246096134e-11
+    },
+    {
+      "trip_id": "Q2-013",
+      "return_difference_s": 9.367795428261161e-11,
+      "energy_difference_kwh": 5.684341886080801e-13,
+      "soc_difference_pp": -7.105427357601002e-12,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 4.6838977141305804e-11
+    },
+    {
+      "trip_id": "Q2-014",
+      "return_difference_s": 9.413270163349807e-11,
+      "energy_difference_kwh": 2.5002222514558525e-13,
+      "soc_difference_pp": -6.249223361010081e-12,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 4.6838977141305804e-11
+    },
+    {
+      "trip_id": "Q2-015",
+      "return_difference_s": 0.0,
+      "energy_difference_kwh": 0.0,
+      "soc_difference_pp": 0.0,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 0.0
+    },
+    {
+      "trip_id": "Q2-016",
+      "return_difference_s": 1.7644197214394808e-10,
+      "energy_difference_kwh": 3.89910326248355e-13,
+      "soc_difference_pp": -8.661515948915621e-12,
+      "phase_energy_difference_kwh": 2.220446049250313e-16,
+      "delivery_max_difference_s": 8.822098607197404e-11
+    },
+    {
+      "trip_id": "Q2-017",
+      "return_difference_s": 0.0,
+      "energy_difference_kwh": 0.0,
+      "soc_difference_pp": 0.0,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 0.0
+    },
+    {
+      "trip_id": "Q2-018",
+      "return_difference_s": 0.0,
+      "energy_difference_kwh": 1.9539925233402755e-14,
+      "soc_difference_pp": -4.298783551348606e-13,
+      "phase_energy_difference_kwh": 4.440892098500626e-16,
+      "delivery_max_difference_s": 5.820766091346741e-11
+    },
+    {
+      "trip_id": "Q2-019",
+      "return_difference_s": 0.0,
+      "energy_difference_kwh": 0.0,
+      "soc_difference_pp": 0.0,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 0.0
+    },
+    {
+      "trip_id": "Q2-020",
+      "return_difference_s": 0.0,
+      "energy_difference_kwh": 0.0,
+      "soc_difference_pp": 0.0,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 0.0
+    },
+    {
+      "trip_id": "Q2-021",
+      "return_difference_s": 0.0,
+      "energy_difference_kwh": 0.0,
+      "soc_difference_pp": 0.0,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 0.0
+    },
+    {
+      "trip_id": "Q2-022",
+      "return_difference_s": 9.094947017729282e-13,
+      "energy_difference_kwh": 1.7763568394002505e-15,
+      "soc_difference_pp": -3.552713678800501e-14,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 0.0
+    },
+    {
+      "trip_id": "Q2-023",
+      "return_difference_s": 0.0,
+      "energy_difference_kwh": 0.0,
+      "soc_difference_pp": 0.0,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 0.0
+    },
+    {
+      "trip_id": "Q2-024",
+      "return_difference_s": 0.0,
+      "energy_difference_kwh": 0.0,
+      "soc_difference_pp": 0.0,
+      "phase_energy_difference_kwh": 0.0,
+      "delivery_max_difference_s": 0.0
+    }
+  ],
+  "results_before_sha256": {
+    "results\\algorithm_comparison.csv": "502599fb4bffe83236ce124f6554eaabd165ac1a253022384cd1363a3cd5c098",
+    "results\\communication_repair_comparison.csv": "5e1a876d8cbf1e8be5efa869a9f71daf609b8f942a42531a9d2bdefed7add45d",
+    "results\\communication_replay.json": "29d807d95c9fc82434ab4efa1e8e24841e4c9126fe7a9ade39c5311d72962d39",
+    "results\\continuous_communication.json": "f69b77d7d4d240a04d5130119df63ad9a03099773a9904c7d6070537519f5200",
+    "results\\q1\\input_manifest.json": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+    "results\\q1\\Q1_batch_solution.csv": "a28c5e3eb7660ec0789969d122025445c61b67140d6bbb91f3a740423dece05c",
+    "results\\q1\\Q1_leg_physics.csv": "1957936788eca03a6dd4d168053f023a7a212bf124b22bfe8f967a799e99f314",
+    "results\\q1\\Q1_max_safe_payload.csv": "2c3decbfea44e95c1e77d84ce9db8c4f13581189774f930fd4e66ed7a8c1e023",
+    "results\\q1\\Q1_metrics.json": "3df457b62741f0236f9cf2fd1d20918d9383fa2b645bf3a0c42fbe807145b7eb",
+    "results\\q1\\Q1_sensitivity_summary.csv": "608793bfdea2401f95a0f0d1dca3fb62142e6324be0307f3b923a400f40e3d77",
+    "results\\q2\\input_manifest.json": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+    "results\\q2\\Q2_box_delivery_balanced.csv": "84e8622c273f65f6709a600b73a82e4fe0dc1ef62099159c64818a9716f1cb34",
+    "results\\q2\\Q2_column_audit.json": "d8188d387ab51c05595ec5fd215cda3c33cc3d79bde3e17f874baf7d1d78bc4f",
+    "results\\q2\\Q2_frontier_plans.json": "687723c3f33d8c8caf88850722a49690c2b83be3c680dafd079d49d2debb0aa9",
+    "results\\q2\\Q2_metrics.json": "79242d7e5035f5aab51ac3bf3c00a76e0a1a1d41d2bdd7a1889d3b95ec5db1d2",
+    "results\\q2\\Q2_pareto_frontier.csv": "5f5b6ff503c8616d7448031df8a56d14f57fac57f539bb7714b72c4c34260a8a",
+    "results\\q2\\Q2_pareto_plans.json": "89c2e0b0f814cf135996bd77c37c4552917f4e2be46f774db38649d8ce503959",
+    "results\\q2\\Q2_preference_audit.json": "e67c2f28619c9586247a4524e750aafbc64fe54faa676c640ee3c1e6ba026884",
+    "results\\q2\\Q2_preference_frontier.csv": "994031606fac459726fa382e7886d38290715c1e8079c2487522516e4263db00",
+    "results\\q2\\Q2_preference_plans.json": "fd10bdffe6908f4d9fc99584be6c2814cc4770573f4a75f543a04bcc11b65c78",
+    "results\\q2\\Q2_resource_check.csv": "7bff8da7130b2f8378c7f988852071079a7085c21c56a91521e7d5a053d61198",
+    "results\\q2\\Q2_search_summary.json": "f9c2c606d55aa4199a42eb6ac0c420a460f976f86cb205dd9f2736452a1335bf",
+    "results\\q2\\Q2_search_trace.json": "058e8ef29de743a969e77238803a0649596bd38834956fc7e60c9cf8cf49735d",
+    "results\\q2\\Q2_tradeoff_frontier.csv": "f4a569c7d5d898285db78352a0db7678398abc286e1ce39d85750ccdd14853bc",
+    "results\\q2\\Q2_transport_trips_balanced.csv": "0098c6633916379afee2f8960505062e388ee3c580829de56bde35a1ce148099",
+    "results\\q2\\runtime.json": "28b927b938b3c55dd10056c8d1517ac79df4ed91ffde2b2bfbaa1b4d9f726039",
+    "results\\q2_workload_bound.json": "fad175c3a8bf694215eff4baf537dc3d08cf5d4bd9d695d86f6bc4e24d3a4a4b",
+    "results\\q3\\input_manifest.json": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+    "results\\q3\\Q3_box_delivery.csv": "9f54eb298fba65ac05971d2cf31ee010b1b2eafa71ec97cadc642f817131e317",
+    "results\\q3\\Q3_column_audit.json": "bb5ab3c69e19cbe76b5f67a2d7762d155b91e61cba75c51cc09b6cdc684c5105",
+    "results\\q3\\Q3_communication.csv": "d5a9f7dc4e47ea7aa671966ff989e523d39cf11c3cfd7f33ac1a5e323a6b9942",
+    "results\\q3\\Q3_cumulative_audit.json": "d3cff8dae437f8506c7effe393c9e5b122caab24f9fdac2fc71fc9e7acd7396d",
+    "results\\q3\\Q3_incumbents.json": "7ae8b20f9ce79907235e929866caeb545be2668e804ef10570b62a7e66cfd6b5",
+    "results\\q3\\Q3_location_audit.json": "1ac10257733ca487b4d24ceeeca689561cb70b8bee88e9326871c6ef465a4611",
+    "results\\q3\\Q3_metrics.json": "b7418dbec4bb31ae4780e08bcfb28b1c40d05d00090d6f14a06042dd7a7e17c9",
+    "results\\q3\\Q3_relay_sorties.csv": "cd3fde3f17e26bfc30979ed47a9c7fcf671a5eda89549be53417ab7e266e64c8",
+    "results\\q3\\Q3_resource_check.csv": "09c7e1f8fb214b6514e47091bf8530822c263c226c5371789bb2536536ae955f",
+    "results\\q3\\Q3_search_summary.json": "bab4acf1bb224137e644d801643b8d63718f823b80fbfbecd0cc9f98312f022b",
+    "results\\q3\\Q3_search_trace.json": "cd64015d9353795a3c0346072136c1ebff70485475d134af590a19ef46cec0e4",
+    "results\\q3\\Q3_seed_repair.json": "866e52b4c1bfed1d8b11ff0dad525589b4bf206a15def4785a804f3e74cf4d17",
+    "results\\q3\\Q3_selected_plan.json": "699e87e008510743a962f676708683445a55f045f40d61de15ff97a0cab59b32",
+    "results\\q3\\Q3_transport_trips.csv": "2214d1607f4f88fd0986e9640768bc680ede06f719544095d315ffd636b68e49",
+    "results\\q3\\runtime.json": "18981626a58dc37fda364334de86589f1a99bb1fa2817ae6a8ca28bd583ea14b",
+    "results\\q4\\input_manifest.json": "8af55b5a1434853bf12eadefb63ad91b414f14745f5123b2f15c15bac52a7e12",
+    "results\\q4\\Q4_balanced_groups.csv": "51bdc9296d2f613ff6aa15f671db226b0708dfb50e1ebfae01813d351d974062",
+    "results\\q4\\Q4_balanced_resources.csv": "0f419eb48762ec4d592a2cb3e3ceb9b081c3227da6ae859fc283a998e62cbc52",
+    "results\\q4\\Q4_enumeration_certificate.json": "09e4117323c69138049feaaecb5836eb5150254d7b9788d5eb7c4c6dcc6d0df7",
+    "results\\q4\\Q4_gap_decomposition.csv": "95b92cd962de8be938d6e62ff7139306d1aae3ef21e17971bbe90adeaaf5fdff",
+    "results\\q4\\Q4_partition_config.csv": "e7a6a47cf0c19ad4afb2b39fc8adb8dab2313e527f92377f725bea44a17a0535",
+    "results\\q4\\Q4_policy_audit.json": "cd0dcbeb1f2636ae624cbec41784ae84b46f91b6e6f1e0a243857dfd95028309",
+    "results\\q4\\Q4_preference_comparison.csv": "a227c56e87ffbab92133889733713026b154c349dcc6904b82fd4f5bc47b7900",
+    "results\\q4\\Q4_preference_frontier.json": "5e42b7f59f92f246cf1e94743e86a87b1e917f813a95d63eb4b6efe8d2491fb9",
+    "results\\q4\\Q4_resource_summary.csv": "0c6b0225488c3ac5270a4a4dea9e0ee3488b752c30f6ce57ca633616c7f36055",
+    "results\\q4\\Q4_source_manifest.json": "a85ef5178a652971a7b1dfe93954055aa7aa98457aefd087c8cb724113661112",
+    "results\\reference_update_metadata.json": "64b7501acb400502326ee830ff621e3abdec5cd28bcfa210bf899b49f5bd0eff",
+    "results\\relay_cover.json": "36896eb1890eec9ff7ddeafe2f602cd44ab786ce2e8cb5d1bc7a227e0210526f",
+    "results\\run_metadata.json": "b0335177a51e69d758ac5ba6cb632d2ae540b783bfba4f23877f67d4cf0b5b26",
+    "results\\validation.json": "b3bf0f91093bef128cd710b5c07627a50f496af9a5da00c03005e4d7e1c427f1"
+  },
+  "results_after_identical": true,
+  "definitions": {
+    "phase_intervals": "Half-open except shared plotting endpoints; load decreases only after handover completion.",
+    "prep_load": "Prep+per-box load time from official type; displayed payload is the assigned payload ready for departure, not a measured intra-loading mass curve.",
+    "energy": "Climb and cruise components are original leg_energy; other phases have zero modeled energy. Within-phase cumulative energy scales with constant prescribed speed.",
+    "altitude": "Absolute model altitude in metres. Service operation altitude is node elevation+30m; cruise is closed-cell terrain maximum+50m. Node elevation is not replaced by DSM.",
+    "distance": "WGS84 geodesic segment length as original Physics.segment; linear lon/lat sampler retained; only cruise increases cumulative horizontal distance."
+  },
+  "output_sha256": {
+    "q2_018_trajectory.csv": "5f28eb1c65f4e3be7d92748e52c09769d51ca9e48eb31c6b5ecdd5a6719f44f3",
+    "q2_020_profile.csv": "f16935fca46099c514bacd983fb697dc94bc12005f4cebf8f5cb6aeac917c670",
+    "q2_delivery_events.csv": "f3059fb8dab418fdbe30df6e9301de28bbc0d13ab82554c5c00db41eed72e072",
+    "q2_task_phases.csv": "0e4ac2237fe8ee2651ab52fa1fe45a1ac61804a60b932a026749504244e1a36e",
+    "q2_trajectory.csv": "57ffd228b9e64b36d7030fa46770950c19762f08570172d6353e824f69e73394",
+    "q2_trip_summary.csv": "541b8c90d354c9bcadd70894bcf76be0d6901fe4f836d8bcaa133efbcd5c9c78"
+  }
+}

@@ -1,0 +1,2032 @@
+{
+  "scope": "figures 1–9 only; graphic-level review before Word replacement",
+  "created_at_utc": "2026-09-26T12:21:05.825507+00:00",
+  "head": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "final_generation": "default all-figures sequential invocation 1→9",
+  "status": "pass_figure_level",
+  "actually_viewed_final_color_previews": 9,
+  "actually_viewed_final_grayscale_previews": 9,
+  "data_check_count": 232,
+  "data_failures": [],
+  "checks": [
+    {
+      "figure": 1,
+      "check": "四问方法边界来自源码，Q4保持固定Q3",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "S001坐标/海拔/箱号/计数保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "S002坐标/海拔/箱号/计数保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "S003坐标/海拔/箱号/计数保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "S004坐标/海拔/箱号/计数保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "S005坐标/海拔/箱号/计数保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "S006坐标/海拔/箱号/计数保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "S007坐标/海拔/箱号/计数保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "S008坐标/海拔/箱号/计数保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "S009坐标/海拔/箱号/计数保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "S010坐标/海拔/箱号/计数保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "S011坐标/海拔/箱号/计数保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "S012坐标/海拔/箱号/计数保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "S013坐标/海拔/箱号/计数保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "S014坐标/海拔/箱号/计数保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "S015坐标/海拔/箱号/计数保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "15个沿线最高DEM逐值连接",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "需求面积按手册改为7×箱数，仅显示变化",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "S001质量和原硬截止集合保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "S002质量和原硬截止集合保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "S003质量和原硬截止集合保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "S004质量和原硬截止集合保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "S005质量和原硬截止集合保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "S006质量和原硬截止集合保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "S007质量和原硬截止集合保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "S008质量和原硬截止集合保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "S009质量和原硬截止集合保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "S010质量和原硬截止集合保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "S011质量和原硬截止集合保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "S012质量和原硬截止集合保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "S013质量和原硬截止集合保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "S014质量和原硬截止集合保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "S015质量和原硬截止集合保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 4,
+      "check": "全部闭像元区间逐条相同",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 4,
+      "check": "闭像元显示包络逐条相同",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 4,
+      "check": "全部闭边界最高值保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 4,
+      "check": "地形距离/峰值/升降保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S001-01四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S001-02四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S002-01四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S002-02四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S003-01四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S003-02四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S004-01四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S005-01四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S006-01四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S007-01四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S008-01四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S009-01四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S010-01四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S011-01四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S012-01四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S013-01四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S014-01四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "Q1-S015-01四项能耗保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 6,
+      "check": "资源原始记录保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 6,
+      "check": "return_s保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 6,
+      "check": "charge_complete_s保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 6,
+      "check": "extra_battery_s保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 6,
+      "check": "确定性重放阶段能耗和正式一致",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S001/A安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S001/B安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S001/C安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S002/A安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S002/B安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S002/C安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S003/A安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S003/B安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S003/C安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S004/A安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S004/B安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S004/C安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S005/A安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S005/B安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S005/C安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S006/A安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S006/B安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S006/C安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S007/A安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S007/B安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S007/C安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S008/A安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S008/B安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S008/C安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S009/A安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S009/B安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S009/C安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S010/A安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S010/B安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S010/C安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S011/A安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S011/B安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S011/C安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S012/A安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S012/B安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S012/C安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S013/A安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S013/B安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S013/C安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S014/A安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S014/B安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S014/C安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S015/A安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S015/B安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "S015/C安全载荷保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S001-01机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S001-02机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S002-01机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S002-02机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S003-01机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S003-02机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S004-01机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S005-01机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S006-01机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S007-01机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S008-01机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S009-01机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S010-01机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S011-01机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S012-01机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S013-01机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S014-01机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "Q1-S015-01机型/逐箱分配/质量保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "80个真实矩形各箱一次",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S001-02三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S004-01三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S001-01三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S002-01三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S003-01三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S009-01三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S010-01三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S011-01三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S012-01三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S013-01三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S014-01三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S015-01三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S008-01三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S003-02三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S002-02三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S005-01三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S006-01三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "Q1-S007-01三比例/SOC/最高项保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "最高项5/9/4保持",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 0,
+      "check": "results/src/config与冻结HEAD无修改",
+      "passed": true,
+      "details": "no tracked differences"
+    },
+    {
+      "figure": 1,
+      "check": "实际PDF宽16.3cm/单页/字>=8pt/文字无出界",
+      "passed": true,
+      "details": {
+        "minimum_pdf_text_pt": 8.5,
+        "outside": []
+      }
+    },
+    {
+      "figure": 1,
+      "check": "实际PDF字体嵌入",
+      "passed": true,
+      "details": [
+        {
+          "name": "FPVEFM+DejaVuSans-Bold",
+          "embedded_bytes": 5040
+        },
+        {
+          "name": "NLAYIU+DejaVuSans",
+          "embedded_bytes": 4556
+        },
+        {
+          "name": "HAJSMO+DejaVuSans",
+          "embedded_bytes": 3724
+        },
+        {
+          "name": "CKQKEC+NotoSansSCPublication-Bold",
+          "embedded_bytes": 8920
+        },
+        {
+          "name": "GRAZUT+NotoSansSCPublication-Regular",
+          "embedded_bytes": 33324
+        }
+      ]
+    },
+    {
+      "figure": 1,
+      "check": "PNG600dpi白底不透明",
+      "passed": true,
+      "details": {
+        "pixels": [
+          3850,
+          2551
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ],
+        "mode": "RGBA"
+      }
+    },
+    {
+      "figure": 1,
+      "check": "SVG保留文本编辑",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 1,
+      "check": "制图数据两交付位置完全一致",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 1,
+      "check": "来源当前SHA匹配：src/core/physics.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 1,
+      "check": "来源当前SHA匹配：src/core/routes.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 1,
+      "check": "来源当前SHA匹配：src/q1/physics_engine.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 1,
+      "check": "来源当前SHA匹配：src/q2/columns.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 1,
+      "check": "来源当前SHA匹配：src/q2/interval_master.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 1,
+      "check": "来源当前SHA匹配：src/q3/search.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 1,
+      "check": "来源当前SHA匹配：src/q3/solver.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 1,
+      "check": "来源当前SHA匹配：src/q4/partition.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "实际PDF宽16.3cm/单页/字>=8pt/文字无出界",
+      "passed": true,
+      "details": {
+        "minimum_pdf_text_pt": 8.0,
+        "outside": []
+      }
+    },
+    {
+      "figure": 2,
+      "check": "实际PDF字体嵌入",
+      "passed": true,
+      "details": [
+        {
+          "name": "DTDDTB+DejaVuSans-Bold",
+          "embedded_bytes": 4872
+        },
+        {
+          "name": "DIUFDO+DejaVuSans",
+          "embedded_bytes": 8052
+        },
+        {
+          "name": "CODLCV+DejaVuSans",
+          "embedded_bytes": 3796
+        },
+        {
+          "name": "BISVBX+NotoSansSCPublication-Bold",
+          "embedded_bytes": 4636
+        },
+        {
+          "name": "BWXIJI+NotoSansSCPublication-Regular",
+          "embedded_bytes": 9840
+        }
+      ]
+    },
+    {
+      "figure": 2,
+      "check": "PNG600dpi白底不透明",
+      "passed": true,
+      "details": {
+        "pixels": [
+          3850,
+          2787
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ],
+        "mode": "RGBA"
+      }
+    },
+    {
+      "figure": 2,
+      "check": "SVG保留文本编辑",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "制图数据两交付位置完全一致",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "来源当前SHA匹配：paper/data/analysis.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "来源当前SHA匹配：results/q1/Q1_leg_physics.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "来源当前SHA匹配：src/core/inputs.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "来源当前SHA匹配：raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "来源当前SHA匹配：raw-input/数据/无人机应急物资运输基础数据/调度中心与服务区.xlsx",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 2,
+      "check": "来源当前SHA匹配：raw-input/数据/无人机应急物资运输基础数据/物资需求与配送时限.xlsx",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "实际PDF宽16.3cm/单页/字>=8pt/文字无出界",
+      "passed": true,
+      "details": {
+        "minimum_pdf_text_pt": 8.0,
+        "outside": []
+      }
+    },
+    {
+      "figure": 3,
+      "check": "实际PDF字体嵌入",
+      "passed": true,
+      "details": [
+        {
+          "name": "DTDDTB+DejaVuSans-Bold",
+          "embedded_bytes": 4872
+        },
+        {
+          "name": "BGKOFR+DejaVuSans",
+          "embedded_bytes": 6652
+        },
+        {
+          "name": "WDRXTZ+NotoSansSCPublication-Bold",
+          "embedded_bytes": 5640
+        },
+        {
+          "name": "FIIEKT+NotoSansSCPublication-Regular",
+          "embedded_bytes": 7236
+        }
+      ]
+    },
+    {
+      "figure": 3,
+      "check": "PNG600dpi白底不透明",
+      "passed": true,
+      "details": {
+        "pixels": [
+          3850,
+          2740
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ],
+        "mode": "RGBA"
+      }
+    },
+    {
+      "figure": 3,
+      "check": "SVG保留文本编辑",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "制图数据两交付位置完全一致",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "来源当前SHA匹配：paper/data/analysis.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "来源当前SHA匹配：src/core/inputs.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 3,
+      "check": "来源当前SHA匹配：raw-input/数据/无人机应急物资运输基础数据/物资需求与配送时限.xlsx",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 4,
+      "check": "实际PDF宽16.3cm/单页/字>=8pt/文字无出界",
+      "passed": true,
+      "details": {
+        "minimum_pdf_text_pt": 8.0,
+        "outside": []
+      }
+    },
+    {
+      "figure": 4,
+      "check": "实际PDF字体嵌入",
+      "passed": true,
+      "details": [
+        {
+          "name": "GDUJCH+DejaVuSans-Bold",
+          "embedded_bytes": 5980
+        },
+        {
+          "name": "GYUWIO+DejaVuSans-Bold",
+          "embedded_bytes": 4308
+        },
+        {
+          "name": "CENVMO+DejaVuSans",
+          "embedded_bytes": 7336
+        },
+        {
+          "name": "GIEHBJ+NotoSansSCPublication-Bold",
+          "embedded_bytes": 7156
+        },
+        {
+          "name": "DJXORQ+NotoSansSCPublication-Regular",
+          "embedded_bytes": 15564
+        }
+      ]
+    },
+    {
+      "figure": 4,
+      "check": "PNG600dpi白底不透明",
+      "passed": true,
+      "details": {
+        "pixels": [
+          3850,
+          2952
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ],
+        "mode": "RGBA"
+      }
+    },
+    {
+      "figure": 4,
+      "check": "SVG保留文本编辑",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 4,
+      "check": "制图数据两交付位置完全一致",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 4,
+      "check": "来源当前SHA匹配：paper/data/terrain_profile.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 4,
+      "check": "来源当前SHA匹配：paper/data/analysis.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 4,
+      "check": "来源当前SHA匹配：paper/data/energy_components.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 4,
+      "check": "来源当前SHA匹配：results/q1/Q1_leg_physics.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 4,
+      "check": "来源当前SHA匹配：results/q1/Q1_batch_solution.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 4,
+      "check": "来源当前SHA匹配：src/core/physics.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 4,
+      "check": "来源当前SHA匹配：src/core/routes.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 4,
+      "check": "来源当前SHA匹配：src/core/energy.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "实际PDF宽16.3cm/单页/字>=8pt/文字无出界",
+      "passed": true,
+      "details": {
+        "minimum_pdf_text_pt": 8.0,
+        "outside": []
+      }
+    },
+    {
+      "figure": 5,
+      "check": "实际PDF字体嵌入",
+      "passed": true,
+      "details": [
+        {
+          "name": "HKOJZX+DejaVuSans-Bold",
+          "embedded_bytes": 5392
+        },
+        {
+          "name": "EUURGK+DejaVuSans",
+          "embedded_bytes": 7420
+        },
+        {
+          "name": "EBJONM+NotoSansSCPublication-Bold",
+          "embedded_bytes": 5908
+        },
+        {
+          "name": "CKYWYF+NotoSansSCPublication-Regular",
+          "embedded_bytes": 6608
+        }
+      ]
+    },
+    {
+      "figure": 5,
+      "check": "PNG600dpi白底不透明",
+      "passed": true,
+      "details": {
+        "pixels": [
+          3850,
+          3000
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ],
+        "mode": "RGBA"
+      }
+    },
+    {
+      "figure": 5,
+      "check": "SVG保留文本编辑",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "制图数据两交付位置完全一致",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "来源当前SHA匹配：paper/data/energy_components.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 5,
+      "check": "来源当前SHA匹配：results/q1/Q1_batch_solution.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 6,
+      "check": "实际PDF宽16.3cm/单页/字>=8pt/文字无出界",
+      "passed": true,
+      "details": {
+        "minimum_pdf_text_pt": 8.5,
+        "outside": []
+      }
+    },
+    {
+      "figure": 6,
+      "check": "实际PDF字体嵌入",
+      "passed": true,
+      "details": [
+        {
+          "name": "FGUNHM+DejaVuSans",
+          "embedded_bytes": 7368
+        },
+        {
+          "name": "GVPPQE+DejaVuSans",
+          "embedded_bytes": 3928
+        },
+        {
+          "name": "FTHWJS+NotoSansSCPublication-Regular",
+          "embedded_bytes": 12680
+        }
+      ]
+    },
+    {
+      "figure": 6,
+      "check": "PNG600dpi白底不透明",
+      "passed": true,
+      "details": {
+        "pixels": [
+          3850,
+          1748
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ],
+        "mode": "RGBA"
+      }
+    },
+    {
+      "figure": 6,
+      "check": "SVG保留文本编辑",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 6,
+      "check": "制图数据两交付位置完全一致",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 6,
+      "check": "来源当前SHA匹配：paper/figure_data_v2/q2_task_phases.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 6,
+      "check": "来源当前SHA匹配：paper/figure_data_v2/q2_replay_audit.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 6,
+      "check": "来源当前SHA匹配：results/q2/Q2_transport_trips_balanced.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 6,
+      "check": "来源当前SHA匹配：results/q2/Q2_resource_check.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 6,
+      "check": "来源当前SHA匹配：results/q2/Q2_box_delivery_balanced.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 6,
+      "check": "来源当前SHA匹配：src/core/routes.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 6,
+      "check": "来源当前SHA匹配：src/core/physics.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "实际PDF宽16.3cm/单页/字>=8pt/文字无出界",
+      "passed": true,
+      "details": {
+        "minimum_pdf_text_pt": 8.0,
+        "outside": []
+      }
+    },
+    {
+      "figure": 7,
+      "check": "实际PDF字体嵌入",
+      "passed": true,
+      "details": [
+        {
+          "name": "BZVUTI+DejaVuSans-Bold",
+          "embedded_bytes": 5152
+        },
+        {
+          "name": "ENAFWY+DejaVuSans",
+          "embedded_bytes": 7632
+        },
+        {
+          "name": "BIHQXT+NotoSansSCPublication-Bold",
+          "embedded_bytes": 5776
+        },
+        {
+          "name": "EZUIOQ+NotoSansSCPublication-Regular",
+          "embedded_bytes": 9232
+        }
+      ]
+    },
+    {
+      "figure": 7,
+      "check": "PNG600dpi白底不透明",
+      "passed": true,
+      "details": {
+        "pixels": [
+          3850,
+          2905
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ],
+        "mode": "RGBA"
+      }
+    },
+    {
+      "figure": 7,
+      "check": "SVG保留文本编辑",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "制图数据两交付位置完全一致",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "来源当前SHA匹配：results/q1/Q1_max_safe_payload.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 7,
+      "check": "来源当前SHA匹配：paper/data/analysis.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "实际PDF宽16.3cm/单页/字>=8pt/文字无出界",
+      "passed": true,
+      "details": {
+        "minimum_pdf_text_pt": 8.5,
+        "outside": []
+      }
+    },
+    {
+      "figure": 8,
+      "check": "实际PDF字体嵌入",
+      "passed": true,
+      "details": [
+        {
+          "name": "DILQTA+DejaVuSans-Bold",
+          "embedded_bytes": 4256
+        },
+        {
+          "name": "DJOPZE+DejaVuSans",
+          "embedded_bytes": 7020
+        },
+        {
+          "name": "GJCMIX+NotoSansSCPublication-Bold",
+          "embedded_bytes": 4776
+        },
+        {
+          "name": "CTKOWL+NotoSansSCPublication-Regular",
+          "embedded_bytes": 11612
+        }
+      ]
+    },
+    {
+      "figure": 8,
+      "check": "PNG600dpi白底不透明",
+      "passed": true,
+      "details": {
+        "pixels": [
+          3850,
+          2929
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ],
+        "mode": "RGBA"
+      }
+    },
+    {
+      "figure": 8,
+      "check": "SVG保留文本编辑",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "制图数据两交付位置完全一致",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "来源当前SHA匹配：results/q1/Q1_batch_solution.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 8,
+      "check": "来源当前SHA匹配：paper/data/analysis.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "实际PDF宽16.3cm/单页/字>=8pt/文字无出界",
+      "passed": true,
+      "details": {
+        "minimum_pdf_text_pt": 8.0,
+        "outside": []
+      }
+    },
+    {
+      "figure": 9,
+      "check": "实际PDF字体嵌入",
+      "passed": true,
+      "details": [
+        {
+          "name": "DTDDTB+DejaVuSans-Bold",
+          "embedded_bytes": 4872
+        },
+        {
+          "name": "EXGZWF+DejaVuSans",
+          "embedded_bytes": 6552
+        },
+        {
+          "name": "DYGSLZ+NotoSansSCPublication-Bold",
+          "embedded_bytes": 4860
+        },
+        {
+          "name": "ENGNMX+NotoSansSCPublication-Regular",
+          "embedded_bytes": 8352
+        }
+      ]
+    },
+    {
+      "figure": 9,
+      "check": "PNG600dpi白底不透明",
+      "passed": true,
+      "details": {
+        "pixels": [
+          3850,
+          2834
+        ],
+        "dpi": [
+          599.9988,
+          599.9988
+        ],
+        "mode": "RGBA"
+      }
+    },
+    {
+      "figure": 9,
+      "check": "SVG保留文本编辑",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "制图数据两交付位置完全一致",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "来源当前SHA匹配：paper/data/constraint_slacks.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "来源当前SHA匹配：results/q1/Q1_batch_solution.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "来源当前SHA匹配：paper/data/analysis.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "来源当前SHA匹配：src/core/energy.py",
+      "passed": true,
+      "details": null
+    },
+    {
+      "figure": 9,
+      "check": "来源当前SHA匹配：scripts/verify_paper.py",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "figures": [
+    {
+      "number": 1,
+      "status": "pass_figure_level",
+      "pdf_sha256": "6b3f16f6555074c09af22ece957aec167d84e06dc177aa81d55fbb6c3252cc41",
+      "artifact_sha256": {
+        "pdf": "6b3f16f6555074c09af22ece957aec167d84e06dc177aa81d55fbb6c3252cc41",
+        "svg": "c0c1e5a2f908626909518b3d6840e864e3128077238824bc5598900cd1b73ed8",
+        "png": "b8fd0c1000922e263a973fd0e02792cadde85e9ae77f226cc03571c928320843"
+      },
+      "previews": {
+        "color": {
+          "path": "work/fig_v2/qa_01_09/fig_01_color.png",
+          "sha256": "d4bdba62e5acc85fbe262c9830d4805f87a80b1624923b3af975972afad6f09a",
+          "actually_viewed": true
+        },
+        "gray": {
+          "path": "work/fig_v2/qa_01_09/fig_01_gray.png",
+          "sha256": "59e105dc14b6700b1681fcd5b21c52520a893c93e2992dbb1759c8d39d3faaa5",
+          "actually_viewed": true
+        }
+      },
+      "preview_dpi": 180,
+      "print_width_cm": 16.3,
+      "actual_pdf_min_font_pt": 8.5,
+      "manual_findings_and_changes": {
+        "changes": [
+          "四行三列表改为共同物理带、四列决策、证据带。",
+          "Q3拆分离散选择与条件LP；Q4实线继承单独强调。"
+        ],
+        "resolved": [],
+        "acceptance": "四列同等可读，Q3内层级与唯一Q3→Q4继承清楚；实/虚线在灰度可区分。"
+      },
+      "open_findings": [],
+      "source_sha_current_verified": true,
+      "data_preservation_checks_pass": true
+    },
+    {
+      "number": 2,
+      "status": "pass_figure_level",
+      "pdf_sha256": "bdddd62fd4e52cccfd5cc455e284489a945a777a42cd874681e4470b796e93de",
+      "artifact_sha256": {
+        "pdf": "bdddd62fd4e52cccfd5cc455e284489a945a777a42cd874681e4470b796e93de",
+        "svg": "1f96718870b07c20d47ef7f1bb9364d59a5d78370c315731e113555012d89e1e",
+        "png": "f300f4b21d8b0c0590ec834d2814a32bddb21aa92be06524c502baaa2c75af0b"
+      },
+      "previews": {
+        "color": {
+          "path": "work/fig_v2/qa_01_09/fig_02_color.png",
+          "sha256": "9b332fff51950f0e6e676cb56c7509b5b3b9410e57134122de25b8a2bb40dedb",
+          "actually_viewed": true
+        },
+        "gray": {
+          "path": "work/fig_v2/qa_01_09/fig_02_gray.png",
+          "sha256": "8246315608bb38d33437a2c944abd2a6382fe274cb559cdcf5c6a630ce1449e6",
+          "actually_viewed": true
+        }
+      },
+      "preview_dpi": 180,
+      "print_width_cm": 16.3,
+      "actual_pdf_min_font_pt": 8.0,
+      "manual_findings_and_changes": {
+        "changes": [
+          "真实原始DEM改用连续高程色带、0.18晕渲与100m细等高线。",
+          "右侧单列节点海拔升级为节点/沿线最高DEM配对。"
+        ],
+        "resolved": [
+          "下移海拔色条，消除与地图横轴标题过近。"
+        ],
+        "acceptance": "15点及O01、比例尺、北向清楚；侧图圆/菱形在灰度中仍区分两类海拔。Δ标签可读，未遮挡数据。"
+      },
+      "open_findings": [],
+      "source_sha_current_verified": true,
+      "data_preservation_checks_pass": true
+    },
+    {
+      "number": 3,
+      "status": "pass_figure_level",
+      "pdf_sha256": "56c14b8578bba1505b783e1714315d3345cac2465261da5dc5f442f82672959e",
+      "artifact_sha256": {
+        "pdf": "56c14b8578bba1505b783e1714315d3345cac2465261da5dc5f442f82672959e",
+        "svg": "e5c73970ad625691f948d96288a057a1da9168ea9435d9df35c35205b73c61eb",
+        "png": "bda692c100d286376d6b59d1794b2cffdf93475d7046aa64f07e8192d04bbd72"
+      },
+      "previews": {
+        "color": {
+          "path": "work/fig_v2/qa_01_09/fig_03_color.png",
+          "sha256": "8fe9d7e8db4774657b3f373ec797b599c8f9af44de5add816d296bccc9319cfa",
+          "actually_viewed": true
+        },
+        "gray": {
+          "path": "work/fig_v2/qa_01_09/fig_03_gray.png",
+          "sha256": "d74a510f26350cd65e0223dca6f3dfb59080c64cf86fe9473a76e9ff6ea24192",
+          "actually_viewed": true
+        }
+      },
+      "preview_dpi": 180,
+      "print_width_cm": 16.3,
+      "actual_pdf_min_font_pt": 8.0,
+      "manual_findings_and_changes": {
+        "changes": [
+          "右侧由硬截止二分类重构为真实1/2/3h与无硬截止四段。",
+          "物资与截止图例改为按阅读顺序排列，辅助纹理支持灰度。"
+        ],
+        "resolved": [
+          "调整两行图例顺序。",
+          "3h截止加稀疏纹理，避免浅灰与无硬截止难分。"
+        ],
+        "acceptance": "15行共用服务区标签；窄段未扩大；总量和硬截止数字清楚；固定类别顺序、边界和纹理支持灰度识读。"
+      },
+      "open_findings": [],
+      "source_sha_current_verified": true,
+      "data_preservation_checks_pass": true
+    },
+    {
+      "number": 4,
+      "status": "pass_figure_level",
+      "pdf_sha256": "e08a3fae02e73863002e93cc8c8a37090512cbb70ca0fa8e7c990a2d43f3dbd6",
+      "artifact_sha256": {
+        "pdf": "e08a3fae02e73863002e93cc8c8a37090512cbb70ca0fa8e7c990a2d43f3dbd6",
+        "svg": "b845e44af0a520701e7b935dc52a0fe883afb5d9ea998e200fe8defa1f449f0a",
+        "png": "7e9f367f0969baacfb416880f2a2b92e4b12923fc34946e2dad1f3211c68356d"
+      },
+      "previews": {
+        "color": {
+          "path": "work/fig_v2/qa_01_09/fig_04_color.png",
+          "sha256": "6efc7b8bc2e6a1178a74c26b362b1cd70303f4febdaf82f9f3d7a3eb8fa44233",
+          "actually_viewed": true
+        },
+        "gray": {
+          "path": "work/fig_v2/qa_01_09/fig_04_gray.png",
+          "sha256": "60cc7d15230138df4de33393803893de6b46cade0bb570c03c9a1d410bef7e69",
+          "actually_viewed": true
+        }
+      },
+      "preview_dpi": 180,
+      "print_width_cm": 16.3,
+      "actual_pdf_min_font_pt": 8.0,
+      "manual_findings_and_changes": {
+        "changes": [
+          "单剖面升级为同任务剖面+真实阶段时长+能耗三面板。",
+          "完整保留闭区间包络与边界最高值。"
+        ],
+        "resolved": [
+          "移动峰值注释和下降注释，消除互相覆盖。",
+          "扩大时长坐标标值空间、精简能耗侧轴标签，消除辅图之间碰撞。",
+          "去程/返程采用共同阶段色，爬升/巡航/下降仅用纹理区分，避免把爬升误用为准备灰。"
+        ],
+        "acceptance": "541.947m、591.947m及50m量尺、升降值清楚；辅助阶段纹理在灰度可区分，单位分别为s与kWh。"
+      },
+      "open_findings": [],
+      "source_sha_current_verified": true,
+      "data_preservation_checks_pass": true
+    },
+    {
+      "number": 5,
+      "status": "pass_figure_level",
+      "pdf_sha256": "5e49fd22df2e74b665ffd21458376528c61b1026e157720e450e46b79a909466",
+      "artifact_sha256": {
+        "pdf": "5e49fd22df2e74b665ffd21458376528c61b1026e157720e450e46b79a909466",
+        "svg": "a049ae3bad2a044705911735624b18db8a0fc0d44c8d1dbf7481eb0178a2b02a",
+        "png": "71a93e0e571f92688106c0c95645eacaea97fa727f7a3fa619d27b1b59d665c0"
+      },
+      "previews": {
+        "color": {
+          "path": "work/fig_v2/qa_01_09/fig_05_color.png",
+          "sha256": "3209f72144018c0da7d75b7d1eb84a7e0c2bfec7529b71e57dd2d0fddd7618c2",
+          "actually_viewed": true
+        },
+        "gray": {
+          "path": "work/fig_v2/qa_01_09/fig_05_gray.png",
+          "sha256": "f7017f28d547f8f8fc34229453265567f8dd81d08d520f02a9d92fc0ba94bbdf",
+          "actually_viewed": true
+        }
+      },
+      "preview_dpi": 180,
+      "print_width_cm": 16.3,
+      "actual_pdf_min_font_pt": 8.0,
+      "manual_findings_and_changes": {
+        "changes": [
+          "右侧重复返程份额点列改为返程/爬升配对散点和全体去返程汇总。"
+        ],
+        "resolved": [
+          "对三个高亮ID使用分离引线位置。",
+          "扩大右下轴尾数值空间；总体份额移到下沿，避免轴标题碰撞。"
+        ],
+        "acceptance": "18批四项真实宽度保持；极小爬升项没有放大；三极值ID可追溯，去返程总能耗和39.2%份额可读。"
+      },
+      "open_findings": [],
+      "source_sha_current_verified": true,
+      "data_preservation_checks_pass": true
+    },
+    {
+      "number": 6,
+      "status": "pass_figure_level",
+      "pdf_sha256": "ce88b961138c43d9c8eae3bbed58006a76f0f08c093f6a07a41e06d4b7545487",
+      "artifact_sha256": {
+        "pdf": "ce88b961138c43d9c8eae3bbed58006a76f0f08c093f6a07a41e06d4b7545487",
+        "svg": "503c5d4aaa71c2f956ee26477f19e18c1728250558baa6e367f75f4a86312e5e",
+        "png": "57e6ef48d277e5fa0a410b4e2796d17461bb0daaf492e76ff3c08366e69d2ee4"
+      },
+      "previews": {
+        "color": {
+          "path": "work/fig_v2/qa_01_09/fig_06_color.png",
+          "sha256": "d37475e86cf27913da0c7d3a92acc565081ede87a69beee00c065a2786675178",
+          "actually_viewed": true
+        },
+        "gray": {
+          "path": "work/fig_v2/qa_01_09/fig_06_gray.png",
+          "sha256": "51bad74bcc58d7c476fca01f0583d5a52599ce842dee56d2877c0e9e8744b877",
+          "actually_viewed": true
+        }
+      },
+      "preview_dpi": 180,
+      "print_width_cm": 16.3,
+      "actual_pdf_min_font_pt": 8.5,
+      "manual_findings_and_changes": {
+        "changes": [
+          "使用Q2-001真实准备、去程飞行、交接、返航阶段，电池延续充电纹理。",
+          "增加交付908.6s及返航、充满三事件和870.4s额外占用。"
+        ],
+        "resolved": [
+          "蓝色机型圆点移到行标签左侧，消除覆盖资源编号。",
+          "图底区间说明下移，避免横轴标题碰撞。"
+        ],
+        "acceptance": "两条前段严格对齐；去返程短分界保留，交付/释放事件和端点可读，灰度依阶段位置、括线、释放线和充电纹理可区分。"
+      },
+      "open_findings": [],
+      "source_sha_current_verified": true,
+      "data_preservation_checks_pass": true
+    },
+    {
+      "number": 7,
+      "status": "pass_figure_level",
+      "pdf_sha256": "deeb9f40b13461161924b97a3435058488a11bbf79f3a2e86b9487854174b170",
+      "artifact_sha256": {
+        "pdf": "deeb9f40b13461161924b97a3435058488a11bbf79f3a2e86b9487854174b170",
+        "svg": "a551230b85b5037fe049839f508f9df3b7e396422329a28752b7c50040483d80",
+        "png": "f4ea167f473ee34e9929ee08ab7a8a6e26b0a66080c040cd83a208f368e0bd6f"
+      },
+      "previews": {
+        "color": {
+          "path": "work/fig_v2/qa_01_09/fig_07_color.png",
+          "sha256": "7048ebc652e99a0982e976caea2403310a0e7a93274bb5951bb31ce175406410",
+          "actually_viewed": true
+        },
+        "gray": {
+          "path": "work/fig_v2/qa_01_09/fig_07_gray.png",
+          "sha256": "b4aa8e8e19deb146103d0c18a5370922cdb339aa29971690f5eb0135fbc99cc2",
+          "actually_viewed": true
+        }
+      },
+      "preview_dpi": 180,
+      "print_width_cm": 16.3,
+      "actual_pdf_min_font_pt": 8.0,
+      "manual_findings_and_changes": {
+        "changes": [
+          "绝对能力增加额定空心参照及真实损失段；右侧改比例数字/损失率矩阵。",
+          "按C型损失统一排序，六个受限组合强调。"
+        ],
+        "resolved": [
+          "降低绘图区并固定面板标题位置，消除上沿图例与标题碰撞。"
+        ],
+        "acceptance": "45个组合可读、数字和矩阵描框对应；A/B/C形状与空心额定符号支持灰度。"
+      },
+      "open_findings": [],
+      "source_sha_current_verified": true,
+      "data_preservation_checks_pass": true
+    },
+    {
+      "number": 8,
+      "status": "pass_figure_level",
+      "pdf_sha256": "540347fdea864a89d58c4f9828ff958857f7f525a44536b0701b64cbee4db6b4",
+      "artifact_sha256": {
+        "pdf": "540347fdea864a89d58c4f9828ff958857f7f525a44536b0701b64cbee4db6b4",
+        "svg": "c21357b1851c33bb654fc58fd4f05d15e750341c25ace976280e7d3b2d14b0b4",
+        "png": "38d7316291d4e933fa66660ac365653fcd6379b094fb2d01ae3060a7e43286ea"
+      },
+      "previews": {
+        "color": {
+          "path": "work/fig_v2/qa_01_09/fig_08_color.png",
+          "sha256": "aab89cd1acf62912c02c4845af8ba081b659b521162eee952f336f55e1c8c8cf",
+          "actually_viewed": true
+        },
+        "gray": {
+          "path": "work/fig_v2/qa_01_09/fig_08_gray.png",
+          "sha256": "d3dee201e45277ccd3f45b3c5c7a374f52ba581c8ca0f908bc2b0362801fce80",
+          "actually_viewed": true
+        }
+      },
+      "preview_dpi": 180,
+      "print_width_cm": 16.3,
+      "actual_pdf_min_font_pt": 8.5,
+      "manual_findings_and_changes": {
+        "changes": [
+          "质量聚合条改为80个真实货箱单元，按实际质量定宽。",
+          "去除四类重复计数列，保留机型/批质量/总箱数。"
+        ],
+        "resolved": [
+          "减稀医疗点纹并为箱序号加极小同色底，避免纹理干扰数字。"
+        ],
+        "acceptance": "80个单元边界及序号可读；B/C形状及字母可辨；同区双批括线清楚。灰度按固定顺序、白边、医疗/卫生纹理和数字明暗识读。"
+      },
+      "open_findings": [],
+      "source_sha_current_verified": true,
+      "data_preservation_checks_pass": true
+    },
+    {
+      "number": 9,
+      "status": "pass_figure_level",
+      "pdf_sha256": "1566ea907d14555ee7120e0e298c0c6a1affa08be6fcf587946401ccb77bdc4d",
+      "artifact_sha256": {
+        "pdf": "1566ea907d14555ee7120e0e298c0c6a1affa08be6fcf587946401ccb77bdc4d",
+        "svg": "b09dc5594cc7bea97b4aa82dabc1d4c9a483ac2a00bd3f20fb3e81c7744cd42c",
+        "png": "52e079ca1d0bdffb5c612059d354fb77bd9c77733755ca61f2baa3956a3f3675"
+      },
+      "previews": {
+        "color": {
+          "path": "work/fig_v2/qa_01_09/fig_09_color.png",
+          "sha256": "3a5c12a3f4921f73e31dfc368702e6bca4847575a8ad902478ee96764d1de1c2",
+          "actually_viewed": true
+        },
+        "gray": {
+          "path": "work/fig_v2/qa_01_09/fig_09_gray.png",
+          "sha256": "284f1f901e7ac6b90a98f22d5d07b23b08a508c3e2703576ac7fbf1f51f1ba9b",
+          "actually_viewed": true
+        }
+      },
+      "preview_dpi": 180,
+      "print_width_cm": 16.3,
+      "actual_pdf_min_font_pt": 8.0,
+      "manual_findings_and_changes": {
+        "changes": [
+          "右侧相对最高项文字表改为18批真实最紧相对余量点图。",
+          "按完整精度最大占用排序；最高项只用形状和前三条短标注。"
+        ],
+        "resolved": [],
+        "acceptance": "54比例和描框清楚，右侧三种形状在灰度可辨；色条/数量/百分点单位均完整。"
+      },
+      "open_findings": [],
+      "source_sha_current_verified": true,
+      "data_preservation_checks_pass": true
+    }
+  ],
+  "limitations": [
+    "Word分页与图注/正文对应将在主任务替换新图后核验，本分项不预先宣称Word版面通过。",
+    "图2侧轴为容纳两个Δ短注记外扩约110m，保留真实坐标且不截断；其他轴/类别均按真实数据。",
+    "手册给出的面板净宽/间距作为起始布局，按8pt最低字号调整实际网格；图宽与每幅总高度遵循手册。"
+  ]
+}

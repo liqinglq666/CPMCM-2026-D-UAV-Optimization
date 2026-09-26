@@ -1,0 +1,151 @@
+{
+  "figure_id": 6,
+  "number": 6,
+  "title": "交付、无人机返航释放与电池充满释放是三种真实时刻",
+  "core_claim": "交付、无人机返航释放与电池充满释放是三种真实时刻",
+  "caption": "Q2-001的实际作业阶段与双层资源释放。两箱在908.6 s交付，早于1250.9 s返航；无人机返航后释放，电池继续充电至2121.3 s，额外占用870.4 s。去返程细分爬升、巡航与下降；充电完成不计入运输返航完工。",
+  "width_cm": 16.3,
+  "height_cm": 7.4,
+  "dpi": 600,
+  "minimum_required_font_pt": 8,
+  "actual_minimum_font_pt": 8.5,
+  "repository_head": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "research_commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "sources": [
+    {
+      "path": "paper/figure_data_v2/q2_task_phases.csv",
+      "sha256": "0e4ac2237fe8ee2651ab52fa1fe45a1ac61804a60b932a026749504244e1a36e"
+    },
+    {
+      "path": "paper/figure_data_v2/q2_replay_audit.json",
+      "sha256": "d9003eceeff12a2ffa8ddd0b8136221bd7bf6c7bacde85756a58f59065b5d498"
+    },
+    {
+      "path": "results/q2/Q2_transport_trips_balanced.csv",
+      "sha256": "0098c6633916379afee2f8960505062e388ee3c580829de56bde35a1ce148099"
+    },
+    {
+      "path": "results/q2/Q2_resource_check.csv",
+      "sha256": "7bff8da7130b2f8378c7f988852071079a7085c21c56a91521e7d5a053d61198"
+    },
+    {
+      "path": "results/q2/Q2_box_delivery_balanced.csv",
+      "sha256": "84e8622c273f65f6709a600b73a82e4fe0dc1ef62099159c64818a9716f1cb34"
+    },
+    {
+      "path": "src/core/routes.py",
+      "sha256": "716aedafd42b4769390c292bececb09a00674d9aa716786b09e85aa52b2dded7"
+    },
+    {
+      "path": "src/core/physics.py",
+      "sha256": "36b58299dbdf77d62b1408a6fb26366860fdee938e8d650bed28f877712d362d"
+    }
+  ],
+  "source_fields": {
+    "q2_task_phases.trip_id/phase_kind/t_begin_relative_s/t_end_relative_s": "stage intervals",
+    "Q2_resource_check.资源编号/任务占用结束（s）/充电结束（s）": "identity and resource releases",
+    "Q2_box_delivery_balanced.交付完成时刻（s）": "actual delivery event"
+  },
+  "field_mapping": {
+    "q2_task_phases.trip_id/phase_kind/t_begin_relative_s/t_end_relative_s": "stage intervals",
+    "Q2_resource_check.资源编号/任务占用结束（s）/充电结束（s）": "identity and resource releases",
+    "Q2_box_delivery_balanced.交付完成时刻（s）": "actual delivery event"
+  },
+  "derived_formula": [
+    "prep_load=prep_time+load_time_per_box*number_of_formal_boxes",
+    "all plotted times=absolute_time−formal_start",
+    "extra_battery=charge_complete−return"
+  ],
+  "derived_formulas": [
+    "prep_load=prep_time+load_time_per_box*number_of_formal_boxes",
+    "all plotted times=absolute_time−formal_start",
+    "extra_battery=charge_complete−return"
+  ],
+  "panel_purposes": {
+    "single": "真实阶段对齐的无人机与电池占用"
+  },
+  "checks": {
+    "continuous_phases": true,
+    "final_phase_equals_formal_return": true,
+    "two_boxes_same_delivery": true,
+    "phase_handover_matches_delivery": true,
+    "prep_load_matches_definition": true,
+    "phase_energy_sum_matches_formal": true,
+    "energy_1.2823207080116534": true,
+    "correct_resources": true
+  },
+  "structural_changes": [
+    "整块任务条拆为模型定义的准备、飞行、交接、返航",
+    "新增实际交付时刻",
+    "双层资源前段严格共用x坐标，充电独立纹理"
+  ],
+  "parameters": {},
+  "script": "scripts/figures_v2/figures_01_09.py",
+  "data_file": "fig_06_data.json",
+  "data_layer": "paper/figure_data_v2/fig_06_data.json",
+  "fonts": {
+    "cn": "Noto Sans SC Publication",
+    "regular": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+    "bold": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+    "latin": "DejaVu Sans",
+    "math": "STIX"
+  },
+  "scope": "Frozen inputs and outputs; no optimization, no changed route/assignment/parameter/time/result.",
+  "missing_or_not_revalidated": [],
+  "visual_qa": {
+    "status": "passed_actual_pdf_color_and_grayscale_review",
+    "pdf_sha256": "ce88b961138c43d9c8eae3bbed58006a76f0f08c093f6a07a41e06d4b7545487",
+    "previews": {
+      "color": {
+        "path": "work/fig_v2/qa_01_09/fig_06_color.png",
+        "sha256": "d37475e86cf27913da0c7d3a92acc565081ede87a69beee00c065a2786675178",
+        "actually_viewed": true
+      },
+      "gray": {
+        "path": "work/fig_v2/qa_01_09/fig_06_gray.png",
+        "sha256": "51bad74bcc58d7c476fca01f0583d5a52599ce842dee56d2877c0e9e8744b877",
+        "actually_viewed": true
+      }
+    },
+    "report": "work/fig_v2/figures_01_09_qa.json",
+    "accepted_reason": "两条前段严格对齐；去返程短分界保留，交付/释放事件和端点可读，灰度依阶段位置、括线、释放线和充电纹理可区分。",
+    "word_page_qa": "pending_parent_word_replacement_and_render"
+  },
+  "shared_visual_sources": [
+    {
+      "path": "scripts/figures_v2/common.py",
+      "sha256": "baaaa4cbc137c79e69b92b7defd2dd134b7f795f57295887083ad9a43bfb2fdf"
+    },
+    {
+      "path": "scripts/figures_v2/paths.py",
+      "sha256": "c3852a429ec7e35bada4289121b5a8da0212f760f1cf33aa3c9428e134679549"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+      "sha256": "c8c2ba68889b16e99b6ee4e802df5882bbe9d7310bbbaab325c48416dfb19763"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+      "sha256": "2bdcce3e875183a6adb5ac0f2f739c42269506563ee3af57b8735e5766bb91ef"
+    }
+  ],
+  "script_sha256": "b997f902e3767736218e77a73de6ca51731e89ea87c90179167c4b904769af11",
+  "base_word_caption": "图 6  正式架次Q2-001的双层资源占用。横轴以该架次开始为零点；无人机于返航时释放，电池继续占用至充满，二者均按左闭右开区间衔接后续任务。",
+  "base_word_sha256": "9b4ced7a81957fd9fc3a097aa91f2636757b0b9a9fbdebaf5f1ae625c9b1f19c",
+  "repository_input_commit": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "data_sha256": "626d30d3c58194ffe54543e2841c909a3e8f8f79c491b92d39259d40748401ff",
+  "output_sha256": {
+    "pdf": "ce88b961138c43d9c8eae3bbed58006a76f0f08c093f6a07a41e06d4b7545487",
+    "svg": "503c5d4aaa71c2f956ee26477f19e18c1728250558baa6e367f75f4a86312e5e",
+    "png": "57e6ef48d277e5fa0a410b4e2796d17461bb0daaf492e76ff3c08366e69d2ee4"
+  },
+  "join_keys": [
+    "trip_id=Q2-001",
+    "box_id",
+    "resource_id"
+  ],
+  "filters": [
+    "trip=Q2-001",
+    "U01 and A-BAT-01"
+  ]
+}

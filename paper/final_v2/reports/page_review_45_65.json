@@ -1,0 +1,153 @@
+{
+  "reviewer": "root",
+  "pages": [
+    {
+      "page": 45,
+      "png_sha256": "898f5b185a674f46980d9c489deddbedbdede1daba358a358d3a6855262b846c",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "表8标题及全部五场景整表同页，公式(33)与正文完整；已修复最后一行独悬。"
+    },
+    {
+      "page": 46,
+      "png_sha256": "b379edfad47837816734323ae630ecf83a234b43c998edd6f6a22329767b4c04",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "第9节标题、引言、结果汇总表9与验证正文完整；后页图27保持整幅。"
+    },
+    {
+      "page": 47,
+      "png_sha256": "fde3a3d2337a3233114ccc36d39851a55672a1c503a5d72eb04805e3a6493558",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "图27与完整图注同页，表10及后续段落清晰，无页脚遮挡。"
+    },
+    {
+      "page": 48,
+      "png_sha256": "17f7b1ac8ef2c26a220a5647e910c19f9101c5709b4b7e4b8e1fa1e71c1688ea",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "连续区间余量、结论强度表11与局限完整。"
+    },
+    {
+      "page": 49,
+      "png_sha256": "9bd1e3c914e0be7b7e0cb01d74e8f85c5934717f759fe1e37ab44a3ea69cd60e",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "结论段落和所有锁定汇总值可读，未溢出。"
+    },
+    {
+      "page": 50,
+      "png_sha256": "b032d1d6503b5e5e10d33376055469e563fc74e79fd7b297c0439c5879984513",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "11条参考文献及链接完整，保留未署名来源披露。"
+    },
+    {
+      "page": 51,
+      "png_sha256": "a9bb40f1a9a85b9b390c69f757515295e118752712181eea7cc6ceb509b94780",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "附录A标题与表12、表13前部完整。"
+    },
+    {
+      "page": 52,
+      "png_sha256": "bfed863035a89af877a6a60b0c1b69bcab63d912310c7313d5803c2286dd3c20",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "表13续表重复表头，表14完整，表15起始两行清晰。"
+    },
+    {
+      "page": 53,
+      "png_sha256": "60bb8c99b8b0c64cc43847f695e6671762c4eb4ef82adc1c7706800b7357d9f7",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "表15续表及表16前部完整，表格与页码无重叠。"
+    },
+    {
+      "page": 54,
+      "png_sha256": "d2761515e6e02f91c16ed4da6d42164b800f10efb2c07b44b7702e295c76b34b",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "表16续表和表17路线箭头、表头完整。"
+    },
+    {
+      "page": 55,
+      "png_sha256": "2b86279cbb2439dc35da6d7804362a0a7a62432abf7f2f449ff574c830f39864",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "表17续表及表18全部24运输架次可读。"
+    },
+    {
+      "page": 56,
+      "png_sha256": "005bc6f77383144d4946e0a31c87f5c715cd83e54662d4c302de8533fe475647",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "表19全部路线与表20三处中继位置完整。"
+    },
+    {
+      "page": 57,
+      "png_sha256": "73e06c80b60435a11fbdf4b9c6f885e933d2b6f6b4ad6be464bb735beca96ea5",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "表21能源时窗与表22通信保障记录完整。"
+    },
+    {
+      "page": 58,
+      "png_sha256": "988400a45bf0f0fa7d679e90fb8bea11c5b0a419b80e4903f51cf1cf74e37456",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "表23箱级分配前30行可读，未裁切。"
+    },
+    {
+      "page": 59,
+      "png_sha256": "dc8542efc6982e4628ad25b44210c0f4e92d15ea81b39c9d89b5efe551396658",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "表23续表，箱号、架次归属及重复表头清晰。"
+    },
+    {
+      "page": 60,
+      "png_sha256": "744e243ca137debddd324990a1e8fafec69b1c37001ed40e379e09800a1cfb36",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "表23末段与表24起始交付时刻完整。"
+    },
+    {
+      "page": 61,
+      "png_sha256": "aa36cae3d91fee1974e63a021d13c749435a1de41a23227d1352e260b84cf1a5",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "表24续表，交付和截止字段对齐。"
+    },
+    {
+      "page": 62,
+      "png_sha256": "b7ac2bb132955f4d51d2c969dfad5bc88a53c85884a6d951130f7d1f65332468",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "表24续表，全部字段清晰，无跨行错位。"
+    },
+    {
+      "page": 63,
+      "png_sha256": "b3f1dcd130b5febe81ab8b3a72327381713b07740ea0e8934dec67d0530dc0bc",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "Q4两偏好分组表及资源需求前部完整；长服务区名单自然换行。"
+    },
+    {
+      "page": 64,
+      "png_sha256": "3a60b991a636648507442aef02db447e0da31d95793c254568a86d3437671e0e",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "资源表续表、补充候选及附录B开头完整。"
+    },
+    {
+      "page": 65,
+      "png_sha256": "310d083d4e043a471075811c5c76581299b879d974224c5f15038c18a5cbec90",
+      "actually_viewed": true,
+      "status": "pass",
+      "notes": "来源归属、视觉方法引用、AI辅助记录及重放说明完整，超链接无裁切。"
+    }
+  ],
+  "scope": "Actual rendered-page visual review; data and formula preservation checked separately."
+}

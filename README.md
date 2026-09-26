@@ -7,9 +7,9 @@
 [依据对应表](docs/audit/post_merge/EVIDENCE.md)。该版本保留已接受的 Q1–Q4 结果；
 后续改动另开分支，复核冻结结果时无需重新运行优化。
 
-**当前论文：[65 页正式 PDF](paper/final/manuscript.pdf)**，含自动目录、27 幅科研图及完整附录。[可编辑 Word](paper/final/manuscript.docx)、[图表与复现说明](paper/final/README.md)同步保留。2026-09-26 的文本、图表与排版更新沿用冻结研究结果；七张空间图使用用户提供的原始 DEM 显示层，模型、参数、任务、时序和分区均保持一致。
+**当前论文：[65 页科研图终稿 PDF](paper/final_v2/manuscript.pdf)**，含自动目录、27 幅重构科研图及完整附录。[可编辑 Word](paper/final_v2/manuscript.docx)、[图表与复现说明](paper/final_v2/README.md)同步保留。此次按最新指导手册重新组织每图主张、面板、真实阶段、原始 DEM 与约束证据；模型、参数、箱号、路线、任务时序和分区保持冻结结果。
 
-Q1、Q2 正式及节能备选、Q3 联合方案、Q4 资源优先与均衡偏好的数值及适用范围见论文和 [版本清单](paper/final/manifest.json)。浮点数值证书与受限模型下界保留各自适用范围。
+Q1、Q2 正式及节能备选、Q3 联合方案、Q4 资源优先与均衡偏好的数值及适用范围见论文和 [版本清单](paper/final_v2/manifest.json)。浮点数值证书与受限模型下界保留各自适用范围。
 
 ## 安装与数据
 
@@ -108,21 +108,21 @@ python scripts/validate_results.py
 
 ## 当前论文与科研图
 
-阅读与提交正文使用 [paper/final/manuscript.pdf](paper/final/manuscript.pdf)。本目录包括 65 页 PDF、Word、27 幅 SVG/PDF/600 dpi PNG、逐图数据、绘图源文件、字体许可和核对记录。
+阅读正文使用 [paper/final_v2/manuscript.pdf](paper/final_v2/manuscript.pdf)。本目录包括 65 页 PDF、Word、27 幅 SVG/PDF/600 dpi PNG 和完整来源与核对记录。新的数据视图在 `paper/figure_data_v2/`，逐图字段、连接键、派生公式和来源摘要见 [清单](paper/figure_manifest_v2.csv)。上一版 `paper/final/` 保留为编辑基准和历史成品。
 
 ```bash
-python paper/final/src/verify_bundle.py
-python -m pip install -r paper/final/requirements.txt
-python paper/final/src/build_figures.py
+python scripts/figures_v2/verify_bundle.py
+python -m pip install -r paper/final_v2/requirements.txt
+python scripts/figures_v2/build_figures.py --raw /path/to/official_D
 ```
 
-重绘需要原始 D 题附件（`data/raw/` 或 `UAV_DATA_ROOT`），只读取冻结方案与原始地理文件，不运行优化求解。输出位置、指纹核对、Word 编辑与 PDF 导出见 [当前论文说明](paper/final/README.md)。
+重绘需要完整官方 D 题附件（`data/raw/`、`--raw` 或 `UAV_DATA_ROOT`）。默认读取已保存的确定性绘图视图；加 `--replay` 可从冻结方案重放 Q2/Q3，再制图。所有入口都不运行优化器。Word 编辑、目录刷新、PDF 导出和核验范围见 [当前论文说明](paper/final_v2/README.md)。
 
 旧 35 页 LaTeX 论文与 12 图构建入口保留用于追溯，见 [历史构建说明](paper/README.md)。原 `scripts/export_submission.mjs` 结果工作簿导出入口保持不变。AI 辅助记录见 [docs/AI_USAGE.md](docs/AI_USAGE.md)。
 
 当前正式方案独立通信回放：1 s：35061条，未覆盖0，最小余量0.090905647 dB；0.5 s：69843条，未覆盖0，最小余量0.090905647 dB；0.25 s：139402条，未覆盖0，最小余量0.090905647 dB。有限采样仍非连续时间证明。Q2固定路线工作量下界诊断运行 `python scripts/diagnose_transport_load.py`。
 
-历史通信修复（PR #10）：原0.5 s回放的1个未覆盖状态（−0.154251 dB）保存在 `archive/baseline-2a98f09/`。候选搜索和独立验证均采用1 s与0.5 s网格并集，先修复失效中继再继续5000次搜索。该次方案在1 s、0.5 s及未参与搜索的0.25 s回放中均为0未覆盖，最低余量0.02877762 dB；这仍不是连续时间证明。该次Q1/Q2正式决策保持一致；本轮对标优化已继续修改Q2/Q3，并重算Q4及图文，请以当前结果与对标审计为准。对比见 [通信修复对比](results/communication_repair_comparison.csv)，审计见 [修复审计](docs/audit/communication-repair/REPORT.md)。
+历史通信修复（PR #10）：原0.5 s回放的1个未覆盖状态（−0.154251 dB）保存在 `archive/baseline-2a98f09/`。候选搜索和独立验证均采用1 s与0.5 s网格并集，先修复失效中继再继续5000次搜索。该次方案在1 s、0.5 s及未参与搜索的0.25 s回放中均为0未覆盖，最低余量0.02877762 dB；这仍不是连续时间证明。该次Q1/Q2正式决策保持一致；随后2026-09-25的对标优化继续修改Q2/Q3，并重算Q4及图文，请以当前结果与对标审计为准。对比见 [通信修复对比](results/communication_repair_comparison.csv)，审计见 [修复审计](docs/audit/communication-repair/REPORT.md)。
 
 额外独立回放与修复前后对比：
 

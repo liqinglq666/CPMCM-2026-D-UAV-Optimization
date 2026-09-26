@@ -1,0 +1,84 @@
+{
+  "figure": 22,
+  "source_commit": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "time_origin": "official task origin; source seconds, display minutes by division by 60",
+  "data": {
+    "atomic_components": [
+      [
+        "S002",
+        "S009",
+        "S010",
+        "S013"
+      ],
+      [
+        "S003",
+        "S007",
+        "S015"
+      ],
+      [
+        "S005",
+        "S011"
+      ],
+      [
+        "S001"
+      ],
+      [
+        "S004"
+      ],
+      [
+        "S006"
+      ],
+      [
+        "S008"
+      ],
+      [
+        "S012"
+      ],
+      [
+        "S014"
+      ]
+    ],
+    "adjacent_visit_relations": [
+      {
+        "component": "C1",
+        "service_a": "S002",
+        "service_b": "S009",
+        "trip_ids": "column-006"
+      },
+      {
+        "component": "C1",
+        "service_a": "S010",
+        "service_b": "S013",
+        "trip_ids": "column-007"
+      },
+      {
+        "component": "C1",
+        "service_a": "S009",
+        "service_b": "S013",
+        "trip_ids": "column-019"
+      },
+      {
+        "component": "C2",
+        "service_a": "S003",
+        "service_b": "S007",
+        "trip_ids": "column-015"
+      },
+      {
+        "component": "C2",
+        "service_a": "S003",
+        "service_b": "S015",
+        "trip_ids": "column-017"
+      },
+      {
+        "component": "C3",
+        "service_a": "S005",
+        "service_b": "S011",
+        "trip_ids": "column-014"
+      }
+    ],
+    "enumerated_partitions": {
+      "2": 255,
+      "3": 3025
+    }
+  }
+}

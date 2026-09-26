@@ -1,0 +1,593 @@
+{
+  "figure_id": 2,
+  "number": 2,
+  "title": "需求分布与地形共同构成任务空间，节点海拔不能替代沿线地形",
+  "core_claim": "需求分布与地形共同构成任务空间，节点海拔不能替代沿线地形",
+  "caption": "需求空间及节点高程与单点航段最高地形的对照。地图圆点面积表示箱数；右侧连接节点输入海拔和O01至该区沿线最高DEM，二者为不同来源的高程属性，差值并非额外爬升或净空。沿途地形仍按原始DEM逐像元检查。",
+  "width_cm": 16.3,
+  "height_cm": 11.8,
+  "dpi": 600,
+  "minimum_required_font_pt": 8,
+  "actual_minimum_font_pt": 8.0,
+  "repository_head": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "research_commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "sources": [
+    {
+      "path": "paper/data/analysis.json",
+      "sha256": "bd83c16f835912e5790957aae8cf998b54afa2e1ebd594f67d72d22c4123ffc4"
+    },
+    {
+      "path": "results/q1/Q1_leg_physics.csv",
+      "sha256": "1957936788eca03a6dd4d168053f023a7a212bf124b22bfe8f967a799e99f314"
+    },
+    {
+      "path": "src/core/inputs.py",
+      "sha256": "124ba94199a2aa8b54abc5a806ec523d53eeaa049dd89d00420e0125dede908c"
+    },
+    {
+      "path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03"
+    },
+    {
+      "path": "raw-input/数据/无人机应急物资运输基础数据/调度中心与服务区.xlsx",
+      "sha256": "541a7af1ded08c9a3ff448480332cb5f6a54902f0afa6e9bcd50c1d2b2b34e38"
+    },
+    {
+      "path": "raw-input/数据/无人机应急物资运输基础数据/物资需求与配送时限.xlsx",
+      "sha256": "5a3346159ceddcf585859d270b8f62114b388a1f737fbe64ffde0ee1fdc8170a"
+    }
+  ],
+  "source_fields": {
+    "official workbook nodes": "nodes.lon/lat/elev checked against analysis",
+    "boxes.id/service": "unique box_count",
+    "Q1_leg_physics.service/max_dem": "max_dem_m, join on service"
+  },
+  "field_mapping": {
+    "official workbook nodes": "nodes.lon/lat/elev checked against analysis",
+    "boxes.id/service": "unique box_count",
+    "Q1_leg_physics.service/max_dem": "max_dem_m, join on service"
+  },
+  "derived_formula": [
+    "marker_area=7×unique_box_count",
+    "paired_difference=max_dem−node_elev",
+    "map display=shared WGS84 ENU"
+  ],
+  "derived_formulas": [
+    "marker_area=7×unique_box_count",
+    "paired_difference=max_dem−node_elev",
+    "map display=shared WGS84 ENU"
+  ],
+  "panel_purposes": {
+    "a": "原始DEM上15服务区需求规模",
+    "b": "逐区节点海拔与沿线最高地形配对"
+  },
+  "checks": {
+    "16_nodes": true,
+    "15_dem_pairs": true,
+    "80_boxes": true,
+    "official_nodes_boxes_equal_analysis": true
+  },
+  "structural_changes": [
+    "统一连续高程色带、0.18晕渲及细等高线",
+    "节点海拔列升级为沿线最高DEM配对",
+    "去除地图与色条过大空白"
+  ],
+  "parameters": {
+    "map_spec": {
+      "projection": "WGS84椭球地表坐标到O01局部东—北切平面的正射显示投影（ECEF→ENU，节点高程不用于平面投影）",
+      "ellipsoid": {
+        "a_m": 6378137.0,
+        "inverse_flattening": 298.257223563
+      },
+      "origin": {
+        "longitude": 109.2308517,
+        "latitude": 23.0085095
+      },
+      "units": "km",
+      "xlim": [
+        -6.941944358736083,
+        5.995393397259461
+      ],
+      "ylim": [
+        -0.7758425981818904,
+        8.274562276123252
+      ],
+      "padding_fraction": 0.05,
+      "label_offsets": {
+        "O01": [
+          4,
+          -11
+        ],
+        "S001": [
+          3,
+          4
+        ],
+        "S002": [
+          3,
+          4
+        ],
+        "S003": [
+          3,
+          4
+        ],
+        "S004": [
+          3,
+          -10
+        ],
+        "S005": [
+          3,
+          4
+        ],
+        "S006": [
+          3,
+          4
+        ],
+        "S007": [
+          3,
+          4
+        ],
+        "S008": [
+          -26,
+          5
+        ],
+        "S009": [
+          4,
+          -11
+        ],
+        "S010": [
+          4,
+          -10
+        ],
+        "S011": [
+          3,
+          4
+        ],
+        "S012": [
+          -29,
+          5
+        ],
+        "S013": [
+          -29,
+          5
+        ],
+        "S014": [
+          -30,
+          6
+        ],
+        "S015": [
+          3,
+          4
+        ]
+      },
+      "dem_background": "original official 30 m GeoTIFF; displayed without terrain correction or smoothing",
+      "scale_bar_km": 2.0,
+      "research_geometry_unchanged": true,
+      "terrain": {
+        "source_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+        "source_sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03",
+        "mat_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.mat",
+        "mat_sha256": "c68703e0cc8f94f4bd52ff6e9974b66a2dae33865f0723ad71c04b6694bf4fbf",
+        "description_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡地理空间数据说明.pdf",
+        "description_sha256": "6d1522c6832a5d91a108dae0d07954845025c0dabd44af8ee78c7860d7c405e4",
+        "frozen_input_manifest_match": true,
+        "source_crs": "EPSG:4326",
+        "source_vertical_unit": "m",
+        "source_kind": "Copernicus DEM GLO-30 digital surface model (DSM), named DEM in official package",
+        "source_affine": [
+          0.00027777777777777393,
+          0.0,
+          109.0326388888889,
+          0.0,
+          -0.0002777777777777777,
+          23.22486111111111
+        ],
+        "source_shape": [
+          1309,
+          1486
+        ],
+        "source_row_direction": "north to south",
+        "source_column_direction": "west to east",
+        "tif_nodata_tag": null,
+        "document_and_mat_nodata": -32767.0,
+        "invalid_pixels": 0,
+        "norm": {
+          "vmin": 120.41609191894531,
+          "vmax": 746.0787353515625,
+          "unit": "m",
+          "rule": "min/max of valid original pixels whose centres lie inside the single unchanged shared ENU map extent",
+          "valid_pixel_count": 133476
+        },
+        "map_extent_km": [
+          -6.941944358736083,
+          5.995393397259461,
+          -0.7758425981818905,
+          8.274562276123252
+        ],
+        "display_projection": "WGS84 geodetic h=0 → ECEF → O01 local east/north orthographic plane (km), same as common.project",
+        "reprojection_method": "Project each original pixel footprint corner; flat-shaded original cell values, no interpolation. Rasterize only the display mesh for PDF/SVG. Equivalent piecewise-constant nearest-cell display, no resampled data written.",
+        "cmap_colors": [
+          "#C4DCE8",
+          "#8FB8C8",
+          "#BDD0BC",
+          "#E9DF9F",
+          "#C79C69",
+          "#89664C"
+        ],
+        "cmap_normalized_stops": [
+          0,
+          0.18,
+          0.38,
+          0.58,
+          0.78,
+          1
+        ],
+        "terrain_rgb_fraction": 1.0,
+        "white_rgb_fraction": 0.0,
+        "hillshade_strength": 0.18,
+        "hillshade_azimuth_deg": 315,
+        "hillshade_altitude_deg": 45,
+        "hillshade_spacing": "WGS84 Geod metric adjacent-pixel dx/dy; array row derivative reversed to north",
+        "metric_pixel_width_range_m": [
+          28.460911636041455,
+          28.47824907815569
+        ],
+        "metric_pixel_height_range_m": [
+          30.76222851237873,
+          30.762549249962603
+        ],
+        "physics_input_unchanged": true,
+        "display_may_not_be_used_for_physics": true,
+        "water_semantics": "optional ordinary mapped rivers/water polygons; not flood inundation extent",
+        "dependencies": {
+          "rasterio": "1.5.1",
+          "pyproj": "3.8.0",
+          "numpy": "2.3.5",
+          "scipy": "1.18.1",
+          "matplotlib": "3.11.2"
+        }
+      }
+    },
+    "paired_x_limit": [
+      0,
+      710
+    ],
+    "x_axis_extension_reason": "右侧三个Δ注记保留真实坐标之外的标注空间，不截断数据"
+  },
+  "script": "scripts/figures_v2/figures_01_09.py",
+  "data_file": "fig_02_data.json",
+  "data_layer": "paper/figure_data_v2/fig_02_data.json",
+  "fonts": {
+    "cn": "Noto Sans SC Publication",
+    "regular": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+    "bold": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+    "latin": "DejaVu Sans",
+    "math": "STIX"
+  },
+  "scope": "Frozen inputs and outputs; no optimization, no changed route/assignment/parameter/time/result.",
+  "missing_or_not_revalidated": [],
+  "visual_qa": {
+    "status": "passed_actual_pdf_color_and_grayscale_review",
+    "pdf_sha256": "bdddd62fd4e52cccfd5cc455e284489a945a777a42cd874681e4470b796e93de",
+    "previews": {
+      "color": {
+        "path": "work/fig_v2/qa_01_09/fig_02_color.png",
+        "sha256": "9b332fff51950f0e6e676cb56c7509b5b3b9410e57134122de25b8a2bb40dedb",
+        "actually_viewed": true
+      },
+      "gray": {
+        "path": "work/fig_v2/qa_01_09/fig_02_gray.png",
+        "sha256": "8246315608bb38d33437a2c944abd2a6382fe274cb559cdcf5c6a630ce1449e6",
+        "actually_viewed": true
+      }
+    },
+    "report": "work/fig_v2/figures_01_09_qa.json",
+    "accepted_reason": "15点及O01、比例尺、北向清楚；侧图圆/菱形在灰度中仍区分两类海拔。Δ标签可读，未遮挡数据。",
+    "word_page_qa": "pending_parent_word_replacement_and_render"
+  },
+  "map_spec": {
+    "projection": "WGS84椭球地表坐标到O01局部东—北切平面的正射显示投影（ECEF→ENU，节点高程不用于平面投影）",
+    "ellipsoid": {
+      "a_m": 6378137.0,
+      "inverse_flattening": 298.257223563
+    },
+    "origin": {
+      "longitude": 109.2308517,
+      "latitude": 23.0085095
+    },
+    "units": "km",
+    "xlim": [
+      -6.941944358736083,
+      5.995393397259461
+    ],
+    "ylim": [
+      -0.7758425981818904,
+      8.274562276123252
+    ],
+    "padding_fraction": 0.05,
+    "label_offsets": {
+      "O01": [
+        4,
+        -11
+      ],
+      "S001": [
+        3,
+        4
+      ],
+      "S002": [
+        3,
+        4
+      ],
+      "S003": [
+        3,
+        4
+      ],
+      "S004": [
+        3,
+        -10
+      ],
+      "S005": [
+        3,
+        4
+      ],
+      "S006": [
+        3,
+        4
+      ],
+      "S007": [
+        3,
+        4
+      ],
+      "S008": [
+        -26,
+        5
+      ],
+      "S009": [
+        4,
+        -11
+      ],
+      "S010": [
+        4,
+        -10
+      ],
+      "S011": [
+        3,
+        4
+      ],
+      "S012": [
+        -29,
+        5
+      ],
+      "S013": [
+        -29,
+        5
+      ],
+      "S014": [
+        -30,
+        6
+      ],
+      "S015": [
+        3,
+        4
+      ]
+    },
+    "dem_background": "original official 30 m GeoTIFF; displayed without terrain correction or smoothing",
+    "scale_bar_km": 2.0,
+    "research_geometry_unchanged": true,
+    "terrain": {
+      "source_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "source_sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03",
+      "mat_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.mat",
+      "mat_sha256": "c68703e0cc8f94f4bd52ff6e9974b66a2dae33865f0723ad71c04b6694bf4fbf",
+      "description_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡地理空间数据说明.pdf",
+      "description_sha256": "6d1522c6832a5d91a108dae0d07954845025c0dabd44af8ee78c7860d7c405e4",
+      "frozen_input_manifest_match": true,
+      "source_crs": "EPSG:4326",
+      "source_vertical_unit": "m",
+      "source_kind": "Copernicus DEM GLO-30 digital surface model (DSM), named DEM in official package",
+      "source_affine": [
+        0.00027777777777777393,
+        0.0,
+        109.0326388888889,
+        0.0,
+        -0.0002777777777777777,
+        23.22486111111111
+      ],
+      "source_shape": [
+        1309,
+        1486
+      ],
+      "source_row_direction": "north to south",
+      "source_column_direction": "west to east",
+      "tif_nodata_tag": null,
+      "document_and_mat_nodata": -32767.0,
+      "invalid_pixels": 0,
+      "norm": {
+        "vmin": 120.41609191894531,
+        "vmax": 746.0787353515625,
+        "unit": "m",
+        "rule": "min/max of valid original pixels whose centres lie inside the single unchanged shared ENU map extent",
+        "valid_pixel_count": 133476
+      },
+      "map_extent_km": [
+        -6.941944358736083,
+        5.995393397259461,
+        -0.7758425981818905,
+        8.274562276123252
+      ],
+      "display_projection": "WGS84 geodetic h=0 → ECEF → O01 local east/north orthographic plane (km), same as common.project",
+      "reprojection_method": "Project each original pixel footprint corner; flat-shaded original cell values, no interpolation. Rasterize only the display mesh for PDF/SVG. Equivalent piecewise-constant nearest-cell display, no resampled data written.",
+      "cmap_colors": [
+        "#C4DCE8",
+        "#8FB8C8",
+        "#BDD0BC",
+        "#E9DF9F",
+        "#C79C69",
+        "#89664C"
+      ],
+      "cmap_normalized_stops": [
+        0,
+        0.18,
+        0.38,
+        0.58,
+        0.78,
+        1
+      ],
+      "terrain_rgb_fraction": 1.0,
+      "white_rgb_fraction": 0.0,
+      "hillshade_strength": 0.18,
+      "hillshade_azimuth_deg": 315,
+      "hillshade_altitude_deg": 45,
+      "hillshade_spacing": "WGS84 Geod metric adjacent-pixel dx/dy; array row derivative reversed to north",
+      "metric_pixel_width_range_m": [
+        28.460911636041455,
+        28.47824907815569
+      ],
+      "metric_pixel_height_range_m": [
+        30.76222851237873,
+        30.762549249962603
+      ],
+      "physics_input_unchanged": true,
+      "display_may_not_be_used_for_physics": true,
+      "water_semantics": "optional ordinary mapped rivers/water polygons; not flood inundation extent",
+      "dependencies": {
+        "rasterio": "1.5.1",
+        "pyproj": "3.8.0",
+        "numpy": "2.3.5",
+        "scipy": "1.18.1",
+        "matplotlib": "3.11.2"
+      }
+    }
+  },
+  "terrain_spec": {
+    "source_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+    "source_sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03",
+    "mat_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.mat",
+    "mat_sha256": "c68703e0cc8f94f4bd52ff6e9974b66a2dae33865f0723ad71c04b6694bf4fbf",
+    "description_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡地理空间数据说明.pdf",
+    "description_sha256": "6d1522c6832a5d91a108dae0d07954845025c0dabd44af8ee78c7860d7c405e4",
+    "frozen_input_manifest_match": true,
+    "source_crs": "EPSG:4326",
+    "source_vertical_unit": "m",
+    "source_kind": "Copernicus DEM GLO-30 digital surface model (DSM), named DEM in official package",
+    "source_affine": [
+      0.00027777777777777393,
+      0.0,
+      109.0326388888889,
+      0.0,
+      -0.0002777777777777777,
+      23.22486111111111
+    ],
+    "source_shape": [
+      1309,
+      1486
+    ],
+    "source_row_direction": "north to south",
+    "source_column_direction": "west to east",
+    "tif_nodata_tag": null,
+    "document_and_mat_nodata": -32767.0,
+    "invalid_pixels": 0,
+    "norm": {
+      "vmin": 120.41609191894531,
+      "vmax": 746.0787353515625,
+      "unit": "m",
+      "rule": "min/max of valid original pixels whose centres lie inside the single unchanged shared ENU map extent",
+      "valid_pixel_count": 133476
+    },
+    "map_extent_km": [
+      -6.941944358736083,
+      5.995393397259461,
+      -0.7758425981818905,
+      8.274562276123252
+    ],
+    "display_projection": "WGS84 geodetic h=0 → ECEF → O01 local east/north orthographic plane (km), same as common.project",
+    "reprojection_method": "Project each original pixel footprint corner; flat-shaded original cell values, no interpolation. Rasterize only the display mesh for PDF/SVG. Equivalent piecewise-constant nearest-cell display, no resampled data written.",
+    "cmap_colors": [
+      "#C4DCE8",
+      "#8FB8C8",
+      "#BDD0BC",
+      "#E9DF9F",
+      "#C79C69",
+      "#89664C"
+    ],
+    "cmap_normalized_stops": [
+      0,
+      0.18,
+      0.38,
+      0.58,
+      0.78,
+      1
+    ],
+    "terrain_rgb_fraction": 1.0,
+    "white_rgb_fraction": 0.0,
+    "hillshade_strength": 0.18,
+    "hillshade_azimuth_deg": 315,
+    "hillshade_altitude_deg": 45,
+    "hillshade_spacing": "WGS84 Geod metric adjacent-pixel dx/dy; array row derivative reversed to north",
+    "metric_pixel_width_range_m": [
+      28.460911636041455,
+      28.47824907815569
+    ],
+    "metric_pixel_height_range_m": [
+      30.76222851237873,
+      30.762549249962603
+    ],
+    "physics_input_unchanged": true,
+    "display_may_not_be_used_for_physics": true,
+    "water_semantics": "optional ordinary mapped rivers/water polygons; not flood inundation extent",
+    "dependencies": {
+      "rasterio": "1.5.1",
+      "pyproj": "3.8.0",
+      "numpy": "2.3.5",
+      "scipy": "1.18.1",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "shared_visual_sources": [
+    {
+      "path": "scripts/figures_v2/common.py",
+      "sha256": "baaaa4cbc137c79e69b92b7defd2dd134b7f795f57295887083ad9a43bfb2fdf"
+    },
+    {
+      "path": "scripts/figures_v2/paths.py",
+      "sha256": "c3852a429ec7e35bada4289121b5a8da0212f760f1cf33aa3c9428e134679549"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+      "sha256": "c8c2ba68889b16e99b6ee4e802df5882bbe9d7310bbbaab325c48416dfb19763"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+      "sha256": "2bdcce3e875183a6adb5ac0f2f739c42269506563ee3af57b8735e5766bb91ef"
+    },
+    {
+      "path": "scripts/figures_v2/terrain.py",
+      "sha256": "337997e146558df871e8b7d6c794167c2a82e103bb75e510c011af4f6f6de82e"
+    },
+    {
+      "path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03"
+    },
+    {
+      "path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.mat",
+      "sha256": "c68703e0cc8f94f4bd52ff6e9974b66a2dae33865f0723ad71c04b6694bf4fbf"
+    }
+  ],
+  "script_sha256": "b997f902e3767736218e77a73de6ca51731e89ea87c90179167c4b904769af11",
+  "base_word_caption": "图 2  原始30 m DEM上的调度中心、15个服务区及需求规模。圆点面积表示箱数，右侧列出输入表中的节点海拔；底图直接采用官方高程栅格，采用统一海拔色阶。节点海拔不替代逐航段的最高地形计算。",
+  "base_word_sha256": "9b4ced7a81957fd9fc3a097aa91f2636757b0b9a9fbdebaf5f1ae625c9b1f19c",
+  "repository_input_commit": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "data_sha256": "01b1fad8c37679fac881784eca15b37d6eefea872d3e56b31a3421c344646a99",
+  "output_sha256": {
+    "pdf": "bdddd62fd4e52cccfd5cc455e284489a945a777a42cd874681e4470b796e93de",
+    "svg": "1f96718870b07c20d47ef7f1bb9364d59a5d78370c315731e113555012d89e1e",
+    "png": "f300f4b21d8b0c0590ec834d2814a32bddb21aa92be06524c502baaa2c75af0b"
+  },
+  "join_keys": [
+    "service=node.code"
+  ],
+  "filters": [
+    "All 15 service areas and O01",
+    "Unique box IDs by service",
+    "Q1 single-destination maximum terrain"
+  ]
+}

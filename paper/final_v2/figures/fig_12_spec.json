@@ -1,0 +1,621 @@
+{
+  "number": 12,
+  "caption": "B型6个正式架次的空间路线与任务属性。Q2-017和Q2-021同赴S008，分别装载20 kg与25 kg；全部属性按正式箱级分配与能耗记录生成。相同路线可重复执行，路线数量不等于架次数，不能单独据此推断机型选择的最优性。",
+  "width_cm": 16.3,
+  "height_cm": 10.8,
+  "dpi": 600,
+  "sources": [
+    {
+      "path": "results/q2/Q2_transport_trips_balanced.csv",
+      "sha256": "0098c6633916379afee2f8960505062e388ee3c580829de56bde35a1ce148099"
+    },
+    {
+      "path": "paper/figure_data_v2/q2_trip_summary.csv",
+      "sha256": "541b8c90d354c9bcadd70894bcf76be0d6901fe4f836d8bcaa133efbcd5c9c78"
+    },
+    {
+      "path": "paper/figure_data_v2/q2_trajectory.csv",
+      "sha256": "57ffd228b9e64b36d7030fa46770950c19762f08570172d6353e824f69e73394"
+    },
+    {
+      "path": "paper/figure_data_v2/q2_replay_audit.json",
+      "sha256": "d9003eceeff12a2ffa8ddd0b8136221bd7bf6c7bacde85756a58f59065b5d498"
+    },
+    {
+      "path": "paper/data/analysis.json",
+      "sha256": "bd83c16f835912e5790957aae8cf998b54afa2e1ebd594f67d72d22c4123ffc4"
+    },
+    {
+      "path": "paper/figure_data_v2/q2_task_phases.csv",
+      "sha256": "0e4ac2237fe8ee2651ab52fa1fe45a1ac61804a60b932a026749504244e1a36e"
+    },
+    {
+      "path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03",
+      "scope": "raw_input"
+    }
+  ],
+  "font": {
+    "cn": "Noto Sans SC Publication",
+    "cn_path": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+    "latin": "DejaVu Sans"
+  },
+  "map_spec": {
+    "projection": "WGS84椭球地表坐标到O01局部东—北切平面的正射显示投影（ECEF→ENU，节点高程不用于平面投影）",
+    "ellipsoid": {
+      "a_m": 6378137.0,
+      "inverse_flattening": 298.257223563
+    },
+    "origin": {
+      "longitude": 109.2308517,
+      "latitude": 23.0085095
+    },
+    "units": "km",
+    "xlim": [
+      -6.941944358736083,
+      5.995393397259461
+    ],
+    "ylim": [
+      -0.7758425981818904,
+      8.274562276123252
+    ],
+    "padding_fraction": 0.05,
+    "label_offsets": {
+      "O01": [
+        4,
+        -11
+      ],
+      "S001": [
+        3,
+        4
+      ],
+      "S002": [
+        3,
+        4
+      ],
+      "S003": [
+        3,
+        4
+      ],
+      "S004": [
+        3,
+        -10
+      ],
+      "S005": [
+        3,
+        4
+      ],
+      "S006": [
+        3,
+        4
+      ],
+      "S007": [
+        3,
+        4
+      ],
+      "S008": [
+        -26,
+        5
+      ],
+      "S009": [
+        4,
+        -11
+      ],
+      "S010": [
+        4,
+        -10
+      ],
+      "S011": [
+        3,
+        4
+      ],
+      "S012": [
+        -29,
+        5
+      ],
+      "S013": [
+        -29,
+        5
+      ],
+      "S014": [
+        -30,
+        6
+      ],
+      "S015": [
+        3,
+        4
+      ]
+    },
+    "dem_background": "original official 30 m GeoTIFF; displayed without terrain correction or smoothing",
+    "scale_bar_km": 2.0,
+    "research_geometry_unchanged": true,
+    "terrain": {
+      "source_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "source_sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03",
+      "mat_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.mat",
+      "mat_sha256": "c68703e0cc8f94f4bd52ff6e9974b66a2dae33865f0723ad71c04b6694bf4fbf",
+      "description_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡地理空间数据说明.pdf",
+      "description_sha256": "6d1522c6832a5d91a108dae0d07954845025c0dabd44af8ee78c7860d7c405e4",
+      "frozen_input_manifest_match": true,
+      "source_crs": "EPSG:4326",
+      "source_vertical_unit": "m",
+      "source_kind": "Copernicus DEM GLO-30 digital surface model (DSM), named DEM in official package",
+      "source_affine": [
+        0.00027777777777777393,
+        0.0,
+        109.0326388888889,
+        0.0,
+        -0.0002777777777777777,
+        23.22486111111111
+      ],
+      "source_shape": [
+        1309,
+        1486
+      ],
+      "source_row_direction": "north to south",
+      "source_column_direction": "west to east",
+      "tif_nodata_tag": null,
+      "document_and_mat_nodata": -32767.0,
+      "invalid_pixels": 0,
+      "norm": {
+        "vmin": 120.41609191894531,
+        "vmax": 746.0787353515625,
+        "unit": "m",
+        "rule": "min/max of valid original pixels whose centres lie inside the single unchanged shared ENU map extent",
+        "valid_pixel_count": 133476
+      },
+      "map_extent_km": [
+        -6.941944358736083,
+        5.995393397259461,
+        -0.7758425981818905,
+        8.274562276123252
+      ],
+      "display_projection": "WGS84 geodetic h=0 → ECEF → O01 local east/north orthographic plane (km), same as common.project",
+      "reprojection_method": "Project each original pixel footprint corner; flat-shaded original cell values, no interpolation. Rasterize only the display mesh for PDF/SVG. Equivalent piecewise-constant nearest-cell display, no resampled data written.",
+      "cmap_colors": [
+        "#C4DCE8",
+        "#8FB8C8",
+        "#BDD0BC",
+        "#E9DF9F",
+        "#C79C69",
+        "#89664C"
+      ],
+      "cmap_normalized_stops": [
+        0,
+        0.18,
+        0.38,
+        0.58,
+        0.78,
+        1
+      ],
+      "terrain_rgb_fraction": 1.0,
+      "white_rgb_fraction": 0.0,
+      "hillshade_strength": 0.18,
+      "hillshade_azimuth_deg": 315,
+      "hillshade_altitude_deg": 45,
+      "hillshade_spacing": "WGS84 Geod metric adjacent-pixel dx/dy; array row derivative reversed to north",
+      "metric_pixel_width_range_m": [
+        28.460911636041455,
+        28.47824907815569
+      ],
+      "metric_pixel_height_range_m": [
+        30.76222851237873,
+        30.762549249962603
+      ],
+      "physics_input_unchanged": true,
+      "display_may_not_be_used_for_physics": true,
+      "water_semantics": "optional ordinary mapped rivers/water polygons; not flood inundation extent",
+      "dependencies": {
+        "rasterio": "1.5.1",
+        "pyproj": "3.8.0",
+        "numpy": "2.3.5",
+        "scipy": "1.18.1",
+        "matplotlib": "3.11.2"
+      }
+    }
+  },
+  "core_claim": "路线几何与六个真实批次的质量、能耗和返航SOC逐行对应。",
+  "derivations": [
+    "mass=sum official box mass by frozen box IDs",
+    "row join trip_id; destination sort only affects display"
+  ],
+  "join_keys": [
+    "trip_id / 架次编号",
+    "box_id / 货箱编号",
+    "phase_id"
+  ],
+  "data_checks": [
+    {
+      "check": "six_trips_five_routes",
+      "passed": true
+    },
+    {
+      "check": "two_entities",
+      "passed": true
+    }
+  ],
+  "parameters": {
+    "map_spec": {
+      "projection": "WGS84椭球地表坐标到O01局部东—北切平面的正射显示投影（ECEF→ENU，节点高程不用于平面投影）",
+      "ellipsoid": {
+        "a_m": 6378137.0,
+        "inverse_flattening": 298.257223563
+      },
+      "origin": {
+        "longitude": 109.2308517,
+        "latitude": 23.0085095
+      },
+      "units": "km",
+      "xlim": [
+        -6.941944358736083,
+        5.995393397259461
+      ],
+      "ylim": [
+        -0.7758425981818904,
+        8.274562276123252
+      ],
+      "padding_fraction": 0.05,
+      "label_offsets": {
+        "O01": [
+          4,
+          -11
+        ],
+        "S001": [
+          3,
+          4
+        ],
+        "S002": [
+          3,
+          4
+        ],
+        "S003": [
+          3,
+          4
+        ],
+        "S004": [
+          3,
+          -10
+        ],
+        "S005": [
+          3,
+          4
+        ],
+        "S006": [
+          3,
+          4
+        ],
+        "S007": [
+          3,
+          4
+        ],
+        "S008": [
+          -26,
+          5
+        ],
+        "S009": [
+          4,
+          -11
+        ],
+        "S010": [
+          4,
+          -10
+        ],
+        "S011": [
+          3,
+          4
+        ],
+        "S012": [
+          -29,
+          5
+        ],
+        "S013": [
+          -29,
+          5
+        ],
+        "S014": [
+          -30,
+          6
+        ],
+        "S015": [
+          3,
+          4
+        ]
+      },
+      "dem_background": "original official 30 m GeoTIFF; displayed without terrain correction or smoothing",
+      "scale_bar_km": 2.0,
+      "research_geometry_unchanged": true,
+      "terrain": {
+        "source_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+        "source_sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03",
+        "mat_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.mat",
+        "mat_sha256": "c68703e0cc8f94f4bd52ff6e9974b66a2dae33865f0723ad71c04b6694bf4fbf",
+        "description_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡地理空间数据说明.pdf",
+        "description_sha256": "6d1522c6832a5d91a108dae0d07954845025c0dabd44af8ee78c7860d7c405e4",
+        "frozen_input_manifest_match": true,
+        "source_crs": "EPSG:4326",
+        "source_vertical_unit": "m",
+        "source_kind": "Copernicus DEM GLO-30 digital surface model (DSM), named DEM in official package",
+        "source_affine": [
+          0.00027777777777777393,
+          0.0,
+          109.0326388888889,
+          0.0,
+          -0.0002777777777777777,
+          23.22486111111111
+        ],
+        "source_shape": [
+          1309,
+          1486
+        ],
+        "source_row_direction": "north to south",
+        "source_column_direction": "west to east",
+        "tif_nodata_tag": null,
+        "document_and_mat_nodata": -32767.0,
+        "invalid_pixels": 0,
+        "norm": {
+          "vmin": 120.41609191894531,
+          "vmax": 746.0787353515625,
+          "unit": "m",
+          "rule": "min/max of valid original pixels whose centres lie inside the single unchanged shared ENU map extent",
+          "valid_pixel_count": 133476
+        },
+        "map_extent_km": [
+          -6.941944358736083,
+          5.995393397259461,
+          -0.7758425981818905,
+          8.274562276123252
+        ],
+        "display_projection": "WGS84 geodetic h=0 → ECEF → O01 local east/north orthographic plane (km), same as common.project",
+        "reprojection_method": "Project each original pixel footprint corner; flat-shaded original cell values, no interpolation. Rasterize only the display mesh for PDF/SVG. Equivalent piecewise-constant nearest-cell display, no resampled data written.",
+        "cmap_colors": [
+          "#C4DCE8",
+          "#8FB8C8",
+          "#BDD0BC",
+          "#E9DF9F",
+          "#C79C69",
+          "#89664C"
+        ],
+        "cmap_normalized_stops": [
+          0,
+          0.18,
+          0.38,
+          0.58,
+          0.78,
+          1
+        ],
+        "terrain_rgb_fraction": 1.0,
+        "white_rgb_fraction": 0.0,
+        "hillshade_strength": 0.18,
+        "hillshade_azimuth_deg": 315,
+        "hillshade_altitude_deg": 45,
+        "hillshade_spacing": "WGS84 Geod metric adjacent-pixel dx/dy; array row derivative reversed to north",
+        "metric_pixel_width_range_m": [
+          28.460911636041455,
+          28.47824907815569
+        ],
+        "metric_pixel_height_range_m": [
+          30.76222851237873,
+          30.762549249962603
+        ],
+        "physics_input_unchanged": true,
+        "display_may_not_be_used_for_physics": true,
+        "water_semantics": "optional ordinary mapped rivers/water polygons; not flood inundation extent",
+        "dependencies": {
+          "rasterio": "1.5.1",
+          "pyproj": "3.8.0",
+          "numpy": "2.3.5",
+          "scipy": "1.18.1",
+          "matplotlib": "3.11.2"
+        }
+      }
+    }
+  },
+  "minimum_necessary_font_pt": 8,
+  "source_fields": {
+    "Q2_transport_trips_balanced.csv": [
+      "架次编号",
+      "无人机编号",
+      "机型编号",
+      "电池编号",
+      "开始时刻（s）",
+      "访问服务区顺序",
+      "返回O01时刻（s）",
+      "架次能耗（kWh）",
+      "返航SOC（%）",
+      "货箱编号列表"
+    ],
+    "q2_trip_summary.csv": [
+      "trip_id",
+      "route",
+      "initial_payload_kg",
+      "energy_kwh",
+      "soc_pct",
+      "uav_id"
+    ],
+    "q2_trajectory.csv": [
+      "trip_id",
+      "phase_id",
+      "phase_kind",
+      "relative_time_s",
+      "lon",
+      "lat",
+      "altitude_m",
+      "payload_kg",
+      "cumulative_distance_m"
+    ],
+    "q2_task_phases.csv": [
+      "trip_id",
+      "type_code",
+      "uav_id",
+      "battery_id",
+      "phase_id",
+      "phase_kind",
+      "display_phase",
+      "t_begin_s",
+      "t_end_s",
+      "source",
+      "target",
+      "payload_kg",
+      "altitude_begin_m",
+      "altitude_end_m",
+      "cumulative_distance_begin_m",
+      "cumulative_distance_end_m"
+    ],
+    "analysis.json": [
+      "nodes.lon",
+      "nodes.lat",
+      "nodes.elev"
+    ]
+  },
+  "field_mapping": {
+    "a": "x,y=ENU(lon,lat); B long-dash routes",
+    "b": "common row=trip_id sorted by destination then ID; separate x axes=mass kg, energy kWh, SOC percent"
+  },
+  "filters": {
+    "all": "type_code=B, all 6 trips; no numerical aggregation across same destination"
+  },
+  "panel_purposes": [
+    "(a) B型5条路线与6架次的关系",
+    "(b) 相同目的地的真实装载与能量属性逐条对照"
+  ],
+  "replay_audit": "paper/figure_data_v2/q2_replay_audit.json",
+  "verification_scope": "Frozen-output and deterministic physical replay comparisons; no optimization.",
+  "visual_review": {
+    "status": "actual_pdf_color_and_grayscale_viewed",
+    "pdf_sha256": "7bb22dc4c2dce25e0c685bda851515ba5f2996fa4d482288b395d01eeb5c0448",
+    "reason": "5条路线与6架次属性共图，017/021的同目的地不同批次直接逐行对照。",
+    "issues": [
+      "S001/S013标签相撞；只调整文字偏移，未动节点。",
+      "同目的地说明与底轴冲突；移至下部空白。",
+      "SOC100刻度外溢；第三属性轴整体左移。"
+    ],
+    "conclusion": "全部6行点和值可读，100刻度在画布内，地图标签不重叠，灰度下路线虚线和方形身份仍可辨。"
+  },
+  "terrain_spec": {
+    "source_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+    "source_sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03",
+    "mat_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.mat",
+    "mat_sha256": "c68703e0cc8f94f4bd52ff6e9974b66a2dae33865f0723ad71c04b6694bf4fbf",
+    "description_path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡地理空间数据说明.pdf",
+    "description_sha256": "6d1522c6832a5d91a108dae0d07954845025c0dabd44af8ee78c7860d7c405e4",
+    "frozen_input_manifest_match": true,
+    "source_crs": "EPSG:4326",
+    "source_vertical_unit": "m",
+    "source_kind": "Copernicus DEM GLO-30 digital surface model (DSM), named DEM in official package",
+    "source_affine": [
+      0.00027777777777777393,
+      0.0,
+      109.0326388888889,
+      0.0,
+      -0.0002777777777777777,
+      23.22486111111111
+    ],
+    "source_shape": [
+      1309,
+      1486
+    ],
+    "source_row_direction": "north to south",
+    "source_column_direction": "west to east",
+    "tif_nodata_tag": null,
+    "document_and_mat_nodata": -32767.0,
+    "invalid_pixels": 0,
+    "norm": {
+      "vmin": 120.41609191894531,
+      "vmax": 746.0787353515625,
+      "unit": "m",
+      "rule": "min/max of valid original pixels whose centres lie inside the single unchanged shared ENU map extent",
+      "valid_pixel_count": 133476
+    },
+    "map_extent_km": [
+      -6.941944358736083,
+      5.995393397259461,
+      -0.7758425981818905,
+      8.274562276123252
+    ],
+    "display_projection": "WGS84 geodetic h=0 → ECEF → O01 local east/north orthographic plane (km), same as common.project",
+    "reprojection_method": "Project each original pixel footprint corner; flat-shaded original cell values, no interpolation. Rasterize only the display mesh for PDF/SVG. Equivalent piecewise-constant nearest-cell display, no resampled data written.",
+    "cmap_colors": [
+      "#C4DCE8",
+      "#8FB8C8",
+      "#BDD0BC",
+      "#E9DF9F",
+      "#C79C69",
+      "#89664C"
+    ],
+    "cmap_normalized_stops": [
+      0,
+      0.18,
+      0.38,
+      0.58,
+      0.78,
+      1
+    ],
+    "terrain_rgb_fraction": 1.0,
+    "white_rgb_fraction": 0.0,
+    "hillshade_strength": 0.18,
+    "hillshade_azimuth_deg": 315,
+    "hillshade_altitude_deg": 45,
+    "hillshade_spacing": "WGS84 Geod metric adjacent-pixel dx/dy; array row derivative reversed to north",
+    "metric_pixel_width_range_m": [
+      28.460911636041455,
+      28.47824907815569
+    ],
+    "metric_pixel_height_range_m": [
+      30.76222851237873,
+      30.762549249962603
+    ],
+    "physics_input_unchanged": true,
+    "display_may_not_be_used_for_physics": true,
+    "water_semantics": "optional ordinary mapped rivers/water polygons; not flood inundation extent",
+    "dependencies": {
+      "rasterio": "1.5.1",
+      "pyproj": "3.8.0",
+      "numpy": "2.3.5",
+      "scipy": "1.18.1",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "shared_visual_sources": [
+    {
+      "path": "scripts/figures_v2/common.py",
+      "sha256": "baaaa4cbc137c79e69b92b7defd2dd134b7f795f57295887083ad9a43bfb2fdf"
+    },
+    {
+      "path": "scripts/figures_v2/paths.py",
+      "sha256": "c3852a429ec7e35bada4289121b5a8da0212f760f1cf33aa3c9428e134679549"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+      "sha256": "c8c2ba68889b16e99b6ee4e802df5882bbe9d7310bbbaab325c48416dfb19763"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+      "sha256": "2bdcce3e875183a6adb5ac0f2f739c42269506563ee3af57b8735e5766bb91ef"
+    },
+    {
+      "path": "scripts/figures_v2/terrain.py",
+      "sha256": "337997e146558df871e8b7d6c794167c2a82e103bb75e510c011af4f6f6de82e"
+    },
+    {
+      "path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.tif",
+      "sha256": "741fe6de0b2bcaffd0f4007f574ee698d46197094f52cc954b532c4f90fc7c03"
+    },
+    {
+      "path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.mat",
+      "sha256": "c68703e0cc8f94f4bd52ff6e9974b66a2dae33865f0723ad71c04b6694bf4fbf"
+    }
+  ],
+  "script": "scripts/figures_v2/figures_10_16.py",
+  "script_sha256": "ca8af92e3e71618ecb1ca7eb7adeb15b2d017971b9255a64d146ea8ae0225306",
+  "base_word_caption": "图 12  Q2正式方案中B型无人机执行6个运输架次。重复有序路线合并显示，箭头及右侧架次索引共同确定实际访问顺序；线段经过服务区附近不表示在该区交付。三机型地图采用相同投影、空间范围、比例及海拔色阶，底图为官方原始30 m DEM。",
+  "base_word_sha256": "9b4ced7a81957fd9fc3a097aa91f2636757b0b9a9fbdebaf5f1ae625c9b1f19c",
+  "repository_input_commit": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "research_commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "data_file": "fig_12_data.json",
+  "data_sha256": "84dc8def1a495666e3d04839f54c31ead5c2127db65c5fe9956b0f4f69eeac39",
+  "output_sha256": {
+    "pdf": "7bb22dc4c2dce25e0c685bda851515ba5f2996fa4d482288b395d01eeb5c0448",
+    "svg": "1c4a15ad03c2f5736f26be3137bb33e7d7959a2e483e624d286689b6509070f6",
+    "png": "02248d50df957e11659c591a65baf78da0a134158e91784e24484052ae246328"
+  }
+}
