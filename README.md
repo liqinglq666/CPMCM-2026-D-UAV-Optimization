@@ -7,11 +7,11 @@
 [依据对应表](docs/audit/post_merge/EVIDENCE.md)。该版本保留已接受的 Q1–Q4 结果；
 后续改动另开分支，复核冻结结果时无需重新运行优化。
 
-**正式提交文件：[66页PDF](submission/D26105580028.pdf)、[官方结果Excel](submission/结果提交模板.xlsx)、[RAR附件](submission/D26105580028.rar)**。最终检查、当届官方规则、校验值和上传顺序见[提交检查报告](submission/FINAL_SUBMISSION_CHECK.md)。最终PDF MD5为`32d637d1f2383b57854e3c5dbe3f0a79`；旧MD5 `990d4a516f058ac87a1aa5fdee999120`已废弃。
+**正式提交文件：[64页PDF](submission/D26105580028.pdf)、[官方结果Excel](submission/结果提交模板.xlsx)、[RAR附件](submission/D26105580028.rar)**。以本次队伍指定的64页PDF为论文标准，仅修复3处删除附录后的交叉引用并移除作者邮箱元数据。全部研究数值和图形保持不变，最终MD5为`f298eae1213cb1ca2d201154bf3adcd9`。规则、哈希、核验及上传顺序见[终检报告](submission/FINAL_SUBMISSION_CHECK.md)，版本关系见[最终论文说明](paper/FINAL_PAPER.md)。
 
-65页[科研图正文原件](paper/final_v2/manuscript.pdf)、[可编辑Word基准](paper/final_v2/manuscript.docx)和[图表复现说明](paper/final_v2/README.md)保留不覆盖。正式PDF只在该原件前补官方封皮，并核实修正原第65页B.3的AI型号与发布日期；正文前64页内容流和像素完全不变，末页其他区域不变。模型、参数、箱号、路线、任务时序和分区保持冻结结果。
+`paper/final_v2/`中的65页PDF、Word及27幅科研图是历史编辑与复现来源；其manifest仅描述该历史图形包，不能作为当前提交PDF的页数或校验依据。本次64页论文不恢复已经删去的目录、表28或附录小节。旧65页MD5 `990d4a516f058ac87a1aa5fdee999120`、旧66页MD5 `32d637d1f2383b57854e3c5dbe3f0a79`及本次修复前64页MD5 `51d98efb9651e89c920af1928f04185b`均不用于提交。
 
-Q1、Q2 正式及节能备选、Q3 联合方案、Q4 资源优先与均衡偏好的数值及适用范围见论文和 [版本清单](paper/final_v2/manifest.json)。浮点数值证书与受限模型下界保留各自适用范围。
+Q1—Q4正式结果、Q2既存偏好档案、Q3通信方案、Q4缺口全部冻结。论文表5展示4个内部已验证方案；图10还展示更大既存档案，其来源边界见[附件检查说明](docs/submission/检查说明.md)。不删除或改写真实来源，也不把Q2/Q3有限搜索结论升级为原问题全局最优。
 
 ## 安装与数据
 

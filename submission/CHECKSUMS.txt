@@ -1,20 +1,21 @@
-Final submission bytes — 2026-09-27
+Final submission — 2026-09-27
 
 D26105580028.pdf
-SizeBytes: 4842510
-MD5: 32d637d1f2383b57854e3c5dbe3f0a79
-SHA256: a874bd85fc701cbcb52c8d6819bb6c43325d27579331b0af1899fec10573cec7
+size_bytes: 6022191
+md5: f298eae1213cb1ca2d201154bf3adcd9
+sha256: 28cb0f605f34e2c72fd883d3d1cd3e32e69321d81daf45164b87699e7b74cc3e
 
 结果提交模板.xlsx
-SizeBytes: 26216
-MD5: bf9a96ad1ccce51cd2bfa5c8d056f75c
-SHA256: e5f3707a42dd86124aa9afdb7453a607bcb14b7419ddf0668c5e75bc31081b22
+size_bytes: 26216
+md5: bf9a96ad1ccce51cd2bfa5c8d056f75c
+sha256: e5f3707a42dd86124aa9afdb7453a607bcb14b7419ddf0668c5e75bc31081b22
 
 D26105580028.rar
-SizeBytes: 6859480
-MD5: 89cbb89dbe846d3c1a700199f38b7e75
-SHA256: 86be96cd67c3206056e6d369b76ca8f46483500664366ff736e13329b7863a9c
+size_bytes: 6862274
+md5: 92d602919d0c6ec744a133dac1918fb4
+sha256: 5e8a09d602a2a882b013fc49265fa330d365d190391422f8c8c7535b09f0f143
 
-Retired PDF MD5: 990d4a516f058ac87a1aa5fdee999120
-Reason: official cover and verified AI disclosure were required.
-Do not register the retired MD5.
+Retired PDF MD5 (do not register):
+990d4a516f058ac87a1aa5fdee999120
+32d637d1f2383b57854e3c5dbe3f0a79
+51d98efb9651e89c920af1928f04185b
