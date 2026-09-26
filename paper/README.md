@@ -1,6 +1,6 @@
 # 论文入口与历史构建
 
-**当前交付版本位于 [final/](final/README.md)：[65 页 PDF](final/manuscript.pdf)、[可编辑 Word](final/manuscript.docx)、27 幅科研图及其数据和源文件。** 当前版本的校验与重绘使用 `paper/final/src/`，不运行优化器。以下 LaTeX 文档、35 页说明和 12 图构建流程属于 2026-09-25 历史版本，保留用于追溯，不能生成当前 Word 排版版本。
+**当前交付版本位于 [final_v2/](final_v2/README.md)：[65 页 PDF](final_v2/manuscript.pdf)、[可编辑 Word](final_v2/manuscript.docx)、27 幅重构科研图及完整来源记录。** 重构代码在 `scripts/figures_v2/`，不运行优化器。上一版 [final/](final/README.md) 保留为编辑输入。以下 LaTeX 文档、35 页说明和 12 图构建流程属于历史版本，不能生成当前 Word 排版版本。
 
 ## 2026-09-25 历史版本
 

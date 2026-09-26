@@ -1,0 +1,159 @@
+{
+  "figure_id": 4,
+  "number": 4,
+  "title": "沿线山脊决定同一正式任务的升降与飞行能耗",
+  "core_claim": "沿线山脊决定同一正式任务的升降与飞行能耗",
+  "caption": "Q1-S014-01（B型，25 kg）同一冻结任务的原始地形剖面、去返程飞行阶段和能耗。剖面按闭像元区间保守包络展示，最高地形541.947 m、巡航591.947 m；两条飞行时长不含准备装载与交接，下降附加能耗为零。端点作业高程保留原输入定义，纵横显示比例不同。",
+  "width_cm": 16.3,
+  "height_cm": 12.5,
+  "dpi": 600,
+  "minimum_required_font_pt": 8,
+  "actual_minimum_font_pt": 8.0,
+  "repository_head": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "research_commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "sources": [
+    {
+      "path": "paper/data/terrain_profile.csv",
+      "sha256": "c34c4ee5ac5a9c43634942281add1b27bddf57857ac82f52fda619f1ab335f00"
+    },
+    {
+      "path": "paper/data/analysis.json",
+      "sha256": "bd83c16f835912e5790957aae8cf998b54afa2e1ebd594f67d72d22c4123ffc4"
+    },
+    {
+      "path": "paper/data/energy_components.csv",
+      "sha256": "3e4f6543642dde4a4c5269f2926ab4d480f8c40f45ce3c9e23fb09b499e61888"
+    },
+    {
+      "path": "results/q1/Q1_leg_physics.csv",
+      "sha256": "1957936788eca03a6dd4d168053f023a7a212bf124b22bfe8f967a799e99f314"
+    },
+    {
+      "path": "results/q1/Q1_batch_solution.csv",
+      "sha256": "a28c5e3eb7660ec0789969d122025445c61b67140d6bbb91f3a740423dece05c"
+    },
+    {
+      "path": "src/core/physics.py",
+      "sha256": "36b58299dbdf77d62b1408a6fb26366860fdee938e8d650bed28f877712d362d"
+    },
+    {
+      "path": "src/core/routes.py",
+      "sha256": "716aedafd42b4769390c292bececb09a00674d9aa716786b09e85aa52b2dded7"
+    },
+    {
+      "path": "src/core/energy.py",
+      "sha256": "3e4ca3ae2b137917c10d9a7c7ba72b12b4aa876899255799b7d8a9cffe1ad4e1"
+    }
+  ],
+  "source_fields": {
+    "terrain_profile.begin_m/end_m/elevation_m": "closed cell profile and upper envelope",
+    "Q1_leg_physics.service": "join S014",
+    "types.climb_speed/cruise_speed/descent_speed": "duration denominators",
+    "energy_components.trip/direction": "four energy terms"
+  },
+  "field_mapping": {
+    "terrain_profile.begin_m/end_m/elevation_m": "closed cell profile and upper envelope",
+    "Q1_leg_physics.service": "join S014",
+    "types.climb_speed/cruise_speed/descent_speed": "duration denominators",
+    "energy_components.trip/direction": "four energy terms"
+  },
+  "derived_formula": [
+    "phase_duration=climb/climb_speed, distance/cruise_speed, descent/descent_speed",
+    "profile display=max elevation on overlapping closed intervals",
+    "energy_out+energy_return=formal batch energy"
+  ],
+  "derived_formulas": [
+    "phase_duration=climb/climb_speed, distance/cruise_speed, descent/descent_speed",
+    "profile display=max elevation on overlapping closed intervals",
+    "energy_out+energy_return=formal batch energy"
+  ],
+  "panel_purposes": {
+    "a": "同任务地形、巡航及净空",
+    "b": "按原速度确定的去返飞行阶段时长",
+    "c": "载货去程与空载返程能耗"
+  },
+  "checks": {
+    "distance_matches": true,
+    "max_dem_matches": true,
+    "clearance50": true,
+    "B25": true,
+    "four_energy_sum_matches": true,
+    "full_duration_replay_matches_formal": true,
+    "closed_boundary_maxima_retained": true
+  },
+  "structural_changes": [
+    "单剖面升级为同任务地形—时间—能耗证据链",
+    "高度注释缩短并使用局部白底",
+    "辅助量纲独立，不把飞行和写成完整作业时间"
+  ],
+  "parameters": {},
+  "script": "scripts/figures_v2/figures_01_09.py",
+  "data_file": "fig_04_data.json",
+  "data_layer": "paper/figure_data_v2/fig_04_data.json",
+  "fonts": {
+    "cn": "Noto Sans SC Publication",
+    "regular": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+    "bold": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+    "latin": "DejaVu Sans",
+    "math": "STIX"
+  },
+  "scope": "Frozen inputs and outputs; no optimization, no changed route/assignment/parameter/time/result.",
+  "missing_or_not_revalidated": [],
+  "visual_qa": {
+    "status": "passed_actual_pdf_color_and_grayscale_review",
+    "pdf_sha256": "e08a3fae02e73863002e93cc8c8a37090512cbb70ca0fa8e7c990a2d43f3dbd6",
+    "previews": {
+      "color": {
+        "path": "work/fig_v2/qa_01_09/fig_04_color.png",
+        "sha256": "6efc7b8bc2e6a1178a74c26b362b1cd70303f4febdaf82f9f3d7a3eb8fa44233",
+        "actually_viewed": true
+      },
+      "gray": {
+        "path": "work/fig_v2/qa_01_09/fig_04_gray.png",
+        "sha256": "60cc7d15230138df4de33393803893de6b46cade0bb570c03c9a1d410bef7e69",
+        "actually_viewed": true
+      }
+    },
+    "report": "work/fig_v2/figures_01_09_qa.json",
+    "accepted_reason": "541.947m、591.947m及50m量尺、升降值清楚；辅助阶段纹理在灰度可区分，单位分别为s与kWh。",
+    "word_page_qa": "pending_parent_word_replacement_and_render"
+  },
+  "shared_visual_sources": [
+    {
+      "path": "scripts/figures_v2/common.py",
+      "sha256": "baaaa4cbc137c79e69b92b7defd2dd134b7f795f57295887083ad9a43bfb2fdf"
+    },
+    {
+      "path": "scripts/figures_v2/paths.py",
+      "sha256": "c3852a429ec7e35bada4289121b5a8da0212f760f1cf33aa3c9428e134679549"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+      "sha256": "c8c2ba68889b16e99b6ee4e802df5882bbe9d7310bbbaab325c48416dfb19763"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+      "sha256": "2bdcce3e875183a6adb5ac0f2f739c42269506563ee3af57b8735e5766bb91ef"
+    }
+  ],
+  "script_sha256": "b997f902e3767736218e77a73de6ca51731e89ea87c90179167c4b904769af11",
+  "base_word_caption": "图 4  O01至S014已保存的原始DEM闭像元航段剖面及计划飞行阶段。沿线最高地形为541.947 m，巡航海拔为591.947 m；端点作业高度较低仍需完成跨越沿途高地的爬升。",
+  "base_word_sha256": "9b4ced7a81957fd9fc3a097aa91f2636757b0b9a9fbdebaf5f1ae625c9b1f19c",
+  "repository_input_commit": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "data_sha256": "31db94ea76c15c717ee27bdab37cd99019836d3b9bb9c837d7b8f489597bd8ea",
+  "output_sha256": {
+    "pdf": "e08a3fae02e73863002e93cc8c8a37090512cbb70ca0fa8e7c990a2d43f3dbd6",
+    "svg": "b845e44af0a520701e7b935dc52a0fe883afb5d9ea998e200fe8defa1f449f0a",
+    "png": "7e9f367f0969baacfb416880f2a2b92e4b12923fc34946e2dad1f3211c68356d"
+  },
+  "join_keys": [
+    "trip=Q1-S014-01",
+    "service=S014",
+    "direction"
+  ],
+  "filters": [
+    "service=S014",
+    "trip=Q1-S014-01",
+    "type=B"
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "routes": {
+    "type": "B",
+    "trip_ids": [
+      "Q2-005",
+      "Q2-006",
+      "Q2-012",
+      "Q2-014",
+      "Q2-017",
+      "Q2-021"
+    ],
+    "routes": [
+      {
+        "route": "S013",
+        "trip_ids": [
+          "Q2-005"
+        ],
+        "multiplicity": 1
+      },
+      {
+        "route": "S014",
+        "trip_ids": [
+          "Q2-006"
+        ],
+        "multiplicity": 1
+      },
+      {
+        "route": "S010",
+        "trip_ids": [
+          "Q2-012"
+        ],
+        "multiplicity": 1
+      },
+      {
+        "route": "S012",
+        "trip_ids": [
+          "Q2-014"
+        ],
+        "multiplicity": 1
+      },
+      {
+        "route": "S008",
+        "trip_ids": [
+          "Q2-017",
+          "Q2-021"
+        ],
+        "multiplicity": 2
+      }
+    ],
+    "ordered_directed_edges": [
+      [
+        "O01",
+        "S013"
+      ],
+      [
+        "S013",
+        "O01"
+      ],
+      [
+        "O01",
+        "S014"
+      ],
+      [
+        "S014",
+        "O01"
+      ],
+      [
+        "O01",
+        "S010"
+      ],
+      [
+        "S010",
+        "O01"
+      ],
+      [
+        "O01",
+        "S012"
+      ],
+      [
+        "S012",
+        "O01"
+      ],
+      [
+        "O01",
+        "S008"
+      ],
+      [
+        "S008",
+        "O01"
+      ]
+    ],
+    "positions_source": "q2_trajectory.csv exact cruise sampling; ENU display projection only"
+  },
+  "records": [
+    {
+      "question": "q2",
+      "trip_id": "Q2-017",
+      "type_code": "B",
+      "uav_id": "U05",
+      "battery_id": "B-BAT-01",
+      "route": "S008",
+      "box_ids": "S008-HYG-01,S008-WAT-01",
+      "box_count": "2",
+      "initial_payload_kg": "20.0",
+      "initial_volume_m3": "0.062",
+      "start_s": "3065.851890933266",
+      "return_s": "4967.6833265935975",
+      "duration_s": "1901.8314356603312",
+      "energy_kwh": "2.7634057475917047",
+      "soc_pct": "30.914856310207384",
+      "last_delivery_s": "4296.994275430098",
+      "horizontal_distance_m": "16158.066224846374"
+    },
+    {
+      "question": "q2",
+      "trip_id": "Q2-021",
+      "type_code": "B",
+      "uav_id": "U06",
+      "battery_id": "B-BAT-02",
+      "route": "S008",
+      "box_ids": "S008-FOD-01,S008-MED-01,S008-WAT-02",
+      "box_count": "3",
+      "initial_payload_kg": "25.0",
+      "initial_volume_m3": "0.067",
+      "start_s": "3792.496767125706",
+      "return_s": "5754.328202786037",
+      "duration_s": "1961.8314356603312",
+      "energy_kwh": "2.975179434105133",
+      "soc_pct": "25.620514147371676",
+      "last_delivery_s": "5083.6391516225385",
+      "horizontal_distance_m": "16158.066224846374"
+    },
+    {
+      "question": "q2",
+      "trip_id": "Q2-012",
+      "type_code": "B",
+      "uav_id": "U05",
+      "battery_id": "B-BAT-03",
+      "route": "S010",
+      "box_ids": "S010-FOD-01,S010-MED-01,S010-WAT-01",
+      "box_count": "3",
+      "initial_payload_kg": "25.0",
+      "initial_volume_m3": "0.067",
+      "start_s": "1510.4723251020891",
+      "return_s": "3065.851890933219",
+      "duration_s": "1555.3795658311294",
+      "energy_kwh": "1.8231528193006703",
+      "soc_pct": "54.42117951748324",
+      "last_delivery_s": "2595.6987746843206",
+      "horizontal_distance_m": "9568.98970328726"
+    },
+    {
+      "question": "q2",
+      "trip_id": "Q2-014",
+      "type_code": "B",
+      "uav_id": "U06",
+      "battery_id": "B-BAT-04",
+      "route": "S012",
+      "box_ids": "S012-FOD-01,S012-MED-01,S012-WAT-01",
+      "box_count": "3",
+      "initial_payload_kg": "25.0",
+      "initial_volume_m3": "0.067",
+      "start_s": "1869.7564163816144",
+      "return_s": "3792.4967671258",
+      "duration_s": "1922.7403507441854",
+      "energy_kwh": "2.752369862636003",
+      "soc_pct": "31.19075343409993",
+      "last_delivery_s": "3141.056591753707",
+      "horizontal_distance_m": "14780.983373955749"
+    },
+    {
+      "question": "q2",
+      "trip_id": "Q2-005",
+      "type_code": "B",
+      "uav_id": "U05",
+      "battery_id": "B-BAT-01",
+      "route": "S013",
+      "box_ids": "S013-FOD-01,S013-MED-01,S013-WAT-01",
+      "box_count": "3",
+      "initial_payload_kg": "25.0",
+      "initial_volume_m3": "0.067",
+      "start_s": "0.0",
+      "return_s": "1510.4723251020891",
+      "duration_s": "1510.4723251020891",
+      "energy_kwh": "1.8247237048368015",
+      "soc_pct": "54.38190737907996",
+      "last_delivery_s": "1062.7694958843779",
+      "horizontal_distance_m": "9698.484754461022"
+    },
+    {
+      "question": "q2",
+      "trip_id": "Q2-006",
+      "type_code": "B",
+      "uav_id": "U06",
+      "battery_id": "B-BAT-02",
+      "route": "S014",
+      "box_ids": "S014-FOD-01,S014-MED-01,S014-WAT-01",
+      "box_count": "3",
+      "initial_payload_kg": "25.0",
+      "initial_volume_m3": "0.067",
+      "start_s": "0.0",
+      "return_s": "1869.7564163815439",
+      "duration_s": "1869.7564163815439",
+      "energy_kwh": "2.140314239483536",
+      "soc_pct": "46.492144012911595",
+      "last_delivery_s": "1242.4348748574387",
+      "horizontal_distance_m": "10839.20371642628"
+    }
+  ]
+}

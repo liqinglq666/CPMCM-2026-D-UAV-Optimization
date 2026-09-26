@@ -1,0 +1,284 @@
+{
+  "figure": 18,
+  "number": 18,
+  "caption": "指定中继服务窗与固定运输任务的直连不足采样。24行按R0、R1、R2和采样全直连分组，再按任务开始排序；淡色背景仅为指定完整窗投影。开括号为已存不足采样首末包络，内部短刻度来自原模型1 s与0.5 s确定性重放，不表示内部始终不足或真实切换日志。连续通信结论见固定轨迹数值证书。",
+  "core_claim": "真实不足采样点及其首末包络均落在正式指定中继的服务窗内。",
+  "panels": {
+    "a": "three exact full service windows",
+    "b": "grouped 24 formal tasks with true insufficiency samples, saved envelopes and designated window projection"
+  },
+  "width_cm": 16.3,
+  "height_cm": 15.999999999999998,
+  "dpi": 600,
+  "source_commit": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "runtime_git_head": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "sources": [
+    {
+      "path": "results/q3/Q3_transport_trips.csv",
+      "sha256": "2214d1607f4f88fd0986e9640768bc680ede06f719544095d315ffd636b68e49"
+    },
+    {
+      "path": "results/q3/Q3_relay_sorties.csv",
+      "sha256": "cd3fde3f17e26bfc30979ed47a9c7fcf671a5eda89549be53417ab7e266e64c8"
+    },
+    {
+      "path": "results/q3/Q3_communication.csv",
+      "sha256": "d5a9f7dc4e47ea7aa671966ff989e523d39cf11c3cfd7f33ac1a5e323a6b9942"
+    },
+    {
+      "path": "paper/figure_data_v2/communication_states_1s.csv",
+      "sha256": "258ecdce89452f57b4f4503f81566f540bcfb6d49c38c5b188b48f3f52259f4f"
+    },
+    {
+      "path": "paper/figure_data_v2/communication_states_05s.csv",
+      "sha256": "04f2fb7919e804e7ddbbe75c0858f08beec7e620dcf10ef05d22e31f897a4afe"
+    },
+    {
+      "path": "paper/figure_data_v2/q3_replay_verification.json",
+      "sha256": "5bdc53c7e88ef7b5f1c8fe991e64d74f2e57207e1cf34525811c7e03ed444f4e"
+    }
+  ],
+  "field_mapping": {
+    "task start/return": "gray task bars",
+    "saved communication start/end": "open brackets",
+    "direct_margin_db<0": "real negative sample ticks",
+    "relay service start/end": "full windows and light projection"
+  },
+  "join_keys": [
+    "trip=运输架次编号",
+    "assigned relay=中继架次编号"
+  ],
+  "derived_formula": [
+    "negative sampling ticks are not interpolated",
+    "row sort by assigned relay, formal start, trip ID",
+    "sampling minimum compared within original numerical tolerance, archived displayed value retained"
+  ],
+  "checks": [
+    {
+      "name": "24 task rows",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "relay groups 6/9/3/6",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "replay counts 35061/69843",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "no uncovered replay states",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "minimum replay equals archived within tolerance",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-006 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-000 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-003 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-007 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-009 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-002 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-010 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-020 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-014 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-008 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-016 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-015 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-017 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-011 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-013 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-018 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-019 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-021 actual envelope and 5s protection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-001 no negative direct sample",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-004 no negative direct sample",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-005 no negative direct sample",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-023 no negative direct sample",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-012 no negative direct sample",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "column-022 no negative direct sample",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "necessary text at least 8 pt",
+      "passed": true,
+      "details": {
+        "minimum_pt": 8.5
+      }
+    },
+    {
+      "name": "publication width 16.3 cm",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "missing_or_limited_evidence": [
+    "Dense replay is deterministic plotting evidence for the frozen plan; it is not a flight switching log or continuous-time proof."
+  ],
+  "plot_parameters": {
+    "minimum_font_pt": 8.5,
+    "font_cn": "Noto Sans SC Publication",
+    "font_latin": "DejaVu Sans",
+    "font_math": "STIX Sans",
+    "svg_text": true,
+    "pdf_fonttype": 42,
+    "sampling_tick_height_rows": 0.14,
+    "sampling_linewidth_pt": 0.35,
+    "task_row_order": "R0/R1/R2/direct then start/id",
+    "shared_time_axis_min": [
+      0,
+      105
+    ]
+  },
+  "visual_review": {
+    "scope": "Actual stand-alone PDF color and grayscale renders at 160 dpi; final Word/A4 placement to be reviewed by root.",
+    "pdf_sha256": "631aef3fe5cf82a38d770522f00d2f66a8bb8d871556a8d650145a68cd0face7",
+    "viewed_previews": [
+      {
+        "path": "C:\\Users\\11346\\Documents\\Codex\\2026-09-26\\d-uav-paper-updated-pdf-pdf\\work\\fig_v2\\fig_18_pdf_color.png",
+        "sha256": "e8d1413b51538f3c0f2b908b977d540aee29485d3ed49c375bd9a57935b22fdb"
+      },
+      {
+        "path": "C:\\Users\\11346\\Documents\\Codex\\2026-09-26\\d-uav-paper-updated-pdf-pdf\\work\\fig_v2\\fig_18_pdf_gray.png",
+        "sha256": "399414ca1eb24c6f085d303b576e21635523514216cc1a1ef3fd3407b5d4839f"
+      }
+    ],
+    "inspection_completed": true,
+    "fixed": "增加顶部共享图例与标题间距；将包络与不足点上下错开，保留真实时刻。",
+    "conclusion": "24行分组与灰度可读；密集采样刻度在印刷尺度局部视觉汇聚，精确逐点记录由CSV提供，未绘连续状态带。",
+    "word_page_review": "not performed in this subtask"
+  },
+  "no_optimization_rerun": true,
+  "authoritative_tolerance": 1e-05,
+  "shared_visual_sources": [
+    {
+      "path": "scripts/figures_v2/common.py",
+      "sha256": "baaaa4cbc137c79e69b92b7defd2dd134b7f795f57295887083ad9a43bfb2fdf"
+    },
+    {
+      "path": "scripts/figures_v2/paths.py",
+      "sha256": "c3852a429ec7e35bada4289121b5a8da0212f760f1cf33aa3c9428e134679549"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+      "sha256": "c8c2ba68889b16e99b6ee4e802df5882bbe9d7310bbbaab325c48416dfb19763"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+      "sha256": "2bdcce3e875183a6adb5ac0f2f739c42269506563ee3af57b8735e5766bb91ef"
+    }
+  ],
+  "script": "scripts/figures_v2/figures_17_27.py",
+  "script_sha256": "c34e1a00c09a39be40893b5cff567ac9fa1c19883dc57a88b51128e6e2756b9e",
+  "base_word_caption": "图 18  Q3的24个运输架次与指定中继服务窗。灰条为完整任务区间，开括号仅表示设计用1 s与0.5 s联合采样中直连不足点的首末时刻包络，括号内部不表示每一时刻均直连不足。上方为三个完整服务窗，右侧列出正式指派。连续区间可用性另见图21。",
+  "base_word_sha256": "9b4ced7a81957fd9fc3a097aa91f2636757b0b9a9fbdebaf5f1ae625c9b1f19c",
+  "repository_input_commit": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "research_commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "data_file": "fig_18_data.json",
+  "data_sha256": "884973d3ccfc32c5adcafa9359210bf98ec61d905dae45a1e1b8093e44862b84",
+  "output_sha256": {
+    "pdf": "631aef3fe5cf82a38d770522f00d2f66a8bb8d871556a8d650145a68cd0face7",
+    "svg": "85b60c3d7c0520bcb90c59676ed411e19b4da5ac05f469cb416c5ed44701b8b5",
+    "png": "b4523159f508473769038f9e118a3628848fb2cc8f49953dd5f1750ccf3ec8e1"
+  }
+}

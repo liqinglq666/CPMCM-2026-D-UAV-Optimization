@@ -1,0 +1,5 @@
+group,boxes,transport_trips,transport_work_s,transport_work_h,K,policy,services,trip_ids
+G1,59,21,38892.975803640045,10.803604389900013,2,minimum_resources,S002;S003;S005;S006;S007;S008;S009;S010;S011;S012;S013;S014;S015,column-000;column-001;column-002;column-003;column-005;column-006;column-007;column-008;column-009;column-010;column-011;column-013;column-014;column-015;column-016;column-017;column-019;column-020;column-021;column-022;column-023
+G2,21,3,5487.394847141519,1.5242763464281996,2,minimum_resources,S001;S004,column-004;column-012;column-018
+G1,33,10,21072.146515592893,5.853374032109137,2,balanced,S002;S003;S007;S009;S010;S013;S015,column-000;column-002;column-006;column-007;column-008;column-010;column-013;column-015;column-017;column-019
+G2,47,14,23308.224135188666,6.474506704219074,2,balanced,S001;S004;S005;S006;S008;S011;S012;S014,column-001;column-003;column-004;column-005;column-009;column-011;column-012;column-014;column-016;column-018;column-020;column-021;column-022;column-023

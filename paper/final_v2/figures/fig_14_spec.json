@@ -1,0 +1,131 @@
+{
+  "number": 14,
+  "caption": "Q2箱级交付进度及两种时限余量。累计数按交接完成事件统计，期望余量与硬截止余量分别由对应时限减去实际交付时刻；最后交付与最后返航相差532.163 s。两个排序集合分别含80箱和31箱，排序仅用于展示，逐箱可行性按唯一箱号核验。",
+  "width_cm": 16.3,
+  "height_cm": 13.599999999999998,
+  "dpi": 600,
+  "sources": [
+    {
+      "path": "results/q2/Q2_box_delivery_balanced.csv",
+      "sha256": "84e8622c273f65f6709a600b73a82e4fe0dc1ef62099159c64818a9716f1cb34"
+    },
+    {
+      "path": "results/q2/Q2_metrics.json",
+      "sha256": "79242d7e5035f5aab51ac3bf3c00a76e0a1a1d41d2bdd7a1889d3b95ec5db1d2"
+    },
+    {
+      "path": "paper/figure_data_v2/q2_delivery_events.csv",
+      "sha256": "f3059fb8dab418fdbe30df6e9301de28bbc0d13ab82554c5c00db41eed72e072"
+    }
+  ],
+  "font": {
+    "cn": "Noto Sans SC Publication",
+    "cn_path": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+    "latin": "DejaVu Sans"
+  },
+  "map_spec": null,
+  "core_claim": "同一正式方案的交付进度、期望余量与硬截止余量分别核验。",
+  "derivations": [
+    "event aggregation by exact delivery time; right-continuous step",
+    "slack=corresponding deadline minus actual handover completion; separate box-ID-ranked views"
+  ],
+  "join_keys": [
+    "trip_id / 架次编号",
+    "box_id / 货箱编号",
+    "phase_id"
+  ],
+  "data_checks": [
+    {
+      "check": "unique_80boxes",
+      "passed": true
+    },
+    {
+      "check": "hard_31boxes",
+      "passed": true
+    },
+    {
+      "check": "all_deadlines",
+      "passed": true
+    },
+    {
+      "check": "event_total",
+      "passed": true
+    }
+  ],
+  "parameters": {},
+  "minimum_necessary_font_pt": 8,
+  "source_fields": {
+    "Q2_box_delivery_balanced.csv": [
+      "货箱编号",
+      "架次编号",
+      "服务区编号",
+      "交付完成时刻（s）",
+      "期望送达时间（s）",
+      "硬截止时间（s）"
+    ],
+    "Q2_metrics.json": [
+      "makespan"
+    ],
+    "q2_delivery_events.csv": [
+      "box_id",
+      "first_batch",
+      "hard_deadline_s"
+    ]
+  },
+  "field_mapping": {
+    "a": "x=delivery time/60; y=cumulative exact integer box count",
+    "b": "x=box rank by expected slack; y=(expected-delivery)/60",
+    "c": "independent box rank by hard slack; y=(hard deadline-delivery)/60"
+  },
+  "filters": {
+    "a,b": "all 80 unique box IDs",
+    "c": "hard deadline present, 31 boxes; first batch OR medical"
+  },
+  "panel_purposes": [
+    "(a) 末箱交付与返航结束的不同时间含义",
+    "(b) 全部期望时间余量",
+    "(c) 真实硬约束集合的独立余量"
+  ],
+  "replay_audit": "paper/figure_data_v2/q2_replay_audit.json",
+  "verification_scope": "Frozen-output and deterministic physical replay comparisons; no optimization.",
+  "visual_review": {
+    "status": "actual_pdf_color_and_grayscale_viewed",
+    "pdf_sha256": "0410e226f7ad97f64afa433b7d8951795faec36dfdb317344583619c01de42d3",
+    "reason": "删去重复的长时间阶梯，新增31箱硬截止余量，保留80箱期望余量及五类完整期望时限。",
+    "issues": [
+      "未发现画布外文字或需要修改的图内碰撞。"
+    ],
+    "conclusion": "两类排序有独立箱号索引，最紧3箱引线均指向对应点；交付/返航两条事件线清楚，灰度形状保持区分。"
+  },
+  "shared_visual_sources": [
+    {
+      "path": "scripts/figures_v2/common.py",
+      "sha256": "baaaa4cbc137c79e69b92b7defd2dd134b7f795f57295887083ad9a43bfb2fdf"
+    },
+    {
+      "path": "scripts/figures_v2/paths.py",
+      "sha256": "c3852a429ec7e35bada4289121b5a8da0212f760f1cf33aa3c9428e134679549"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+      "sha256": "c8c2ba68889b16e99b6ee4e802df5882bbe9d7310bbbaab325c48416dfb19763"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+      "sha256": "2bdcce3e875183a6adb5ac0f2f739c42269506563ee3af57b8735e5766bb91ef"
+    }
+  ],
+  "script": "scripts/figures_v2/figures_10_16.py",
+  "script_sha256": "ca8af92e3e71618ecb1ca7eb7adeb15b2d017971b9255a64d146ea8ae0225306",
+  "base_word_caption": "图 14  Q2逐箱交付进度与期望时限余量。累计曲线按箱级交接完成时刻构造，全部80箱按期；下图按期望时限余量排序，菱形仅标识具有硬截止的货箱。末箱交付为5370.875 s，运输最后返航为5903.038 s，相差532.163 s；逐箱匹配核验是时限可行性的依据。",
+  "base_word_sha256": "9b4ced7a81957fd9fc3a097aa91f2636757b0b9a9fbdebaf5f1ae625c9b1f19c",
+  "repository_input_commit": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "research_commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "data_file": "fig_14_data.json",
+  "data_sha256": "bbd699609f899d0418fb9b7a91022e0faef6eefbbd6b03a7d30d4a0aa291e92e",
+  "output_sha256": {
+    "pdf": "0410e226f7ad97f64afa433b7d8951795faec36dfdb317344583619c01de42d3",
+    "svg": "e2da5cc9f803891ef38b370cff95f57c48fc9653d9452f68ba1acf91a4018f56",
+    "png": "65f029d71e025213e89ab1dae45d5d9a2c975c6344a345318476f1c8793ae68f"
+  }
+}

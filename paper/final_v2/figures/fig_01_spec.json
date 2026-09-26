@@ -1,0 +1,135 @@
+{
+  "figure_id": 1,
+  "number": 1,
+  "title": "共同物理模型保证可比较，各问分别增加决策与约束",
+  "core_claim": "共同物理模型保证可比较，各问分别增加决策与约束",
+  "caption": "统一物理评价连接四问的决策与核验；Q2、Q3重新选择任务，Q4在冻结Q3任务及其时序后计算独立配置。虚线表示结果核验关系，实线仅表示Q3至Q4的固定方案继承。",
+  "width_cm": 16.3,
+  "height_cm": 10.8,
+  "dpi": 600,
+  "minimum_required_font_pt": 8,
+  "actual_minimum_font_pt": 8.5,
+  "repository_head": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "research_commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "sources": [
+    {
+      "path": "src/core/physics.py",
+      "sha256": "36b58299dbdf77d62b1408a6fb26366860fdee938e8d650bed28f877712d362d"
+    },
+    {
+      "path": "src/core/routes.py",
+      "sha256": "716aedafd42b4769390c292bececb09a00674d9aa716786b09e85aa52b2dded7"
+    },
+    {
+      "path": "src/q1/physics_engine.py",
+      "sha256": "997747a02f4fac4440d5c7139ebb0e7d48ac5bca72edafea4429171975b7748b"
+    },
+    {
+      "path": "src/q2/columns.py",
+      "sha256": "27ee70deec31f1fe4e4367aa4fe1c185fda6c5f96671677a4578e016804c96d1"
+    },
+    {
+      "path": "src/q2/interval_master.py",
+      "sha256": "bc10a0220300147f1dc6d1d70218140eda03ed595c6fc390773242e357484525"
+    },
+    {
+      "path": "src/q3/search.py",
+      "sha256": "6ea7627f6eec919eb304ab5fe92129e1eb55d8eefcc51a66e4f0beb376004928"
+    },
+    {
+      "path": "src/q3/solver.py",
+      "sha256": "df98768e984d131f1f1bdaa783cfbae88d9d2dac8fa42dded6d505682b679d3c"
+    },
+    {
+      "path": "src/q4/partition.py",
+      "sha256": "f3619a7ec2e0f6293748aa5a7535475b4e150a3cd4421b749ce1c7af82dbaf8c"
+    }
+  ],
+  "source_fields": {
+    "source functions": "method text and decision boundary"
+  },
+  "field_mapping": {
+    "source functions": "method text and decision boundary"
+  },
+  "derived_formula": [],
+  "derived_formulas": [],
+  "panel_purposes": {
+    "common": "共同地形、载荷、时间能量和资源区间",
+    "decisions": "四问独立决策层；Q3条件LP；Q4固定继承",
+    "evidence": "四类结果核验"
+  },
+  "checks": {
+    "four_questions": true,
+    "named_source_members_exist": true,
+    "only_Q3_Q4_fixed_inheritance": true
+  },
+  "structural_changes": [
+    "由四行三列表改为共同计算带、四列决策和证据带",
+    "Q3分开离散选择与条件时序LP",
+    "Q4只接Q3冻结输出"
+  ],
+  "parameters": {},
+  "script": "scripts/figures_v2/figures_01_09.py",
+  "data_file": "fig_01_data.json",
+  "data_layer": "paper/figure_data_v2/fig_01_data.json",
+  "fonts": {
+    "cn": "Noto Sans SC Publication",
+    "regular": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+    "bold": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+    "latin": "DejaVu Sans",
+    "math": "STIX"
+  },
+  "scope": "Frozen inputs and outputs; no optimization, no changed route/assignment/parameter/time/result.",
+  "missing_or_not_revalidated": [],
+  "visual_qa": {
+    "status": "passed_actual_pdf_color_and_grayscale_review",
+    "pdf_sha256": "6b3f16f6555074c09af22ece957aec167d84e06dc177aa81d55fbb6c3252cc41",
+    "previews": {
+      "color": {
+        "path": "work/fig_v2/qa_01_09/fig_01_color.png",
+        "sha256": "d4bdba62e5acc85fbe262c9830d4805f87a80b1624923b3af975972afad6f09a",
+        "actually_viewed": true
+      },
+      "gray": {
+        "path": "work/fig_v2/qa_01_09/fig_01_gray.png",
+        "sha256": "59e105dc14b6700b1681fcd5b21c52520a893c93e2992dbb1759c8d39d3faaa5",
+        "actually_viewed": true
+      }
+    },
+    "report": "work/fig_v2/figures_01_09_qa.json",
+    "accepted_reason": "四列同等可读，Q3内层级与唯一Q3→Q4继承清楚；实/虚线在灰度可区分。",
+    "word_page_qa": "pending_parent_word_replacement_and_render"
+  },
+  "shared_visual_sources": [
+    {
+      "path": "scripts/figures_v2/common.py",
+      "sha256": "baaaa4cbc137c79e69b92b7defd2dd134b7f795f57295887083ad9a43bfb2fdf"
+    },
+    {
+      "path": "scripts/figures_v2/paths.py",
+      "sha256": "c3852a429ec7e35bada4289121b5a8da0212f760f1cf33aa3c9428e134679549"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+      "sha256": "c8c2ba68889b16e99b6ee4e802df5882bbe9d7310bbbaab325c48416dfb19763"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+      "sha256": "2bdcce3e875183a6adb5ac0f2f739c42269506563ee3af57b8735e5766bb91ef"
+    }
+  ],
+  "script_sha256": "b997f902e3767736218e77a73de6ca51731e89ea87c90179167c4b904769af11",
+  "base_word_caption": "图 1  四问共享地形、动态载荷、时间能量与资源占用计算。Q2与Q3重新选择离散任务，Q4固定Q3正式任务及其时序，再计算分组独立配置需求。",
+  "base_word_sha256": "9b4ced7a81957fd9fc3a097aa91f2636757b0b9a9fbdebaf5f1ae625c9b1f19c",
+  "repository_input_commit": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "data_sha256": "4bc7bc135a056cc21b97fbddcbf1b840b0066db4a665734e130b7bb5c52bb7e0",
+  "output_sha256": {
+    "pdf": "6b3f16f6555074c09af22ece957aec167d84e06dc177aa81d55fbb6c3252cc41",
+    "svg": "c0c1e5a2f908626909518b3d6840e864e3128077238824bc5598900cd1b73ed8",
+    "png": "b8fd0c1000922e263a973fd0e02792cadde85e9ae77f226cc03571c928320843"
+  },
+  "join_keys": [],
+  "filters": [
+    "Source-defined modules and decision dependencies"
+  ]
+}

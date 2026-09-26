@@ -1,0 +1,160 @@
+{
+  "figure": 19,
+  "number": 19,
+  "caption": "三个中继架次的服务阶段与两架实体复用。上层阶段边界直接读取正式记录，准备、出航与建链保持合并；下层实体占用延伸至返航后300 s。R01先后执行R0、R2，间隔为正式时序中的可用时间。联合完工以最后返航计，后续周转另示。",
+  "core_claim": "服务窗口、实体资源占用与最后返航是不同时间量。",
+  "panels": {
+    "a": "three saved relay task phases",
+    "b": "two physical UAV schedules with actual 300 s turnaround"
+  },
+  "width_cm": 16.3,
+  "height_cm": 11.6,
+  "dpi": 600,
+  "source_commit": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "runtime_git_head": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "sources": [
+    {
+      "path": "results/q3/Q3_relay_sorties.csv",
+      "sha256": "cd3fde3f17e26bfc30979ed47a9c7fcf671a5eda89549be53417ab7e266e64c8"
+    },
+    {
+      "path": "paper/data/analysis.json",
+      "sha256": "bd83c16f835912e5790957aae8cf998b54afa2e1ebd594f67d72d22c4123ffc4"
+    },
+    {
+      "path": "raw-input/数据/无人机应急物资运输基础数据/中继无人机数据.xlsx",
+      "sha256": "be52643ff29419233e6a141dca03a04160a8af551cab36d8c49b51bb836bea04"
+    },
+    {
+      "path": "raw-input/数据/无人机应急物资运输基础数据/调度中心与服务区.xlsx",
+      "sha256": "541a7af1ded08c9a3ff448480332cb5f6a54902f0afa6e9bcd50c1d2b2b34e38"
+    },
+    {
+      "path": "raw-input/数据/镇龙乡地理空间数据/镇龙乡及周边地理数据/数字高程模型数据（DEM）/镇龙乡及周边30米DEM.mat",
+      "sha256": "c68703e0cc8f94f4bd52ff6e9974b66a2dae33865f0723ad71c04b6694bf4fbf"
+    },
+    {
+      "path": "src/core/communication.py",
+      "sha256": "7b2cdaa54eead3c8d8d0a300b09e71d298c5c8ee17c9047312932c6f55bb3a65"
+    },
+    {
+      "path": "src/core/energy.py",
+      "sha256": "3e4ca3ae2b137917c10d9a7c7ba72b12b4aa876899255799b7d8a9cffe1ad4e1"
+    }
+  ],
+  "field_mapping": {
+    "开始时刻_s/建链完成时刻_s/服务结束时刻_s/返回O01时刻_s": "three real phase boundaries",
+    "turnaround_s": "post-return entity occupation"
+  },
+  "join_keys": [
+    "relay trip_id to physical entity and component"
+  ],
+  "derived_formula": [
+    "uav_release_s=return_s+turnaround_s",
+    "idle_R01=R2.start-R0.uav_release",
+    "display_time_min=source_time_s/60"
+  ],
+  "checks": [
+    {
+      "name": "3 tasks 2 entities",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "R01 R02 R01",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "300 second turnaround",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "positive actual idle",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "relay energy anchor",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "necessary text at least 8 pt",
+      "passed": true,
+      "details": {
+        "minimum_pt": 8.5
+      }
+    },
+    {
+      "name": "publication width 16.3 cm",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "missing_or_limited_evidence": [],
+  "plot_parameters": {
+    "minimum_font_pt": 8.5,
+    "font_cn": "Noto Sans SC Publication",
+    "font_latin": "DejaVu Sans",
+    "font_math": "STIX Sans",
+    "svg_text": true,
+    "pdf_fonttype": 42,
+    "time_axis_same_both_panels": [
+      0,
+      106
+    ]
+  },
+  "visual_review": {
+    "scope": "Actual stand-alone PDF color and grayscale renders at 160 dpi; final Word/A4 placement to be reviewed by root.",
+    "pdf_sha256": "337a9832d8252ead33706f1640d5b9a3003bee806ccd430b92c08c4719765121",
+    "viewed_previews": [
+      {
+        "path": "C:\\Users\\11346\\Documents\\Codex\\2026-09-26\\d-uav-paper-updated-pdf-pdf\\work\\fig_v2\\fig_19_pdf_color.png",
+        "sha256": "dfba43bdebb5f87d2bcd33ac6349f8853362950a94566b182f7cb1c0e24221e8"
+      },
+      {
+        "path": "C:\\Users\\11346\\Documents\\Codex\\2026-09-26\\d-uav-paper-updated-pdf-pdf\\work\\fig_v2\\fig_19_pdf_gray.png",
+        "sha256": "8761cced89bf9c8009fc9860103e4aba5bf52a3efc195dcef2fcefcefe292aba"
+      }
+    ],
+    "inspection_completed": true,
+    "fixed": "复核图例明确前段合并为准备、出航与建链；实体占用另加300 s。",
+    "conclusion": "两层同轴、实体编号和任务编号可区分；384.830 s空闲及最后返航线清楚。",
+    "word_page_review": "not performed in this subtask"
+  },
+  "no_optimization_rerun": true,
+  "authoritative_tolerance": 1e-05,
+  "shared_visual_sources": [
+    {
+      "path": "scripts/figures_v2/common.py",
+      "sha256": "baaaa4cbc137c79e69b92b7defd2dd134b7f795f57295887083ad9a43bfb2fdf"
+    },
+    {
+      "path": "scripts/figures_v2/paths.py",
+      "sha256": "c3852a429ec7e35bada4289121b5a8da0212f760f1cf33aa3c9428e134679549"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+      "sha256": "c8c2ba68889b16e99b6ee4e802df5882bbe9d7310bbbaab325c48416dfb19763"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+      "sha256": "2bdcce3e875183a6adb5ac0f2f739c42269506563ee3af57b8735e5766bb91ef"
+    }
+  ],
+  "script": "scripts/figures_v2/figures_17_27.py",
+  "script_sha256": "c34e1a00c09a39be40893b5cff567ac9fa1c19883dc57a88b51128e6e2756b9e",
+  "base_word_caption": "图 19  三个中继架次的阶段时序与两架实体中继机的复用关系。服务窗按中继编号着色；准备、出航与建链采用已知合并阶段，返航与返航后300 s周转分别标识。R01依次执行中继0和中继2，R02执行中继1；可用间隔为正式时序中的空闲，不作成因推断。",
+  "base_word_sha256": "9b4ced7a81957fd9fc3a097aa91f2636757b0b9a9fbdebaf5f1ae625c9b1f19c",
+  "repository_input_commit": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "research_commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "data_file": "fig_19_data.json",
+  "data_sha256": "4b33c449e5c0fc37cbf0710c1616828e81d6881dd1e34faf28663c457d244273",
+  "output_sha256": {
+    "pdf": "337a9832d8252ead33706f1640d5b9a3003bee806ccd430b92c08c4719765121",
+    "svg": "d59c313d20c9da5d75ae089dd93a84cb45e3e29a4d9e1dfcdadf8c0215ce4ac1",
+    "png": "5fa7bc9cc71a261f75d74bd4887355d003b658310b274a5b16c2d5b1e335adec"
+  }
+}

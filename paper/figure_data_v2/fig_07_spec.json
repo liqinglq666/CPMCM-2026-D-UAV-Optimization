@@ -1,0 +1,131 @@
+{
+  "figure_id": 7,
+  "number": 7,
+  "title": "相对额定能力的真实损失集中于六个机型—服务区组合",
+  "core_claim": "相对额定能力的真实损失集中于六个机型—服务区组合",
+  "caption": "安全载荷相对各机型额定能力的差额及比例，按C型载荷损失降序、同值按服务区编号排列。左侧实心为安全载荷、空心为额定能力；右侧数字是占额定比例，底色是额定损失率，未按列单独归一化。单点往返边界不直接替代多点路线可行性。",
+  "width_cm": 16.3,
+  "height_cm": 12.3,
+  "dpi": 600,
+  "minimum_required_font_pt": 8,
+  "actual_minimum_font_pt": 8.0,
+  "repository_head": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "research_commit": "bec20f1536458db47bac583c309c7b30637cb67a",
+  "sources": [
+    {
+      "path": "results/q1/Q1_max_safe_payload.csv",
+      "sha256": "2c3decbfea44e95c1e77d84ce9db8c4f13581189774f930fd4e66ed7a8c1e023"
+    },
+    {
+      "path": "paper/data/analysis.json",
+      "sha256": "bd83c16f835912e5790957aae8cf998b54afa2e1ebd594f67d72d22c4123ffc4"
+    }
+  ],
+  "source_fields": {
+    "service+type": "join and row ordering",
+    "max_safe_payload": "safe_kg",
+    "analysis.types.max_payload/rho": "rated_kg and original reserve"
+  },
+  "field_mapping": {
+    "service+type": "join and row ordering",
+    "max_safe_payload": "safe_kg",
+    "analysis.types.max_payload/rho": "rated_kg and original reserve"
+  },
+  "derived_formula": [
+    "ratio=safe_kg/rated_kg",
+    "shortfall_kg=rated_kg−safe_kg",
+    "loss_pct=100*(1−ratio)",
+    "sort by C shortfall descending then service"
+  ],
+  "derived_formulas": [
+    "ratio=safe_kg/rated_kg",
+    "shortfall_kg=rated_kg−safe_kg",
+    "loss_pct=100*(1−ratio)",
+    "sort by C shortfall descending then service"
+  ],
+  "panel_purposes": {
+    "a": "同形额定与安全载荷的真实kg差",
+    "b": "占额定数字与损失率共同尺度"
+  },
+  "checks": {
+    "45_rows": true,
+    "15_A25": true,
+    "5_Climited": true,
+    "1_Blimited": true,
+    "Bmin28.80": true,
+    "Cmin58.91": true
+  },
+  "structural_changes": [
+    "右侧重复100%点列改为比例数字/损失率矩阵",
+    "左图新增额定空心参照及实际损失连接",
+    "按C型损失统一排序，受限组合成为焦点"
+  ],
+  "parameters": {},
+  "script": "scripts/figures_v2/figures_01_09.py",
+  "data_file": "fig_07_data.json",
+  "data_layer": "paper/figure_data_v2/fig_07_data.json",
+  "fonts": {
+    "cn": "Noto Sans SC Publication",
+    "regular": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+    "bold": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+    "latin": "DejaVu Sans",
+    "math": "STIX"
+  },
+  "scope": "Frozen inputs and outputs; no optimization, no changed route/assignment/parameter/time/result.",
+  "missing_or_not_revalidated": [],
+  "visual_qa": {
+    "status": "passed_actual_pdf_color_and_grayscale_review",
+    "pdf_sha256": "deeb9f40b13461161924b97a3435058488a11bbf79f3a2e86b9487854174b170",
+    "previews": {
+      "color": {
+        "path": "work/fig_v2/qa_01_09/fig_07_color.png",
+        "sha256": "7048ebc652e99a0982e976caea2403310a0e7a93274bb5951bb31ce175406410",
+        "actually_viewed": true
+      },
+      "gray": {
+        "path": "work/fig_v2/qa_01_09/fig_07_gray.png",
+        "sha256": "b4aa8e8e19deb146103d0c18a5370922cdb339aa29971690f5eb0135fbc99cc2",
+        "actually_viewed": true
+      }
+    },
+    "report": "work/fig_v2/figures_01_09_qa.json",
+    "accepted_reason": "45个组合可读、数字和矩阵描框对应；A/B/C形状与空心额定符号支持灰度。",
+    "word_page_qa": "pending_parent_word_replacement_and_render"
+  },
+  "shared_visual_sources": [
+    {
+      "path": "scripts/figures_v2/common.py",
+      "sha256": "baaaa4cbc137c79e69b92b7defd2dd134b7f795f57295887083ad9a43bfb2fdf"
+    },
+    {
+      "path": "scripts/figures_v2/paths.py",
+      "sha256": "c3852a429ec7e35bada4289121b5a8da0212f760f1cf33aa3c9428e134679549"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Regular.ttf",
+      "sha256": "c8c2ba68889b16e99b6ee4e802df5882bbe9d7310bbbaab325c48416dfb19763"
+    },
+    {
+      "path": "paper/final/fonts/NotoSansSC-Publication-Bold.ttf",
+      "sha256": "2bdcce3e875183a6adb5ac0f2f739c42269506563ee3af57b8735e5766bb91ef"
+    }
+  ],
+  "script_sha256": "b997f902e3767736218e77a73de6ca51731e89ea87c90179167c4b904769af11",
+  "base_word_caption": "图 7  15个服务区的单点往返安全载荷及其额定比例。A型均达到额定载荷，C型在5个服务区受能量限制；B型和C型的最小安全载荷分别为28.80 kg和58.91 kg。比例使用各机型自身额定载荷归一化。",
+  "base_word_sha256": "9b4ced7a81957fd9fc3a097aa91f2636757b0b9a9fbdebaf5f1ae625c9b1f19c",
+  "repository_input_commit": "e71cdb13c0969a28d78f349e1ce79047e731e954",
+  "data_sha256": "e891841a9de45ba0eea1784d72b754925c98116d0b36e017a49da6d70f5f5861",
+  "output_sha256": {
+    "pdf": "deeb9f40b13461161924b97a3435058488a11bbf79f3a2e86b9487854174b170",
+    "svg": "a551230b85b5037fe049839f508f9df3b7e396422329a28752b7c50040483d80",
+    "png": "f4ea167f473ee34e9929ee08ab7a8a6e26b0a66080c040cd83a208f368e0bd6f"
+  },
+  "join_keys": [
+    "service",
+    "type"
+  ],
+  "filters": [
+    "All 15 services x 3 types",
+    "Current official reserve fractions"
+  ]
+}

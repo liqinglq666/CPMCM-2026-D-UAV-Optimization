@@ -1,3 +1,8 @@
 # Verified paper artifacts and provenance records must retain their exact bytes.
 /paper/final/** -text -whitespace
 /paper/final/figures/*.svg -diff
+/paper/final_v2/** -text -whitespace
+/paper/final_v2/figures/*.svg -diff
+/paper/figure_data_v2/** -text -whitespace
+/paper/figure_manifest_v2.csv -text -whitespace
+/scripts/figures_v2/** -text whitespace=cr-at-eol
