@@ -1,0 +1,19 @@
+{
+  "source": "User-provided 华为杯论文.pdf",
+  "sha256": "0310c77b5d58ce2161ef10ece27198263b73fdbca45016b9b0b385db8c0f0273",
+  "physical_pdf_pages": [
+    56,
+    57,
+    58,
+    59,
+    60
+  ],
+  "tables": [
+    "A3",
+    "A6"
+  ],
+  "fields": "Discrete cargo/route/type/resource ordering only; no time/energy copied",
+  "recomputed_on": "Unchanged official DEM and shared physical model",
+  "paper_dem": "Reference applies horizontal co-registration: east 12.44 m, north 12.61 m, vertical 0.11 m",
+  "scope": "Attributed warm start; does not demonstrate independent discovery or global optimality"
+}
