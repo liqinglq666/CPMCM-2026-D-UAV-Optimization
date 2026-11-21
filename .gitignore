@@ -42,3 +42,21 @@ paper/data/communication_states_05s.csv
 
 # Atomic full-run staging directories
 /.uav-run-*/
+
+# Local checkers, build caches and editor lock/swap files
+.mypy_cache/
+.pyright/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+node_modules/
+build/
+dist/
+*.tmp
+*.swp
+*.swo
+*~
+~$*.docx
+~$*.xlsx
+~$*.pptx

@@ -1,5 +1,8 @@
 # CPMCM 2026 D 无人机运输与通信协同优化
 
+> **快速入口**：[正式提交材料](submission/FINAL_SUBMISSION_CHECK.md) · [64 页正式 PDF](submission/D26105580028.pdf) · [仓库导航与清理边界](docs/REPOSITORY_GUIDE.md) · [只读大文件/重复检测](scripts/check_repo_hygiene.py)。
+> `paper/final_v2/` 的 65 页 Word/PDF 和 27 图是历史编辑与复现资产，不是这次提交的正式 PDF；请保留其完整性清单和数据引用。
+
 赛题、原始 Excel、DEM 是输入事实来源；`src/core/` 统一距离、地形、时间、载荷、能耗、充电和资源检查。仓库保持私有。
 
 **冻结版本：`freeze/2026-09-25-final`。** 算法、论文与代码的终审、修复和证据范围见
