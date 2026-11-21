@@ -118,7 +118,7 @@ python scripts/validate_results.py
 可以直接执行 `python scripts/verify_submission_integrity.py` 验证正式 PDF、Excel、RAR 的原始字节摘要。
 
 为减小日常检出体积，旧 65 页 Word/PDF、旧版中文字体、27 幅图的成套输出、历史图形数据及完整性清单不再置于 `main`。
-它们**完整保存在** [backup/pre-slim-20261121](../../tree/backup/pre-slim-20261121) 的
+它们**完整保存在** [backup/pre-slim-20261121](https://github.com/liqinglq666/CPMCM-2026-D-UAV-Optimization/tree/backup/pre-slim-20261121) 的
 `paper/final/`、`paper/final_v2/`、`paper/figure_data_v2/` 目录中。
 主分支仍保留原始研究模型与已接受结果；这里的清理只改变历史编辑资产在当前工作树中的位置。
 
