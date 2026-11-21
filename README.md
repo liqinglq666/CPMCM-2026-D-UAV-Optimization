@@ -1,48 +1,67 @@
-# 2026 年“华为杯”全国研究生数学建模竞赛 · D 题
+# 2026 年“华为杯”中国研究生数学建模竞赛 · D 题
 
-**获奖：全国二等奖**  
-**研究主题：无人机应急物资运输与通信协同优化**
+**无人机应急物资运输与通信协同优化**  
+2026 年中国研究生数学建模竞赛 · 全国二等奖
 
-本仓库同时保留**正式提交成果、Q1–Q4 最终方案与完整核心算法源码**。历史搜索轨迹、旧论文版本、重复计算档案与中间图表不放在主分支。
+本仓库提供四个子问题的建模实现、正式提交结果与论文原件。研究围绕地形约束下的安全运输、时限与能耗协同调度、中继通信保障以及分区资源配置展开。
 
-## 正式提交成果
+## 研究思路与实现
 
-| 文件 | 用途 |
-| --- | --- |
-| [最终论文 PDF](submission/D26105580028.pdf) | 唯一正式 64 页论文，包含四问的完整分析及图表 |
-| [官方结果 Excel](submission/%E7%BB%93%E6%9E%9C%E6%8F%90%E4%BA%A4%E6%A8%A1%E6%9D%BF.xlsx) | 6 张正式结果表 |
-| [正式 RAR 附件](submission/D26105580028.rar) | 比赛提交时包含的程序及材料 |
-| [校验清单](submission/CHECKSUMS.txt) | PDF、Excel、RAR 的原始字节哈希 |
-
-## 算法代码在哪里？
-
-算法已恢复在 **[src/](src/)**，不是历史计算文件：
-
-| 问题 | 主要代码 | 模型重点 |
+| 模块 | 核心问题 | 方法与实现 |
 | --- | --- | --- |
-| Q1 安全载荷与分批 | [src/q1/physics_engine.py](src/q1/physics_engine.py) | 地形与能量计算、返航储备、精确分批 |
-| Q2 运输调度优化 | [src/q2/](src/q2/) | 路线与组批搜索、资源占用、列生成、时间和能耗偏好 |
-| Q3 中继通信协同 | [src/q3/](src/q3/) | 联合时序、通信可行性、连续区间校验、资源安排 |
-| Q4 分区与配置 | [src/q4/partition.py](src/q4/partition.py) | 固定正式 Q3 任务后的分区枚举和资源需求 |
+| Q1 · 安全载荷与分批 | 在地形净空、机型载荷、能耗和返航储备约束下制定运输方案 | 基于 DEM 的航段几何与能量计算、各机型安全载荷求解、货箱分批 |
+| Q2 · 运输调度 | 在物资时限、无人机及电池资源约束下组织运输任务 | 组批与路线搜索、资源可行调度、时间—能耗方案比较 |
+| Q3 · 通信协同 | 同时满足运输调度和全过程通信保障要求 | 运输/中继协同规划、条件时序优化、离散采样与连续区间数值核验 |
+| Q4 · 分区配置 | 固定已接受的 Q3 任务后分析区域独立执行的资源需求 | 服务区组件划分、K=2/3 分区枚举、设备与电池缺口统计 |
 
-共享物理模型在 [src/core/](src/core/)；输入校验和系统约束在 [src/validation.py](src/validation.py)；
-可复现参数及离散热启动在 [config/](config/)，单题及全流程入口在根目录 `run_q1.py`、`run_q2.py`、`run_q3.py`、`run_q4.py`、`run_all.py`。
+共享的地形、飞行、能耗、通信和资源约束实现位于 [`src/core/`](src/core/)；四问求解器分别位于 [`src/q1/`](src/q1/)、[`src/q2/`](src/q2/)、[`src/q3/`](src/q3/) 与 [`src/q4/`](src/q4/)。
 
-## 已冻结的最终结果
+## 正式成果
 
-| 问题 | 正式结果 |
+| 文件 | 内容 |
 | --- | --- |
-| Q1 | 18 架次，59.1304 kWh |
-| Q2 | 24 架次，80 箱按期交付；5903.0382 s，65.5662 kWh |
-| Q3 | 24 运输 + 3 中继架次；5931.7347 s，69.1409 kWh |
-| Q4 | K=2 资源缺口 1 项；K=3 资源缺口 3 项 |
+| [正式论文 PDF](submission/D26105580028.pdf) | 64 页正式提交版，包含四问的模型、图表和结论 |
+| [官方结果工作簿](submission/%E7%BB%93%E6%9E%9C%E6%8F%90%E4%BA%A4%E6%A8%A1%E6%9D%BF.xlsx) | 依据赛事模板填写的六张结果表 |
+| [提交附件 RAR](submission/D26105580028.rar) | 比赛正式提交附件 |
+| [文件摘要](submission/CHECKSUMS.txt) | 正式文件大小、MD5 与 SHA-256 |
 
-最终结果表格见 [results/q1/](results/q1/)、[results/q2/](results/q2/)、[results/q3/](results/q3/)、[results/q4/](results/q4/)；指标摘要见 [results/validation.json](results/validation.json)。
-不将有限搜索结果表述为原问题的全局最优证明，通信连续检查是数值证书而非精确算术证明。
+**以 `submission/` 中的 PDF、Excel 和 RAR 为正式提交原件。** 这些文件不在构建或验证步骤中重新生成、覆盖。
 
-## 运行与验证
+### 已接受方案的主要指标
 
-需要 Python 3.11/3.12 及完整**官方 D 题原始附件**（5 份工作簿和 30 米 DEM），将官方 ZIP 解压到 `data/raw/` 并保持原始名称和目录结构。仓库不上传官方原始数据。
+| 问题 | 指标 | 结果 |
+| --- | --- | --- |
+| Q1 | 运输架次 / 总能耗 | 18 架次 / 59.1304 kWh |
+| Q2 | 运输架次 / 物资交付 | 24 架次 / 80 箱按期交付 |
+| Q2 | 运输返航完工时间 / 总能耗 | 5903.0382 s / 65.5662 kWh |
+| Q3 | 运输 / 中继架次 | 24 / 3 |
+| Q3 | 联合完工时间 / 总能耗 | 5931.7347 s / 69.1409 kWh |
+| Q4 | K=2 / K=3 的资源缺口总数 | 1 / 3 |
+
+完整数值以 [`results/`](results/) 内的 CSV/JSON 及 [核验摘要](results/validation.json) 为准。Q2/Q3 的候选搜索不构成全局最优性证明；Q3 连续通信核验属于带数值界的可行性检查，不等同于精确算术形式化证明。
+
+## 代码结构
+
+```text
+src/
+├── core/        地形、航段、能耗、通信、约束与数据结构
+├── q1/          安全载荷及运输分批
+├── q2/          组批搜索、调度与时间—能耗权衡
+├── q3/          运输和中继联合规划
+├── q4/          分区与资源需求分析
+├── cli.py       命令行调度入口
+└── validation.py  结果与约束复核
+config/          模型参数和离散热启动
+results/         已接受的 Q1–Q4 结果
+submission/      参赛论文、结果工作簿与附件原件
+tests/           算法单元测试与约束回归测试
+```
+
+根目录的 `run_q1.py`—`run_q4.py` 和 `run_all.py` 提供单题和全流程入口。核心模块位于 `src/`，不依赖旧论文制图目录。
+
+## 运行环境与复核
+
+使用 Python 3.12。项目依赖见 `requirements.txt`，开发测试依赖见 `requirements-dev.txt`。
 
 ```bash
 python -m pip install -r requirements-dev.txt
@@ -50,21 +69,24 @@ python -m pytest -q
 python scripts/verify_submission_integrity.py
 ```
 
-单题及全流程求解入口：
+算法复算需要完整的官方 D 题原始数据（五份工作簿及 30 米 DEM），按照赛题原文件名解压至 `data/raw/`。原始附件不随本仓库分发。
 
 ```bash
-python run_q1.py /path/to/official_D --out outputs/recomputed/q1
-python run_q2.py /path/to/official_D --out outputs/recomputed/q2
-python run_q3.py /path/to/official_D --out outputs/recomputed/q3
-python run_q4.py /path/to/official_D --q3-dir outputs/recomputed/q3 --out outputs/recomputed/q4
-python run_all.py /path/to/official_D --out outputs/recomputed
+# 单题示例：计算结果写入单独目录
+python run_q1.py data/raw --out outputs/recomputed/q1
+python run_q2.py data/raw --out outputs/recomputed/q2
+python run_q3.py data/raw --out outputs/recomputed/q3
+python run_q4.py data/raw --q3-dir outputs/recomputed/q3 --out outputs/recomputed/q4
+
+# 全流程重新求解并复核
+python run_all.py data/raw --out outputs/recomputed
 ```
 
-**请把新运行结果写入独立的 `outputs/`，不要覆盖 `results/` 内的正式参赛方案。** Q2/Q3 的限时搜索受硬件、随机种子和求解预算影响，新运行可能出现其他可行候选；重新运行不代表原比赛结果会改变。
+**复算输出始终放在 `outputs/`，不要覆盖 `results/` 中的正式方案。** 不同运行环境和求解预算可能得到不同候选。未提供官方原始附件时，部分依赖真实输入的测试不能执行；应以各项测试的实际通过或跳过记录为准。
 
-## 本仓库的清理范围
+## 可复核性
 
-- **保留**：核心算法和支持代码、配置、可运行入口、必要测试、最终 CSV/JSON、正式论文 PDF/Excel/RAR。
-- **不展示**：`archive/` 的历史基线、旧论文 Word/PDF 及制图中间文件、过去的搜索轨迹、历史审计报告。
-- 论文及最终附件均保持提交时的原字节；可运行 `python scripts/verify_submission_integrity.py` 核对。
-
+- 已接受方案的主要结果和校验摘要保存在 `results/`；
+- `src/validation.py` 对运输、资源与通信约束提供复核逻辑；
+- `scripts/verify_submission_integrity.py` 只核对正式 PDF、Excel、RAR 的文件大小与摘要，不修改提交原件；
+- 程序中的必要来源与辅助工具说明按赛事规范保留，不影响模型、结果或提交文件的完整性。
