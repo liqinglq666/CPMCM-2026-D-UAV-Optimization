@@ -1,7 +1,0 @@
-{
-  "source": "Official inputs; finite sortie catalogue, interval time-indexed integer model and continuous resource reconstruction developed in this change",
-  "q2": "Generated at 6600 s horizon with 120 s starts, then interval coloring and continuous earliest-start reconstruction",
-  "q3": "Three hover locations from a 20 by 20 node-envelope candidate grid; generated at 8000 s horizon with 120 s starts, then joint LP and 1 s/0.5 s union validation",
-  "stored_fields": "Discrete cargo, route, resource order and relay locations only; all times, energy, SOC and feasibility are recomputed",
-  "external_reference": "User-provided screenshot of WJ数模; no external source code or per-sortie tables available"
-}

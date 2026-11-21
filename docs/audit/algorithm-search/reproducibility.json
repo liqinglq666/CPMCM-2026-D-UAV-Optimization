@@ -1,7 +1,0 @@
-{
-  "fixed_seed": 20260924,
-  "files_compared": 33,
-  "excluded": "Measured elapsed/runtime metadata only",
-  "different_files": [],
-  "deterministic_results_match": true
-}

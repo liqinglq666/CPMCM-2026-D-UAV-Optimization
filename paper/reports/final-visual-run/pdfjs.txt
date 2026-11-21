@@ -1,1 +1,0 @@
-{"pages":32,"rendered_without_fonts":true,"min_nonwhite_pixels":33016}
