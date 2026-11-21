@@ -41,7 +41,8 @@ paper/data/terrain_map.json
 paper/data/communication_states_05s.csv
 
 # Atomic full-run staging directories
-/.uav-run-*/\n
+/.uav-run-*/
+
 # Local checkers, build caches and editor lock/swap files
 .mypy_cache/
 .pyright/
