@@ -1,2 +1,0 @@
-Generated 63 number macros, tables, workbook payload and figure manifest
-/workspace/scratch/7fa7ed635f10/paper-final/outputs/paper/main.pdf

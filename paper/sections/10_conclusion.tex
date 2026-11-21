@@ -1,4 +1,0 @@
-\section{结论}
-本文以统一的地形、动态载荷、能量与资源占用模型连接四问。Q1算法冻结，精确集合划分仍得到\QOneTrips{}架次、\QOneEnergy{} kWh。Q2通过架次列、时间索引和区间着色重新平衡机型负载，得到\QTwoTrips{}架次、\QTwoTime{} s，全部货箱按期送达。Q3采用三点分时中继与联合组批，形成\QThreeTrips{}运输、\RelayTrips{}中继的可行方案，联合完工\JointTime{} s、能耗\JointEnergy{} kWh。Q4固定其时序与保障关系，精确得到两组、三组分别缺少\GapTwo{}、\GapThree{}份资源。
-
-独立回放在1 s、0.5 s和0.25 s网格均无未覆盖状态，加密最小余量为\MarginHalf{} dB，最小硬截止余量为\HardSlack{} s。Q2列生成下界限于有限目录和网格，Q3内层LP限于固定离散决策，Q4精确性限于已冻结任务。性能改善与证明范围分别报告；本轮新增连续区间数值证书，最差余量下界为\ContinuousMargin{} dB；Q2提供\EnergyChoiceEnergy{} kWh节能选项，Q4均衡方案缺口为\BalancedGapTwo{}和\BalancedGapThree{}。后续仍需严格舍入误差证明、区间级中继切换与完整路线定价，才能加强结论。

@@ -1,8 +1,0 @@
-# Versions used for the audited Python 3.12 computation.
-numpy==2.3.5
-pandas==2.2.3
-openpyxl==3.1.5
-rasterio==1.5.1
-affine==2.4.0
-pyproj==3.8.0
-scipy==1.17.0

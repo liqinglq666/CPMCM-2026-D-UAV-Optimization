@@ -1,62 +1,17 @@
-# Python
-__pycache__/
-*.py[cod]
-*.so
-.venv/
-venv/
-.env
-
-# IDE / OS
-.vscode/
-.idea/
+# Local and editor-generated files
 .DS_Store
 Thumbs.db
-
-# Jupyter
-.ipynb_checkpoints/
-
-# Temporary outputs
-tmp/
-cache/
-*.log
-
-# Raw competition data should not be committed by default
-data/raw/*
-!data/raw/README.md
-
-# DEM can be large; keep local unless intentionally versioned
-data/dem/*
-!data/dem/README.md
-
-
-# Test/tool caches and optional rendered figures
+.vscode/
+.idea/
+__pycache__/
+*.py[cod]
+.venv/
+.env
 .pytest_cache/
 .ruff_cache/
-/figures/
-/outputs/
-paper/reports/pytest.xml
-paper/fonts/*.ttf
-paper/data/communication_states.csv
-paper/data/terrain_map.json
-paper/data/communication_states_05s.csv
-
-# Atomic full-run staging directories
-/.uav-run-*/
-
-# Local checkers, build caches and editor lock/swap files
-.mypy_cache/
-.pyright/
-.coverage
-.coverage.*
-htmlcov/
-*.egg-info/
-node_modules/
-build/
-dist/
 *.tmp
+*.log
 *.swp
-*.swo
 *~
-~$*.docx
 ~$*.xlsx
-~$*.pptx
+~$*.docx
