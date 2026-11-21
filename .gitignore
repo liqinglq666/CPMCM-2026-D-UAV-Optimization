@@ -1,17 +1,32 @@
-# Local and editor-generated files
+# Python/tool caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Official competition input data is local and must not be committed
+data/raw/*
+!data/raw/README.md
+data/dem/*
+!data/dem/README.md
+
+# Recomputed outputs must never replace final results
+outputs/
+figures/
+tmp/
+cache/
+*.log
+*.tmp
+*.swp
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
-__pycache__/
-*.py[cod]
-.venv/
-.env
-.pytest_cache/
-.ruff_cache/
-*.tmp
-*.log
-*.swp
-*~
-~$*.xlsx
 ~$*.docx
+~$*.xlsx
