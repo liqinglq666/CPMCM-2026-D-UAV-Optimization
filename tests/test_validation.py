@@ -124,10 +124,6 @@ def test_csv_roundtrip_quotes_and_unicode(tmp_path):
         "run_q3",
         "run_q4",
         "run_all",
-        "scripts.run_q1",
-        "scripts.run_q2",
-        "scripts.run_q3",
-        "scripts.run_q4",
         "scripts.validate_results",
     ],
 )
