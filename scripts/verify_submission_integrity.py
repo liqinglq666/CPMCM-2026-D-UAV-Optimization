@@ -37,11 +37,13 @@ FROZEN_FILES = {
 
 def check_file(name: str, size: int, md5: str, sha256: str) -> bool:
     path = SUBMISSION / name
+    # Actions on Windows may use cp1252 when Python prints to stdout.
+    display_name = name.encode("ascii", "backslashreplace").decode("ascii")
     if not path.is_file():
-        print(f"FAIL missing: {path.relative_to(REPO)}")
+        print(f"FAIL missing: submission/{display_name}")
         return False
     if path.stat().st_size != size:
-        print(f"FAIL size: {name}")
+        print(f"FAIL size: {display_name}")
         return False
     h_md5 = hashlib.md5()
     h_sha256 = hashlib.sha256()
@@ -50,9 +52,9 @@ def check_file(name: str, size: int, md5: str, sha256: str) -> bool:
             h_md5.update(chunk)
             h_sha256.update(chunk)
     if h_md5.hexdigest() != md5 or h_sha256.hexdigest() != sha256:
-        print(f"FAIL hash: {name}")
+        print(f"FAIL hash: {display_name}")
         return False
-    print(f"PASS exact bytes: {name}")
+    print(f"PASS exact bytes: {display_name}")
     return True
 
 
