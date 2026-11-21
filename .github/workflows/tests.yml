@@ -16,6 +16,6 @@ jobs:
           cache: pip
       - run: python -m pip install -r requirements-dev.txt
       - run: python -m ruff check --select F,E9 src scripts tests run_all.py run_q1.py run_q2.py run_q3.py run_q4.py
-      - run: python paper/final/src/verify_bundle.py
-      - run: python scripts/figures_v2/verify_bundle.py
+      # Historical figure bundles remain on backup/pre-slim-20261121.
+      - run: python scripts/verify_submission_integrity.py
       - run: python -m pytest -q
