@@ -1,11 +1,11 @@
 # CPMCM 2026 D 无人机运输与通信协同优化
 
 > **快速入口**：[正式提交材料](submission/FINAL_SUBMISSION_CHECK.md) · [64 页正式 PDF](submission/D26105580028.pdf) · [仓库导航与清理边界](docs/REPOSITORY_GUIDE.md) · [只读大文件/重复检测](scripts/check_repo_hygiene.py)。
-> `paper/final_v2/` 的 65 页 Word/PDF 和 27 图是历史编辑与复现资产，不是这次提交的正式 PDF；请保留其完整性清单和数据引用。
+> 65 页历史 Word/PDF、27 幅图及其完整校验清单已转存到 `backup/pre-slim-20261121`；正式提交是 `submission/` 中的 64 页 PDF。
 
 赛题、原始 Excel、DEM 是输入事实来源；`src/core/` 统一距离、地形、时间、载荷、能耗、充电和资源检查。仓库保持私有。
 
-**冻结版本：`freeze/2026-09-25-final`。** 算法、论文与代码的终审、修复和证据范围见
+**冻结算法提交：`bec20f1536458db47bac583c309c7b30637cb67a`。** 算法、论文与代码的终审、修复和证据范围见
 [冻结说明](docs/FROZEN_RELEASE.md)、[代码复查](docs/post_merge_code_audit.md)及
 [依据对应表](docs/audit/post_merge/EVIDENCE.md)。该版本保留已接受的 Q1–Q4 结果；
 后续改动另开分支，复核冻结结果时无需重新运行优化。
@@ -111,21 +111,34 @@ python scripts/validate_results.py
 
 校验器重算 Q1 航段、载荷和敏感性，Q2 所有保存的前沿计划及所选方案一致性，Q3 运输/中继能耗、SOC、资源、交付、最小硬截止余量与通信状态，以及 Q4 分区和库存统计。资源表不会在校验过程中被静默修复。校验失败会撤销旧 `validation.json`，避免留下误导性的成功记录。Q4 独立入口先核对 Q3 的官方输入指纹；完整物理和通信复核仍需运行总校验器。
 
-## 当前论文与科研图
+## 正式论文与历史科研图
 
-正式提交使用 [submission/D26105580028.pdf](submission/D26105580028.pdf)。科研图正文基准位于 [paper/final_v2/manuscript.pdf](paper/final_v2/manuscript.pdf)，该目录包括原65页PDF、Word、27幅SVG/PDF/600 dpi PNG和来源核对记录。数据视图在 `paper/figure_data_v2/`，逐图字段、连接键、派生公式和来源摘要见 [清单](paper/figure_manifest_v2.csv)。`paper/final/`和`paper/final_v2/`保留为编辑来源，不与提交文件混用。
+**唯一正式参赛论文**：[submission/D26105580028.pdf](submission/D26105580028.pdf)（64 页）。
+正式 Excel、RAR 和校验清单也完整保存在 [submission/](submission/) 中。
+可以直接执行 `python scripts/verify_submission_integrity.py` 验证正式 PDF、Excel、RAR 的原始字节摘要。
+
+为减小日常检出体积，旧 65 页 Word/PDF、旧版中文字体、27 幅图的成套输出、历史图形数据及完整性清单不再置于 `main`。
+它们**完整保存在** [backup/pre-slim-20261121](https://github.com/liqinglq666/CPMCM-2026-D-UAV-Optimization/tree/backup/pre-slim-20261121) 的
+`paper/final/`、`paper/final_v2/`、`paper/figure_data_v2/` 目录中。
+主分支仍保留原始研究模型与已接受结果；这里的清理只改变历史编辑资产在当前工作树中的位置。
+
+需要重新编辑历史 Word 或复核图形包时，先恢复旧目录，然后再运行该版本对应的检查：
 
 ```bash
+git fetch origin backup/pre-slim-20261121
+git restore --source origin/backup/pre-slim-20261121 -- paper/final paper/final_v2 paper/figure_data_v2
 python scripts/figures_v2/verify_bundle.py
-python -m pip install -r paper/final_v2/requirements.txt
-python scripts/figures_v2/build_figures.py --raw /path/to/official_D
 ```
 
-重绘需要完整官方 D 题附件（`data/raw/`、`--raw` 或 `UAV_DATA_ROOT`）。默认读取已保存的确定性绘图视图；加 `--replay` 可从冻结方案重放 Q2/Q3，再制图。所有入口都不运行优化器。Word 编辑、目录刷新、PDF 导出和核验范围见 [当前论文说明](paper/final_v2/README.md)。
+以上恢复操作会把历史文件复制到当前工作树；**请在个人临时分支操作，不要直接提交回 `main`**。
+科研图重建另外需要官方 D 题原始附件；详情见 [归档操作说明](docs/REPOSITORY_GUIDE.md)。
+旧 35 页 LaTeX 源与 `scripts/export_submission.mjs` 仍保留，相关历史构建说明见 [paper/README.md](paper/README.md)。
+AI 辅助记录见 [docs/AI_USAGE.md](docs/AI_USAGE.md)。
 
-旧 35 页 LaTeX 论文与 12 图构建入口保留用于追溯，见 [历史构建说明](paper/README.md)。原 `scripts/export_submission.mjs` 结果工作簿导出入口保持不变。AI 辅助记录见 [docs/AI_USAGE.md](docs/AI_USAGE.md)。
-
-当前正式方案独立通信回放：1 s：35061条，未覆盖0，最小余量0.090905647 dB；0.5 s：69843条，未覆盖0，最小余量0.090905647 dB；0.25 s：139402条，未覆盖0，最小余量0.090905647 dB。有限采样仍非连续时间证明。Q2固定路线工作量下界诊断运行 `python scripts/diagnose_transport_load.py`。
+当前正式方案独立通信回放：1 s：35061 条，未覆盖 0，最小余量 0.090905647 dB；
+0.5 s：69843 条，未覆盖 0，最小余量 0.090905647 dB；
+0.25 s：139402 条，未覆盖 0，最小余量 0.090905647 dB。
+有限采样仍非连续时间证明。Q2 固定路线工作量下界诊断运行 `python scripts/diagnose_transport_load.py`。
 
 历史通信修复（PR #10）：原0.5 s回放的1个未覆盖状态（−0.154251 dB）保存在 `archive/baseline-2a98f09/`。候选搜索和独立验证均采用1 s与0.5 s网格并集，先修复失效中继再继续5000次搜索。该次方案在1 s、0.5 s及未参与搜索的0.25 s回放中均为0未覆盖，最低余量0.02877762 dB；这仍不是连续时间证明。该次Q1/Q2正式决策保持一致；随后2026-09-25的对标优化继续修改Q2/Q3，并重算Q4及图文，请以当前结果与对标审计为准。对比见 [通信修复对比](results/communication_repair_comparison.csv)，审计见 [修复审计](docs/audit/communication-repair/REPORT.md)。
 

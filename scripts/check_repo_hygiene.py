@@ -49,9 +49,9 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def manifest_paths() -> set[str]:
+def manifest_paths() -> set[str] | None:
     if not MANIFEST.is_file():
-        return set()
+        return None  # Archived manifest is not an empty manifest.
     content = json.loads(MANIFEST.read_text(encoding="utf-8"))
     return set(content.get("files", {}))
 
@@ -69,7 +69,7 @@ def build_report(limit: int, min_duplicate_bytes: int) -> dict:
         roots[top]["files"] += 1
         roots[top]["bytes"] += size
         largest.append((size, name))
-        manifest_count += name in protected
+        manifest_count += (protected is not None and name in protected)
         # 只对达到门槛的文件计算 SHA256；相同大小不表示相同内容。
         if size >= min_duplicate_bytes:
             duplicates[(size, sha256_file(path))].append(name)
@@ -86,7 +86,7 @@ def build_report(limit: int, min_duplicate_bytes: int) -> dict:
                 "paths": paths,
                 "protected_paths": [
                     p for p in paths
-                    if p in protected or p.startswith(PROTECTED_PREFIXES)
+                    if (protected is not None and p in protected) or p.startswith(PROTECTED_PREFIXES)
                 ],
                 "note": "仅为相同内容提示，不等于文件可删除；先核对引用与完整性清单。",
             }
@@ -103,7 +103,8 @@ def build_report(limit: int, min_duplicate_bytes: int) -> dict:
         "read_only": True,
         "total_files": len(largest),
         "total_bytes": sum(v["bytes"] for v in roots.values()),
-        "manifest_pinned_files": manifest_count,
+        "legacy_manifest_available": protected is not None,
+        "manifest_pinned_files": manifest_count if protected is not None else None,
         "by_top_level": sorted_roots,
         "largest_files": [
             {"path": name, "size_bytes": size}
@@ -131,7 +132,10 @@ def main() -> None:
         return
     print(f"已跟踪文件：{report['total_files']} 个")
     print(f"当前文件合计：{report['total_bytes'] / (1024**2):.2f} MiB")
-    print(f"被 final_v2 完整性清单引用：{report['manifest_pinned_files']} 个")
+    if report["legacy_manifest_available"]:
+        print(f"被 final_v2 完整性清单引用：{report['manifest_pinned_files']} 个")
+    else:
+        print("历史图包 manifest 已归档到备份分支；当前 main 不执行旧包锁定路径检查")
     print("\n目录体积：")
     for name, info in report["by_top_level"].items():
         print(f"  {name:24s} {info['files']:4d} 个  {info['bytes'] / (1024**2):8.2f} MiB")

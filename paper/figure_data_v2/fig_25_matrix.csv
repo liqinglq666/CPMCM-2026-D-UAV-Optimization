@@ -1,9 +1,0 @@
-resource,shared_peak,inventory,K2_resource_priority,K2_balanced,K3_resource_priority,K3_balanced,class_gaps
-A_uav,4,4,4,6,4,7,0;2;0;3
-B_uav,2,2,2,2,2,2,0;0;0;0
-C_uav,2,2,2,2,3,2,0;0;1;0
-A_bat,6,6,6,7,6,9,0;1;0;3
-B_bat,4,4,4,4,4,4,0;0;0;0
-C_bat,4,4,4,4,5,5,0;0;1;1
-relay_uav,2,2,3,4,3,4,1;2;1;2
-relay_comp,3,6,4,6,4,6,0;0;0;0

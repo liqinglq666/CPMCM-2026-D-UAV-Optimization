@@ -1,7 +1,0 @@
-component,service_a,service_b,trip_ids
-C1,S002,S009,column-006
-C1,S010,S013,column-007
-C1,S009,S013,column-019
-C2,S003,S007,column-015
-C2,S003,S015,column-017
-C3,S005,S011,column-014
